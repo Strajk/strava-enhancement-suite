@@ -1,7 +1,7 @@
 DEFAULTS = {
-  default_to_my_results: false,
-  running_tss: true,
-  standard_google_map: false
+    default_to_my_results: false
+  , running_tss: true,
+  , standard_google_map: false
 };
 
 chrome.storage.sync.get(DEFAULTS, function(items) {
