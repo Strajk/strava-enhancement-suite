@@ -36,7 +36,6 @@
     "tabs"
   ],
   "web_accessible_resources": [
-    "js/injected.js",
-    "js/switch_units/injected.js"
+    "js/injected.js"
   ]
 }

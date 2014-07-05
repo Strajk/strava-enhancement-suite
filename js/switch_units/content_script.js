@@ -1,5 +1,5 @@
 var s = document.createElement('script');
-s.src = chrome.extension.getURL("js/switch_units/injected.js");
+s.textContent = 'strava_enhancement_suite.switch_units();';
 s.onload = function() {
     this.parentNode.removeChild(this);
 };
