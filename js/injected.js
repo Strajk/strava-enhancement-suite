@@ -32,6 +32,10 @@ StravaEnhancementSuite.prototype.running_tss = function() {
     return;
   }
 
+  if (typeof Strava.Labs === 'undefined') {
+    return;
+  }
+
   var TSS_PER_HOUR = {
     'Z1':  60,
     'Z2': 100,
