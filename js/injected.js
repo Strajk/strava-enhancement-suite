@@ -3,6 +3,7 @@ function StravaEnhancementSuite(options) {
 
   this.default_to_my_results();
   this.running_tss();
+  this.standard_google_map();
 };
 
 StravaEnhancementSuite.prototype.default_to_my_results = function() {
@@ -64,4 +65,24 @@ StravaEnhancementSuite.prototype.running_tss = function() {
 
     return result;
   };
+};
+
+StravaEnhancementSuite.prototype.standard_google_map = function() {
+  if (this.options.standard_google_map === false) {
+    return;
+  }
+
+  var poll = function() {
+    var elem = jQuery('a.map-type-selector[data-map-type-id=standard]').click();
+
+    if (elem.length > 0) {
+      elem.parents('.drop-down-menu').click();
+    } else {
+      setTimeout(poll, 1000);
+    }
+  };
+
+  if (jQuery('#map-canvas').length > 0) {
+    poll();
+  }
 };
