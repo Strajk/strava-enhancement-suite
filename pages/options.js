@@ -6,18 +6,19 @@ DEFAULTS = {
 
 document.addEventListener('DOMContentLoaded', function() {
   chrome.storage.sync.get(DEFAULTS, function(items) {
-    document.getElementById('default_to_my_results').checked = items.default_to_my_results;
-    document.getElementById('running_tss').checked = items.running_tss;
-    document.getElementById('standard_google_map').checked = items.standard_google_map;
+    for (x in DEFAULTS) {
+      document.getElementById(x).checked = items[x];
+    }
   });
 });
 
 document.getElementById('save').addEventListener('click', function () {
-  chrome.storage.sync.set({
-    default_to_my_results: document.getElementById('default_to_my_results').checked,
-    running_tss: document.getElementById('running_tss').checked,
-    standard_google_map: document.getElementById('standard_google_map').checked
-  }, function() {
+  var data = {};
+  for (x in DEFAULTS) {
+    data[x] = document.getElementById(x).checked;
+  }
+
+  chrome.storage.sync.set(data, function() {
     var elem = document.getElementById('saved');
     elem.style.display = 'block';
     setTimeout(function() {
