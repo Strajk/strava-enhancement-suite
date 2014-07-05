@@ -30,10 +30,13 @@
     "default_popup": "pages/popup.html"
   },
   "permissions": [
+    "http://*.strava.com/*",
+    "https://*.strava.com/*",
     "storage",
     "tabs"
   ],
   "web_accessible_resources": [
-    "js/injected.js"
+    "js/injected.js",
+    "js/switch_units/injected.js"
   ]
 }
