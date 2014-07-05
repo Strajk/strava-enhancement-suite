@@ -11,6 +11,10 @@ StravaEnhancementSuite.prototype.default_to_my_results = function() {
     return;
   }
 
+  if (typeof Strava.Labs === 'undefined') {
+    return;
+  }
+
   // Default to my results
   var view = Strava.Labs.Activities.SegmentLeaderboardView;
   var fn = view.prototype.render;
