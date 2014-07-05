@@ -1,5 +1,6 @@
 DEFAULTS = {
     default_to_my_results: false
+  , infinite_scroll: true
   , running_tss: true
   , side_by_side_running: false
   , standard_google_map: false
