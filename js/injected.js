@@ -119,10 +119,6 @@ StravaEnhancementSuite.prototype.standard_google_map = function() {
 };
 
 StravaEnhancementSuite.prototype.switch_units = function() {
-  if (this.options.standard_google_map === false) {
-    return;
-  }
-
   var url = jQuery("a:contains(My Profile)[href^='/athletes/']").attr('href');
   var target = window._measurement_preference == "meters" ? "feet" : "meters";
   var athlete_id = parseInt(url.split('/')[2], 10);
