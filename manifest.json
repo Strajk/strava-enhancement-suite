@@ -1,0 +1,22 @@
+{
+  "manifest_version": 2,
+
+  "name": "Strava Enhancement Suite",
+  "description": "Handy tools and improvements to Strava.com",
+  "version": "1.0",
+
+  "content_scripts": [
+    {
+      "js": ["js/content_script.js"],
+      "run_at": "document_end",
+      "matches": ["http://*.strava.com/*"]
+    }
+  ],
+  "options_page": "pages/options.html",
+  "permissions": [
+    "storage"
+  ],
+  "web_accessible_resources": [
+    "js/injected.js"
+  ]
+}
