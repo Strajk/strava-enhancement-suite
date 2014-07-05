@@ -4,6 +4,7 @@ function StravaEnhancementSuite(options) {
   this.default_to_my_results();
   this.edit_profile();
   this.running_tss();
+  this.side_by_side_running();
   this.standard_google_map();
 };
 
@@ -87,6 +88,14 @@ StravaEnhancementSuite.prototype.running_tss = function() {
 
     return result;
   };
+};
+
+StravaEnhancementSuite.prototype.side_by_side_running = function() {
+  if (this.options.side_by_side_running === false) {
+    return;
+  }
+
+  jQuery('section.comparison .running-tab').click();
 };
 
 StravaEnhancementSuite.prototype.standard_google_map = function() {
