@@ -2,6 +2,7 @@ function StravaEnhancementSuite(options) {
   this.options = options;
 
   this.default_to_my_results();
+  this.edit_profile();
   this.running_tss();
   this.standard_google_map();
 };
@@ -29,6 +30,19 @@ StravaEnhancementSuite.prototype.default_to_my_results = function() {
 
     return result;
   };
+};
+
+StravaEnhancementSuite.prototype.edit_profile = function() {
+  if (jQuery('header .user-menu a').attr('href') !== window.location.pathname) {
+    return;
+  }
+
+  jQuery('<a>')
+    .css('font-size', '20px')
+    .css('margin-left', '8px')
+    .attr('href', '/settings/profile')
+    .text('(edit)')
+    .appendTo('.pageContent h1:first');
 };
 
 StravaEnhancementSuite.prototype.running_tss = function() {
