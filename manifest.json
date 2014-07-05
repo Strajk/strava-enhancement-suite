@@ -26,7 +26,8 @@
   "options_page": "pages/options.html",
   "page_action": {
     "default_icon": "icons/icon48.png",
-    "default_title": "Strava Enhancement Suite"
+    "default_title": "Strava Enhancement Suite",
+    "default_popup": "pages/popup.html"
   },
   "permissions": [
     "storage",
