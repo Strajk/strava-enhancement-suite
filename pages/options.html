@@ -7,7 +7,9 @@ body {
   color: #303942;
   width: 680px;
   margin: 0 auto;
+  font-size: 13px;
   font-family: ProximaNova, Helvetica, Arial, "Lucida Grande", sans-serif;
+  padding-bottom: 40px;
   background-color: #f0f0f0;
 }
 
@@ -23,11 +25,11 @@ footer {
   text-align: center;
 }
 
-div#content {
+.content {
   width: 650px;
-  margin: 40px auto  auto;
+  margin: 40px auto;
   border: 1px solid #cacaca;
-  padding: 20px 46px 50px 46px;
+  padding: 46px;
   box-shadow: 0px 1px 0px #fff;
   background-color: #fff;
 }
@@ -35,6 +37,7 @@ div#content {
 h2 {
   color: #777777;
   font-size: 24px;
+  margin-top: 0;
   font-weight: normal;
   text-transform: uppercase;
 }
@@ -43,12 +46,12 @@ h3 {
   float: left;
   width: 215px;
   font-size: 14px;
-  line-height: 40px;
+  line-height: 30px;
 }
 
 input[type=checkbox] {
-  border: 1px solid #cacaca;
   width: 15px;
+  border: 1px solid #cacaca;
   height: 15px;
   margin-left: 1px;
 }
@@ -68,8 +71,11 @@ ul {
 
 li.text {
   line-height: 1.1em;
-  font-size: 13px;
   color: #666;
+}
+
+.paypal {
+  margin-bottom: 32px;
 }
 
   </style>
@@ -79,11 +85,11 @@ li.text {
     <img src="../icons/icon128.png">
   </header>
 
-  <div id="content">
+  <div class="content">
     <h2>Options</h2>
 
     <section>
-      <h3>Default to my results?</h3>
+      <h3>Default to my results</h3>
       <ul>
         <li>
           <input type="checkbox" id="default_to_my_results">
@@ -96,7 +102,7 @@ li.text {
     </section>
 
     <section>
-      <h3>Estimate running TSS?</h3>
+      <h3>Estimate running TSS</h3>
       <ul>
         <li>
           <input type="checkbox" id="running_tss">
@@ -109,20 +115,39 @@ li.text {
     </section>
 
     <section>
-      <h3>Standard Google map?</h3>
+      <h3>Use standard Google map</h3>
       <ul>
         <li>
           <input type="checkbox" id="standard_google_map">
         </li>
         <li class="text">
-          Prefer "Standard" Google map over "Terrain" view
+          Prefer "Standard" Google map over "Terrain" view. (experimental)
         </li>
       </ul>
     </section>
   </div>
 
   <footer>
-    Copyright &copy; 2013, 2014 Chris Lamb.</div>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top" class="paypal">
+      <input type="hidden" name="cmd" value="_donations">
+      <input type="hidden" name="business" value="chris@chris-lamb.co.uk">
+      <input type="hidden" name="lc" value="US">
+      <input type="hidden" name="item_name" value="Chris Lamb">
+      <input type="hidden" name="no_note" value="0">
+      <input type="hidden" name="currency_code" value="USD">
+      <input type="hidden" name="bn" value="PP-DonationsBF:btn_donateCC_LG.gif:NonHostedGuest">
+      <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+      <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+    <p>
+      Copyright &copy; 2013, 2014 Chris Lamb (chris@chris-lamb.co.uk).
+    </p>
+
+    <p>
+      If you like this software, please consider donating to support further
+      development:
+    </p>
+
   </footer>
 
   <script src="options.js"></script>
