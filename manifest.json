@@ -12,7 +12,10 @@
     {
       "js": ["js/content_script.js"],
       "run_at": "document_end",
-      "matches": ["http://*.strava.com/*"]
+      "matches": [
+        "http://*.strava.com/*",
+        "https://*.strava.com/*"
+      ]
     }
   ],
   "icons": {
