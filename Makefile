@@ -6,7 +6,7 @@ all: $(DIST)
 clean:
 	rm -f $(DIST)
 
-strava-enhancement-suite.zip: icons
+strava-enhancement-suite.zip: clean icons
 	zip -r $@ $(SRC)
 
 icons:
