@@ -4,75 +4,126 @@
   <style type="text/css">
 
 body {
-  font: 14px "DejaVu Sans", "Arial", sans-serif;
   color: #303942;
   width: 680px;
   margin: 0 auto;
-}
-
-div#wrapper {
-  width: 500px;
+  font-family: ProximaNova, Helvetica, Arial, "Lucida Grande", sans-serif;
+  background-color: #f0f0f0;
 }
 
 header {
-  width: 100%;
-  margin: 40px 0 20px 0;
-  font-size: 18px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ddd;
+  margin-top: 40px;
+  text-align: center;
 }
 
-table td {
-  padding: 4px;
+footer {
+  color: #777777;
+  font-size: 12px;
+  margin-top: 30px;
+  text-align: center;
 }
 
-button {
-  padding: 4px 10px;
-  margin-top: 20px;
+div#content {
+  width: 650px;
+  margin: 40px auto  auto;
+  border: 1px solid #cacaca;
+  padding: 20px 46px 50px 46px;
+  box-shadow: 0px 1px 0px #fff;
+  background-color: #fff;
 }
 
-#saved {
-  padding: 4px;
+h2 {
+  color: #777777;
+  font-size: 24px;
+  font-weight: normal;
+  text-transform: uppercase;
+}
+
+h3 {
+  float: left;
+  width: 215px;
+  font-size: 14px;
+  line-height: 40px;
+}
+
+input[type=checkbox] {
+  border: 1px solid #cacaca;
+  width: 15px;
+  height: 15px;
+  margin-left: 1px;
+}
+
+section {
+  clear: both;
+  min-height: 60px;
+  border-top: 1px solid #DADADA;
+}
+
+ul {
+  float: right;
+  width: 330px;
+  line-height: 40px;
+  list-style-type: none;
+}
+
+li.text {
+  line-height: 1.1em;
+  font-size: 13px;
+  color: #666;
 }
 
   </style>
 </head>
 <body>
-  <div id="wrapper">
-    <header>
-      Strava Enhancement Suite options
-    </header>
+  <header>
+    <img src="../icons/icon128.png">
+  </header>
 
-    <table>
-      <tr>
-        <td>
-          Default to my results?
-        </td>
-        <td>
+  <div id="content">
+    <h2>Options</h2>
+
+    <section>
+      <h3>Default to my results?</h3>
+      <ul>
+        <li>
           <input type="checkbox" id="default_to_my_results">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Estimate running TSS (Training Stress Score)?
-        </td>
-        <td>
-          <input type="checkbox" id="running_tss">
-        </td>
-      </tr>
-      <tr>
-        <td>
-          Prefer "Standard" Google map over "Terrain" view
-        </td>
-        <td>
-          <input type="checkbox" id="standard_google_map">
-        </td>
-      </tr>
-    </table>
+        </li>
+        <li class="text">
+          Changes the default leaderboard to "My Results" instead of "Overall"
+          when viewing a segment effort.
+        </li>
+      </ul>
+    </section>
 
-    <button id="save">Save</button>
-    <div id="saved" style="display: none;">Options saved.</div>
+    <section>
+      <h3>Estimate running TSS?</h3>
+      <ul>
+        <li>
+          <input type="checkbox" id="running_tss">
+        </li>
+        <li class="text">
+          Estimates a run's Training Stress Score from its Grade Adjusted Pace
+          distribution.
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h3>Standard Google map?</h3>
+      <ul>
+        <li>
+          <input type="checkbox" id="standard_google_map">
+        </li>
+        <li class="text">
+          Prefer "Standard" Google map over "Terrain" view
+        </li>
+      </ul>
+    </section>
   </div>
+
+  <footer>
+    Copyright &copy; 2013, 2014 Chris Lamb.</div>
+  </footer>
 
   <script src="options.js"></script>
 </body>

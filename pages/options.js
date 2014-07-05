@@ -12,17 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 
-document.getElementById('save').addEventListener('click', function () {
-  var data = {};
-  for (x in DEFAULTS) {
-    data[x] = document.getElementById(x).checked;
-  }
+for (x in DEFAULTS) {
+  document.getElementById(x).addEventListener('change', function () {
+    var data = {};
+    for (x in DEFAULTS) {
+      data[x] = document.getElementById(x).checked;
+    }
 
-  chrome.storage.sync.set(data, function() {
-    var elem = document.getElementById('saved');
-    elem.style.display = 'block';
-    setTimeout(function() {
-      elem.style.display = 'none';
-    }, 2000);
+    chrome.storage.sync.set(data);
   });
-});
+}
