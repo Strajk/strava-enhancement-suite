@@ -1,4 +1,5 @@
 DEFAULTS = {
+  default_to_my_results: false
 };
 
 chrome.storage.sync.get(DEFAULTS, function(items) {
