@@ -26,7 +26,7 @@
   "options_page": "pages/options.html",
   "page_action": {
     "default_icon": "icons/icon48.png",
-    "default_title": "Switch units"
+    "default_title": "Strava Enhancement Suite"
   },
   "permissions": [
     "storage",
