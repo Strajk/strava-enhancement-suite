@@ -2,11 +2,12 @@ function StravaEnhancementSuite(options) {
   this.options = options;
 
   this.default_to_my_results();
-  this.edit_profile();
   this.running_tss();
   this.side_by_side_running();
   this.standard_google_map();
   this.variability_index();
+
+  this.edit_profile();
 };
 
 StravaEnhancementSuite.prototype.default_to_my_results = function() {
