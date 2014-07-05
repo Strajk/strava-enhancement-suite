@@ -1,5 +1,6 @@
 DEFAULTS = {
-  default_to_my_results: false
+  default_to_my_results: false,
+  running_tss: true
 };
 
 chrome.storage.sync.get(DEFAULTS, function(items) {
