@@ -1,6 +1,6 @@
 DEFAULTS = {
     default_to_my_results: false
-  , running_tss: true,
+  , running_tss: true
   , standard_google_map: false
 };
 
