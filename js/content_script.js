@@ -3,6 +3,7 @@ DEFAULTS = {
   , running_tss: true
   , side_by_side_running: false
   , standard_google_map: false
+  , variability_index: true
 };
 
 chrome.storage.sync.get(DEFAULTS, function(items) {

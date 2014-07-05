@@ -6,6 +6,7 @@ function StravaEnhancementSuite(options) {
   this.running_tss();
   this.side_by_side_running();
   this.standard_google_map();
+  this.variability_index();
 };
 
 StravaEnhancementSuite.prototype.default_to_my_results = function() {
@@ -128,4 +129,25 @@ StravaEnhancementSuite.prototype.switch_units = function() {
     target,
     {"success": function(x) { window.location.reload(); } }
   );
+};
+
+StravaEnhancementSuite.prototype.variability_index = function() {
+  if (this.options.variability_index === false) {
+    return;
+  }
+
+  if (typeof pageview === 'undefined') {
+    return;
+  }
+
+  var elem = jQuery('span[data-glossary-term=definition-weighted-average-power]')
+    .parents('li');
+
+  var np = parseInt(elem.find('strong').text(), 10);
+  var ap = pageView.activity().get('avgWatts');
+
+  jQuery('<li><strong>X</strong><div class="label">Variability Index</div></li>')
+    .insertAfter(elem)
+    .find('strong')
+    .text((np / ap).toFixed(2));
 };
