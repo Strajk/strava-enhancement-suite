@@ -204,17 +204,13 @@ StravaEnhancementSuite.prototype.standard_google_map = function() {
   }
 
   setInterval(function() {
-    var elem = jQuery('a.map-type-selector[data-map-type-id=standard]')
-      .not('.once-only');
-
-    elem.each(function() {
-      jQuery(this)
-        .addClass('once-only')
-        .click()
-        .parents('.drop-down-menu')
-        .click()
+    jQuery('a.map-type-selector[data-map-type-id=standard]')
+      .not('.once-only')
+      .addClass('once-only')
+      .click()
+      .parents('.drop-down-menu') // Close menu
+      .click()
       ;
-    });
   }, 1000);
 };
 
