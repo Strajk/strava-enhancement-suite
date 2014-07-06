@@ -135,7 +135,8 @@ StravaEnhancementSuite.prototype.running_cadence = function() {
     jQuery('#elevation-profile td[data-type=cadence] .toggle-button')
       .not('.once-only')
       .addClass('once-only')
-      .click();
+      .click()
+      ;
   }, 1000);
 };
 
@@ -192,7 +193,8 @@ StravaEnhancementSuite.prototype.side_by_side_running = function() {
     jQuery('section.comparison .running-tab')
       .not('.once-only')
       .addClass('once-only')
-      .click();
+      .click()
+      ;
   }, 1000);
 };
 
