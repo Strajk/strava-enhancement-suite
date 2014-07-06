@@ -1,6 +1,7 @@
 function StravaEnhancementSuite(options) {
   this.options = options;
 
+  this.comment_post_on_enter();
   this.default_to_my_results();
   this.estimated_ftp();
   this.hide_invite_friends();
@@ -11,6 +12,22 @@ function StravaEnhancementSuite(options) {
   this.variability_index();
 
   this.edit_profile();
+};
+
+StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
+  if (this.options.comment_post_on_enter === false) {
+    return;
+  }
+
+  jQuery(document).on('keydown', '.comments textarea', function(e) {
+    if (e.keyCode !== 13) {
+      return true;
+    }
+
+    jQuery(this).parents('form').submit();
+
+    return false;
+  });
 };
 
 StravaEnhancementSuite.prototype.default_to_my_results = function() {

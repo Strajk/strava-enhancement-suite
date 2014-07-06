@@ -1,5 +1,6 @@
 DEFAULTS = {
-    default_to_my_results: false
+    comment_post_on_enter: true
+  , default_to_my_results: false
   , estimated_ftp: true
   , hide_invite_friends: false
   , infinite_scroll: true
