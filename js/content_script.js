@@ -1,5 +1,6 @@
 DEFAULTS = {
     default_to_my_results: false
+  , estimated_ftp: true
   , hide_invite_friends: false
   , infinite_scroll: true
   , running_tss: true

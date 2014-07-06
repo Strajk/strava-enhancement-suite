@@ -2,6 +2,7 @@ function StravaEnhancementSuite(options) {
   this.options = options;
 
   this.default_to_my_results();
+  this.estimated_ftp();
   this.hide_invite_friends();
   this.infinite_scroll();
   this.running_tss();
@@ -35,6 +36,14 @@ StravaEnhancementSuite.prototype.default_to_my_results = function() {
 
     return result;
   };
+};
+
+StravaEnhancementSuite.prototype.estimated_ftp = function() {
+  if (this.options.estimated_ftp === false) {
+    return;
+  }
+
+  jQuery('#cpcurve-estimatedCP').click();
 };
 
 StravaEnhancementSuite.prototype.hide_invite_friends = function() {
