@@ -183,7 +183,12 @@ StravaEnhancementSuite.prototype.side_by_side_running = function() {
     return;
   }
 
-  jQuery('section.comparison .running-tab').click();
+  setInterval(function() {
+    jQuery('section.comparison .running-tab')
+      .not('.once-only')
+      .addClass('once-only')
+      .click();
+  }, 1000);
 };
 
 StravaEnhancementSuite.prototype.standard_google_map = function() {
