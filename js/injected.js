@@ -2,6 +2,7 @@ function StravaEnhancementSuite(options) {
   this.options = options;
 
   this.default_to_my_results();
+  this.hide_invite_friends();
   this.infinite_scroll();
   this.running_tss();
   this.side_by_side_running();
@@ -34,6 +35,24 @@ StravaEnhancementSuite.prototype.default_to_my_results = function() {
 
     return result;
   };
+};
+
+StravaEnhancementSuite.prototype.hide_invite_friends = function() {
+  if (this.options.hide_invite_friends === false) {
+    return;
+  }
+
+  // "You Should Follow" on dashboard
+  jQuery('#suggested-follow-module').hide();
+
+  // "Find Your Friends On Strava" on dashboard
+  jQuery('#invite-your-friend-module').hide();
+
+  // "Invite friends" in navbar
+  jQuery('header nav a.find-and-invite').parent('li').hide();
+
+  // "Share your rides" on profile
+  jQuery('a#embed-athlete-widget').parent('section').hide();
 };
 
 StravaEnhancementSuite.prototype.infinite_scroll = function() {
