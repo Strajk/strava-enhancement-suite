@@ -68,7 +68,7 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
 };
 
 StravaEnhancementSuite.prototype.edit_profile = function() {
-  if (jQuery('header .user-menu a').attr('href') !== window.location.pathname) {
+  if (window.location.pathname.indexOf(jQuery('header .user-menu a').attr('href')) !== 0) {
     return;
   }
 
