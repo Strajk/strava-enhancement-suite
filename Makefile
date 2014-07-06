@@ -1,10 +1,13 @@
 SRC = manifest.json icons js pages
 DIST = strava-enhancement-suite.zip
 
-all: $(DIST)
+all: test $(DIST)
 
 clean:
 	rm -f $(DIST)
+
+test:
+	! find -type f -name '*.js' -print0 | xargs -0r grep console.log
 
 strava-enhancement-suite.zip: clean icons
 	zip -r $@ $(SRC)
