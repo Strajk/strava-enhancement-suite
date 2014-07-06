@@ -6,6 +6,7 @@ function StravaEnhancementSuite(options) {
   this.estimated_ftp();
   this.hide_invite_friends();
   this.infinite_scroll();
+  this.running_cadence();
   this.running_tss();
   this.side_by_side_running();
   this.standard_google_map();
@@ -123,6 +124,14 @@ StravaEnhancementSuite.prototype.edit_profile = function() {
     .attr('href', '/settings/profile')
     .text('(edit)')
     .appendTo('.pageContent h1:first');
+};
+
+StravaEnhancementSuite.prototype.running_cadence = function() {
+  if (this.options.running_cadence === false) {
+    return;
+  }
+
+  jQuery('#elevation-profile td[data-type=cadence] .toggle-button').click();
 };
 
 StravaEnhancementSuite.prototype.running_tss = function() {
