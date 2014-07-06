@@ -3,7 +3,7 @@
 
   "name": "Strava Enhancement Suite",
   "description": "Handy tools and improvements to Strava.com",
-  "version": "1.3",
+  "version": "1.4",
 
   "background": {
     "scripts": ["js/background.js"]
