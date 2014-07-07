@@ -249,19 +249,28 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
         'title': this.attributes.name
     };
 
-    data[segment_id].times.push(this.attributes.elapsed_time_raw);
+    data[segment_id].times.push({
+      'seconds': this.attributes.elapsed_time_raw,
+      'segment_effort_id': this.id
+    });
   });
 
   // Annotate with aggregate data
   jQuery.each(data, function() {
     var sum = 0;
-    var max = 0;
-    var min = 99999999;
+    var max = {
+      'seconds': 0,
+      'segment_effort_id': null
+    };
+    var min = {
+      'seconds': 99999999,
+      'segment_effort_id': null
+    };
 
     jQuery.each(this.times, function() {
-      sum += this;
-      max = Math.max(max, this);
-      min = Math.min(min, this);
+      sum += this.seconds;
+      max = (this.seconds > max.seconds) ? this : max;
+      min = (this.seconds < min.seconds) ? this : min;
     });
 
     jQuery.extend(this, {
@@ -275,6 +284,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
 
   setInterval(function() {
     var section = jQuery('section.segments-list')
+      .not('.collapsed')
       .not('.once-only')
       .addClass('once-only')
       ;
@@ -300,26 +310,47 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
     ).appendTo(section);
 
     jQuery.each(data, function() {
+      var row = this;
+
       // Only add repeated rows
       if (this.count < 2) {
         return;
       }
 
-      jQuery(
+      var tr = jQuery(
         '<tr>' +
-          '<td><a href="#"</a></td>' +
-          '<td>' + this.count + '</td>' +
-          '<td>' + that.toSeconds(this.min) + '</td>' +
-          '<td>' + that.toSeconds(this.max) + '</td>' +
-          '<td>' + that.toSeconds(this.average) + '</td>' +
-          '<td>' + that.toSeconds(this.sum) + '</td>' +
+          '<td><a class="title" href="#"</a></td>' +
+          '<td>' + row.count + '</td>' +
+          '<td><a href="#" class="min">' + that.toSeconds(row.min.seconds) + '</a></td>' +
+          '<td><a href="#" class="max">' + that.toSeconds(row.max.seconds) + '</a></td>' +
+          '<td>' + that.toSeconds(row.average) + '</td>' +
+          '<td>' + that.toSeconds(row.sum) + '</td>' +
         '</tr>'
-      )
-        .appendTo(table.find('tbody'))
-        .find('a')
-        .attr('href', '/segments/' + this.segment_id)
-        .text(this.title)
+      ).appendTo(table.find('tbody'));
+
+      tr.find('a.title')
+        .attr('href', '/segments/' + row.segment_id)
+        .text(row.title)
         ;
+
+      jQuery.each(['min', 'max'], function() {
+        var min_max = this;
+
+        tr.find('a.' + min_max).click(function(e) {
+          var elem = jQuery(
+            'tr[data-segment-effort-id=' + row[min_max].segment_effort_id + ']'
+          );
+
+          // Scroll into view. Doesn't work perfectly at the moment if a
+          // segment is already open.
+          jQuery('html, body').scrollTop(elem.offset().top);
+
+          // Passthrough click
+          elem.trigger(e);
+
+          return false;
+        });
+      });
     })
   }, 1000);
 };
