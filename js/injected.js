@@ -37,7 +37,7 @@ StravaEnhancementSuite.prototype.default_to_my_results = function() {
     return;
   }
 
-  if (typeof Strava.Labs === 'undefined') {
+  if (typeof Strava.Labs.Activities.SegmentLeaderboardView === 'undefined') {
     return;
   }
 
