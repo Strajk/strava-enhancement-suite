@@ -299,8 +299,8 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
           '<tr>' +
             '<th>Name</th>' +
             '<th>Count</th>' +
-            '<th>Slowest</th>' +
             '<th>Fastest</th>' +
+            '<th>Slowest</th>' +
             '<th>Average</th>' +
             '<th>Total</th>' +
           '</tr>' +
