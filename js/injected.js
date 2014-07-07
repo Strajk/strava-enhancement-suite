@@ -161,7 +161,7 @@ StravaEnhancementSuite.prototype.running_tss = function() {
     return;
   }
 
-  if (typeof Strava.Labs === 'undefined') {
+  if (typeof Strava.Labs.Activities.PaceZones === 'undefined') {
     return;
   }
 
