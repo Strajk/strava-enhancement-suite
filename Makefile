@@ -14,4 +14,4 @@ strava-enhancement-suite.zip: clean $(ICONS)
 	zip -r $@ $(SRC)
 
 icons/icon%.png: icons/original.png
-	convert $< -resize $* $@
+	convert $< -resize $*x $@
