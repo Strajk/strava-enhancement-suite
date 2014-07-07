@@ -16,7 +16,13 @@ DEFAULTS = {
 document.addEventListener('DOMContentLoaded', function() {
   chrome.storage.sync.get(DEFAULTS, function(items) {
     for (x in DEFAULTS) {
-      document.getElementById(x).checked = items[x];
+      var elem = document.getElementById(x);
+
+      elem.value = items[x];
+
+      if ((elem.tagName === 'INPUT') && (elem.getAttribute('type') === 'checkbox')) {
+        elem.checked = items[x];
+      }
     }
   });
 });
@@ -25,7 +31,13 @@ for (x in DEFAULTS) {
   document.getElementById(x).addEventListener('change', function () {
     var data = {};
     for (x in DEFAULTS) {
-      data[x] = document.getElementById(x).checked;
+      var elem = document.getElementById(x);
+
+      data[x] = elem.value;
+
+      if ((elem.tagName === 'INPUT') && (elem.getAttribute('type') === 'checkbox')) {
+        data[x] = elem.checked;
+      }
     }
 
     chrome.storage.sync.set(data);
