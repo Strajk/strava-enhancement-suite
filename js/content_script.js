@@ -5,6 +5,7 @@ DEFAULTS = {
   , hide_invite_friends: false
   , infinite_scroll: true
   , leaderboard_default: 'overall'
+  , repeated_segments: true
   , running_cadence: true
   , running_heart_rate: true
   , running_tss: true

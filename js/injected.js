@@ -7,6 +7,7 @@ function StravaEnhancementSuite(options) {
   this.hide_invite_friends();
   this.infinite_scroll();
   this.leaderboard_default();
+  this.repeated_segments();
   this.running_cadence();
   this.running_heart_rate();
   this.running_tss();
@@ -226,6 +227,103 @@ StravaEnhancementSuite.prototype.running_tss = function() {
   };
 };
 
+StravaEnhancementSuite.prototype.repeated_segments = function() {
+  if (this.options.repeated_segments === false) {
+    return;
+  }
+
+  if (typeof pageView === 'undefined') {
+    return;
+  }
+
+  var data = {};
+  var that = this;
+
+  // Find total raw times by segment ID
+  jQuery.each(pageView.segmentEfforts().models, function() {
+    var segment_id = this.attributes.segment_id;
+
+    data[segment_id] = data[segment_id] || {
+        'segment_id': segment_id,
+        'times': [],
+        'title': this.attributes.name
+    };
+
+    data[segment_id].times.push(this.attributes.elapsed_time_raw);
+  });
+
+  // Annotate with aggregate data
+  jQuery.each(data, function() {
+    var sum = 0;
+    var max = 0;
+    var min = 99999999;
+
+    jQuery.each(this.times, function() {
+      sum += this;
+      max = Math.max(max, this);
+      min = Math.min(min, this);
+    });
+
+    jQuery.extend(this, {
+      'max': max,
+      'min': min,
+      'sum': sum,
+      'count': this.times.length,
+      'average': Math.floor(sum / this.times.length)
+    });
+  });
+
+  setInterval(function() {
+    var section = jQuery('section.segments-list')
+      .not('.once-only')
+      .addClass('once-only')
+      ;
+
+    if (section.length === 0) {
+      return;
+    }
+
+    var table = jQuery(
+      '<table class="striped">' +
+        '<thead>' +
+          '<tr>' +
+            '<th>Name</th>' +
+            '<th>Count</th>' +
+            '<th>Slowest</th>' +
+            '<th>Fastest</th>' +
+            '<th>Average</th>' +
+            '<th>Total</th>' +
+          '</tr>' +
+        '</thead>' +
+        '<tbody></tbody>' +
+      '</table>'
+    ).appendTo(section);
+
+    jQuery.each(data, function() {
+      // Only add repeated rows
+      if (this.count < 2) {
+        return;
+      }
+
+      jQuery(
+        '<tr>' +
+          '<td><a href="#"</a></td>' +
+          '<td>' + this.count + '</td>' +
+          '<td>' + that.toSeconds(this.min) + '</td>' +
+          '<td>' + that.toSeconds(this.max) + '</td>' +
+          '<td>' + that.toSeconds(this.average) + '</td>' +
+          '<td>' + that.toSeconds(this.sum) + '</td>' +
+        '</tr>'
+      )
+        .appendTo(table.find('tbody'))
+        .find('a')
+        .attr('href', '/segments/' + this.segment_id)
+        .text(this.title)
+        ;
+    })
+  }, 1000);
+};
+
 StravaEnhancementSuite.prototype.side_by_side_running = function() {
   if (this.options.side_by_side_running === false) {
     return;
@@ -287,4 +385,40 @@ StravaEnhancementSuite.prototype.variability_index = function() {
     .insertAfter(elem)
     .find('strong')
     .text((np / ap).toFixed(2));
+};
+
+// Utilities
+
+StravaEnhancementSuite.prototype.toSeconds = function(s) {
+  var r = '';
+  var hours = Math.floor(s / 3600.0);
+
+  if (hours < 10) {
+    r += '0' + hours
+  } else {
+    r += hours;
+  }
+  r += ':';
+
+  var minutes = Math.floor((s - (hours * 3600)) / 60.0);
+  if (minutes < 10) {
+    r += '0' + minutes;
+  } else {
+    r += minutes;
+  }
+  r += ':';
+
+  var seconds = s - hours * 3600 - minutes * 60;
+
+  if (seconds - Math.floor(seconds) > 0.0) {
+    seconds = seconds.toFixed(1);
+  }
+
+  if (seconds < 10) {
+    r += '0' + seconds;
+  } else {
+    r += seconds;
+  }
+
+  return r;
 };
