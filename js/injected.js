@@ -7,6 +7,7 @@ function StravaEnhancementSuite(options) {
   this.hide_invite_friends();
   this.infinite_scroll();
   this.running_cadence();
+  this.running_heart_rate();
   this.running_tss();
   this.side_by_side_running();
   this.standard_google_map();
@@ -134,6 +135,20 @@ StravaEnhancementSuite.prototype.running_cadence = function() {
 
   setInterval(function() {
     jQuery('#elevation-profile td[data-type=cadence] .toggle-button')
+      .not('.once-only')
+      .addClass('once-only')
+      .click()
+      ;
+  }, 1000);
+};
+
+StravaEnhancementSuite.prototype.running_heart_rate = function() {
+  if (this.options.running_heart_rate === false) {
+    return;
+  }
+
+  setInterval(function() {
+    jQuery('#elevation-profile td[data-type=heartrate] .toggle-button')
       .not('.once-only')
       .addClass('once-only')
       .click()
