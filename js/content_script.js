@@ -1,10 +1,10 @@
 DEFAULTS = {
     comment_post_on_enter: true
-  , default_to_my_results: false
   , estimated_ftp: true
   , external_links: true
   , hide_invite_friends: false
   , infinite_scroll: true
+  , leaderboard_default: 'overall'
   , running_cadence: true
   , running_heart_rate: true
   , running_tss: true

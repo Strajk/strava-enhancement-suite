@@ -2,11 +2,11 @@ function StravaEnhancementSuite(options) {
   this.options = options;
 
   this.comment_post_on_enter();
-  this.default_to_my_results();
   this.estimated_ftp();
   this.external_links();
   this.hide_invite_friends();
   this.infinite_scroll();
+  this.leaderboard_default();
   this.running_cadence();
   this.running_heart_rate();
   this.running_tss();
@@ -31,32 +31,6 @@ StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
 
     return false;
   });
-};
-
-StravaEnhancementSuite.prototype.default_to_my_results = function() {
-  if (this.options.default_to_my_results === false) {
-    return;
-  }
-
-  if (typeof Strava.Labs.Activities.SegmentLeaderboardView === 'undefined') {
-    return;
-  }
-
-  var view = Strava.Labs.Activities.SegmentLeaderboardView;
-  var fn = view.prototype.render;
-
-  view.prototype.render = function () {
-    var result = fn.apply(this, Array.prototype.slice.call(arguments));
-
-    jQuery(this.el)
-      .not('.once-only')
-      .addClass('once-only')
-      .find('.clickable[data-filter=my_results]')
-      .click()
-      ;
-
-    return result;
-  };
 };
 
 StravaEnhancementSuite.prototype.external_links = function() {
@@ -137,6 +111,35 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
     }
   });
 };
+
+StravaEnhancementSuite.prototype.leaderboard_default = function() {
+  if (this.options.leadeboard_default === 'overall') {
+    return;
+  }
+
+  if (typeof Strava.Labs.Activities.SegmentLeaderboardView === 'undefined') {
+    return;
+  }
+
+  var view = Strava.Labs.Activities.SegmentLeaderboardView;
+  var fn = view.prototype.render;
+
+  var leaderboard_default = this.options.leaderboard_default;
+
+  view.prototype.render = function () {
+    var result = fn.apply(this, Array.prototype.slice.call(arguments));
+
+    jQuery(this.el)
+      .not('.once-only')
+      .addClass('once-only')
+      .find('.clickable[data-filter=' + leaderboard_default + ']')
+      .click()
+      ;
+
+    return result;
+  };
+};
+
 
 StravaEnhancementSuite.prototype.edit_profile = function() {
   if (window.location.pathname.indexOf(jQuery('header .user-menu a').attr('href')) !== 0) {
