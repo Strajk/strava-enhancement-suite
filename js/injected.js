@@ -39,6 +39,19 @@ StravaEnhancementSuite.prototype.external_links = function() {
     return;
   }
 
+  if (typeof pageView !== 'undefined') {
+    jQuery(
+      '<div class="button-group">' +
+        '<a href="#" class="button title">View flyby</span>' +
+      '</div>'
+    )
+      .prependTo('section#heading .social')
+      .find('a')
+      .attr('href', 'http://labs.strava.com/flyby/viewer/#' + pageView.activity().id)
+      ;
+  }
+
+  // Segment external links
   var m = window.location.pathname.match(/^\/segments\/(\d+)$/);
 
   if (m === null) {
