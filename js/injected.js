@@ -40,25 +40,21 @@ StravaEnhancementSuite.prototype.external_links = function() {
   }
 
   if (this.defined('pageView')) {
-    jQuery(
-      '<div class="button-group">' +
-        '<a href="#" class="button title">Flyby</span>' +
-      '</div>'
-    )
-      .prependTo('section#heading .social')
-      .find('a')
-      .attr('href', 'http://labs.strava.com/flyby/viewer/#' + pageView.activity().id)
-      ;
-
-    jQuery(
-      '<div class="button-group">' +
-        '<a href="#" class="button title">Veloviewer</span>' +
-      '</div>'
-    )
-      .prependTo('section#heading .social')
-      .find('a')
-      .attr('href', 'http://veloviewer.com/activities/' + pageView.activity().id)
-      ;
+    jQuery.each([
+      ["View Flyby", 'http://labs.strava.com/flyby/viewer/#'],
+      ["Veloviewer", 'http://veloviewer.com/activities/']
+    ].reverse(), function() {
+      jQuery(
+        '<div class="button-group">' +
+          '<a href="#" class="button title"></a>' +
+        '</div>'
+      )
+        .prependTo('section#heading .social')
+        .find('a')
+        .text(this[0])
+        .attr('href', this[1] + pageView.activity().id)
+        ;
+    });
   }
 
   // Segment external links
