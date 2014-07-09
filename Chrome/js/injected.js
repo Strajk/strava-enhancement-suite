@@ -97,6 +97,7 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
   w.scroll(function() {
     var elem = container.find('a.load-feed');
 
+
     if (elem.length === 0) {
       // Can't unbind as we may be waiting for another page to load
       return;
@@ -118,7 +119,7 @@ StravaEnhancementSuite.prototype.leaderboard_default = function() {
     return;
   }
 
-  if (typeof Strava.Labs.Activities.SegmentLeaderboardView === 'undefined') {
+  if (typeof Strava.Labs === 'undefined' || typeof Strava.Labs.Activities.SegmentLeaderboardView === 'undefined') {
     return;
   }
 
@@ -188,7 +189,7 @@ StravaEnhancementSuite.prototype.running_tss = function() {
     return;
   }
 
-  if (typeof Strava.Labs.Activities.PaceZones === 'undefined') {
+  if (typeof Strava.Labs === 'undefined' || typeof Strava.Labs.Activities.PaceZones === 'undefined') {
     return;
   }
 
