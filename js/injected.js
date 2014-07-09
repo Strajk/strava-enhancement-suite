@@ -42,8 +42,8 @@ StravaEnhancementSuite.prototype.external_links = function() {
 
   if (this.defined('pageView')) {
     jQuery.each([
-      ["View Flyby", 'http://labs.strava.com/flyby/viewer/#'],
-      ["Veloviewer", 'http://veloviewer.com/activities/']
+        ["Flyby", 'http://labs.strava.com/flyby/viewer/#']
+      , ["Veloviewer", 'http://veloviewer.com/activities/']
     ].reverse(), function() {
       jQuery(
         '<div class="button-group">' +
