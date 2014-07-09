@@ -77,6 +77,21 @@ StravaEnhancementSuite.prototype.external_links = function() {
       '</div>'
     ).prependTo('.pageContent .sidebar');
   }
+
+  // Link to KOM Club
+  jQuery(
+    '<li>' +
+      '<button>KOM Club</button>' +
+    '</li>'
+  )
+    .appendTo('#challenge-filters')
+    .find('button')
+    .css('margin-left', '18px')
+    .on('click', function (e) {
+      e.preventDefault();
+      window.location.href = 'http://www.kom.club/';
+    })
+    ;
 };
 
 StravaEnhancementSuite.prototype.estimated_ftp = function() {
