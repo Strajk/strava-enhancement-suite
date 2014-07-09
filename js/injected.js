@@ -42,12 +42,22 @@ StravaEnhancementSuite.prototype.external_links = function() {
   if (this.defined('pageView')) {
     jQuery(
       '<div class="button-group">' +
-        '<a href="#" class="button title">View flyby</span>' +
+        '<a href="#" class="button title">Flyby</span>' +
       '</div>'
     )
       .prependTo('section#heading .social')
       .find('a')
       .attr('href', 'http://labs.strava.com/flyby/viewer/#' + pageView.activity().id)
+      ;
+
+    jQuery(
+      '<div class="button-group">' +
+        '<a href="#" class="button title">Veloviewer</span>' +
+      '</div>'
+    )
+      .prependTo('section#heading .social')
+      .find('a')
+      .attr('href', 'http://veloviewer.com/activities/' + pageView.activity().id)
       ;
   }
 
