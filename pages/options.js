@@ -2,6 +2,7 @@ DEFAULTS = {
     comment_post_on_enter: true
   , estimated_ftp: true
   , external_links: true
+  , hide_challenge_feed_entries: false
   , hide_invite_friends: false
   , infinite_scroll: true
   , leaderboard_default: 'overall'

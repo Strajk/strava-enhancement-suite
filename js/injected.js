@@ -4,6 +4,7 @@ function StravaEnhancementSuite(options) {
   this.comment_post_on_enter();
   this.estimated_ftp();
   this.external_links();
+  this.hide_challenge_feed_entries();
   this.hide_invite_friends();
   this.infinite_scroll();
   this.leaderboard_default();
@@ -81,6 +82,16 @@ StravaEnhancementSuite.prototype.estimated_ftp = function() {
   }
 
   jQuery('#cpcurve-estimatedCP').click();
+};
+
+StravaEnhancementSuite.prototype.hide_challenge_feed_entries = function() {
+  if (this.options.hide_challenge_feed_entries === false) {
+    return;
+  }
+
+  setInterval(function() {
+    jQuery('div.feed>.challenge').remove();
+  }, 1000);
 };
 
 StravaEnhancementSuite.prototype.hide_invite_friends = function() {
