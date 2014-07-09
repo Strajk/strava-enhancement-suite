@@ -54,6 +54,10 @@ StravaEnhancementSuite.prototype.external_links = function() {
         .prependTo('section#heading .social')
         .find('a')
         .text(this[0])
+        .css({
+          'font-size': '12px',
+          'line-height': '20px'
+        })
         .attr('href', this[1] + pageView.activity().id)
         ;
     });
