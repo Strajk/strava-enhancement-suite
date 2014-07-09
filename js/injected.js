@@ -80,6 +80,9 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
 
   // "Share your rides" on profile
   jQuery('a#embed-athlete-widget').parent('section').hide();
+
+  // Facebook, Twitter and share logos on activity page
+  jQuery('section#heading .social .sharing').hide();
 };
 
 StravaEnhancementSuite.prototype.infinite_scroll = function() {
