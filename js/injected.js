@@ -39,7 +39,7 @@ StravaEnhancementSuite.prototype.external_links = function() {
     return;
   }
 
-  if (typeof pageView !== 'undefined') {
+  if (this.defined('pageView')) {
     jQuery(
       '<div class="button-group">' +
         '<a href="#" class="button title">View flyby</span>' +
@@ -134,9 +134,7 @@ StravaEnhancementSuite.prototype.leaderboard_default = function() {
     return;
   }
 
-  if ((typeof Strava === 'undefined') ||
-      (typeof Strava.Labs === 'undefined') ||
-      (typeof Strava.Labs.Activities.SegmentLeaderboardView === 'undefined')) {
+  if (!this.defined('Strava.Labs.Activities.SegmentLeaderboardView')) {
     return;
   }
 
@@ -206,9 +204,7 @@ StravaEnhancementSuite.prototype.running_tss = function() {
     return;
   }
 
-  if ((typeof Strava === 'undefined') ||
-      (typeof Strava.Labs === 'undefined') ||
-      (typeof Strava.Labs.Activities.PaceZones === 'undefined')) {
+  if (!this.defined('Strava.Labs.Activities.PaceZones')) {
     return;
   }
 
@@ -252,7 +248,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
     return;
   }
 
-  if (typeof pageView === 'undefined') {
+  if (!this.defined('pageView')) {
     return;
   }
 
@@ -422,7 +418,7 @@ StravaEnhancementSuite.prototype.variability_index = function() {
     return;
   }
 
-  if (typeof pageView === 'undefined') {
+  if (!this.defined('pageView')) {
     return;
   }
 
@@ -439,6 +435,18 @@ StravaEnhancementSuite.prototype.variability_index = function() {
 };
 
 // Utilities
+
+StravaEnhancementSuite.prototype.defined = function(val) {
+  var parts = val.split('.');
+
+  for (var i = 0; i < parts.length; ++i) {
+    if (typeof window[parts.slice(0, i + 1).join('.')] === 'undefined') {
+      return false;
+    }
+  }
+
+  return true;
+};
 
 StravaEnhancementSuite.prototype.toSeconds = function(s) {
   var r = '';
