@@ -121,7 +121,8 @@ StravaEnhancementSuite.prototype.leaderboard_default = function() {
     return;
   }
 
-  if ((typeof Strava.Labs === 'undefined') ||
+  if ((typeof Strava === 'undefined') ||
+      (typeof Strava.Labs === 'undefined') ||
       (typeof Strava.Labs.Activities.SegmentLeaderboardView === 'undefined')) {
     return;
   }
@@ -192,7 +193,8 @@ StravaEnhancementSuite.prototype.running_tss = function() {
     return;
   }
 
-  if ((typeof Strava.Labs === 'undefined') ||
+  if ((typeof Strava === 'undefined') ||
+      (typeof Strava.Labs === 'undefined') ||
       (typeof Strava.Labs.Activities.PaceZones === 'undefined')) {
     return;
   }
