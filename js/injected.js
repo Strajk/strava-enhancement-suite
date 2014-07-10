@@ -472,15 +472,12 @@ StravaEnhancementSuite.prototype.variability_index = function() {
 // Utilities
 
 StravaEnhancementSuite.prototype.defined = function(val) {
-  var parts = val.split('.');
-
-  for (var i = 0; i < parts.length; ++i) {
-    if (typeof window[parts.slice(0, i + 1).join('.')] === 'undefined') {
-      return false;
-    }
+  try {
+    eval(val);
+    return true;
+  } catch (err) {
+    return false;
   }
-
-  return true;
 };
 
 StravaEnhancementSuite.prototype.toSeconds = function(s) {
