@@ -106,9 +106,13 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
   var that = this;
 
   setInterval(function() {
-    if (that.options.hide_challenge_feed_entries) {
-      jQuery('div.feed>.challenge').remove();
-    }
+    jQuery.each([
+        ['hide_challenge_feed_entries', '.challenge']
+    ], function() {
+      if (that.options[this[0]]) {
+        jQuery('div.feed>.row').filter(this[1]).remove();
+      }
+    })
 
     jQuery('div.feed>.min-view').each(function() {
       var elem = jQuery(this);
