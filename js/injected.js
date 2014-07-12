@@ -112,7 +112,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
 
     jQuery('div.feed>.min-view').each(function() {
       var elem = jQuery(this);
-      var text = elem.text();
+      var text = elem.find('.entry-title').text();
 
       jQuery.each([
           ['hide_route_feed_entries', 'created the route']
