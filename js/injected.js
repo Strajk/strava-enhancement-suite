@@ -115,7 +115,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
       var html = elem.find('.entry-title').html();
 
       jQuery.each([
-          ['hide_route_feed_entries', 'created the route']
+          ['hide_route_feed_entries', '> created the route, <']
         ], function() {
           if ((that.options[this[0]]) && (html.indexOf(this[1]) !== -1)) {
             elem.remove();
