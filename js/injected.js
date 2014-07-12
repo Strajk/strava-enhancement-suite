@@ -1,6 +1,5 @@
 function StravaEnhancementSuite(options) {
   this.options = options;
-
   this.comment_post_on_enter();
   this.estimated_ftp();
   this.external_links();
@@ -15,8 +14,28 @@ function StravaEnhancementSuite(options) {
   this.side_by_side_running();
   this.standard_google_map();
   this.variability_index();
-
   this.edit_profile();
+  this.hide_premium();
+}
+
+StravaEnhancementSuite.prototype.hide_premium  = function() {
+
+ if (this.options.hide_premium === false) {
+    return;
+  }
+  
+  // Premium left panel (Heart Rate, Est power curve, Est 25w Distribution)
+  jQuery("#premium-views").hide();
+
+  // Premium features in drop downs (in top header)
+  jQuery(".premium").hide();
+
+  // Premium links
+  jQuery("a[href*='premium']").hide();
+ 
+  // "Upcoming Goal" on dashboard
+  jQuery('#performance-goals').hide();
+
 };
 
 StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
