@@ -16,6 +16,7 @@ DEFAULTS = {
   , side_by_side_running: false
   , standard_google_map: false
   , variability_index: true
+  , hide_premium: false
 };
 
 chrome.storage.sync.get(DEFAULTS, function(items) {
