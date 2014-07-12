@@ -110,15 +110,15 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
       jQuery('div.feed>.challenge').remove();
     }
 
-    if (that.options.hide_route_feed_entries) {
-      jQuery('div.feed>.min-view').each(function() {
-        var elem = jQuery(this);
+    jQuery('div.feed>.min-view').each(function() {
+      var elem = jQuery(this);
 
+      if (that.options.hide_route_feed_entries) {
         if (elem.text().indexOf('created the route') !== -1) {
           elem.remove();
         }
-      });
-    }
+      }
+    });
 
     // Remove any days that are now empty
     jQuery('div.feed>.header').each(function() {
