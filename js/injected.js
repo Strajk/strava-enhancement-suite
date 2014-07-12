@@ -109,6 +109,15 @@ StravaEnhancementSuite.prototype.hide_challenge_feed_entries = function() {
 
   setInterval(function() {
     jQuery('div.feed>.challenge').remove();
+
+    // Remove any days that are now empty
+    jQuery('div.feed>.header').each(function() {
+      var elem = jQuery(this);
+
+      if (elem.nextUntil('.row.header').not('script').length === 0) {
+        elem.remove();
+      }
+    });
   }, 1000);
 };
 
