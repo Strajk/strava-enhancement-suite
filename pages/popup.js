@@ -10,3 +10,9 @@ document.getElementById('switch_units').addEventListener('click', function() {
   window.close();
   return false;
 });
+
+document.getElementById('donate').addEventListener('click', function() {
+  document.getElementById('paypal-form').submit();
+  window.close();
+  return false;
+});
