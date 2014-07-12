@@ -116,12 +116,11 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
 
       jQuery.each([
           ['hide_route_feed_entries', '> created the route, <']
-        ], function() {
-          if ((that.options[this[0]]) && (html.indexOf(this[1]) !== -1)) {
-            elem.remove();
-          }
+      ], function() {
+        if ((that.options[this[0]]) && (html.indexOf(this[1]) !== -1)) {
+          elem.remove();
         }
-      );
+      });
     });
 
     // Remove any days that are now empty
