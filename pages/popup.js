@@ -8,4 +8,5 @@ document.getElementById('switch_units').addEventListener('click', function() {
     file: 'js/switch_units/content_script.js'
   });
   window.close();
+  return false;
 });
