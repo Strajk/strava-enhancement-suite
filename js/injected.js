@@ -108,6 +108,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
   setInterval(function() {
     jQuery.each([
         ['hide_challenge_feed_entries', '.challenge']
+      , ['hide_goal_feed_entries', '.performance-goal-created']
     ], function() {
       if (that.options[this[0]]) {
         jQuery('div.feed>.row').filter(this[1]).remove();

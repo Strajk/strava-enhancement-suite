@@ -4,6 +4,7 @@ DEFAULTS = {
   , external_links: true
   , hide_challenge_feed_entries: false
   , hide_club_feed_entries: false
+  , hide_goal_feed_entries: false
   , hide_route_feed_entries: false
   , hide_invite_friends: false
   , infinite_scroll: true
