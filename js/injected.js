@@ -116,6 +116,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
 
       jQuery.each([
           ['hide_route_feed_entries', '> created the route, <']
+        , ['hide_club_feed_entries', '> joined <']
       ], function() {
         if ((that.options[this[0]]) && (html.indexOf(this[1]) !== -1)) {
           elem.remove();
