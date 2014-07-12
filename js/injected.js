@@ -4,7 +4,7 @@ function StravaEnhancementSuite(options) {
   this.comment_post_on_enter();
   this.estimated_ftp();
   this.external_links();
-  this.hide_challenge_feed_entries();
+  this.hide_feed_entries();
   this.hide_invite_friends();
   this.infinite_scroll();
   this.leaderboard_default();
@@ -102,13 +102,13 @@ StravaEnhancementSuite.prototype.estimated_ftp = function() {
   jQuery('#cpcurve-estimatedCP').click();
 };
 
-StravaEnhancementSuite.prototype.hide_challenge_feed_entries = function() {
-  if (this.options.hide_challenge_feed_entries === false) {
-    return;
-  }
+StravaEnhancementSuite.prototype.hide_feed_entries = function() {
+  var that = this;
 
   setInterval(function() {
-    jQuery('div.feed>.challenge').remove();
+    if (that.options.hide_challenge_feed_entries) {
+      jQuery('div.feed>.challenge').remove();
+    }
 
     // Remove any days that are now empty
     jQuery('div.feed>.header').each(function() {
