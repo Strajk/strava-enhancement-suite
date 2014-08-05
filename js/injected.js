@@ -324,9 +324,9 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
     var segment_id = this.attributes.segment_id;
 
     data[segment_id] = data[segment_id] || {
-        'segment_id': segment_id,
-        'times': [],
-        'title': this.attributes.name
+      'segment_id': segment_id,
+      'times': [],
+      'title': this.attributes.name
     };
 
     data[segment_id].times.push({
