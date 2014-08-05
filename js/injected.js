@@ -268,7 +268,7 @@ StravaEnhancementSuite.prototype.running_tss = function() {
     return;
   }
 
-  if (!this.defined('Strava.Labs.Activities.PaceZones')) {
+  if (!this.defined('Strava.Labs.Activities.PaceZones.view.prototype.getPaceZones')) {
     return;
   }
 
