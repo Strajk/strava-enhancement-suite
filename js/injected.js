@@ -326,7 +326,8 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
     data[segment_id] = data[segment_id] || {
       'segment_id': segment_id,
       'times': [],
-      'title': this.attributes.name
+      'title': this.attributes.name,
+      'starred': this.attributes.starred_by_current_athlete
     };
 
     data[segment_id].times.push({
@@ -377,6 +378,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
       '<table class="striped">' +
         '<thead>' +
           '<tr>' +
+            '<th>&nbsp;</th>' +
             '<th>Name</th>' +
             '<th>Count</th>' +
             '<th>Fastest</th>' +
@@ -399,6 +401,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
 
       var tr = jQuery(
         '<tr>' +
+          '<td><div class="starred" style="cursor: default;">★</div></td>' +
           '<td><a class="title" href="#"</a></td>' +
           '<td>' + row.count + '</td>' +
           '<td><a href="#" class="min">' + that.toSeconds(row.min.seconds) + '</a></td>' +
@@ -411,6 +414,10 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
       tr.find('a.title')
         .attr('href', '/segments/' + row.segment_id)
         .text(row.title)
+        ;
+
+      tr.find('.starred')
+        .toggleClass('active', row.starred)
         ;
 
       jQuery.each(['min', 'max'], function() {
