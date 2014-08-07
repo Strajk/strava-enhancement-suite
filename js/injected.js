@@ -363,6 +363,10 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
     });
   });
 
+  // Flatten and sort
+  data = jQuery.map(data, function(elem) { return elem; });
+  data.sort(that.keySort('-starred', '-count', 'title'));
+
   setInterval(function() {
     var section = jQuery('section.segments-list')
       .not('.collapsed')
@@ -548,4 +552,36 @@ StravaEnhancementSuite.prototype.toSeconds = function(s) {
   }
 
   return r;
+};
+
+StravaEnhancementSuite.prototype.keySort = function() {
+  var fields = arguments;
+
+  return function(a, b) {
+    for (var i = 0; i < fields.length; ++i) {
+      var key = fields[i];
+
+      if (key.slice(0, 1) === '-') {
+        var val_a = b[key.slice(1)];
+        var val_b = a[key.slice(1)];
+      } else {
+        var val_a = a[key];
+        var val_b = b[key];
+      }
+
+      if (typeof val_a === 'string') {
+        val_a = val_a.trim().toLowerCase();
+        val_b = val_b.trim().toLowerCase();
+      }
+
+      if (val_a > val_b) {
+        return 1;
+      }
+      if (val_a < val_b) {
+        return -1;
+      }
+    }
+
+    return 0;
+  };
 };
