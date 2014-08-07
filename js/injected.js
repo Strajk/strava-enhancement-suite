@@ -198,7 +198,7 @@ StravaEnhancementSuite.prototype.leaderboard_default = function() {
     return;
   }
 
-  if (!this.defined('Strava.Labs.Activities.SegmentLeaderboardView')) {
+  if (!this.defined('Strava.Labs.Activities.SegmentLeaderboardView.prototype.render')) {
     return;
   }
 
