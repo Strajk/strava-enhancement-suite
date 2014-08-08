@@ -2,6 +2,7 @@ SRC = manifest.json icons js pages
 DIST = strava-enhancement-suite.zip
 
 all: test $(DIST)
+	@echo https://chrome.google.com/webstore/developer/dashboard
 
 clean:
 	rm -f $(DIST) $(ICONS)
