@@ -324,6 +324,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
   jQuery.each(pageView.segmentEfforts().models, function() {
     var segment_id = this.attributes.segment_id;
 
+    var m_distance = this.attributes.distance.match(/^([\d\.]+)(.*)/);
     var m_elev_difference = this.attributes.elev_difference.match(/^(\d+)(.*)/);
 
     data[segment_id] = data[segment_id] || {
@@ -331,6 +332,8 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
       'times': [],
       'title': this.attributes.name,
       'starred': this.attributes.starred_by_current_athlete,
+      'distance': parseFloat(m_distance[1]),
+      'distance_unit': m_distance[2],
       'elev_difference': parseInt(m_elev_difference[1], 10),
       'elev_difference_unit': m_elev_difference[2]
     };
@@ -394,6 +397,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
             '<th>Slowest</th>' +
             '<th>Average</th>' +
             '<th>Total</th>' +
+            '<th>Distance</th>' +
             '<th>Elevation</th>' +
           '</tr>' +
         '</thead>' +
@@ -418,6 +422,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
           '<td><a href="#" class="max">' + that.toSeconds(row.max.seconds) + '</a></td>' +
           '<td>' + that.toSeconds(row.average) + '</td>' +
           '<td>' + that.toSeconds(row.sum) + '</td>' +
+          '<td>' + (row.count * row.distance).toLocaleString() + row.distance_unit + '</td>' +
           '<td>' + (row.count * row.elev_difference).toLocaleString() + row.elev_difference_unit + '</td>' +
         '</tr>'
       ).appendTo(table.find('tbody'));
