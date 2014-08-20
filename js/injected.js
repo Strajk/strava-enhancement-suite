@@ -407,7 +407,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
         '<tr>' +
           '<td><div class="starred" style="cursor: default;">★</div></td>' +
           '<td><a class="title" href="#"</a></td>' +
-          '<td>' + row.count + '</td>' +
+          '<td>' + row.count.toLocaleString() + '</td>' +
           '<td><a href="#" class="min">' + that.toSeconds(row.min.seconds) + '</a></td>' +
           '<td><a href="#" class="max">' + that.toSeconds(row.max.seconds) + '</a></td>' +
           '<td>' + that.toSeconds(row.average) + '</td>' +
