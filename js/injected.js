@@ -16,8 +16,8 @@ function StravaEnhancementSuite(options) {
   this.standard_google_map();
   this.variability_index();
 
-  this.edit_profile();
   this.flyby();
+  this.profile();
 };
 
 StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
@@ -256,7 +256,7 @@ StravaEnhancementSuite.prototype.flyby = function() {
     })
 };
 
-StravaEnhancementSuite.prototype.edit_profile = function() {
+StravaEnhancementSuite.prototype.profile = function() {
   if (window.location.pathname.indexOf(jQuery('header .user-menu a').attr('href')) !== 0) {
     return;
   }
