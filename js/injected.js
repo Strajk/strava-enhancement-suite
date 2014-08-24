@@ -17,6 +17,7 @@ function StravaEnhancementSuite(options) {
   this.variability_index();
 
   this.edit_profile();
+  this.flyby();
 };
 
 StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
@@ -230,6 +231,30 @@ StravaEnhancementSuite.prototype.leaderboard_default = function() {
   };
 };
 
+StravaEnhancementSuite.prototype.flyby = function() {
+  if (jQuery('#playback-controls').length === 0) {
+    return;
+  }
+
+
+  jQuery('<div><input type="checkbox"> Select all</div>')
+    .prependTo('#sidebar-checkboxes')
+    .find('input')
+    .on('change', function() {
+      var elem = jQuery(this);
+
+      // Disable some fancy hash handling reload, otherwise calling .change()
+      // reloads the page when unselecting.
+      window.onhashchange = function() {};
+
+      jQuery('#activity_table input[type=checkbox]')
+        .prop('checked', elem.prop('checked'))
+        .change()
+        ;
+
+      return true;
+    })
+};
 
 StravaEnhancementSuite.prototype.edit_profile = function() {
   if (window.location.pathname.indexOf(jQuery('header .user-menu a').attr('href')) !== 0) {
