@@ -160,6 +160,15 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
 
   // Facebook, Twitter and share logos on activity page
   jQuery('section#heading .social .sharing').hide();
+
+  // Strava blog link on dashboard (currently "Vuelta")
+  jQuery('.module#dorado-module').hide();
+
+  // Upcoming races, events, goals on dashboard
+  jQuery('.module#upcoming-events').hide();
+
+  // Discover more races, etc. on dashboard
+  jQuery('.module#discover-more').hide();
 };
 
 StravaEnhancementSuite.prototype.infinite_scroll = function() {
