@@ -268,6 +268,10 @@ StravaEnhancementSuite.prototype.profile = function() {
     .text('(edit)')
     .appendTo('.pageContent h1:first')
     ;
+
+  jQuery('.avatar.avatar-athlete img')
+    .wrap('<a href="/settings/profile"></a>')
+    ;
 };
 
 StravaEnhancementSuite.prototype.running_cadence = function() {
