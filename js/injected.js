@@ -241,7 +241,8 @@ StravaEnhancementSuite.prototype.edit_profile = function() {
     .css('margin-left', '8px')
     .attr('href', '/settings/profile')
     .text('(edit)')
-    .appendTo('.pageContent h1:first');
+    .appendTo('.pageContent h1:first')
+    ;
 };
 
 StravaEnhancementSuite.prototype.running_cadence = function() {
