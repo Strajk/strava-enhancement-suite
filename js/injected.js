@@ -9,6 +9,7 @@ function StravaEnhancementSuite(options) {
   this.infinite_scroll();
   this.leaderboard_default();
   this.repeated_segments();
+  this.pagination();
   this.running_cadence();
   this.running_heart_rate();
   this.running_tss();
@@ -272,6 +273,35 @@ StravaEnhancementSuite.prototype.profile = function() {
   jQuery('.avatar.avatar-athlete img')
     .wrap('<a href="/settings/profile"></a>')
     ;
+};
+
+StravaEnhancementSuite.prototype.pagination = function() {
+  setInterval(function() {
+    jQuery('.simple.pagination ul.switches')
+      .not('.once-only')
+      .addClass('once-only')
+
+      // First
+      .prepend('<li><span class="button first_page">First</span></li>')
+      .find('.first_page')
+        .on('click', function() {
+          pagingController.page = 1;
+          pagingController.paging_adapter.fetch(pagingController.buildOptions());
+        })
+        .toggleClass('disabled', pagingController.page == 1)
+      .end()
+
+      // Last
+      .append('<li><span class="button last_page">Last</span></li>')
+      .find('.last_page')
+        .on('click', function() {
+          pagingController.page = pagingController.pageInfo().pages;
+          pagingController.paging_adapter.fetch(pagingController.buildOptions());
+        })
+        .toggleClass('disabled', pagingController.page == pagingController.pageInfo().pages)
+      .end()
+      ;
+  }, 1000);
 };
 
 StravaEnhancementSuite.prototype.running_cadence = function() {
