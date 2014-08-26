@@ -192,7 +192,10 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
   jQuery('section#heading .social .sharing').hide();
 
   // Strava blog link on dashboard (currently "Vuelta")
-  jQuery('.module#dorado-module').hide();
+  jQuery('.sidebar .section')
+    .has('a[href*=blog\\.strava\\.com]')
+    .hide()
+    ;
 
   // Upcoming races, events, goals on dashboard
   jQuery('.module#upcoming-events').hide();
