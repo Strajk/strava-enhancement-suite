@@ -197,7 +197,7 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
   jQuery('.sidebar .section#upcoming-events').hide();
 
   // Discover more races, etc.
-  jQuery('.module#discover-more').hide();
+  jQuery('.sidebar .section#discover-more').hide();
 
   // "You Should Follow"
   jQuery('.sidebar #suggested-follow-module').hide();
