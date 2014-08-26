@@ -194,7 +194,7 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
     ;
 
   // Upcoming races, events, goals
-  jQuery('.section#upcoming-events').hide();
+  jQuery('.sidebar .section#upcoming-events').hide();
 
   // Discover more races, etc.
   jQuery('.module#discover-more').hide();
