@@ -206,6 +206,11 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
 
   // Discover more races, etc.
   jQuery('.sidebar .section#discover-more').hide();
+
+  // Swap club and challenges
+  jQuery('.sidebar #club-module')
+    .after(jQuery('.sidebar #challenge-module'))
+    ;
 };
 
 StravaEnhancementSuite.prototype.infinite_scroll = function() {
