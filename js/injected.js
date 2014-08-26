@@ -31,6 +31,12 @@ StravaEnhancementSuite.prototype.activity = function() {
     .css('display', 'inline')
     ;
 
+  // Don't link to shop
+  jQuery('#heading .activity-stats .device a')
+    .contents()
+    .unwrap()
+    ;
+
   if (edit_activity.length === 0) {
     return;
   }
