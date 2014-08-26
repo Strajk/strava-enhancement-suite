@@ -276,6 +276,10 @@ StravaEnhancementSuite.prototype.profile = function() {
 };
 
 StravaEnhancementSuite.prototype.pagination = function() {
+  if (!this.defined('pagingController')) {
+    return;
+  }
+
   setInterval(function() {
     jQuery('.simple.pagination ul.switches')
       .not('.once-only')
