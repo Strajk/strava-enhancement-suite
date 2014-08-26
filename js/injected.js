@@ -187,23 +187,25 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
 
   //// Dashboard
 
+  // "You Should Follow"
+  jQuery('.sidebar #suggested-follow-module').hide();
+
+  // "Find Your Friends On Strava"
+  jQuery('.sidebar #invite-your-friend-module').hide();
+
   // Strava blog link in sidebar (currently "Vuelta")
   jQuery('.sidebar .section')
     .has('a[href*=blog\\.strava\\.com]')
     .hide()
     ;
 
+  // FIXME: These are not social networking related
+
   // Upcoming races, events, goals
   jQuery('.sidebar .section#upcoming-events').hide();
 
   // Discover more races, etc.
   jQuery('.sidebar .section#discover-more').hide();
-
-  // "You Should Follow"
-  jQuery('.sidebar #suggested-follow-module').hide();
-
-  // "Find Your Friends On Strava"
-  jQuery('.sidebar #invite-your-friend-module').hide();
 };
 
 StravaEnhancementSuite.prototype.infinite_scroll = function() {
