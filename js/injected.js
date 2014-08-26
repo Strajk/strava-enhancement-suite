@@ -26,6 +26,11 @@ StravaEnhancementSuite.prototype.activity = function() {
   // Detect whether we are viewing our own activity and to activate the dialog
   var edit_activity = jQuery('.sidenav .edit-activity');
 
+  // Seems to be truncated in size
+  jQuery('#heading span.title')
+    .css('display', 'inline')
+    ;
+
   if (edit_activity.length === 0) {
     return;
   }
