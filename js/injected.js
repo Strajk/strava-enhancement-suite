@@ -17,8 +17,25 @@ function StravaEnhancementSuite(options) {
   this.standard_google_map();
   this.variability_index();
 
+  this.activity();
   this.flyby();
   this.profile();
+};
+
+StravaEnhancementSuite.prototype.activity = function() {
+  // Detect whether we are viewing our own activity and to activate the dialog
+  var edit_activity = jQuery('.sidenav .edit-activity');
+
+  if (edit_activity.length === 0) {
+    return;
+  }
+
+  jQuery('#heading h2.activity-name')
+    .css('cursor', 'pointer')
+    .on('click', function() {
+      edit_activity.click();
+    })
+    ;
 };
 
 StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
