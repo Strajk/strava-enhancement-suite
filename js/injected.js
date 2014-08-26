@@ -31,7 +31,7 @@ StravaEnhancementSuite.prototype.activity = function() {
     .css('display', 'inline')
     ;
 
-  // Don't link to shop
+  // Don't link device name to shop
   jQuery('#heading .activity-stats .device a')
     .contents()
     .unwrap()
