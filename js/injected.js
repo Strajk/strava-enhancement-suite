@@ -177,10 +177,16 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
   }
 
   // "Invite friends" in navbar
-  jQuery('header nav a.find-and-invite').parent('li').hide();
+  jQuery('header nav a.find-and-invite')
+    .parent('li')
+    .hide()
+    ;
 
   // "Share your rides" on profile
-  jQuery('a#embed-athlete-widget').parent('section').hide();
+  jQuery('a#embed-athlete-widget')
+    .parent('section')
+    .hide()
+    ;
 
   // Facebook, Twitter and share logos on activity page
   jQuery('section#heading .social .sharing').hide();
