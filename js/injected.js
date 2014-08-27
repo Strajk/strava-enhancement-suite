@@ -583,7 +583,7 @@ StravaEnhancementSuite.prototype.side_by_side_running = function() {
   }
 
   setInterval(function() {
-    jQuery('section.comparison .running-tab')
+    jQuery('.section.comparison .running-tab')
       .not('.once-only')
       .addClass('once-only')
       .click()
