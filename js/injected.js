@@ -283,7 +283,6 @@ StravaEnhancementSuite.prototype.flyby = function() {
     return;
   }
 
-
   jQuery('<div><input type="checkbox"> Select all</div>')
     .prependTo('#sidebar-checkboxes')
     .find('input')
