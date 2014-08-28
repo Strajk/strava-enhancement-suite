@@ -8,6 +8,7 @@ function StravaEnhancementSuite(options) {
   this.hide_invite_friends();
   this.infinite_scroll();
   this.leaderboard_default();
+  this.manual_upload();
   this.repeated_segments();
   this.pagination();
   this.running_cadence();
@@ -312,6 +313,24 @@ StravaEnhancementSuite.prototype.flyby = function() {
 
       return true;
     })
+};
+
+StravaEnhancementSuite.prototype.manual_upload = function() {
+  if (window.location.pathname !== '/upload/select') {
+    return;
+  }
+
+  jQuery('body').on('keydown', '.uploads input[type=text]', function (e) {
+    if (e.keyCode === 13) {
+      jQuery('footer .save-and-view').click();
+    }
+  });
+
+  jQuery('body').on('keydown', '.uploads input[type=text], .uploads textarea', function (e) {
+    if (e.ctrlKey && e.keyCode === 13) {
+      jQuery('footer .save-and-view').click();
+    }
+  });
 };
 
 StravaEnhancementSuite.prototype.profile = function() {
