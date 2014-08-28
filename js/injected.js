@@ -48,6 +48,12 @@ StravaEnhancementSuite.prototype.activity = function() {
     })
     ;
 
+  jQuery('body').on('keydown', '.lightbox.edit_activity input[type=text]', function (e) {
+    if (e.keyCode === 13) {
+      jQuery(this).parents('.lightbox').find('input[type=submit]').click();
+    }
+  });
+
   jQuery('body').on('keydown', '.lightbox.edit_activity input[type=text], .lightbox.edit_activity textarea', function (e) {
     if (e.ctrlKey && e.keyCode === 13) {
       jQuery(this).parents('.lightbox').find('input[type=submit]').click();
