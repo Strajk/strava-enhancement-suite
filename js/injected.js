@@ -322,7 +322,18 @@ StravaEnhancementSuite.prototype.manual_upload = function() {
 
   jQuery('body').on('keydown', '.uploads input[type=text], .uploads textarea', function (e) {
     if (e.ctrlKey && e.keyCode === 13) {
-      jQuery('footer .save-and-view').click();
+      var btn = jQuery('footer .save-and-view');
+
+      var poll = function() {
+        if (btn.hasClass('disabled')) {
+          btn.text("Please wait...");
+          setTimeout(poll, 1000);
+          return;
+        }
+        btn.click();
+      };
+
+      poll();
     }
   });
 };
