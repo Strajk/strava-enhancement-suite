@@ -320,12 +320,6 @@ StravaEnhancementSuite.prototype.manual_upload = function() {
     return;
   }
 
-  jQuery('body').on('keydown', '.uploads input[type=text]', function (e) {
-    if (e.keyCode === 13) {
-      jQuery('footer .save-and-view').click();
-    }
-  });
-
   jQuery('body').on('keydown', '.uploads input[type=text], .uploads textarea', function (e) {
     if (e.ctrlKey && e.keyCode === 13) {
       jQuery('footer .save-and-view').click();
