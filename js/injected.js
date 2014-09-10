@@ -222,6 +222,7 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
 
   // Upcoming races, events, goals
   jQuery('.sidebar .section#upcoming-events')
+    .not(':has(li)') // Show if we have upcoming events
     .hide()
     ;
 
