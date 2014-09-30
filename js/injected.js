@@ -196,8 +196,8 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
     ;
 
   // "Share your rides" on profile
-  jQuery('a#embed-athlete-widget')
-    .parent('section')
+  jQuery('.sidebar .section')
+    .has('#embed-athlete-widget')
     .hide()
     ;
 
