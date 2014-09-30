@@ -357,7 +357,7 @@ StravaEnhancementSuite.prototype.profile = function() {
     .css('margin-left', '8px')
     .attr('href', '/settings/profile')
     .text('(edit)')
-    .appendTo('.pageContent h1:first')
+    .appendTo('.page .main h1:first')
     ;
 
   jQuery('.avatar.avatar-athlete img')
