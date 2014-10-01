@@ -154,7 +154,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
       , ['hide_goal_feed_entries', '.performance-goal-created']
     ], function() {
       if (that.options[this[0]]) {
-        jQuery('div.feed>.row').filter(this[1]).remove();
+        jQuery('div.feed>.feed-entry').filter(this[1]).remove();
       }
     })
 
