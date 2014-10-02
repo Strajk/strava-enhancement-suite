@@ -84,6 +84,11 @@ StravaEnhancementSuite.prototype.external_links = function() {
   }
 
   if (this.defined('pageView')) {
+    // Need a little more room to include our links
+    jQuery('section#heading h1')
+      .css({'width': '40%'})
+      ;
+
     jQuery.each([
         ["Flyby", 'http://labs.strava.com/flyby/viewer/#']
       , ["Veloviewer", 'http://veloviewer.com/activities/']
