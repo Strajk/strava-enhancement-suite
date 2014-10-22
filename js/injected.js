@@ -441,12 +441,12 @@ StravaEnhancementSuite.prototype.running_tss = function() {
   }
 
   var TSS_PER_HOUR = {
-      'Z1':  60
-    , 'Z2': 100
-    , 'Z3': 120
-    , 'Z4': 200
-    , 'Z5': 300
-    , 'Z6': 600
+      'Z1':  55
+    , 'Z2':  75
+    , 'Z3':  90
+    , 'Z4': 100
+    , 'Z5': 120
+    , 'Z6': 145
   };
 
   var view = Strava.Labs.Activities.PaceZones;
