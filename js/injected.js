@@ -155,7 +155,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
 
   setInterval(function() {
     jQuery.each([
-        ['hide_challenge_feed_entries', '.challenge']
+        ['hide_challenge_feed_entries', '.challenge, .promo']
       , ['hide_goal_feed_entries', '.performance-goal-created']
     ], function() {
       if (that.options[this[0]]) {
