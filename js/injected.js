@@ -161,7 +161,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
       if (that.options[this[0]]) {
         jQuery('div.feed>.feed-entry').filter(this[1]).remove();
       }
-    })
+    });
 
     jQuery('div.feed>.min-view').each(function() {
       var elem = jQuery(this);
