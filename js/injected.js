@@ -252,7 +252,9 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
     return;
   }
 
-  if (window.location.pathname.indexOf('/dashboard') !== 0) {
+  var url = window.location.pathname;
+
+  if (url.indexOf('/dashboard') !== 0) {
     return;
   }
 
