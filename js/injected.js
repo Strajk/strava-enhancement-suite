@@ -256,6 +256,7 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
 
   if (!(
        (url.indexOf('/dashboard') === 0)
+    || (url.indexOf('/clubs/') === 0 && url.indexOf('/recent_activity') > 0)
   )) {
     return;
   }
