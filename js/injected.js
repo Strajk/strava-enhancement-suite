@@ -254,7 +254,9 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
 
   var url = window.location.pathname;
 
-  if (url.indexOf('/dashboard') !== 0) {
+  if (!(
+       (url.indexOf('/dashboard') === 0)
+  )) {
     return;
   }
 
