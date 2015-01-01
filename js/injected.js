@@ -278,7 +278,7 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
     var window_bottom = w.height() + window_top;
 
     if ((elem_top >= window_top + offset) && (elem_top < window_bottom)) {
-      elem.click().remove();
+      elem.click();
     }
   });
 };
