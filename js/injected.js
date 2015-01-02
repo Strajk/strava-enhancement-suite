@@ -362,6 +362,15 @@ StravaEnhancementSuite.prototype.manual_upload = function() {
       poll();
     }
   });
+
+  // Make description boxes bigger by default
+  setInterval(function() {
+    jQuery('textarea[name=description]')
+      .not('.once-only')
+      .addClass('once-only')
+      .css('height', 160)
+      ;
+  }, 1000);
 };
 
 StravaEnhancementSuite.prototype.profile = function() {
