@@ -1,6 +1,9 @@
 function StravaEnhancementSuite(options) {
   this.options = options;
 
+  // FIXME: No need to specify the functions here; we should have some kind of
+  // "registration" method.
+
   this.comment_post_on_enter();
   this.estimated_ftp();
   this.external_links();
