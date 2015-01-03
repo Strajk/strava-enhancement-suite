@@ -206,7 +206,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
 
       // Remove "Premium" buttons
       jQuery('div.feed>.feed-entry .badge.premium')
-        .remove()
+        .hide()
         ;
     }
   }, 1000);
