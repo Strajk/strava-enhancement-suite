@@ -656,7 +656,9 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
 
           // Scroll into view. Doesn't work perfectly at the moment if a
           // segment is already open.
-          jQuery('html, body').scrollTop(elem.offset().top);
+          jQuery('html, body')
+            .scrollTop(elem.offset().top)
+            ;
 
           // Passthrough click
           elem.trigger(e);
@@ -728,7 +730,8 @@ StravaEnhancementSuite.prototype.variability_index = function() {
   jQuery('<li><strong>X</strong><div class="label">Variability Index</div></li>')
     .insertAfter(elem)
     .find('strong')
-    .text((np / ap).toFixed(2));
+    .text((np / ap).toFixed(2))
+    ;
 };
 
 // Utilities
