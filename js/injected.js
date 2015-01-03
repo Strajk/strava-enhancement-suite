@@ -199,14 +199,16 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
     });
 
     if (that.options.hide_invite_friends === true) {
-      // Remove social buttons
-      jQuery('div.feed>.feed-entry .share')
-        .hide()
-        ;
+      jQuery('div.feed>.feed-entry')
+        // Remove social buttons
+        .find('.share')
+          .hide()
+        .end()
 
-      // Remove "Premium" buttons
-      jQuery('div.feed>.feed-entry .badge.premium')
-        .hide()
+        // Remove "Premium" buttons
+        .find('.badge.premium')
+          .hide()
+        .end()
         ;
     }
   }, 1000);
