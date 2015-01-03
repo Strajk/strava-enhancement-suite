@@ -203,6 +203,11 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
       jQuery('div.feed>.feed-entry .share')
         .hide()
         ;
+
+      // Remove "Premium" buttons
+      jQuery('div.feed>.feed-entry .badge.premium')
+        .remove()
+        ;
     }
   }, 1000);
 };
