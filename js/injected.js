@@ -198,8 +198,8 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
       }
     });
 
-    // Remove social buttons
     if (that.options.hide_invite_friends === true) {
+      // Remove social buttons
       jQuery('div.feed>.feed-entry .share')
         .hide()
         ;
