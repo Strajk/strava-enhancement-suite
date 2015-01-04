@@ -707,6 +707,9 @@ function StravaEnhancementSuite(options) {
 
   // Mouseover on feed avatars makes them bigger
   (function() {
+    // TODO: Proportionally make the avatars in the comments bigger
+    // TODO: Make Instagram images larger
+
     var src = '.feed-entry .avatar-md';
     var target = 'avatar-xl';
 
