@@ -1,32 +1,7 @@
 function StravaEnhancementSuite(options) {
-  this.options = options;
 
-  // FIXME: No need to specify the functions here; we should have some kind of
-  // "registration" method.
-
-  this.comment_post_on_enter();
-  this.estimated_ftp();
-  this.external_links();
-  this.hide_feed_entries();
-  this.hide_invite_friends();
-  this.infinite_scroll();
-  this.leaderboard_default();
-  this.manual_upload();
-  this.repeated_segments();
-  this.pagination();
-  this.running_cadence();
-  this.running_heart_rate();
-  this.running_tss();
-  this.side_by_side_running();
-  this.standard_google_map();
-  this.variability_index();
-
-  this.activity();
-  this.flyby();
-  this.profile();
-};
-
-StravaEnhancementSuite.prototype.activity = function() {
+// activity
+(function() {
   // Detect whether we are viewing our own activity and to activate the dialog
   var edit_activity = jQuery('.sidenav .edit-activity');
 
@@ -71,10 +46,11 @@ StravaEnhancementSuite.prototype.activity = function() {
         ;
     }
   });
-};
+}());
 
-StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
-  if (this.options.comment_post_on_enter === false) {
+// comment_post_on_enter
+(function() {
+  if (options.comment_post_on_enter === false) {
     return;
   }
 
@@ -90,14 +66,15 @@ StravaEnhancementSuite.prototype.comment_post_on_enter = function() {
 
     return false;
   });
-};
+}());
 
-StravaEnhancementSuite.prototype.external_links = function() {
-  if (this.options.external_links === false) {
+// external_links
+(function() {
+  if (options.external_links === false) {
     return;
   }
 
-  if (this.defined('pageView')) {
+  if (defined('pageView')) {
     // Need a little more room to include our links
     jQuery('section#heading h1')
       .css({'width': '40%'})
@@ -154,25 +131,25 @@ StravaEnhancementSuite.prototype.external_links = function() {
       window.location.href = 'http://www.kom.club/';
     })
     ;
-};
+}());
 
-StravaEnhancementSuite.prototype.estimated_ftp = function() {
-  if (this.options.estimated_ftp === false) {
+// estimated_ftp
+(function() {
+  if (options.estimated_ftp === false) {
     return;
   }
 
   jQuery('#cpcurve-estimatedCP').click();
-};
+}());
 
-StravaEnhancementSuite.prototype.hide_feed_entries = function() {
-  var that = this;
-
+// hide_feed_entries
+(function() {
   setInterval(function() {
     jQuery.each([
         ['hide_challenge_feed_entries', '.challenge, .promo']
       , ['hide_goal_feed_entries', '.performance-goal-created']
     ], function() {
-      if (that.options[this[0]]) {
+      if (options[this[0]]) {
         jQuery('div.feed>.feed-entry').filter(this[1]).remove();
       }
     });
@@ -186,7 +163,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
         , ['hide_club_feed_entries', '> joined <']
         , ['hide_club_feed_entries', '> created <']
       ], function() {
-        if ((that.options[this[0]]) && (html.indexOf(this[1]) !== -1)) {
+        if ((options[this[0]]) && (html.indexOf(this[1]) !== -1)) {
           elem.remove();
         }
       });
@@ -201,7 +178,7 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
       }
     });
 
-    if (that.options.hide_invite_friends === true) {
+    if (options.hide_invite_friends === true) {
       jQuery('div.feed>.feed-entry')
         // Remove social buttons
         .find('.share')
@@ -215,10 +192,11 @@ StravaEnhancementSuite.prototype.hide_feed_entries = function() {
         ;
     }
   }, 1000);
-};
+})();
 
-StravaEnhancementSuite.prototype.hide_invite_friends = function() {
-  if (this.options.hide_invite_friends === false) {
+// hide_invite_friends
+(function() {
+  if (options.hide_invite_friends === false) {
     return;
   }
 
@@ -266,10 +244,11 @@ StravaEnhancementSuite.prototype.hide_invite_friends = function() {
   jQuery('.sidebar #club-module')
     .after(jQuery('.sidebar #challenge-module'))
     ;
-};
+}());
 
-StravaEnhancementSuite.prototype.infinite_scroll = function() {
-  if (this.options.infinite_scroll === false) {
+// infinite_scroll
+(function() {
+  if (options.infinite_scroll === false) {
     return;
   }
 
@@ -302,21 +281,22 @@ StravaEnhancementSuite.prototype.infinite_scroll = function() {
       elem.click();
     }
   });
-};
+}());
 
-StravaEnhancementSuite.prototype.leaderboard_default = function() {
-  if (this.options.leadeboard_default === 'overall') {
+// leaderboard_default
+(function() {
+  if (options.leadeboard_default === 'overall') {
     return;
   }
 
-  if (!this.defined('Strava.Labs.Activities.SegmentLeaderboardView.prototype.render')) {
+  if (!defined('Strava.Labs.Activities.SegmentLeaderboardView.prototype.render')) {
     return;
   }
 
   var view = Strava.Labs.Activities.SegmentLeaderboardView;
   var fn = view.prototype.render;
 
-  var leaderboard_default = this.options.leaderboard_default;
+  var leaderboard_default = options.leaderboard_default;
 
   view.prototype.render = function () {
     var result = fn.apply(this, Array.prototype.slice.call(arguments));
@@ -330,9 +310,10 @@ StravaEnhancementSuite.prototype.leaderboard_default = function() {
 
     return result;
   };
-};
+}());
 
-StravaEnhancementSuite.prototype.flyby = function() {
+// flyby
+(function() {
   if (jQuery('#playback-controls').length === 0) {
     return;
   }
@@ -354,9 +335,10 @@ StravaEnhancementSuite.prototype.flyby = function() {
 
       return true;
     })
-};
+}());
 
-StravaEnhancementSuite.prototype.manual_upload = function() {
+// manual_upload
+(function() {
   if (window.location.pathname !== '/upload/select') {
     return;
   }
@@ -392,9 +374,10 @@ StravaEnhancementSuite.prototype.manual_upload = function() {
       .css('height', 160)
       ;
   }, 1000);
-};
+}());
 
-StravaEnhancementSuite.prototype.profile = function() {
+// profile
+(function() {
   if (window.location.pathname.indexOf(jQuery('header .user-menu a').attr('href')) !== 0) {
     return;
   }
@@ -410,10 +393,11 @@ StravaEnhancementSuite.prototype.profile = function() {
   jQuery('.avatar.avatar-athlete img')
     .wrap('<a href="/settings/profile"></a>')
     ;
-};
+}());
 
-StravaEnhancementSuite.prototype.pagination = function() {
-  if (!this.defined('pagingController')) {
+// pagination
+(function() {
+  if (!defined('pagingController')) {
     return;
   }
 
@@ -443,10 +427,11 @@ StravaEnhancementSuite.prototype.pagination = function() {
       .end()
       ;
   }, 1000);
-};
+}());
 
-StravaEnhancementSuite.prototype.running_cadence = function() {
-  if (this.options.running_cadence === false) {
+// running_cadence
+(function() {
+  if (options.running_cadence === false) {
     return;
   }
 
@@ -457,10 +442,11 @@ StravaEnhancementSuite.prototype.running_cadence = function() {
       .click()
       ;
   }, 1000);
-};
+}());
 
-StravaEnhancementSuite.prototype.running_heart_rate = function() {
-  if (this.options.running_heart_rate === false) {
+// running_heart_rate
+(function() {
+  if (options.running_heart_rate === false) {
     return;
   }
 
@@ -471,14 +457,15 @@ StravaEnhancementSuite.prototype.running_heart_rate = function() {
       .click()
       ;
   }, 1000);
-};
+}());
 
-StravaEnhancementSuite.prototype.running_tss = function() {
-  if (this.options.running_tss === false) {
+// running_tss
+(function() {
+  if (options.running_tss === false) {
     return;
   }
 
-  if (!this.defined('Strava.Labs.Activities.PaceZones.prototype.getPaceZones')) {
+  if (!defined('Strava.Labs.Activities.PaceZones.prototype.getPaceZones')) {
     return;
   }
 
@@ -515,19 +502,19 @@ StravaEnhancementSuite.prototype.running_tss = function() {
 
     return result;
   };
-};
+}());
 
-StravaEnhancementSuite.prototype.repeated_segments = function() {
-  if (this.options.repeated_segments === false) {
+// repeated_segments
+(function() {
+  if (options.repeated_segments === false) {
     return;
   }
 
-  if (!this.defined('pageView')) {
+  if (!defined('pageView')) {
     return;
   }
 
   var data = {};
-  var that = this;
   var elevation_unit = null;
 
   // Find total raw times by segment ID
@@ -583,7 +570,7 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
 
   // Flatten and sort
   data = jQuery.map(data, function(elem) { return elem; });
-  data.sort(that.keySort('-starred', '-count', 'title'));
+  data.sort(keySort('-starred', '-count', 'title'));
 
   setInterval(function() {
     var section = jQuery('section.segments-list')
@@ -628,10 +615,10 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
           '<td><div class="starred" style="cursor: default;">★</div></td>' +
           '<td><a class="title" href="#"</a></td>' +
           '<td>' + row.count.toLocaleString() + '</td>' +
-          '<td><a href="#" class="min">' + that.toSeconds(row.min.seconds) + '</a></td>' +
-          '<td><a href="#" class="max">' + that.toSeconds(row.max.seconds) + '</a></td>' +
-          '<td>' + that.toSeconds(row.average) + '</td>' +
-          '<td>' + that.toSeconds(row.sum) + '</td>' +
+          '<td><a href="#" class="min">' + toSeconds(row.min.seconds) + '</a></td>' +
+          '<td><a href="#" class="max">' + toSeconds(row.max.seconds) + '</a></td>' +
+          '<td>' + toSeconds(row.average) + '</td>' +
+          '<td>' + toSeconds(row.sum) + '</td>' +
           '<td>' + (row.count * row.distance).toLocaleString() + row.distance_unit + '</td>' +
           '<td>' + (row.count * row.elev_difference).toLocaleString() + row.elev_difference_unit + '</td>' +
         '</tr>'
@@ -668,10 +655,11 @@ StravaEnhancementSuite.prototype.repeated_segments = function() {
       });
     })
   }, 1000);
-};
+}());
 
-StravaEnhancementSuite.prototype.side_by_side_running = function() {
-  if (this.options.side_by_side_running === false) {
+// side_by_side_running
+(function() {
+  if (options.side_by_side_running === false) {
     return;
   }
 
@@ -682,10 +670,11 @@ StravaEnhancementSuite.prototype.side_by_side_running = function() {
       .click()
       ;
   }, 1000);
-};
+}());
 
-StravaEnhancementSuite.prototype.standard_google_map = function() {
-  if (this.options.standard_google_map === false) {
+// standard_google_map
+(function() {
+  if (options.standard_google_map === false) {
     return;
   }
 
@@ -698,16 +687,15 @@ StravaEnhancementSuite.prototype.standard_google_map = function() {
       .click()
       ;
   }, 1000);
-};
+}());
 
-
-
-StravaEnhancementSuite.prototype.variability_index = function() {
-  if (this.options.variability_index === false) {
+// variability_index
+(function() {
+  if (options.variability_index === false) {
     return;
   }
 
-  if (!this.defined('pageView')) {
+  if (!defined('pageView')) {
     return;
   }
 
@@ -722,11 +710,11 @@ StravaEnhancementSuite.prototype.variability_index = function() {
     .find('strong')
     .text((np / ap).toFixed(2))
     ;
-};
+}());
 
 // Utilities
 
-StravaEnhancementSuite.prototype.defined = function(val) {
+function defined(val) {
   try {
     eval(val);
     return true;
@@ -735,7 +723,7 @@ StravaEnhancementSuite.prototype.defined = function(val) {
   }
 };
 
-StravaEnhancementSuite.prototype.toSeconds = function(s) {
+function toSeconds(s) {
   var r = '';
   var hours = Math.floor(s / 3600.0);
 
@@ -769,7 +757,7 @@ StravaEnhancementSuite.prototype.toSeconds = function(s) {
   return r;
 };
 
-StravaEnhancementSuite.prototype.keySort = function() {
+function keySort() {
   var fields = arguments;
 
   return function(a, b) {
@@ -799,6 +787,8 @@ StravaEnhancementSuite.prototype.keySort = function() {
 
     return 0;
   };
+};
+
 };
 
 StravaEnhancementSuite.prototype.switch_units = function() {
