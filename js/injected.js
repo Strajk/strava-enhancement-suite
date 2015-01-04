@@ -705,6 +705,41 @@ function StravaEnhancementSuite(options) {
       ;
   }());
 
+  // Mouseover on feed avatars makes them bigger
+  (function() {
+    var src = '.feed-entry .avatar-md';
+    var target = 'avatar-xl';
+
+    $('body')
+      .on('mouseover', src, function() {
+        $(this)
+          // Use a higher-resolution bigger image
+          .find('img')
+            .attr('src', function (i, val) {
+              return val.replace('medium.jpg', 'large.jpg');
+            })
+          .end()
+
+          // Use absolute positioning so we don't move stuff out of the way
+          .data('original-position', $(this).css('position'))
+          .css('position', 'absolute')
+
+          // Ensure we are over any other nearby icons
+          .css('z-index', 99999)
+
+          // Actually make it bigger
+          .addClass(target)
+          ;
+      })
+      .on('mouseout', src, function() {
+        $(this)
+          .css('position', $(this).data('original-position'))
+          .removeClass(target)
+          ;
+      })
+      ;
+  })();
+
   // Utilities ////////////////////////////////////////////////////////////////
 
   $.fn.onceOnly = function () {
