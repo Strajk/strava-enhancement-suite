@@ -713,8 +713,6 @@ function StravaEnhancementSuite(options) {
       , 'height': 124
       // Use absolute positioning so we don't move stuff out of the way
       , 'position': 'absolute'
-      // Ensure we are over any other nearby icons
-      , 'z-index': 9999
     }, function() {
       $(this)
         // Use a higher-resolution bigger image
@@ -731,7 +729,6 @@ function StravaEnhancementSuite(options) {
     onHover('.feed-entry .photostream li', {
         'width': 300
       , 'height': 300
-      , 'z-index': 9999
     });
   })();
 
@@ -828,6 +825,10 @@ function StravaEnhancementSuite(options) {
   };
 
   function onHover(src, css, handlerIn, handlerOut) {
+    css = $.extend({
+        'z-index': 99999
+    }, css);
+
     $('body')
       .on('mouseover', src, function() {
         var elem = $(this);
