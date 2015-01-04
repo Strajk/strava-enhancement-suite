@@ -752,6 +752,14 @@ function StravaEnhancementSuite(options) {
       ;
   };
 
+  $.extend({
+    keys: function(obj) {
+      var a = [];
+      $.each(obj, function(k) { a.push(k) });
+      return a;
+    }
+  });
+
   function defined(val) {
     try {
       eval(val);
@@ -825,6 +833,32 @@ function StravaEnhancementSuite(options) {
 
       return 0;
     };
+  };
+
+  function onHover(src, css, handlerIn, handlerOut) {
+    $('body')
+      .on('mouseover', src, function() {
+        var elem = $(this);
+
+        typeof handlerIn === 'function' && handlerIn.apply(this);
+
+        elem
+          // Save original CSS
+          .data('original-css', elem.css($.keys(css)))
+
+          // Apply target CSS
+          .css(css)
+          ;
+      })
+      .on('mouseout', src, function() {
+        var elem = $(this);
+
+        typeof handlerOut === 'function' && handlerOut.apply(this);
+
+        // Restore original CSS
+        elem.css(elem.data('original-css'));
+      })
+      ;
   };
 };
 
