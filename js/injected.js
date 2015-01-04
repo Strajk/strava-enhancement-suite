@@ -301,8 +301,7 @@ function StravaEnhancementSuite(options) {
       var result = fn.apply(this, Array.prototype.slice.call(arguments));
 
       $(this.el)
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
         .find('.clickable[data-filter=' + leaderboard_default + ']')
         .click()
         ;
@@ -368,8 +367,7 @@ function StravaEnhancementSuite(options) {
     // Make description boxes bigger by default
     setInterval(function() {
       $('textarea[name=description]')
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
         .css('height', 160)
         ;
     }, 1000);
@@ -402,8 +400,7 @@ function StravaEnhancementSuite(options) {
 
     setInterval(function() {
       $('.simple.pagination ul.switches')
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
 
         // First
         .prepend('<li><span class="button first_page">First</span></li>')
@@ -436,8 +433,7 @@ function StravaEnhancementSuite(options) {
 
     setInterval(function() {
       $('#elevation-profile td[data-type=cadence] .toggle-button')
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
         .click()
         ;
     }, 1000);
@@ -451,8 +447,7 @@ function StravaEnhancementSuite(options) {
 
     setInterval(function() {
       $('#elevation-profile td[data-type=heartrate] .toggle-button')
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
         .click()
         ;
     }, 1000);
@@ -574,8 +569,7 @@ function StravaEnhancementSuite(options) {
     setInterval(function() {
       var section = $('section.segments-list')
         .not('.collapsed')
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
         ;
 
       if (section.length === 0) {
@@ -664,8 +658,7 @@ function StravaEnhancementSuite(options) {
 
     setInterval(function() {
       $('.section.comparison .running-tab')
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
         .click()
         ;
     }, 1000);
@@ -679,8 +672,7 @@ function StravaEnhancementSuite(options) {
 
     setInterval(function() {
       $('a.map-type-selector[data-map-type-id=standard]')
-        .not('.once-only')
-        .addClass('once-only')
+        .onceOnly()
         .click()
         .parents('.drop-down-menu') // Close menu
         .click()
@@ -712,6 +704,13 @@ function StravaEnhancementSuite(options) {
   }());
 
   // Utilities ////////////////////////////////////////////////////////////////
+
+  $.fn.onceOnly = function () {
+    return this
+      .not('.once-only')
+      .addClass('once-only')
+      ;
+  };
 
   function defined(val) {
     try {
