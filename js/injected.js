@@ -732,6 +732,22 @@ function StravaEnhancementSuite(options) {
     });
   })();
 
+  // Mouseover on club images makes them bigger
+  (function() {
+    onHover('#club-module .avatar', {
+        'width': 64
+      , 'height': 64
+    });
+  })();
+
+  // Mouseover on challenge images makes them bigger
+  (function() {
+    onHover('#challenge-module .avatar', {
+        'width': 80
+      , 'height': 80
+    });
+  })();
+
   // Utilities ////////////////////////////////////////////////////////////////
 
   $.fn.onceOnly = function () {
