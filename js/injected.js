@@ -708,8 +708,6 @@ function StravaEnhancementSuite(options) {
   // Mouseover on feed avatars makes them bigger
   (function() {
     // TODO: Proportionally make the avatars in the comments bigger
-    // TODO: Make Instagram images larger
-
     onHover('.feed-entry .avatar-md', {
         'width': 124
       , 'height': 124
@@ -725,6 +723,15 @@ function StravaEnhancementSuite(options) {
             return val.replace('/medium.jpg', '/large.jpg');
           })
         ;
+    });
+  })();
+
+  // Mouseover on Instagram images makes them bigger
+  (function() {
+    onHover('.feed-entry .photostream li', {
+        'width': 300
+      , 'height': 300
+      , 'z-index': 9999
     });
   })();
 
