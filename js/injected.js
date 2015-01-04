@@ -707,7 +707,6 @@ function StravaEnhancementSuite(options) {
 
   // Mouseover on feed avatars makes them bigger
   (function() {
-    // TODO: Proportionally make the avatars in the comments bigger
     onHover('.feed-entry .avatar-md', {
         'width': 124
       , 'height': 124
@@ -732,7 +731,7 @@ function StravaEnhancementSuite(options) {
     });
   })();
 
-  // Mouseover on club images makes them bigger
+  // Mouseover on club images on dashboard makes them bigger
   (function() {
     onHover('#club-module .avatar', {
         'width': 64
@@ -740,11 +739,28 @@ function StravaEnhancementSuite(options) {
     });
   })();
 
-  // Mouseover on challenge images makes them bigger
+  // Mouseover on challenge images on dashboard makes them bigger
   (function() {
-    onHover('#challenge-module .avatar', {
+    onHover('challenge-module .avatar', {
         'width': 80
       , 'height': 80
+    });
+  })();
+
+  // Mouseover on challenge images in dashboard feed makes them bigger
+  (function() {
+    onHover('.feed-entry.challenge .entry-image img', {
+        'max-width': 200
+      , 'max-height': 130
+    });
+  })();
+
+  // Mouseover on condensed athlete list in feed makes them bigger
+  (function() {
+    onHover('.feed-entry.challenge .list-athletes img', {
+        'width': 60
+      , 'height': 60
+      , 'position': 'absolute'
     });
   })();
 
