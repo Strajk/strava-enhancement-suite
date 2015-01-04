@@ -1,6 +1,8 @@
 function StravaEnhancementSuite(options) {
   var $ = jQuery;
 
+  // Methods //////////////////////////////////////////////////////////////////
+
   // Activity pages
   (function() {
     // Detect whether we are viewing our own activity and to activate the dialog
