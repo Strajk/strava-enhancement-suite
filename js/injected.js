@@ -719,7 +719,7 @@ function StravaEnhancementSuite(options) {
           // Use a higher-resolution bigger image
           .find('img')
             .attr('src', function (i, val) {
-              return val.replace('medium.jpg', 'large.jpg');
+              return val.replace('/medium.jpg', '/large.jpg');
             })
           .end()
 
