@@ -1,16 +1,18 @@
 function StravaEnhancementSuite(options) {
+  var $ = jQuery;
+
   // activity
   (function() {
     // Detect whether we are viewing our own activity and to activate the dialog
-    var edit_activity = jQuery('.sidenav .edit-activity');
+    var edit_activity = $('.sidenav .edit-activity');
 
     // Seems to be truncated in size
-    jQuery('#heading span.title')
+    $('#heading span.title')
       .css('display', 'inline')
       ;
 
     // Don't link device name to shop
-    jQuery('#heading .activity-stats .device a')
+    $('#heading .activity-stats .device a')
       .contents()
       .unwrap()
       ;
@@ -19,16 +21,16 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
-    jQuery('#heading h2.activity-name')
+    $('#heading h2.activity-name')
       .css('cursor', 'pointer')
       .on('click', function() {
         edit_activity.click();
       })
       ;
 
-    jQuery('body').on('keydown', '.lightbox.edit_activity input[type=text]', function (e) {
+    $('body').on('keydown', '.lightbox.edit_activity input[type=text]', function (e) {
       if (e.keyCode === 13) {
-        jQuery(this)
+        $(this)
           .parents('.lightbox')
           .find('input[type=submit]')
           .click()
@@ -36,9 +38,9 @@ function StravaEnhancementSuite(options) {
       }
     });
 
-    jQuery('body').on('keydown', '.lightbox.edit_activity input[type=text], .lightbox.edit_activity textarea', function (e) {
+    $('body').on('keydown', '.lightbox.edit_activity input[type=text], .lightbox.edit_activity textarea', function (e) {
       if (e.ctrlKey && e.keyCode === 13) {
-        jQuery(this)
+        $(this)
           .parents('.lightbox')
           .find('input[type=submit]')
           .click()
@@ -53,12 +55,12 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
-    jQuery(document).on('keydown', '.comments textarea', function(e) {
+    $(document).on('keydown', '.comments textarea', function(e) {
       if (e.keyCode !== 13) {
         return true;
       }
 
-      jQuery(this)
+      $(this)
         .parents('form')
         .submit()
         ;
@@ -75,16 +77,16 @@ function StravaEnhancementSuite(options) {
 
     if (defined('pageView')) {
       // Need a little more room to include our links
-      jQuery('section#heading h1')
+      $('section#heading h1')
         .css({'width': '40%'})
         ;
 
-      jQuery.each([
+      $.each([
           ["Flyby", 'http://labs.strava.com/flyby/viewer/#']
         , ["Veloviewer", 'http://veloviewer.com/activities/']
         , ["Raceshape", 'http://raceshape.com/url.redirect.php?url=http%3A%2F%2Fapp.strava.com%2Factivities%2F']
       ].reverse(), function() {
-        jQuery(
+        $(
           '<div class="button-group">' +
             '<a href="#" class="button title"></a>' +
           '</div>'
@@ -105,7 +107,7 @@ function StravaEnhancementSuite(options) {
     var m = window.location.pathname.match(/^\/segments\/(\d+)$/);
 
     if (m !== null) {
-      jQuery(
+      $(
         '<div class="module">' +
           '<h3 class="marginless">External links</h3>' +
           '<ul style="list-style-type: disc; margin: 10px 0 0 25px;">' +
@@ -117,7 +119,7 @@ function StravaEnhancementSuite(options) {
     }
 
     // Link to KOM Club
-    jQuery(
+    $(
       '<li>' +
         '<button>KOM Club</button>' +
       '</li>'
@@ -138,26 +140,26 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
-    jQuery('#cpcurve-estimatedCP').click();
+    $('#cpcurve-estimatedCP').click();
   }());
 
   // hide_feed_entries
   (function() {
     setInterval(function() {
-      jQuery.each([
+      $.each([
           ['hide_challenge_feed_entries', '.challenge, .promo']
         , ['hide_goal_feed_entries', '.performance-goal-created']
       ], function() {
         if (options[this[0]]) {
-          jQuery('div.feed>.feed-entry').filter(this[1]).remove();
+          $('div.feed>.feed-entry').filter(this[1]).remove();
         }
       });
 
-      jQuery('div.feed>.min-view').each(function() {
-        var elem = jQuery(this);
+      $('div.feed>.min-view').each(function() {
+        var elem = $(this);
         var html = elem.find('.entry-title').html();
 
-        jQuery.each([
+        $.each([
             ['hide_route_feed_entries', '> created the route, <']
           , ['hide_club_feed_entries', '> joined <']
           , ['hide_club_feed_entries', '> created <']
@@ -169,8 +171,8 @@ function StravaEnhancementSuite(options) {
       });
 
       // Remove any days that are now empty
-      jQuery('div.feed>.header').each(function() {
-        var elem = jQuery(this);
+      $('div.feed>.header').each(function() {
+        var elem = $(this);
 
         if (elem.nextUntil('.row.header').not('script').length === 0) {
           elem.remove();
@@ -178,7 +180,7 @@ function StravaEnhancementSuite(options) {
       });
 
       if (options.hide_invite_friends === true) {
-        jQuery('div.feed>.feed-entry')
+        $('div.feed>.feed-entry')
           // Remove social buttons
           .find('.share')
             .hide()
@@ -200,30 +202,30 @@ function StravaEnhancementSuite(options) {
     }
 
     // "Invite friends" in navbar
-    jQuery('header nav a.find-and-invite')
+    $('header nav a.find-and-invite')
       .parent('li')
       .hide()
       ;
 
     // "Share your rides" on profile
-    jQuery('.sidebar .section')
+    $('.sidebar .section')
       .has('#embed-athlete-widget')
       .hide()
       ;
 
     // Facebook, Twitter and share logos on activity page
-    jQuery('section#heading .social .sharing').hide();
+    $('section#heading .social .sharing').hide();
 
     //// Dashboard
 
     // "You Should Follow"
-    jQuery('.sidebar #suggested-follow-module').hide();
+    $('.sidebar #suggested-follow-module').hide();
 
     // "Find Your Friends On Strava"
-    jQuery('.sidebar #invite-your-friend-module').hide();
+    $('.sidebar #invite-your-friend-module').hide();
 
     // Strava blog link in sidebar (currently "Vuelta")
-    jQuery('.sidebar .section')
+    $('.sidebar .section')
       .has('a[href*=blog\\.strava\\.com]')
       .hide()
       ;
@@ -231,17 +233,17 @@ function StravaEnhancementSuite(options) {
     // FIXME: These are not social networking related
 
     // Upcoming races, events, goals
-    jQuery('.sidebar .section#upcoming-events')
+    $('.sidebar .section#upcoming-events')
       .not(':has(li)') // Show if we have upcoming events
       .hide()
       ;
 
     // Discover more races, etc.
-    jQuery('.sidebar .section#discover-more').hide();
+    $('.sidebar .section#discover-more').hide();
 
     // Swap club and challenges
-    jQuery('.sidebar #club-module')
-      .after(jQuery('.sidebar #challenge-module'))
+    $('.sidebar #club-module')
+      .after($('.sidebar #challenge-module'))
       ;
   }());
 
@@ -260,8 +262,8 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
-    var w = jQuery(window);
-    var container = jQuery('.feed-container');
+    var w = $(window);
+    var container = $('.feed-container');
 
     w.scroll(function() {
       var elem = container.find('a.load-feed');
@@ -300,7 +302,7 @@ function StravaEnhancementSuite(options) {
     view.prototype.render = function () {
       var result = fn.apply(this, Array.prototype.slice.call(arguments));
 
-      jQuery(this.el)
+      $(this.el)
         .not('.once-only')
         .addClass('once-only')
         .find('.clickable[data-filter=' + leaderboard_default + ']')
@@ -313,21 +315,21 @@ function StravaEnhancementSuite(options) {
 
   // flyby
   (function() {
-    if (jQuery('#playback-controls').length === 0) {
+    if ($('#playback-controls').length === 0) {
       return;
     }
 
-    jQuery('<div><input type="checkbox"> Select all</div>')
+    $('<div><input type="checkbox"> Select all</div>')
       .prependTo('#sidebar-checkboxes')
       .find('input')
       .on('change', function() {
-        var elem = jQuery(this);
+        var elem = $(this);
 
         // Disable some fancy hash handling reload, otherwise calling .change()
         // reloads the page when unselecting.
         window.onhashchange = function() {};
 
-        jQuery('#activity_table input[type=checkbox]')
+        $('#activity_table input[type=checkbox]')
           .prop('checked', elem.prop('checked'))
           .change()
           ;
@@ -342,15 +344,15 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
-    jQuery('body').on('keydown', '.uploads input[type=text]', function (e) {
+    $('body').on('keydown', '.uploads input[type=text]', function (e) {
       if (e.keyCode === 13) {
-        jQuery('footer .save-and-view').click();
+        $('footer .save-and-view').click();
       }
     });
 
-    jQuery('body').on('keydown', '.uploads input[type=text], .uploads textarea', function (e) {
+    $('body').on('keydown', '.uploads input[type=text], .uploads textarea', function (e) {
       if (e.ctrlKey && e.keyCode === 13) {
-        var btn = jQuery('footer .save-and-view');
+        var btn = $('footer .save-and-view');
 
         var poll = function() {
           if (btn.hasClass('disabled')) {
@@ -367,7 +369,7 @@ function StravaEnhancementSuite(options) {
 
     // Make description boxes bigger by default
     setInterval(function() {
-      jQuery('textarea[name=description]')
+      $('textarea[name=description]')
         .not('.once-only')
         .addClass('once-only')
         .css('height', 160)
@@ -377,11 +379,11 @@ function StravaEnhancementSuite(options) {
 
   // profile
   (function() {
-    if (window.location.pathname.indexOf(jQuery('header .user-menu a').attr('href')) !== 0) {
+    if (window.location.pathname.indexOf($('header .user-menu a').attr('href')) !== 0) {
       return;
     }
 
-    jQuery('<a>')
+    $('<a>')
       .css('font-size', '20px')
       .css('margin-left', '8px')
       .attr('href', '/settings/profile')
@@ -389,7 +391,7 @@ function StravaEnhancementSuite(options) {
       .appendTo('.page .main h1:first')
       ;
 
-    jQuery('.avatar.avatar-athlete img')
+    $('.avatar.avatar-athlete img')
       .wrap('<a href="/settings/profile"></a>')
       ;
   }());
@@ -401,7 +403,7 @@ function StravaEnhancementSuite(options) {
     }
 
     setInterval(function() {
-      jQuery('.simple.pagination ul.switches')
+      $('.simple.pagination ul.switches')
         .not('.once-only')
         .addClass('once-only')
 
@@ -435,7 +437,7 @@ function StravaEnhancementSuite(options) {
     }
 
     setInterval(function() {
-      jQuery('#elevation-profile td[data-type=cadence] .toggle-button')
+      $('#elevation-profile td[data-type=cadence] .toggle-button')
         .not('.once-only')
         .addClass('once-only')
         .click()
@@ -450,7 +452,7 @@ function StravaEnhancementSuite(options) {
     }
 
     setInterval(function() {
-      jQuery('#elevation-profile td[data-type=heartrate] .toggle-button')
+      $('#elevation-profile td[data-type=heartrate] .toggle-button')
         .not('.once-only')
         .addClass('once-only')
         .click()
@@ -484,7 +486,7 @@ function StravaEnhancementSuite(options) {
       var result = fn.apply(this, Array.prototype.slice.call(arguments));
 
       var tss = 0;
-      jQuery.each(this.paceZones, function (i, item) {
+      $.each(this.paceZones, function (i, item) {
         // Re-parse the time (eg. "23s" / "32:21")
         var parts = item.time.replace('s', '').split(':').reverse();
         var seconds = parts.reduce(function (prev, cur, idx) {
@@ -495,7 +497,7 @@ function StravaEnhancementSuite(options) {
         tss += TSS_PER_HOUR[item.name] / 3600 * seconds;
       });
 
-      jQuery('#view .inline-stats').append(
+      $('#view .inline-stats').append(
         '<li><strong>' + Math.round(tss) + '</strong><div class="label">TSS (estimated)</div></li>'
       );
 
@@ -517,7 +519,7 @@ function StravaEnhancementSuite(options) {
     var elevation_unit = null;
 
     // Find total raw times by segment ID
-    jQuery.each(pageView.segmentEfforts().models, function() {
+    $.each(pageView.segmentEfforts().models, function() {
       var segment_id = this.attributes.segment_id;
 
       var m_distance = this.attributes.distance.match(/^([\d\.]+)(.*)/);
@@ -541,7 +543,7 @@ function StravaEnhancementSuite(options) {
     });
 
     // Annotate with aggregate data
-    jQuery.each(data, function() {
+    $.each(data, function() {
       var sum = 0;
       var max = {
         'seconds': 0,
@@ -552,13 +554,13 @@ function StravaEnhancementSuite(options) {
         'segment_effort_id': null
       };
 
-      jQuery.each(this.times, function() {
+      $.each(this.times, function() {
         sum += this.seconds;
         max = (this.seconds > max.seconds) ? this : max;
         min = (this.seconds < min.seconds) ? this : min;
       });
 
-      jQuery.extend(this, {
+      $.extend(this, {
         'max': max,
         'min': min,
         'sum': sum,
@@ -568,11 +570,11 @@ function StravaEnhancementSuite(options) {
     });
 
     // Flatten and sort
-    data = jQuery.map(data, function(elem) { return elem; });
+    data = $.map(data, function(elem) { return elem; });
     data.sort(keySort('-starred', '-count', 'title'));
 
     setInterval(function() {
-      var section = jQuery('section.segments-list')
+      var section = $('section.segments-list')
         .not('.collapsed')
         .not('.once-only')
         .addClass('once-only')
@@ -582,7 +584,7 @@ function StravaEnhancementSuite(options) {
         return;
       }
 
-      var table = jQuery(
+      var table = $(
         '<table class="striped">' +
           '<thead>' +
             '<tr>' +
@@ -601,7 +603,7 @@ function StravaEnhancementSuite(options) {
         '</table>'
       ).appendTo(section);
 
-      jQuery.each(data, function() {
+      $.each(data, function() {
         var row = this;
 
         // Only add repeated rows
@@ -609,7 +611,7 @@ function StravaEnhancementSuite(options) {
           return;
         }
 
-        var tr = jQuery(
+        var tr = $(
           '<tr>' +
             '<td><div class="starred" style="cursor: default;">★</div></td>' +
             '<td><a class="title" href="#"</a></td>' +
@@ -632,17 +634,17 @@ function StravaEnhancementSuite(options) {
           .toggleClass('active', row.starred)
           ;
 
-        jQuery.each(['min', 'max'], function() {
+        $.each(['min', 'max'], function() {
           var min_max = this;
 
           tr.find('a.' + min_max).click(function(e) {
-            var elem = jQuery(
+            var elem = $(
               'tr[data-segment-effort-id=' + row[min_max].segment_effort_id + ']'
             );
 
             // Scroll into view. Doesn't work perfectly at the moment if a
             // segment is already open.
-            jQuery('html, body')
+            $('html, body')
               .scrollTop(elem.offset().top)
               ;
 
@@ -663,7 +665,7 @@ function StravaEnhancementSuite(options) {
     }
 
     setInterval(function() {
-      jQuery('.section.comparison .running-tab')
+      $('.section.comparison .running-tab')
         .not('.once-only')
         .addClass('once-only')
         .click()
@@ -678,7 +680,7 @@ function StravaEnhancementSuite(options) {
     }
 
     setInterval(function() {
-      jQuery('a.map-type-selector[data-map-type-id=standard]')
+      $('a.map-type-selector[data-map-type-id=standard]')
         .not('.once-only')
         .addClass('once-only')
         .click()
@@ -698,13 +700,13 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
-    var elem = jQuery('span[data-glossary-term=definition-weighted-average-power]')
+    var elem = $('span[data-glossary-term=definition-weighted-average-power]')
       .parents('li');
 
     var np = parseInt(elem.find('strong').text(), 10);
     var ap = pageView.activity().get('avgWatts');
 
-    jQuery('<li><strong>X</strong><div class="label">Variability Index</div></li>')
+    $('<li><strong>X</strong><div class="label">Variability Index</div></li>')
       .insertAfter(elem)
       .find('strong')
       .text((np / ap).toFixed(2))
@@ -790,7 +792,7 @@ function StravaEnhancementSuite(options) {
 };
 
 StravaEnhancementSuite.prototype.switch_units = function() {
-  var url = jQuery("a:contains(My Profile)[href^='/athletes/']").attr('href');
+  var url = $("a:contains(My Profile)[href^='/athletes/']").attr('href');
   var target = window._measurement_preference == "meters" ? "feet" : "meters";
   var athlete_id = parseInt(url.split('/')[2], 10);
 
