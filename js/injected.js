@@ -1,7 +1,7 @@
 function StravaEnhancementSuite(options) {
   var $ = jQuery;
 
-  // activity
+  // Activity pages
   (function() {
     // Detect whether we are viewing our own activity and to activate the dialog
     var edit_activity = $('.sidenav .edit-activity');
@@ -49,7 +49,7 @@ function StravaEnhancementSuite(options) {
     });
   }());
 
-  // comment_post_on_enter
+  // Post comments on 'enter'
   (function() {
     if (options.comment_post_on_enter === false) {
       return;
@@ -69,7 +69,7 @@ function StravaEnhancementSuite(options) {
     });
   }());
 
-  // external_links
+  // Add external links, etc.
   (function() {
     if (options.external_links === false) {
       return;
@@ -134,16 +134,14 @@ function StravaEnhancementSuite(options) {
       ;
   }());
 
-  // estimated_ftp
+  // Estimated FTP
   (function() {
-    if (options.estimated_ftp === false) {
-      return;
+    if (options.estimated_ftp === true) {
+      $('#cpcurve-estimatedCP').click();
     }
-
-    $('#cpcurve-estimatedCP').click();
   }());
 
-  // hide_feed_entries
+  // Hide feed entries
   (function() {
     setInterval(function() {
       $.each([
@@ -195,7 +193,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   })();
 
-  // hide_invite_friends
+  // Hide invite friends & social buttons
   (function() {
     if (options.hide_invite_friends === false) {
       return;
@@ -247,7 +245,7 @@ function StravaEnhancementSuite(options) {
       ;
   }());
 
-  // infinite_scroll
+  // Infinite scroll
   (function() {
     if (options.infinite_scroll === false) {
       return;
@@ -284,7 +282,7 @@ function StravaEnhancementSuite(options) {
     });
   }());
 
-  // leaderboard_default
+  // Leaderboard defaults
   (function() {
     if (options.leadeboard_default === 'overall') {
       return;
@@ -313,7 +311,7 @@ function StravaEnhancementSuite(options) {
     };
   }());
 
-  // flyby
+  // Flyby modifications
   (function() {
     if ($('#playback-controls').length === 0) {
       return;
@@ -338,7 +336,7 @@ function StravaEnhancementSuite(options) {
       })
   }());
 
-  // manual_upload
+  // Manual upload
   (function() {
     if (window.location.pathname !== '/upload/select') {
       return;
@@ -377,7 +375,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // profile
+  // Athlete profile
   (function() {
     if (window.location.pathname.indexOf($('header .user-menu a').attr('href')) !== 0) {
       return;
@@ -396,7 +394,7 @@ function StravaEnhancementSuite(options) {
       ;
   }());
 
-  // pagination
+  // Improved pagination
   (function() {
     if (!defined('pagingController')) {
       return;
@@ -430,7 +428,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // running_cadence
+  // Show running cadence by default
   (function() {
     if (options.running_cadence === false) {
       return;
@@ -445,7 +443,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // running_heart_rate
+  // Show running heart rate by default
   (function() {
     if (options.running_heart_rate === false) {
       return;
@@ -460,7 +458,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // running_tss
+  // Caculate running TSS
   (function() {
     if (options.running_tss === false) {
       return;
@@ -505,7 +503,7 @@ function StravaEnhancementSuite(options) {
     };
   }());
 
-  // repeated_segments
+  // Repated segments
   (function() {
     if (options.repeated_segments === false) {
       return;
@@ -658,7 +656,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // side_by_side_running
+  // Show "running" tab by default
   (function() {
     if (options.side_by_side_running === false) {
       return;
@@ -673,7 +671,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // standard_google_map
+  // Show the standard Google map, not the terrain one
   (function() {
     if (options.standard_google_map === false) {
       return;
@@ -690,7 +688,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // variability_index
+  // Calculate a ccling variability index by default
   (function() {
     if (options.variability_index === false) {
       return;
@@ -713,7 +711,7 @@ function StravaEnhancementSuite(options) {
       ;
   }());
 
-  // Utilities
+  // Utilities ////////////////////////////////////////////////////////////////
 
   function defined(val) {
     try {
