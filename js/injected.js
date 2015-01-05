@@ -741,7 +741,7 @@ function StravaEnhancementSuite(options) {
 
   // Mouseover on challenge images on dashboard makes them bigger
   (function() {
-    onHover('challenge-module .avatar', {
+    onHover('#challenge-module .avatar', {
         'width': 80
       , 'height': 80
     });
