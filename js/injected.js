@@ -147,8 +147,9 @@ function StravaEnhancementSuite(options) {
   (function() {
     setInterval(function() {
       $.each([
-          ['hide_challenge_feed_entries', '.challenge, .promo']
+          ['hide_challenge_feed_entries', '.challenge']
         , ['hide_goal_feed_entries', '.performance-goal-created']
+        , ['hide_promotion_feed_entries', '.promo']
       ], function() {
         if (options[this[0]]) {
           $('div.feed>.feed-entry').filter(this[1]).remove();
