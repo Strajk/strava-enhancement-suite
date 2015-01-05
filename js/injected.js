@@ -885,7 +885,7 @@ function StravaEnhancementSuite(options) {
       })
       ;
   };
-};
+}
 
 StravaEnhancementSuite.prototype.switch_units = function() {
   var url = $("a:contains(My Profile)[href^='/athletes/']").attr('href');
