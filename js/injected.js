@@ -146,6 +146,7 @@ function StravaEnhancementSuite(options) {
   // Hide feed entries
   (function() {
     setInterval(function() {
+      // Match by CSS class
       $.each([
           ['hide_challenge_feed_entries', '.challenge']
         , ['hide_goal_feed_entries', '.performance-goal-created']
@@ -156,6 +157,7 @@ function StravaEnhancementSuite(options) {
         }
       });
 
+      // Match by text
       $('div.feed>.min-view').each(function() {
         var elem = $(this);
         var html = elem.find('.entry-title').html();
