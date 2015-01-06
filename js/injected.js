@@ -16,6 +16,9 @@ function StravaEnhancementSuite(options) {
       $.each(obj, function(k) { a.push(k) });
       return a;
     },
+    always: function (handler) {
+      handler();
+    },
     option: function (option, handler) {
       if (options[option] !== false) {
         handler();
@@ -100,7 +103,7 @@ function StravaEnhancementSuite(options) {
   // Methods //////////////////////////////////////////////////////////////////
 
   // Activity pages
-  (function() {
+  $.always(function() {
     // Detect whether we are viewing our own activity and to activate the dialog
     var edit_activity = $('.sidenav .edit-activity');
 
@@ -139,7 +142,7 @@ function StravaEnhancementSuite(options) {
           ;
       }
     });
-  }());
+  });
 
   // Post comments on 'enter'
   $.option('comment_post_on_enter', function() {
@@ -229,7 +232,7 @@ function StravaEnhancementSuite(options) {
   });
 
   // Hide feed entries
-  (function() {
+  $.always(function() {
     setInterval(function() {
       // Match by CSS class
       $.each([
@@ -281,7 +284,7 @@ function StravaEnhancementSuite(options) {
           ;
       }
     }, 1000);
-  })();
+  });
 
   // Hide shop in top-level navigation
   $.option('hide_shop', function() {
@@ -416,7 +419,7 @@ function StravaEnhancementSuite(options) {
   });
 
   // Manual upload
-  (function() {
+  $.always(function() {
     if (window.location.pathname !== '/upload/select') {
       return;
     }
@@ -451,10 +454,10 @@ function StravaEnhancementSuite(options) {
         .css('height', 160)
         ;
     }, 1000);
-  }());
+  });
 
   // Athlete profile
-  (function() {
+  $.always(function() {
     if (window.location.pathname.indexOf($('header .user-menu a').attr('href')) !== 0) {
       return;
     }
@@ -470,11 +473,11 @@ function StravaEnhancementSuite(options) {
     $('.avatar.avatar-athlete img')
       .wrap('<a href="/settings/profile"></a>')
       ;
-  }());
+  });
 
   // Improved pagination
   // FIXME: Move to option
-  (function() {
+  $.always(function() {
     if (!$.defined('pagingController')) {
       return;
     }
@@ -504,7 +507,7 @@ function StravaEnhancementSuite(options) {
         .end()
         ;
     }, 1000);
-  }());
+  });
 
   // Show running cadence by default
   $.option('running_cadence', function() {
