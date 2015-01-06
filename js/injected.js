@@ -1,6 +1,133 @@
 function StravaEnhancementSuite(options) {
   var $ = jQuery;
 
+  // Utilities ////////////////////////////////////////////////////////////////
+
+  $.fn.onceOnly = function () {
+    return this
+      .not('.once-only')
+      .addClass('once-only')
+      ;
+  };
+
+  $.extend({
+    keys: function (obj) {
+      var a = [];
+      $.each(obj, function(k) { a.push(k) });
+      return a;
+    },
+    option: function (option, handler) {
+      if (options[option] !== false) {
+        handler();
+      }
+    }
+  });
+
+  function defined(val) {
+    try {
+      eval(val);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  };
+
+  function toSeconds(s) {
+    var r = '';
+    var hours = Math.floor(s / 3600.0);
+
+    if (hours < 10) {
+      r += '0' + hours
+    } else {
+      r += hours;
+    }
+    r += ':';
+
+    var minutes = Math.floor((s - (hours * 3600)) / 60.0);
+    if (minutes < 10) {
+      r += '0' + minutes;
+    } else {
+      r += minutes;
+    }
+    r += ':';
+
+    var seconds = s - hours * 3600 - minutes * 60;
+
+    if (seconds - Math.floor(seconds) > 0.0) {
+      seconds = seconds.toFixed(1);
+    }
+
+    if (seconds < 10) {
+      r += '0' + seconds;
+    } else {
+      r += seconds;
+    }
+
+    return r;
+  };
+
+  function keySort() {
+    var fields = arguments;
+
+    return function(a, b) {
+      for (var i = 0; i < fields.length; ++i) {
+        var key = fields[i];
+
+        if (key.slice(0, 1) === '-') {
+          var val_a = b[key.slice(1)];
+          var val_b = a[key.slice(1)];
+        } else {
+          var val_a = a[key];
+          var val_b = b[key];
+        }
+
+        if (typeof val_a === 'string') {
+          val_a = val_a.trim().toLowerCase();
+          val_b = val_b.trim().toLowerCase();
+        }
+
+        if (val_a > val_b) {
+          return 1;
+        }
+        if (val_a < val_b) {
+          return -1;
+        }
+      }
+
+      return 0;
+    };
+  };
+
+  function onHover(src, css, handlerIn, handlerOut) {
+    css = $.extend({
+        'z-index': 99999
+    }, css);
+
+    $('body')
+      .on('mouseover', src, function() {
+        var elem = $(this);
+
+        typeof handlerIn === 'function' && handlerIn.apply(this);
+
+        elem
+          // Save original CSS
+          .data('original-css', elem.css($.keys(css)))
+
+          // Apply target CSS
+          .css(css)
+          ;
+      })
+      .on('mouseout', src, function() {
+        var elem = $(this);
+
+        typeof handlerOut === 'function' && handlerOut.apply(this);
+
+        // Restore original CSS
+        elem.css(elem.data('original-css') || {});
+      })
+      ;
+  };
+
   // Methods //////////////////////////////////////////////////////////////////
 
   // Activity pages
@@ -46,11 +173,7 @@ function StravaEnhancementSuite(options) {
   }());
 
   // Post comments on 'enter'
-  (function() {
-    if (options.comment_post_on_enter === false) {
-      return;
-    }
-
+  $.option('comment_post_on_enter', function() {
     $(document).on('keydown', '.comments textarea', function(e) {
       if (e.keyCode !== 13) {
         return true;
@@ -63,14 +186,10 @@ function StravaEnhancementSuite(options) {
 
       return false;
     });
-  }());
+  });
 
   // Add external links, etc.
-  (function() {
-    if (options.external_links === false) {
-      return;
-    }
-
+  $.option('external_links', function() {
     if (defined('pageView')) {
       // Need a little more room to include our links
       $('section#heading h1')
@@ -128,14 +247,12 @@ function StravaEnhancementSuite(options) {
         window.location.href = 'http://www.kom.club/';
       })
       ;
-  }());
+  });
 
   // Estimated FTP
-  (function() {
-    if (options.estimated_ftp === true) {
-      $('#cpcurve-estimatedCP').click();
-    }
-  }());
+  $.option('estimated_ftp', function() {
+    $('#cpcurve-estimatedCP').click();
+  });
 
   // Hide feed entries
   (function() {
@@ -193,11 +310,7 @@ function StravaEnhancementSuite(options) {
   })();
 
   // Hide shop in top-level navigation
-  (function() {
-    if (options.hide_shop === false) {
-      return;
-    }
-
+  $.option('hide_shop', function() {
     $('header nav ul.global-nav li a[href^="/shop"]')
       .remove()
       ;
@@ -214,14 +327,10 @@ function StravaEnhancementSuite(options) {
       .children()
       .hide()
       ;
-  })();
+  });
 
   // Hide invite friends & social buttons
-  (function() {
-    if (options.hide_invite_friends === false) {
-      return;
-    }
-
+  $.option('hide_invite_friends', function() {
     // "Invite friends" in navbar
     $('header nav a.find-and-invite')
       .parent('li')
@@ -250,13 +359,9 @@ function StravaEnhancementSuite(options) {
       .has('a[href*=blog\\.strava\\.com]')
       .hide()
       ;
-  }());
+  });
 
-  (function() {
-    if (options.hide_upcoming === false) {
-      return;
-    }
-
+  $.option('hide_upcoming', function() {
     // Upcoming races, events, goals
     $('.sidebar .section#upcoming-events')
       .not(':has(li)') // Show if we have upcoming events
@@ -267,25 +372,17 @@ function StravaEnhancementSuite(options) {
     $('.sidebar .section#discover-more')
       .hide()
       ;
-  }());
+  });
 
   // Swap club and challenges
-  (function() {
-    if (options.swap_clubs_and_challenge_module === false) {
-      return;
-    }
-
+  $.option('swap_clubs_and_challenge_module', function() {
     $('.sidebar #club-module')
       .after($('.sidebar #challenge-module'))
       ;
-  }());
+  });
 
   // Infinite scroll
-  (function() {
-    if (options.infinite_scroll === false) {
-      return;
-    }
-
+  $.option('infinite_scroll', function() {
     var url = window.location.pathname;
 
     if (!(
@@ -317,7 +414,7 @@ function StravaEnhancementSuite(options) {
         elem.click();
       }
     });
-  }());
+  });
 
   // Leaderboard defaults
   (function() {
@@ -348,11 +445,7 @@ function StravaEnhancementSuite(options) {
   }());
 
   // Flyby modifications
-  (function() {
-    if (options.flyby_select_all === false) {
-      return;
-    }
-
+  $.option('flyby_select_all', function() {
     if ($('#playback-controls').length === 0) {
       return;
     }
@@ -374,7 +467,7 @@ function StravaEnhancementSuite(options) {
 
         return true;
       })
-  }());
+  });
 
   // Manual upload
   (function() {
@@ -434,6 +527,7 @@ function StravaEnhancementSuite(options) {
   }());
 
   // Improved pagination
+  // FIXME: Move to option
   (function() {
     if (!defined('pagingController')) {
       return;
@@ -467,39 +561,27 @@ function StravaEnhancementSuite(options) {
   }());
 
   // Show running cadence by default
-  (function() {
-    if (options.running_cadence === false) {
-      return;
-    }
-
+  $.option('running_cadence', function() {
     setInterval(function() {
       $('#elevation-profile td[data-type=cadence] .toggle-button')
         .onceOnly()
         .click()
         ;
     }, 1000);
-  }());
+  });
 
   // Show running heart rate by default
-  (function() {
-    if (options.running_heart_rate === false) {
-      return;
-    }
-
+  $.option('running_heart_rate', function() {
     setInterval(function() {
       $('#elevation-profile td[data-type=heartrate] .toggle-button')
         .onceOnly()
         .click()
         ;
     }, 1000);
-  }());
+  });
 
   // Caculate running TSS
-  (function() {
-    if (options.running_tss === false) {
-      return;
-    }
-
+  $.option('running_tss', function() {
     if (!defined('Strava.Labs.Activities.PaceZones.prototype.getPaceZones')) {
       return;
     }
@@ -537,14 +619,10 @@ function StravaEnhancementSuite(options) {
 
       return result;
     };
-  }());
+  });
 
   // Repated segments
-  (function() {
-    if (options.repeated_segments === false) {
-      return;
-    }
-
+  $.option('repeated_segments', function() {
     if (!defined('pageView')) {
       return;
     }
@@ -689,28 +767,20 @@ function StravaEnhancementSuite(options) {
         });
       })
     }, 1000);
-  }());
+  });
 
   // Show "running" tab by default
-  (function() {
-    if (options.side_by_side_running === false) {
-      return;
-    }
-
+  $.option('side_by_side_running', function() {
     setInterval(function() {
       $('.section.comparison .running-tab')
         .onceOnly()
         .click()
         ;
     }, 1000);
-  }());
+  });
 
   // Show the standard Google map, not the terrain one
-  (function() {
-    if (options.standard_google_map === false) {
-      return;
-    }
-
+  $.option('standard_google_map', function() {
     setInterval(function() {
       $('a.map-type-selector[data-map-type-id=standard]')
         .onceOnly()
@@ -719,14 +789,10 @@ function StravaEnhancementSuite(options) {
         .click()
         ;
     }, 1000);
-  }());
+  });
 
   // Calculate a cycling variability index by default
-  (function() {
-    if (options.variability_index === false) {
-      return;
-    }
-
+  $.option('variability_index', function() {
     if (!defined('pageView')) {
       return;
     }
@@ -742,12 +808,9 @@ function StravaEnhancementSuite(options) {
       .find('strong')
       .text((np / ap).toFixed(2))
       ;
-  }());
+  });
 
-  (function() {
-    if (options.enlarge_on_hover === false) {
-      return;
-    }
+  $.option('enlarge_on_hover', function() {
 
     // Mouseover on feed avatars makes them bigger
     onHover('.feed-entry .avatar-md', {
@@ -804,129 +867,7 @@ function StravaEnhancementSuite(options) {
       , 'height': 60
       , 'position': 'absolute'
     });
-  })();
-
-  // Utilities ////////////////////////////////////////////////////////////////
-
-  $.fn.onceOnly = function () {
-    return this
-      .not('.once-only')
-      .addClass('once-only')
-      ;
-  };
-
-  $.extend({
-    keys: function (obj) {
-      var a = [];
-      $.each(obj, function(k) { a.push(k) });
-      return a;
-    }
   });
-
-  function defined(val) {
-    try {
-      eval(val);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  };
-
-  function toSeconds(s) {
-    var r = '';
-    var hours = Math.floor(s / 3600.0);
-
-    if (hours < 10) {
-      r += '0' + hours
-    } else {
-      r += hours;
-    }
-    r += ':';
-
-    var minutes = Math.floor((s - (hours * 3600)) / 60.0);
-    if (minutes < 10) {
-      r += '0' + minutes;
-    } else {
-      r += minutes;
-    }
-    r += ':';
-
-    var seconds = s - hours * 3600 - minutes * 60;
-
-    if (seconds - Math.floor(seconds) > 0.0) {
-      seconds = seconds.toFixed(1);
-    }
-
-    if (seconds < 10) {
-      r += '0' + seconds;
-    } else {
-      r += seconds;
-    }
-
-    return r;
-  };
-
-  function keySort() {
-    var fields = arguments;
-
-    return function(a, b) {
-      for (var i = 0; i < fields.length; ++i) {
-        var key = fields[i];
-
-        if (key.slice(0, 1) === '-') {
-          var val_a = b[key.slice(1)];
-          var val_b = a[key.slice(1)];
-        } else {
-          var val_a = a[key];
-          var val_b = b[key];
-        }
-
-        if (typeof val_a === 'string') {
-          val_a = val_a.trim().toLowerCase();
-          val_b = val_b.trim().toLowerCase();
-        }
-
-        if (val_a > val_b) {
-          return 1;
-        }
-        if (val_a < val_b) {
-          return -1;
-        }
-      }
-
-      return 0;
-    };
-  };
-
-  function onHover(src, css, handlerIn, handlerOut) {
-    css = $.extend({
-        'z-index': 99999
-    }, css);
-
-    $('body')
-      .on('mouseover', src, function() {
-        var elem = $(this);
-
-        typeof handlerIn === 'function' && handlerIn.apply(this);
-
-        elem
-          // Save original CSS
-          .data('original-css', elem.css($.keys(css)))
-
-          // Apply target CSS
-          .css(css)
-          ;
-      })
-      .on('mouseout', src, function() {
-        var elem = $(this);
-
-        typeof handlerOut === 'function' && handlerOut.apply(this);
-
-        // Restore original CSS
-        elem.css(elem.data('original-css') || {});
-      })
-      ;
-  };
 }
 
 StravaEnhancementSuite.prototype.switch_units = function() {
