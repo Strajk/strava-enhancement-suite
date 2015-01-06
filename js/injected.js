@@ -713,8 +713,8 @@ function StravaEnhancementSuite(options) {
   // Mouseover on feed avatars makes them bigger
   (function() {
     onHover('.feed-entry .avatar-md', {
-        'width': 124
-      , 'height': 124
+        'width': 80
+      , 'height': 80
       // Use absolute positioning so we don't move stuff out of the way
       , 'position': 'absolute'
     }, function() {
