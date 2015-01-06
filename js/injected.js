@@ -13,12 +13,6 @@ function StravaEnhancementSuite(options) {
       .css('display', 'inline')
       ;
 
-    // Don't link device name to shop
-    $('#heading .activity-stats .device a')
-      .contents()
-      .unwrap()
-      ;
-
     if (edit_activity.length === 0) {
       return;
     }
@@ -206,6 +200,12 @@ function StravaEnhancementSuite(options) {
 
     $('header nav ul.global-nav li a[href^="/shop"]')
       .remove()
+      ;
+
+    // Don't link device name on activity pages to shop
+    $('#heading .activity-stats .device a')
+      .contents()
+      .unwrap()
       ;
 
     // Shop module in footer
