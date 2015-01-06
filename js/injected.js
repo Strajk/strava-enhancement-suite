@@ -269,7 +269,9 @@ function StravaEnhancementSuite(options) {
     var container = $('.feed-container');
 
     w.scroll(function() {
-      var elem = container.find('a.load-feed');
+      var elem = container
+        .find('a.load-feed')
+        ;
 
       if (elem.length === 0) {
         // Can't unbind as we may be waiting for another page to load
