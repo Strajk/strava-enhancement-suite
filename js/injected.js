@@ -20,17 +20,16 @@ function StravaEnhancementSuite(options) {
       if (options[option] !== false) {
         handler();
       }
+    },
+    defined: function (val) {
+      try {
+        eval(val);
+        return true;
+      } catch (err) {
+        return false;
+      }
     }
   });
-
-  function defined(val) {
-    try {
-      eval(val);
-      return true;
-    } catch (err) {
-      return false;
-    }
-  };
 
   function toSeconds(s) {
     var r = '';
@@ -190,7 +189,7 @@ function StravaEnhancementSuite(options) {
 
   // Add external links, etc.
   $.option('external_links', function() {
-    if (defined('pageView')) {
+    if ($.defined('pageView')) {
       // Need a little more room to include our links
       $('section#heading h1')
         .css({'width': '40%'})
@@ -422,7 +421,7 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
-    if (!defined('Strava.Labs.Activities.SegmentLeaderboardView.prototype.render')) {
+    if (!$.defined('Strava.Labs.Activities.SegmentLeaderboardView.prototype.render')) {
       return;
     }
 
@@ -529,7 +528,7 @@ function StravaEnhancementSuite(options) {
   // Improved pagination
   // FIXME: Move to option
   (function() {
-    if (!defined('pagingController')) {
+    if (!$.defined('pagingController')) {
       return;
     }
 
@@ -582,7 +581,7 @@ function StravaEnhancementSuite(options) {
 
   // Caculate running TSS
   $.option('running_tss', function() {
-    if (!defined('Strava.Labs.Activities.PaceZones.prototype.getPaceZones')) {
+    if (!$.defined('Strava.Labs.Activities.PaceZones.prototype.getPaceZones')) {
       return;
     }
 
@@ -623,7 +622,7 @@ function StravaEnhancementSuite(options) {
 
   // Repated segments
   $.option('repeated_segments', function() {
-    if (!defined('pageView')) {
+    if (!$.defined('pageView')) {
       return;
     }
 
@@ -793,7 +792,7 @@ function StravaEnhancementSuite(options) {
 
   // Calculate a cycling variability index by default
   $.option('variability_index', function() {
-    if (!defined('pageView')) {
+    if (!$.defined('pageView')) {
       return;
     }
 
