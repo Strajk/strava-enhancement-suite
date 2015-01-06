@@ -240,9 +240,11 @@ function StravaEnhancementSuite(options) {
         , ['hide_goal_feed_entries', '.performance-goal-created']
         , ['hide_promotion_feed_entries', '.promo']
       ], function() {
-        if (options[this[0]]) {
-          $('div.feed>.feed-entry').filter(this[1]).remove();
-        }
+        var filter = this[1];
+
+        $.option(this[0], function() {
+          $('div.feed>.feed-entry').filter(filter).remove();
+        });
       });
 
       // Match by text
@@ -255,9 +257,13 @@ function StravaEnhancementSuite(options) {
           , ['hide_club_feed_entries', '> joined <']
           , ['hide_club_feed_entries', '> created <']
         ], function() {
-          if ((options[this[0]]) && (html.indexOf(this[1]) !== -1)) {
-            elem.remove();
-          }
+          var html = this[1];
+
+          $.option(this[0], function() {
+            if (html.indexOf(html) !== -1) {
+              elem.remove();
+            }
+          });
         });
       });
 
@@ -270,7 +276,7 @@ function StravaEnhancementSuite(options) {
         }
       });
 
-      if (options.hide_invite_friends === true) {
+      $.option('hide_invite_friends', function() {
         $('div.feed>.feed-entry')
           // Remove social buttons
           .find('.share')
@@ -282,7 +288,7 @@ function StravaEnhancementSuite(options) {
             .hide()
           .end()
           ;
-      }
+      });
     }, 1000);
   });
 
