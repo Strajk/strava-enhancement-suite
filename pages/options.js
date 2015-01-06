@@ -20,6 +20,7 @@ DEFAULTS = {
   , running_tss: true
   , side_by_side_running: false
   , standard_google_map: false
+  , swap_clubs_and_challenge_module: false
   , variability_index: true
 };
 

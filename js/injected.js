@@ -254,8 +254,14 @@ function StravaEnhancementSuite(options) {
 
     // Discover more races, etc.
     $('.sidebar .section#discover-more').hide();
+  }());
 
-    // Swap club and challenges
+  // Swap club and challenges
+  (function() {
+    if (options.swap_clubs_and_challenge_module === false) {
+      return;
+    }
+
     $('.sidebar #club-module')
       .after($('.sidebar #challenge-module'))
       ;
