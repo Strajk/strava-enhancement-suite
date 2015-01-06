@@ -207,6 +207,13 @@ function StravaEnhancementSuite(options) {
     $('header nav ul.global-nav li a[href^="/shop"]')
       .remove()
       ;
+
+    // Shop module in footer
+    $('footer .footer-promos .promo')
+      .has('a[href*=shop\\.strava\\.com]')
+      .children()
+      .hide()
+      ;
   })();
 
   // Hide invite friends & social buttons
