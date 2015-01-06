@@ -390,34 +390,6 @@ function StravaEnhancementSuite(options) {
     });
   });
 
-  // Leaderboard defaults
-  (function() {
-    if (options.leadeboard_default === 'overall') {
-      return;
-    }
-
-    if (!$.defined('Strava.Labs.Activities.SegmentLeaderboardView.prototype.render')) {
-      return;
-    }
-
-    var view = Strava.Labs.Activities.SegmentLeaderboardView;
-    var fn = view.prototype.render;
-
-    var leaderboard_default = options.leaderboard_default;
-
-    view.prototype.render = function () {
-      var result = fn.apply(this, Array.prototype.slice.call(arguments));
-
-      $(this.el)
-        .onceOnly()
-        .find('.clickable[data-filter=' + leaderboard_default + ']')
-        .click()
-        ;
-
-      return result;
-    };
-  }());
-
   // Flyby modifications
   $.option('flyby_select_all', function() {
     if ($('#playback-controls').length === 0) {
