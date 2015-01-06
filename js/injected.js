@@ -687,7 +687,7 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   }());
 
-  // Calculate a ccling variability index by default
+  // Calculate a cycling variability index by default
   (function() {
     if (options.variability_index === false) {
       return;
