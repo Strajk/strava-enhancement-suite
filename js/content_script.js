@@ -12,6 +12,7 @@ DEFAULTS = {
   , hide_promotion_feed_entries: false
   , hide_shop: false
   , hide_invite_friends: false
+  , hide_upcoming: false
   , infinite_scroll: true
   , leaderboard_default: 'overall'
   , repeated_segments: true

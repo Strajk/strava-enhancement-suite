@@ -243,8 +243,12 @@ function StravaEnhancementSuite(options) {
       .has('a[href*=blog\\.strava\\.com]')
       .hide()
       ;
+  }());
 
-    // FIXME: These are not social networking related
+  (function() {
+    if (options.hide_upcoming === false) {
+      return;
+    }
 
     // Upcoming races, events, goals
     $('.sidebar .section#upcoming-events')
@@ -253,7 +257,9 @@ function StravaEnhancementSuite(options) {
       ;
 
     // Discover more races, etc.
-    $('.sidebar .section#discover-more').hide();
+    $('.sidebar .section#discover-more')
+      .hide()
+      ;
   }());
 
   // Swap club and challenges
