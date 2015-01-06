@@ -490,6 +490,8 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
+    var c = pagingController;
+
     setInterval(function() {
       $('.simple.pagination ul.switches')
         .onceOnly()
@@ -498,20 +500,20 @@ function StravaEnhancementSuite(options) {
         .prepend('<li><span class="button first_page">First</span></li>')
         .find('.first_page')
           .on('click', function() {
-            pagingController.page = 1;
-            pagingController.paging_adapter.fetch(pagingController.buildOptions());
+            c.page = 1;
+            c.paging_adapter.fetch(c.buildOptions());
           })
-          .toggleClass('disabled', pagingController.page == 1)
+          .toggleClass('disabled', c.page == 1)
         .end()
 
         // Last
         .append('<li><span class="button last_page">Last</span></li>')
         .find('.last_page')
           .on('click', function() {
-            pagingController.page = pagingController.pageInfo().pages;
-            pagingController.paging_adapter.fetch(pagingController.buildOptions());
+            c.page = c.pageInfo().pages;
+            c.paging_adapter.fetch(c.buildOptions());
           })
-          .toggleClass('disabled', pagingController.page == pagingController.pageInfo().pages)
+          .toggleClass('disabled', c.page == c.pageInfo().pages)
         .end()
         ;
     }, 1000);
