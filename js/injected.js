@@ -427,8 +427,8 @@ function StravaEnhancementSuite(options) {
       })
   });
 
-  // Manual upload
-  $.always(function() {
+  // Upload activity
+  $.option('improve_upload_activity', function() {
     if (window.location.pathname !== '/upload/select') {
       return;
     }

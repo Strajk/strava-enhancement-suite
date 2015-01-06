@@ -15,6 +15,7 @@ DEFAULTS = {
   , hide_invite_friends: false
   , hide_upcoming: false
   , improve_pagination: true
+  , improve_upload_activity: true
   , infinite_scroll: true
   , repeated_segments: true
   , running_cadence: true
