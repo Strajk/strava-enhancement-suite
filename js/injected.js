@@ -725,8 +725,12 @@ function StravaEnhancementSuite(options) {
       ;
   }());
 
-  // Mouseover on feed avatars makes them bigger
   (function() {
+    if (options.enlarge_on_hover === false) {
+      return;
+    }
+
+    // Mouseover on feed avatars makes them bigger
     onHover('.feed-entry .avatar-md', {
         'width': 80
       , 'height': 80
@@ -741,13 +745,10 @@ function StravaEnhancementSuite(options) {
           })
         ;
     });
-  })();
 
-  // Mouseover on map makes them bigger
-  (function() {
+    // Mouseover on map makes them bigger
     var width = 250;
     var height = 135;
-
     onHover('.feed-entry .activity-map', {
         'width': width
       , 'height': height
@@ -771,24 +772,20 @@ function StravaEnhancementSuite(options) {
         })
         ;
     });
-  })();
 
-  // Mouseover on Instagram images makes them bigger
-  (function() {
+    // Mouseover on Instagram images makes them bigger
     onHover('.feed-entry .photostream li', {
         'width': 300
       , 'height': 300
     });
-  })();
 
-  // Mouseover on condensed athlete list in feed makes them bigger
-  (function() {
+    // Mouseover on condensed athlete list in feed makes them bigger
     onHover('.feed-entry.challenge .list-athletes img', {
         'width': 60
       , 'height': 60
       , 'position': 'absolute'
     });
-  })();
+  });
 
   // Utilities ////////////////////////////////////////////////////////////////
 

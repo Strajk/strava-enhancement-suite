@@ -1,6 +1,7 @@
 // Requires syncing with js/content_script.js
 DEFAULTS = {
     comment_post_on_enter: true
+  , enlarge_on_hover: true
   , estimated_ftp: true
   , external_links: true
   , flyby_select_all: true
