@@ -331,10 +331,16 @@ function StravaEnhancementSuite(options) {
     // "Find Your Friends On Strava"
     $('.sidebar #invite-your-friend-module').hide();
 
-    // Strava blog link in sidebar (currently "Vuelta")
     $('.sidebar .section')
+      // Strava blog link in sidebar (currently "Vuelta")
       .has('a[href*=blog\\.strava\\.com]')
-      .hide()
+        .hide()
+      .end()
+
+      // Hide "Your 2014 story" link
+      .has('a[href*=2014story\\.strava\\.com]')
+        .hide()
+      .end()
       ;
   });
 
