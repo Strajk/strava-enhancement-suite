@@ -482,8 +482,7 @@ function StravaEnhancementSuite(options) {
   });
 
   // Improved pagination
-  // FIXME: Move to option
-  $.always(function() {
+  $.option('improve_pagination', function() {
     if (!$.defined('pagingController')) {
       return;
     }
