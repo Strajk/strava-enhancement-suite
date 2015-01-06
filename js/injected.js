@@ -157,36 +157,41 @@ function StravaEnhancementSuite(options) {
     });
   });
 
-  // Add external links, etc.
+  // Add external links 1/2
   $.option('external_links', function() {
-    if ($.defined('pageView')) {
-      // Need a little more room to include our links
-      $('section#heading h1')
-        .css({'width': '40%'})
-        ;
-
-      $.each([
-          ["Flyby", 'http://labs.strava.com/flyby/viewer/#']
-        , ["Veloviewer", 'http://veloviewer.com/activities/']
-        , ["Raceshape", 'http://raceshape.com/url.redirect.php?url=http%3A%2F%2Fapp.strava.com%2Factivities%2F']
-      ].reverse(), function() {
-        $(
-          '<div class="button-group">' +
-            '<a href="#" class="button title"></a>' +
-          '</div>'
-        )
-          .prependTo('section#heading .social')
-          .find('a')
-          .text(this[0])
-          .css({
-              'font-size': '12px'
-            , 'line-height': '20px'
-          })
-          .attr('href', this[1] + pageView.activity().id)
-          ;
-      });
+    if (!$.defined('pageView')) {
+      return;
     }
 
+    // Need a little more room to include our links
+    $('section#heading h1')
+      .css({'width': '40%'})
+      ;
+
+    $.each([
+        ["Flyby", 'http://labs.strava.com/flyby/viewer/#']
+      , ["Veloviewer", 'http://veloviewer.com/activities/']
+      , ["Raceshape", 'http://raceshape.com/url.redirect.php?url=http%3A%2F%2Fapp.strava.com%2Factivities%2F']
+    ].reverse(), function() {
+      $(
+        '<div class="button-group">' +
+          '<a href="#" class="button title"></a>' +
+        '</div>'
+      )
+        .prependTo('section#heading .social')
+        .find('a')
+        .text(this[0])
+        .css({
+            'font-size': '12px'
+          , 'line-height': '20px'
+        })
+        .attr('href', this[1] + pageView.activity().id)
+        ;
+    });
+  });
+
+  // Add external links 2/2
+  $.option('external_links', function() {
     // Segment external links
     var m = window.location.pathname.match(/^\/segments\/(\d+)$/);
 
