@@ -781,14 +781,6 @@ function StravaEnhancementSuite(options) {
     });
   })();
 
-  // Mouseover on challenge images in dashboard feed makes them bigger
-  (function() {
-    onHover('.feed-entry.challenge .entry-image img', {
-        'max-width': 200
-      , 'max-height': 130
-    });
-  })();
-
   // Mouseover on condensed athlete list in feed makes them bigger
   (function() {
     onHover('.feed-entry.challenge .list-athletes img', {
