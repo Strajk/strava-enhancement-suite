@@ -3,6 +3,7 @@ DEFAULTS = {
     comment_post_on_enter: true
   , estimated_ftp: true
   , external_links: true
+  , flyby_select_all: true
   , hide_challenge_feed_entries: false
   , hide_club_feed_entries: false
   , hide_goal_feed_entries: false

@@ -330,6 +330,10 @@ function StravaEnhancementSuite(options) {
 
   // Flyby modifications
   (function() {
+    if (options.flyby_select_all === false) {
+      return;
+    }
+
     if ($('#playback-controls').length === 0) {
       return;
     }
