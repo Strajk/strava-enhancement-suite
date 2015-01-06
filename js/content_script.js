@@ -1,3 +1,4 @@
+// Requires syncing with pages/options.js
 DEFAULTS = {
     comment_post_on_enter: true
   , estimated_ftp: true
