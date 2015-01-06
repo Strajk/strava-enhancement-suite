@@ -797,7 +797,7 @@ function StravaEnhancementSuite(options) {
       , 'height': 60
       , 'position': 'absolute'
     });
-  });
+  })();
 
   // Utilities ////////////////////////////////////////////////////////////////
 
