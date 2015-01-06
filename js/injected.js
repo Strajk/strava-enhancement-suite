@@ -330,7 +330,10 @@ function StravaEnhancementSuite(options) {
 
     // "Find Your Friends On Strava"
     $('.sidebar #invite-your-friend-module').hide();
+  });
 
+  // Hide blog links
+  $.option('hide_blog', function() {
     $('.sidebar .section')
       // Strava blog link in sidebar (currently "Vuelta")
       .has('a[href*=blog\\.strava\\.com]')
