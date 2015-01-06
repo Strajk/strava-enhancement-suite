@@ -728,6 +728,36 @@ function StravaEnhancementSuite(options) {
     });
   })();
 
+  // Mouseover on map makes them bigger
+  (function() {
+    var width = 250;
+    var height = 135;
+
+    onHover('.feed-entry .activity-map', {
+        'width': width
+      , 'height': height
+      , 'margin-left': 0
+    }, function() {
+      var elem = $(this);
+
+      elem
+        .find('.leaflet-map-pane')
+        .css({
+            'margin-top': (height - elem.height()) / 2
+          , 'margin-left': (width - elem.width()) / 2
+        })
+        ;
+    }, function() {
+      $(this)
+        .find('.leaflet-map-pane')
+        .css({
+            'margin-top': 0
+          , 'margin-left': 0
+        })
+        ;
+    });
+  })();
+
   // Mouseover on Instagram images makes them bigger
   (function() {
     onHover('.feed-entry .photostream li', {
