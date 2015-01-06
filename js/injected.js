@@ -97,36 +97,6 @@ function StravaEnhancementSuite(options) {
     };
   };
 
-  function onHover(src, css, handlerIn, handlerOut) {
-    css = $.extend({
-        'z-index': 99999
-    }, css);
-
-    $('body')
-      .on('mouseover', src, function() {
-        var elem = $(this);
-
-        typeof handlerIn === 'function' && handlerIn.apply(this);
-
-        elem
-          // Save original CSS
-          .data('original-css', elem.css($.keys(css)))
-
-          // Apply target CSS
-          .css(css)
-          ;
-      })
-      .on('mouseout', src, function() {
-        var elem = $(this);
-
-        typeof handlerOut === 'function' && handlerOut.apply(this);
-
-        // Restore original CSS
-        elem.css(elem.data('original-css') || {});
-      })
-      ;
-  };
-
   // Methods //////////////////////////////////////////////////////////////////
 
   // Activity pages
@@ -810,6 +780,35 @@ function StravaEnhancementSuite(options) {
   });
 
   $.option('enlarge_on_hover', function() {
+    function onHover(src, css, handlerIn, handlerOut) {
+      css = $.extend({
+          'z-index': 99999
+      }, css);
+
+      $('body')
+        .on('mouseover', src, function() {
+          var elem = $(this);
+
+          typeof handlerIn === 'function' && handlerIn.apply(this);
+
+          elem
+            // Save original CSS
+            .data('original-css', elem.css($.keys(css)))
+
+            // Apply target CSS
+            .css(css)
+            ;
+        })
+        .on('mouseout', src, function() {
+          var elem = $(this);
+
+          typeof handlerOut === 'function' && handlerOut.apply(this);
+
+          // Restore original CSS
+          elem.css(elem.data('original-css') || {});
+        })
+        ;
+    };
 
     // Mouseover on feed avatars makes them bigger
     onHover('.feed-entry .avatar-md', {
