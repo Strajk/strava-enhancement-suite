@@ -473,7 +473,7 @@ function StravaEnhancementSuite(options) {
 
   // Athlete profile
   $.always(function() {
-    if (window.location.pathname.indexOf($('header .user-menu a').attr('href')) !== 0) {
+    if ($('header .user-menu a').attr('href').indexOf(window.location.pathname) !== 0) {
       return;
     }
 
