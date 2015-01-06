@@ -14,8 +14,8 @@ DEFAULTS = {
   , hide_shop: false
   , hide_invite_friends: false
   , hide_upcoming: false
-  , infinite_scroll: true
   , improve_pagination: true
+  , infinite_scroll: true
   , repeated_segments: true
   , running_cadence: true
   , running_heart_rate: true
