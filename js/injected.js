@@ -198,6 +198,17 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   })();
 
+  // Hide shop in top-level navigation
+  (function() {
+    if (options.hide_shop === false) {
+      return;
+    }
+
+    $('header nav ul.global-nav li a[href^="/shop"]')
+      .remove()
+      ;
+  })();
+
   // Hide invite friends & social buttons
   (function() {
     if (options.hide_invite_friends === false) {
