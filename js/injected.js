@@ -884,7 +884,7 @@ function StravaEnhancementSuite(options) {
         typeof handlerOut === 'function' && handlerOut.apply(this);
 
         // Restore original CSS
-        elem.css(elem.data('original-css'));
+        elem.css(elem.data('original-css') || {});
       })
       ;
   };
