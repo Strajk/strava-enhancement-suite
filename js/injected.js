@@ -146,8 +146,8 @@ function StravaEnhancementSuite(options) {
       }
     });
 
-    // Make description boxes bigger by default
     setInterval(function() {
+      // Make description boxes bigger by default
       $('.lightbox.edit_activity textarea[name=description]')
         .onceOnly()
         .css('height', 130)
