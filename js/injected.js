@@ -161,8 +161,12 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   });
 
-  // Hide calories
+  // Hide calories on your own pages
   $.option('hide_calories', function() {
+    if ($('.sidenav .edit-activity').length === 0) {
+      return;
+    }
+
     $('.section.more-stats table tr')
       .filter(function () {
           return $(this).find('th').text() === 'Calories';
