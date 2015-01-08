@@ -34,7 +34,7 @@ function StravaEnhancementSuite(options) {
         return false;
       }
     },
-    convert: function(unit, val) {
+    convert: function(val, unit) {
       val = parseFloat(val);
 
       switch (unit) {
@@ -204,7 +204,7 @@ function StravaEnhancementSuite(options) {
             ;
 
           container
-            .attr('title', $.convert(elem.text(), val))
+            .attr('title', $.convert(val, elem.text())
             ;
         })
         ;
