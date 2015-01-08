@@ -351,8 +351,9 @@ function StravaEnhancementSuite(options) {
           , ['hide_club_feed_entries', '> created <']
         ], function() {
           var html = this[1];
+          var option = this[0];
 
-          $.option(this[0], function() {
+          $.option(option, function() {
             if (html.indexOf(html) !== -1) {
               elem.remove();
             }
