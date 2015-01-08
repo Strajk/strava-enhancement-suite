@@ -204,7 +204,7 @@ function StravaEnhancementSuite(options) {
             ;
 
           container
-            .attr('title', $.convert(val, elem.text())
+            .attr('title', $.convert(val, elem.text()))
             ;
         })
         ;
