@@ -45,7 +45,7 @@ function StravaEnhancementSuite(options) {
       case 'km/h':
         return (d * 0.621371).toFixed(1) + 'mi/h';
       case 'mi/h':
-        return (d * 1.60934).toFixed(1) + 'km/h';
+        return (d * 1.609344).toFixed(1) + 'km/h';
       case 'm':
         return (d * 3.2808).toFixed(0) + 'ft';
       case 'ft':
