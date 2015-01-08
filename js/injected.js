@@ -37,6 +37,14 @@ function StravaEnhancementSuite(options) {
     convert: function(val, unit) {
       var d = parseFloat(val);
 
+      var toPace = function(scaling) {
+        var result = (parseInt(val.split(':')[0], 10) * 60 +
+            parseInt(val.split(':')[1], 10)) * scaling;
+
+        return (result / 60).toFixed(0) + ':' +
+          ((result % 60 < 10) ? '0' : '') + (result % 60).toFixed(0);
+      };
+
       switch (unit) {
       case 'km':
         return (d * 0.621371).toFixed(1) + 'mi';
@@ -54,6 +62,10 @@ function StravaEnhancementSuite(options) {
         return ((d * 1.8) + 32).toFixed(0) + '℉';
       case '℉':
         return ((d - 32) / 1.8).toFixed(0) + '℃';
+      case '/km':
+        return toPace(1.60934) + '/mi';
+      case '/mi':
+        return toPace(0.621371) + '/km';
       default:
         return '';
       }
