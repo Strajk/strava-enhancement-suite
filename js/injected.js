@@ -147,6 +147,12 @@ function StravaEnhancementSuite(options) {
     });
 
     setInterval(function() {
+      // Disable autocomplete on the "Name" dialog
+      $('.lightbox.edit_activity input[type=text]')
+        .onceOnly()
+        .attr('autocomplete', 'off')
+        ;
+
       // Make description boxes bigger by default
       $('.lightbox.edit_activity textarea[name=description]')
         .onceOnly()
