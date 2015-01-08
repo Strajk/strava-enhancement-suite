@@ -116,6 +116,7 @@ function StravaEnhancementSuite(options) {
       return;
     }
 
+    // Clicking the activity name launches the dialog
     $('#heading h2.activity-name')
       .css('cursor', 'pointer')
       .on('click', function() {
@@ -123,6 +124,7 @@ function StravaEnhancementSuite(options) {
       })
       ;
 
+    // Enter whilst editing the name saves the dialog
     $('body').on('keydown', '.lightbox.edit_activity input[type=text]', function (e) {
       if (e.keyCode === 13) {
         $(this)
@@ -133,6 +135,7 @@ function StravaEnhancementSuite(options) {
       }
     });
 
+    // CTRL+Enter whilst editing the name or description saves the dialog
     $('body').on('keydown', '.lightbox.edit_activity input[type=text], .lightbox.edit_activity textarea', function (e) {
       if (e.ctrlKey && e.keyCode === 13) {
         $(this)
