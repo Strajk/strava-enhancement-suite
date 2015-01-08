@@ -3,21 +3,22 @@ function StravaEnhancementSuite(options) {
 
   // Utilities ////////////////////////////////////////////////////////////////
 
-  $.fn.onceOnly = function () {
-    return this
-      .not('.once-only')
-      .addClass('once-only')
-      ;
-  };
-
-  $.fn.ignore = function (sel) {
-    return this
-      .clone()
-        .find(sel)
-        .remove()
-      .end()
-      ;
-  };
+  $.fn.extend({
+    onceOnly: function () {
+      return this
+        .not('.once-only')
+        .addClass('once-only')
+        ;
+    },
+    ignore:  function (sel) {
+      return this
+        .clone()
+          .find(sel)
+          .remove()
+        .end()
+        ;
+    }
+  });
 
   $.extend({
     keys: function (obj) {
