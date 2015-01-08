@@ -142,6 +142,14 @@ function StravaEnhancementSuite(options) {
           ;
       }
     });
+
+    // Make description boxes bigger by default
+    setInterval(function() {
+      $('.lightbox.edit_activity textarea[name=description]')
+        .onceOnly()
+        .css('height', 130)
+        ;
+    }, 1000);
   });
 
   // Post comments on 'enter'
