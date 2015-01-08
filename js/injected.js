@@ -354,7 +354,7 @@ function StravaEnhancementSuite(options) {
           var option = this[0];
 
           $.option(option, function() {
-            if (html.indexOf(html) !== -1) {
+            if ($(this).html().indexOf(html) !== -1) {
               elem.remove();
             }
           });
