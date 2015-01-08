@@ -35,25 +35,25 @@ function StravaEnhancementSuite(options) {
       }
     },
     convert: function(val, unit) {
-      val = parseFloat(val);
+      var d = parseFloat(val);
 
       switch (unit) {
       case 'km':
-        return (val * 0.621371).toFixed(1) + 'mi';
+        return (d * 0.621371).toFixed(1) + 'mi';
       case 'mi':
-        return (val * 1.609344).toFixed(1) + 'km';
+        return (d * 1.609344).toFixed(1) + 'km';
       case 'km/h':
-        return (val * 0.621371).toFixed(1) + 'mi/h';
+        return (d * 0.621371).toFixed(1) + 'mi/h';
       case 'mi/h':
-        return (val * 1.60934).toFixed(1) + 'km/h';
+        return (d * 1.60934).toFixed(1) + 'km/h';
       case 'm':
-        return (val * 3.2808).toFixed(0) + 'ft';
+        return (d * 3.2808).toFixed(0) + 'ft';
       case 'ft':
-        return (val * 0.3048).toFixed(0) + 'm';
+        return (d * 0.3048).toFixed(0) + 'm';
       case '℃':
-        return ((val * 1.8) + 32).toFixed(0) + '℉';
+        return ((d * 1.8) + 32).toFixed(0) + '℉';
       case '℉':
-        return ((val - 32) / 1.8).toFixed(0) + '℃';
+        return ((d - 32) / 1.8).toFixed(0) + '℃';
       default:
         return '';
       }
