@@ -9,27 +9,6 @@ function StravaEnhancementSuite(options) {
         .not('.once-only')
         .addClass('once-only')
         ;
-    },
-    ignore: function (sel) {
-      return this
-        .clone()
-          .find(sel)
-          .remove()
-        .end()
-        ;
-    },
-    addTitleConversion: function (sel) {
-      return this
-        .has(sel)
-        .each(function() {
-          var elem = $(this);
-
-          elem.attr('title', $.convert(
-            elem.find(sel).text(),
-            elem.ignore(sel).text()
-          ));
-        })
-        ;
     }
   });
 
@@ -210,18 +189,24 @@ function StravaEnhancementSuite(options) {
 
   // Convert units on hover, etc.
   $.option('convert_units', function() {
-    $('.activity-stats .section.more-stats table td, .activity-stats ul.inline-stats li strong')
-      .addTitleConversion('abbr.unit')
-      ;
-
     setInterval(function() {
-      $('section#segments table.segments td.name-col .stats span')
-        .addTitleConversion('abbr.unit')
-        ;
+      $('abbr.unit, span.unit')
+        .each(function() {
+          var elem = $(this);
+          var container = elem.parent();
 
-      $('section#segments table.segments td.time-col')
-        .next()
-        .addTitleConversion('abbr.unit')
+          var val = container
+            .clone()
+            .children()
+              .remove()
+            .end()
+            .text()
+            ;
+
+          container
+            .attr('title', $.convert(elem.text(), val))
+            ;
+        })
         ;
     }, 1000);
   });
@@ -370,12 +355,6 @@ function StravaEnhancementSuite(options) {
         if (elem.nextUntil('.row.header').not('script').length === 0) {
           elem.remove();
         }
-      });
-
-      $.option('convert_units', function() {
-        $('div.feed>.feed-entry ul.inline-stats li')
-          .addTitleConversion('span.unit')
-          ;
       });
 
       $.option('hide_invite_friends', function() {
