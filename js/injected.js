@@ -850,6 +850,9 @@ function StravaEnhancementSuite(options) {
       var elem = $(this);
 
       elem
+        .find('.leaflet-container')
+          .css('z-index', 99999)
+        .end()
         .find('.leaflet-map-pane')
           .css({
               'margin-top': (height - elem.height()) / 2
