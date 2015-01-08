@@ -306,6 +306,36 @@ function StravaEnhancementSuite(options) {
           .end()
           ;
       });
+
+      $.always(function() {
+        var elems = $('div.feed>.feed-entry .featured-achievements li')
+          .filter(function() {
+            var txt = $(this)
+              .find('strong')
+              .text()
+              ;
+
+            return /^\d+ [KQ]OM$/.test(txt);
+          })
+          ;
+
+        switch (options.annual_achievements) {
+        case 'show':
+          break;
+        case 'mute':
+          elems
+            .find('strong')
+            .css('font-weight', 'normal')
+            .text(function(idx, txt) {
+              return '(' + txt + ')';
+            })
+            ;
+          break;
+        case 'hide':
+          elems.hide();
+          break;
+        }
+      });
     }, 1000);
   });
 
