@@ -7,6 +7,7 @@ DEFAULTS = {
   , external_links: true
   , flyby_select_all: true
   , hide_blog: false
+  , hide_calories: false
   , hide_challenge_feed_entries: false
   , hide_club_feed_entries: false
   , hide_goal_feed_entries: false

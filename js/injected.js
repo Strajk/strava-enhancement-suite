@@ -161,6 +161,16 @@ function StravaEnhancementSuite(options) {
     }, 1000);
   });
 
+  // Hide calories
+  $.option('hide_calories', function() {
+    $('.section.more-stats table tr')
+      .filter(function () {
+          return $(this).find('th').text() === 'Calories';
+      })
+      .hide()
+      ;
+  });
+
   // Post comments on 'enter'
   $.option('comment_post_on_enter', function() {
     $(document).on('keydown', '.comments textarea', function(e) {
@@ -516,7 +526,7 @@ function StravaEnhancementSuite(options) {
         .css('height', 160)
         ;
 
-      // Disable autocomplete
+      // Disable autocomplete on the "Name" dialog
       $('input[type=text]')
         .onceOnly()
         .attr('autocomplete', 'off')
