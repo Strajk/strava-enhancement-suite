@@ -10,7 +10,7 @@ function StravaEnhancementSuite(options) {
         .addClass('once-only')
         ;
     },
-    ignore:  function (sel) {
+    ignore: function (sel) {
       return this
         .clone()
           .find(sel)
