@@ -509,8 +509,8 @@ function StravaEnhancementSuite(options) {
       }
     });
 
-    // Make description boxes bigger by default
     setInterval(function() {
+      // Make description boxes bigger by default
       $('textarea[name=description]')
         .onceOnly()
         .css('height', 160)
