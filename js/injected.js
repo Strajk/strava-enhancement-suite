@@ -41,6 +41,30 @@ function StravaEnhancementSuite(options) {
       } catch (err) {
         return false;
       }
+    },
+    convert: function(unit, val) {
+      val = parseFloat(val);
+
+      switch (unit) {
+      case 'km':
+        return (val * 0.621371).toFixed(1) + 'mi';
+      case 'mi':
+        return (val * 1.609344).toFixed(1) + 'km';
+      case 'km/h':
+        return (val * 0.621371).toFixed(1) + 'mi/h';
+      case 'mi/h':
+        return (val * 1.60934).toFixed(1) + 'km/h';
+      case 'm':
+        return (val * 3.2808).toFixed(0) + 'ft';
+      case 'ft':
+        return (val * 0.3048).toFixed(0) + 'm';
+      case '℃':
+        return ((val * 1.8) + 32).toFixed(0) + '℉';
+      case '℉':
+        return ((val - 32) / 1.8).toFixed(0) + '℃';
+      default:
+        return '';
+      }
     }
   });
 
@@ -169,6 +193,21 @@ function StravaEnhancementSuite(options) {
         .css('height', 130)
         ;
     }, 1000);
+  });
+
+  // Convert units on hover, etc.
+  $.option('mouseover_convert_units', function() {
+    $('.activity-stats .section.more-stats table td, .activity-stats ul.inline-stats li strong')
+      .has('abbr.unit')
+      .each(function() {
+        var elem = $(this);
+
+        elem.attr('title', $.convert(
+          elem.find('abbr').text(),
+          elem.ignore('abbr').text()
+        ));
+      })
+      ;
   });
 
   // Hide calories on your own pages

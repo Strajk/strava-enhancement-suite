@@ -2,6 +2,7 @@
 DEFAULTS = {
     annual_achievements: 'show'
   , comment_post_on_enter: true
+  , convert_units: true
   , enlarge_on_hover: true
   , estimated_ftp: true
   , external_links: true
