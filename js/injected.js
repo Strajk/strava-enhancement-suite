@@ -356,6 +356,20 @@ function StravaEnhancementSuite(options) {
         }
       });
 
+      $.option('convert_units', function() {
+        $('div.feed>.feed-entry ul.inline-stats li')
+          .has('span.unit')
+          .each(function() {
+            var elem = $(this);
+
+            elem.attr('title', $.convert(
+              elem.find('span').text(),
+              elem.ignore('span').text()
+            ));
+          })
+          ;
+      });
+
       $.option('hide_invite_friends', function() {
         $('div.feed>.feed-entry')
           // Remove social buttons
