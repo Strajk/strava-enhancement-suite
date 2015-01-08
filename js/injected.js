@@ -196,7 +196,7 @@ function StravaEnhancementSuite(options) {
   });
 
   // Convert units on hover, etc.
-  $.option('mouseover_convert_units', function() {
+  $.option('convert_units', function() {
     $('.activity-stats .section.more-stats table td, .activity-stats ul.inline-stats li strong')
       .has('abbr.unit')
       .each(function() {
