@@ -385,7 +385,7 @@ function StravaEnhancementSuite(options) {
         switch (options.annual_achievements) {
         case 'show':
           break;
-        case 'mute':
+        case 'unhighlight':
           elems
             .find('strong')
             .css('font-weight', 'normal')
