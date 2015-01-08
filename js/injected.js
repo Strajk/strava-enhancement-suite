@@ -515,6 +515,12 @@ function StravaEnhancementSuite(options) {
         .onceOnly()
         .css('height', 160)
         ;
+
+      // Disable autocomplete
+      $('input[type=text]')
+        .onceOnly()
+        .attr('autocomplete', 'off')
+        ;
     }, 1000);
   });
 
