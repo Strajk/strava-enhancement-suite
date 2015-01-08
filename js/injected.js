@@ -851,18 +851,20 @@ function StravaEnhancementSuite(options) {
 
       elem
         .find('.leaflet-map-pane')
-        .css({
-            'margin-top': (height - elem.height()) / 2
-          , 'margin-left': (width - elem.width()) / 2
-        })
+          .css({
+              'margin-top': (height - elem.height()) / 2
+            , 'margin-left': (width - elem.width()) / 2
+          })
+        .end()
         ;
     }, function() {
       $(this)
         .find('.leaflet-map-pane')
-        .css({
-            'margin-top': 0
-          , 'margin-left': 0
-        })
+          .css({
+              'margin-top': 0
+            , 'margin-left': 0
+          })
+        .end()
         ;
     });
 
