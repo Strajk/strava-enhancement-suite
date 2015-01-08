@@ -205,6 +205,7 @@ function StravaEnhancementSuite(options) {
       $('abbr.unit, span.unit')
         .each(function() {
           var elem = $(this)
+            .removeAttr('title')
             ;
 
           var container = elem.parent();
