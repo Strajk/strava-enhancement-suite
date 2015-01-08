@@ -208,6 +208,32 @@ function StravaEnhancementSuite(options) {
         ));
       })
       ;
+
+    setInterval(function() {
+      $('section#segments table.segments td.name-col .stats span')
+        .has('abbr.unit')
+        .each(function() {
+          var elem = $(this);
+
+          elem.attr('title', $.convert(
+            elem.find('abbr').text(),
+            elem.ignore('abbr').text()
+          ));
+        })
+        ;
+
+      $('section#segments table.segments td.time-col')
+        .next()
+        .each(function() {
+          var elem = $(this);
+
+          elem.attr('title', $.convert(
+            elem.find('abbr').text(),
+            elem.ignore('abbr').text()
+          ));
+        })
+        ;
+    }, 1000);
   });
 
   // Hide calories on your own pages
