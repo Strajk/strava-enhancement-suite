@@ -17,6 +17,19 @@ function StravaEnhancementSuite(options) {
           .remove()
         .end()
         ;
+    },
+    addTitleConversion: function (sel) {
+      return this
+        .has(sel)
+        .each(function() {
+          var elem = $(this);
+
+          elem.attr('title', $.convert(
+            elem.find(sel).text(),
+            elem.ignore(sel).text()
+          ));
+        })
+        ;
     }
   });
 
@@ -198,40 +211,17 @@ function StravaEnhancementSuite(options) {
   // Convert units on hover, etc.
   $.option('convert_units', function() {
     $('.activity-stats .section.more-stats table td, .activity-stats ul.inline-stats li strong')
-      .has('abbr.unit')
-      .each(function() {
-        var elem = $(this);
-
-        elem.attr('title', $.convert(
-          elem.find('abbr').text(),
-          elem.ignore('abbr').text()
-        ));
-      })
+      .addTitleConversion('abbr.unit')
       ;
 
     setInterval(function() {
       $('section#segments table.segments td.name-col .stats span')
-        .has('abbr.unit')
-        .each(function() {
-          var elem = $(this);
-
-          elem.attr('title', $.convert(
-            elem.find('abbr').text(),
-            elem.ignore('abbr').text()
-          ));
-        })
+        .addTitleConversion('abbr.unit')
         ;
 
       $('section#segments table.segments td.time-col')
         .next()
-        .each(function() {
-          var elem = $(this);
-
-          elem.attr('title', $.convert(
-            elem.find('abbr').text(),
-            elem.ignore('abbr').text()
-          ));
-        })
+        .addTitleConversion('abbr.unit')
         ;
     }, 1000);
   });
@@ -384,15 +374,7 @@ function StravaEnhancementSuite(options) {
 
       $.option('convert_units', function() {
         $('div.feed>.feed-entry ul.inline-stats li')
-          .has('span.unit')
-          .each(function() {
-            var elem = $(this);
-
-            elem.attr('title', $.convert(
-              elem.find('span').text(),
-              elem.ignore('span').text()
-            ));
-          })
+          .addTitleConversion('span.unit')
           ;
       });
 
