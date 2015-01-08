@@ -204,7 +204,9 @@ function StravaEnhancementSuite(options) {
     setInterval(function() {
       $('abbr.unit, span.unit')
         .each(function() {
-          var elem = $(this);
+          var elem = $(this)
+            ;
+
           var container = elem.parent();
 
           var val = container
