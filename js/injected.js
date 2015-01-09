@@ -395,7 +395,7 @@ function StravaEnhancementSuite(options) {
               .text()
               ;
 
-            return /^\d+ [KQ]OM$/.test(txt);
+            return /^\d+ (KOM|QOM|PR)$/.test(txt);
           })
           ;
 
