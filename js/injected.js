@@ -346,18 +346,18 @@ function StravaEnhancementSuite(options) {
       // Match by text
       $('div.feed>.min-view').each(function() {
         var elem = $(this);
-        var html = elem.find('.entry-title').html();
+        var haystack = elem.find('.entry-title').html();
 
         $.each([
             ['hide_route_feed_entries', '> created the route, <']
           , ['hide_club_feed_entries', '> joined <']
           , ['hide_club_feed_entries', '> created <']
         ], function() {
-          var html = this[1];
           var option = this[0];
+          var needle = this[1];
 
           $.option(option, function() {
-            if (elem.html().indexOf(html) !== -1) {
+            if (haystack.indexOf(needle) !== -1) {
               elem.remove();
             }
           });
