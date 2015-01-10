@@ -14,6 +14,7 @@ DEFAULTS = {
   , hide_goal_feed_entries: false
   , hide_route_feed_entries: false
   , hide_promotion_feed_entries: false
+  , hide_training_plan_feed_entries: false
   , hide_shop: false
   , hide_invite_friends: false
   , hide_upcoming: false
