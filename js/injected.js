@@ -215,6 +215,11 @@ function StravaEnhancementSuite(options) {
     setInterval(function() {
       $('abbr.unit, span.unit')
         .onceOnly()
+        .filter(function() {
+          // Don't convert multi-"1h 30m" units. In this case we think "m"
+          // means meters but we just don't support any of these.
+          return $(this).siblings('.unit').length === 0;
+        })
         .each(function() {
           var elem = $(this)
             .removeAttr('title')
