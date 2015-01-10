@@ -81,42 +81,41 @@ function StravaEnhancementSuite(options) {
       default:
         return '';
       }
+    },
+    toSeconds: function(s) {
+      var r = '';
+      var hours = Math.floor(s / 3600.0);
+
+      if (hours < 10) {
+        r += '0' + hours
+      } else {
+        r += hours;
+      }
+      r += ':';
+
+      var minutes = Math.floor((s - (hours * 3600)) / 60.0);
+      if (minutes < 10) {
+        r += '0' + minutes;
+      } else {
+        r += minutes;
+      }
+      r += ':';
+
+      var seconds = s - hours * 3600 - minutes * 60;
+
+      if (seconds - Math.floor(seconds) > 0.0) {
+        seconds = seconds.toFixed(1);
+      }
+
+      if (seconds < 10) {
+        r += '0' + seconds;
+      } else {
+        r += seconds;
+      }
+
+      return r;
     }
   });
-
-  function toSeconds(s) {
-    var r = '';
-    var hours = Math.floor(s / 3600.0);
-
-    if (hours < 10) {
-      r += '0' + hours
-    } else {
-      r += hours;
-    }
-    r += ':';
-
-    var minutes = Math.floor((s - (hours * 3600)) / 60.0);
-    if (minutes < 10) {
-      r += '0' + minutes;
-    } else {
-      r += minutes;
-    }
-    r += ':';
-
-    var seconds = s - hours * 3600 - minutes * 60;
-
-    if (seconds - Math.floor(seconds) > 0.0) {
-      seconds = seconds.toFixed(1);
-    }
-
-    if (seconds < 10) {
-      r += '0' + seconds;
-    } else {
-      r += seconds;
-    }
-
-    return r;
-  };
 
   function keySort() {
     var fields = arguments;
@@ -837,10 +836,10 @@ function StravaEnhancementSuite(options) {
             '<td><div class="starred" style="cursor: default;">★</div></td>' +
             '<td><a class="title" href="#"</a></td>' +
             '<td>' + row.count.toLocaleString() + '</td>' +
-            '<td><a href="#" class="min">' + toSeconds(row.min.seconds) + '</a></td>' +
-            '<td><a href="#" class="max">' + toSeconds(row.max.seconds) + '</a></td>' +
-            '<td>' + toSeconds(row.average) + '</td>' +
-            '<td>' + toSeconds(row.sum) + '</td>' +
+            '<td><a href="#" class="min">' + $.toSeconds(row.min.seconds) + '</a></td>' +
+            '<td><a href="#" class="max">' + $.toSeconds(row.max.seconds) + '</a></td>' +
+            '<td>' + $.toSeconds(row.average) + '</td>' +
+            '<td>' + $.toSeconds(row.sum) + '</td>' +
             '<td>' + (row.count * row.distance).toLocaleString() + row.distance_unit + '</td>' +
             '<td>' + (row.count * row.elev_difference).toLocaleString() + row.elev_difference_unit + '</td>' +
           '</tr>'
