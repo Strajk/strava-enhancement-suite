@@ -214,6 +214,7 @@ function StravaEnhancementSuite(options) {
   $.option('convert_units', function() {
     setInterval(function() {
       $('abbr.unit, span.unit')
+        .onceOnly()
         .each(function() {
           var elem = $(this)
             .removeAttr('title')
