@@ -41,7 +41,7 @@ function StravaEnhancementSuite(options) {
         var result = (parseInt(val.split(':')[0], 10) * 60 +
             parseInt(val.split(':')[1], 10)) * scaling;
 
-        return (result / 60).toFixed(0) + ':' +
+        return Math.floor(result / 60).toFixed(0) + ':' +
           ((result % 60 < 10) ? '0' : '') + (result % 60).toFixed(0);
       };
 
