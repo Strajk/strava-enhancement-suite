@@ -996,6 +996,9 @@ function StravaEnhancementSuite(options) {
         ;
     }, function() {
       $(this)
+        .find('.leaflet-container')
+          .css('z-index', 'inherit')
+        .end()
         .find('.leaflet-map-pane')
           .css({
               'margin-top': 0
