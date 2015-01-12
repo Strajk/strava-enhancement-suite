@@ -12,6 +12,7 @@ all: test $(DIST)
 	@nodejs tools/description.js
 	@echo
 	@echo https://chrome.google.com/webstore/developer/dashboard
+	@echo `pwd`
 
 clean:
 	rm -f $(DIST) $(ICONS)
