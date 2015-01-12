@@ -3,6 +3,12 @@ DIST = strava-enhancement-suite.zip
 
 all: test $(DIST)
 	@echo
+	@echo ===
+	@nodejs tools/project.js
+	@echo ===
+	@echo
+	@echo https://chris-lamb.co.uk/admin/projects/32/edit
+	@echo
 	@nodejs tools/description.js
 	@echo
 	@echo https://chrome.google.com/webstore/developer/dashboard
