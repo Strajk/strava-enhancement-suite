@@ -1,8 +1,4 @@
-function StravaEnhancementSuite(options) {
-  var $ = jQuery;
-
-  // Utilities ////////////////////////////////////////////////////////////////
-
+function StravaEnhancementSuite($, options) {
   $.fn.extend({
     onceOnly: function () {
       return this

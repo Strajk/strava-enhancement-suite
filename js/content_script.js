@@ -38,7 +38,7 @@ chrome.storage.sync.get(DEFAULTS, function(items) {
     this.parentNode.removeChild(this);
 
     var inner = document.createElement('script');
-    inner.textContent = 'var strava_enhancement_suite = new StravaEnhancementSuite(' + JSON.stringify(items) + ');';
+    inner.textContent = 'var strava_enhancement_suite = new StravaEnhancementSuite(jQuery, ' + JSON.stringify(items) + ');';
     inner.onload = function () {
       this.parentNode.removeChild(this);
     };
