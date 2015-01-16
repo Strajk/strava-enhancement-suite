@@ -140,7 +140,7 @@ var StravaEnhancementSuiteOptions = [
   , {
       "name": "hide_shop"
     , "title": "Hide shop links"
-    , "description": "Hide links to the Strava store in the header, footer and on activity pags."
+    , "description": "Hide links to the Strava store in the header, footer and on activity pages."
     , "image": false
     , "default": false
   }
