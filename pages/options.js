@@ -189,7 +189,7 @@ var StravaEnhancementSuiteOptions = [
   , {
       "name": "improve_upload_activity"
     , "title": "Improve activity upload"
-    , "description": "Add the ability to automatically \"Save &amp; View\", CTRL+Enter support, and increase the size of the description boxes to the manual \"Upload and Sync Your Activities\" manual upload page,"
+    , "description": "Add the ability to automatically \"Save & View\", CTRL+Enter support, and increase the size of the description boxes to the manual \"Upload and Sync Your Activities\" manual upload page,"
     , "image": false
     , "default": true
   }
