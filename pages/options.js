@@ -140,7 +140,7 @@ var StravaEnhancementSuiteOptions = [
   , {
       "name": "hide_shop"
     , "title": "Hide shop links"
-    , "description": "Hide links to the Strava store in the header, footer and on activity pags."
+    , "description": "Hide links to the Strava store in the header, footer and on activity pages."
     , "image": false
     , "default": false
   }
@@ -189,7 +189,7 @@ var StravaEnhancementSuiteOptions = [
   , {
       "name": "improve_upload_activity"
     , "title": "Improve activity upload"
-    , "description": "Add the ability to automatically \"Save &amp; View\", CTRL+Enter support, and increase the size of the description boxes to the manual \"Upload and Sync Your Activities\" manual upload page,"
+    , "description": "Add the ability to automatically \"Save & View\", CTRL+Enter support, and increase the size of the description boxes to the manual \"Upload and Sync Your Activities\" manual upload page,"
     , "image": false
     , "default": true
   }
