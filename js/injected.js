@@ -499,6 +499,12 @@ function StravaEnhancementSuite($, options) {
         .hide()
       .end()
       ;
+
+      // Hide videos
+      .has('a[href*=\'www.strava.com/videos\']')
+        .hide()
+      .end()
+      ;
   });
 
   $.option('hide_upcoming', function() {
