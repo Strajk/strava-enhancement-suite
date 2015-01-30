@@ -488,23 +488,17 @@ function StravaEnhancementSuite($, options) {
 
   // Hide blog links
   $.option('hide_blog', function() {
-    $('.sidebar .section')
-      // Strava blog link in sidebar (currently "Vuelta")
-      .has('a[href*=blog\\.strava\\.com]')
+    $.each([
+        ['blog.strava.com']
+      , ['2014story.strava.com']
+      , ['www.strava.com/videos']
+    ], function() {
+      $('.sidebar .section')
+        .has("a[href*='" + this + "']")
         .hide()
-      .end()
-
-      // Hide "Your 2014 story" link
-      .has('a[href*=2014story\\.strava\\.com]')
-        .hide()
-      .end()
+        ;
       ;
-
-      // Hide videos
-      .has('a[href*=\'www.strava.com/videos\']')
-        .hide()
-      .end()
-      ;
+    });
   });
 
   $.option('hide_upcoming', function() {
