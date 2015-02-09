@@ -41,7 +41,7 @@ function StravaEnhancementSuite($, options) {
       var d = parseFloat(val.replace(/,/g, ''));
 
       var toNumber = function(x, suffix, digits) {
-        return x.toFixed(digits) + suffix;
+        return x.toFixed(digits).replace(/\B(?=(\d{3})+(?!\d))/g, ',') + suffix;
       };
 
       var toPace = function(x, conv, u1, u2, u3) {
