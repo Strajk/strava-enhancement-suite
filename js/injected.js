@@ -40,6 +40,10 @@ function StravaEnhancementSuite($, options) {
     convert: function(val, unit) {
       var d = parseFloat(val.replace(/,/g, ''));
 
+      var toNumber = function(x, suffix, digits) {
+        return x.toFixed(digits) + suffix;
+      };
+
       var toPace = function(x, conv, u1, u2, u3) {
         var secs =
             parseInt(x.split(':')[0], 10) * 60
@@ -62,21 +66,21 @@ function StravaEnhancementSuite($, options) {
 
       switch (unit) {
       case 'km':
-        return (d * 0.621371).toFixed(1) + 'mi';
+        return toNumber(d * 0.621371, 'mi', 1);
       case 'mi':
-        return (d * 1.609344).toFixed(1) + 'km';
+        return toNumber(d * 1.609344, 'km', 1);
       case 'km/h':
-        return (d * 0.621371).toFixed(1) + 'mi/h';
+        return toNumber(d * 0.621371, 'mi/h', 1);
       case 'mi/h':
-        return (d * 1.609344).toFixed(1) + 'km/h';
+        return toNumber(d * 1.609344, 'km/h', 1);
       case 'm':
-        return (d * 3.2808).toFixed(0) + 'ft';
+        return toNumber(d * 3.2808, 'ft', 0);
       case 'ft':
-        return (d * 0.3048).toFixed(0) + 'm';
+        return toNumber(d * 0.3048, 'm', 0);
       case '℃':
-        return ((d * 1.8) + 32).toFixed(0) + '℉';
+        return toNumber((d * 1.8) + 32, '℉', 0);
       case '℉':
-        return ((d - 32) / 1.8).toFixed(0) + '℃';
+        return toNumber((d - 32) / 1.8, '℃', 0);
       case '/km':
         return toPace(val, 1.60934, '/mi', 'km/h', 'mi/h');
       case '/mi':
