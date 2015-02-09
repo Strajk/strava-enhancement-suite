@@ -38,7 +38,7 @@ function StravaEnhancementSuite($, options) {
       }
     },
     convert: function(val, unit) {
-      var d = parseFloat(val);
+      var d = parseFloat(val.replace(/,/g, ''));
 
       var toPace = function(x, conv, u1, u2, u3) {
         var secs =
