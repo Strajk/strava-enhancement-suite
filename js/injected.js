@@ -31,8 +31,7 @@ function StravaEnhancementSuite($, options) {
     },
     defined: function (val) {
       try {
-        eval(val);
-        return true;
+        return typeof eval(val) !== 'undefined';
       } catch (err) {
         return false;
       }
