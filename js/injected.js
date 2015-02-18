@@ -389,6 +389,14 @@ function StravaEnhancementSuite($, options) {
         });
       });
 
+      $.option('hide_turbo_trainer_rides', function() {
+        $('div.feed>.feed-entry')
+          .has('.type[title=Ride]')
+          .not(':has(.activity-map)')
+          .remove()
+          ;
+      });
+
       // Remove any days that are now empty
       $('div.feed>.header').each(function() {
         var elem = $(this);

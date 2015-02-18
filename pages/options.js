@@ -89,6 +89,13 @@ var StravaEnhancementSuiteOptions = [
     , "default": false
   }
   , {
+      "name": "hide_turbo_trainer_rides"
+    , "title": "Hide turbo trainer rides"
+    , "description": "Hide rides in the feed that do not contain a map."
+    , "image": true
+    , "default": false
+  }
+  , {
       "name": "side_by_side_running"
     , "title": "Compare running"
     , "description": "Changes the default sport for the \"Side by Side comparison\" module to running."
