@@ -563,6 +563,7 @@ function StravaEnhancementSuite($, options) {
 
       if ((elem_top >= window_top + offset) && (elem_top < window_bottom)) {
         elem
+          .onceOnly()
           .click()
           ;
       }
