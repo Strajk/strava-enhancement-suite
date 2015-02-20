@@ -31,6 +31,9 @@ function StravaEnhancementSuite($, options) {
 
   $.extend({
     setInterval: function(fn, interval) {
+      // Call immediately, not just after the first interval
+      fn();
+
       setInterval(fn, interval);
     },
     keys: function (obj) {
