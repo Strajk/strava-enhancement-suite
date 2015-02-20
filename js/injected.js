@@ -364,7 +364,7 @@ function StravaEnhancementSuite($, options) {
         $.option(this[0], function() {
           $('div.feed>.feed-entry')
             .filter(filter)
-            .remove()
+            .hide()
             ;
         });
       });
@@ -385,7 +385,7 @@ function StravaEnhancementSuite($, options) {
 
           $.option(option, function() {
             if (haystack.indexOf(needle) !== -1) {
-              elem.remove();
+              elem.hide();
             }
           });
         });
@@ -395,7 +395,7 @@ function StravaEnhancementSuite($, options) {
         $('div.feed>.feed-entry')
           .has('.type[title=Ride]')
           .not(':has(.activity-map)')
-          .remove()
+          .hide()
           ;
       });
 
@@ -404,7 +404,7 @@ function StravaEnhancementSuite($, options) {
         var elem = $(this);
 
         if (elem.nextUntil('.row.header').not('script').length === 0) {
-          elem.remove();
+          elem.hide();
         }
       });
 
