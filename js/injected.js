@@ -362,7 +362,10 @@ function StravaEnhancementSuite($, options) {
         var filter = this[1];
 
         $.option(this[0], function() {
-          $('div.feed>.feed-entry').filter(filter).remove();
+          $('div.feed>.feed-entry')
+            .filter(filter)
+            .remove()
+            ;
         });
       });
 
