@@ -17,7 +17,7 @@ function StravaEnhancementSuite($, options) {
       var that = $(this);
       var prev = undefined;
 
-      setInterval(function() {
+      $.setInterval(function() {
         var current = $(that.selector).length;
 
         if (current !== prev) {
@@ -30,6 +30,9 @@ function StravaEnhancementSuite($, options) {
   });
 
   $.extend({
+    setInterval: function(fn, interval) {
+      setInterval(fn, interval);
+    },
     keys: function (obj) {
       var a = [];
       $.each(obj, function(k) { a.push(k) });
@@ -215,7 +218,7 @@ function StravaEnhancementSuite($, options) {
       }
     });
 
-    setInterval(function() {
+    $.setInterval(function() {
       // Disable autocomplete on the "Name" dialog
       $('.lightbox.edit_activity input[type=text]')
         .onceOnly()
@@ -232,7 +235,7 @@ function StravaEnhancementSuite($, options) {
 
   // Convert units on hover, etc.
   $.option('convert_units', function() {
-    setInterval(function() {
+    $.setInterval(function() {
       $('abbr.unit, span.unit')
         .onceOnly()
         .filter(function() {
@@ -641,7 +644,7 @@ function StravaEnhancementSuite($, options) {
       }
     });
 
-    setInterval(function() {
+    $.setInterval(function() {
       // Make description boxes bigger by default
       $('textarea[name=description]')
         .onceOnly()
@@ -683,7 +686,7 @@ function StravaEnhancementSuite($, options) {
 
     var c = pagingController;
 
-    setInterval(function() {
+    $.setInterval(function() {
       $('.simple.pagination ul.switches')
         .onceOnly()
 
@@ -712,7 +715,7 @@ function StravaEnhancementSuite($, options) {
 
   // Show running cadence by default
   $.option('running_cadence', function() {
-    setInterval(function() {
+    $.setInterval(function() {
       $('#elevation-profile td[data-type=cadence] .toggle-button')
         .onceOnly()
         .click()
@@ -722,7 +725,7 @@ function StravaEnhancementSuite($, options) {
 
   // Show running heart rate by default
   $.option('running_heart_rate', function() {
-    setInterval(function() {
+    $.setInterval(function() {
       $('#elevation-profile td[data-type=heartrate] .toggle-button')
         .onceOnly()
         .click()
@@ -835,7 +838,7 @@ function StravaEnhancementSuite($, options) {
     data = $.map(data, function(elem) { return elem; });
     data.sort(keySort('-starred', '-count', 'title'));
 
-    setInterval(function() {
+    $.setInterval(function() {
       var section = $('section.segments-list')
         .not('.collapsed')
         .onceOnly()
@@ -921,7 +924,7 @@ function StravaEnhancementSuite($, options) {
 
   // Show "running" tab by default
   $.option('side_by_side_running', function() {
-    setInterval(function() {
+    $.setInterval(function() {
       $('.section.comparison .running-tab')
         .onceOnly()
         .click()
@@ -931,7 +934,7 @@ function StravaEnhancementSuite($, options) {
 
   // Show the standard Google map, not the terrain one
   $.option('standard_google_map', function() {
-    setInterval(function() {
+    $.setInterval(function() {
       $('a.map-type-selector[data-map-type-id=standard]')
         .onceOnly()
         .click()
