@@ -562,7 +562,9 @@ function StravaEnhancementSuite($, options) {
       var window_bottom = w.height() + window_top;
 
       if ((elem_top >= window_top + offset) && (elem_top < window_bottom)) {
-        elem.click();
+        elem
+          .click()
+          ;
       }
     });
   });
