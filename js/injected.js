@@ -12,6 +12,20 @@ function StravaEnhancementSuite($, options) {
         .not('.once-only')
         .addClass('once-only')
         ;
+    },
+    setInterval: function (fn, interval) {
+      var that = $(this);
+      var prev = undefined;
+
+      setInterval(function() {
+        var current = $(that.selector).length;
+
+        if (current !== prev) {
+          fn();
+        }
+
+        prev = current;
+      }, interval);
     }
   });
 
@@ -352,7 +366,7 @@ function StravaEnhancementSuite($, options) {
 
   // Hide feed entries
   $.always(function() {
-    setInterval(function() {
+    $('div.feed>.feed-entry').setInterval(function() {
       // Match by CSS class
       $.each([
           ['hide_challenge_feed_entries', '.challenge']
