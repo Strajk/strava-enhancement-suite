@@ -4,7 +4,7 @@ function StravaEnhancementSuite($, options) {
     defaults[this.name] = this['default'];
   });
 
-  options = $.merge(options, defaults);
+  options = $.extend({}, defaults, options);
 
   $.fn.extend({
     onceOnly: function () {
