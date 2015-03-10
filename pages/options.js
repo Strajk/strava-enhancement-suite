@@ -119,7 +119,7 @@ var StravaEnhancementSuiteOptions = [
   , {
       "name": "variability_index"
     , "title": "Variability Index"
-    , "description": "Calculate a Variability Index (VI) from the weighted average power and the average power, an indication of how \"smooth\" a ride was. A VI of 1.0 would mean perfect pacing."
+    , "description": "Calculate a Variability Index (VI) from the weighted average power and the average power, an indication of how \"smooth\" a ride was. A VI of 1.0 would mean perfect pacing. (Requires a power meter.)"
     , "image": true
     , "default": true
   }
