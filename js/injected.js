@@ -275,10 +275,24 @@ function StravaEnhancementSuite($, options) {
       return;
     }
 
+    // Premium
     $('.section.more-stats table tr')
       .filter(function () {
           return $(this).find('th').text() === 'Calories';
       })
+      .hide()
+      ;
+
+    // Non-premium
+    $('.section.more-stats div')
+      // Label
+      .filter(function () {
+          return $(this).text() === 'Calories';
+      })
+      .hide()
+
+      // Value
+      .next()
       .hide()
       ;
   });
