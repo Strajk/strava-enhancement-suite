@@ -159,13 +159,6 @@ var StravaEnhancementSuiteOptions = [
     , "default": false
   }
   , {
-      "name": "flyby_select_all"
-    , "title": "Add \"Select all\" to Flyby"
-    , "description": "Add an option to show/hide all \"Flyby\" rides at once."
-    , "image": false
-    , "default": true
-  }
-  , {
       "name": "enlarge_on_hover"
     , "title": "Hover actions"
     , "description": "Make various elements (Instagram images, maps, avatars, etc.) larger when you run your mouse over them."

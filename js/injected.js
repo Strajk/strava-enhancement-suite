@@ -607,31 +607,6 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Flyby modifications
-  $.option('flyby_select_all', function() {
-    if ($('#playback-controls').length === 0) {
-      return;
-    }
-
-    $('<div><input type="checkbox"> Select all</div>')
-      .prependTo('#sidebar-checkboxes')
-      .find('input')
-      .on('change', function() {
-        var elem = $(this);
-
-        // Disable some fancy hash handling reload, otherwise calling .change()
-        // reloads the page when unselecting.
-        window.onhashchange = function() {};
-
-        $('#activity_table input[type=checkbox]')
-          .prop('checked', elem.prop('checked'))
-          .change()
-          ;
-
-        return true;
-      })
-  });
-
   // Upload activity
   $.option('improve_upload_activity', function() {
     if (window.location.pathname !== '/upload/select') {
