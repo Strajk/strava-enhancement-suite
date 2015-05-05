@@ -28,7 +28,7 @@ var StravaEnhancementSuiteOptions = [
   , {
       "name": "external_links"
     , "title": "External links"
-    , "description": "Show links to Strava Labs Flyby, Veloviewer, Race Shape, KOM Club etc. on activity, segment detail and Challenge pages."
+    , "description": "Show links to Veloviewer, Race Shape, KOM Club etc. on activity, segment detail and Challenge pages."
     , "image": true
     , "default": true
   }

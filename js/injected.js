@@ -325,7 +325,6 @@ function StravaEnhancementSuite($, options) {
       ;
 
     $.each([
-        ["Flyby", 'http://labs.strava.com/flyby/viewer/#']
       , ["Veloviewer", 'http://veloviewer.com/activities/']
       , ["Raceshape", 'http://raceshape.com/url.redirect.php?url=http%3A%2F%2Fapp.strava.com%2Factivities%2F']
     ].reverse(), function() {
