@@ -83,6 +83,20 @@ function StravaEnhancementSuite($, options) {
         ].join(' — ');
       };
 
+      var swimPace = function(x, conv, suffix) {
+        var secs =
+            parseInt(x.split(':')[0], 10) * 60
+          + parseInt(x.split(':')[1], 10)
+          ;
+
+        return Math.floor((secs * conv) / 60).toFixed(0)
+          + ':'
+          + (((secs * conv) % 60 < 10) ? '0' : '')
+          + ((secs * conv) % 60).toFixed(0)
+          + suffix
+          ;
+      };
+
       switch (unit) {
       case 'km':
         return toNumber(d * 0.621371, 'mi', 1);
@@ -104,6 +118,10 @@ function StravaEnhancementSuite($, options) {
         return toPace(val, 1.60934, '/mi', 'km/h', 'mi/h');
       case '/mi':
         return toPace(val, 0.621371, '/km', 'mi/h', 'km/h');
+      case '/100m':
+        return swimPace(val, 0.9144, '/100yds');
+      case '/100yds':
+        return swimPace(val, 1.0936, '/100m');
       default:
         return '';
       }
