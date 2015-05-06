@@ -64,10 +64,7 @@ function StravaEnhancementSuite($, options) {
       };
 
       var toPace = function(x, conv, u1, u2, u3) {
-        var secs =
-            parseInt(x.split(':')[0], 10) * 60
-          + parseInt(x.split(':')[1], 10)
-          ;
+        var secs = $.parseSeconds(x);
 
         var pace =
             Math.floor((secs * conv) / 60).toFixed(0)
@@ -84,10 +81,7 @@ function StravaEnhancementSuite($, options) {
       };
 
       var swimPace = function(x, conv, suffix) {
-        var secs =
-            parseInt(x.split(':')[0], 10) * 60
-          + parseInt(x.split(':')[1], 10)
-          ;
+        var secs = $.parseSeconds(x);
 
         return Math.floor((secs * conv) / 60).toFixed(0)
           + ':'
@@ -125,6 +119,9 @@ function StravaEnhancementSuite($, options) {
       default:
         return '';
       }
+    },
+    parseSeconds: function(x) {
+      return parseInt(x.split(':')[0], 10) * 60 + parseInt(x.split(':')[1], 10);
     },
     toSeconds: function(s) {
       var r = '';
