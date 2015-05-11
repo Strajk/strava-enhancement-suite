@@ -448,7 +448,7 @@ function StravaEnhancementSuite($, options) {
       });
 
       // Remove any days that are now empty
-      $('div.feed>.header').each(function() {
+      $('div.feed>.time-header').each(function() {
         var elem = $(this);
 
         if (elem.nextUntil('.row.header').not('script').length === 0) {
