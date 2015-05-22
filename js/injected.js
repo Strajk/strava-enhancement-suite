@@ -405,7 +405,7 @@ function StravaEnhancementSuite($, options) {
       $.each([
           ['hide_challenge_feed_entries', '.challenge']
         , ['hide_goal_feed_entries', '.performance-goal-created']
-        , ['hide_promotion_feed_entries', '.promo']
+        , ['hide_promotion_feed_entries', '.promo, .membership']
       ], function() {
         var filter = this[1];
 
