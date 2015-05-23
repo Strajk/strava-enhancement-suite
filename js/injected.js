@@ -508,6 +508,11 @@ function StravaEnhancementSuite($, options) {
       .remove()
       ;
 
+    $('.sidebar .section')
+      .has('.upsell-copy')
+      .hide()
+      ;
+
     // Don't link device name on activity pages to shop
     $('#heading .activity-stats .device a')
       .contents()
