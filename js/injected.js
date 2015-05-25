@@ -412,7 +412,7 @@ function StravaEnhancementSuite($, options) {
         $.option(this[0], function() {
           $('div.feed>.feed-entry')
             .filter(filter)
-            .hide()
+            .remove()
             ;
         });
       });
@@ -433,7 +433,7 @@ function StravaEnhancementSuite($, options) {
 
           $.option(option, function() {
             if (haystack.indexOf(needle) !== -1) {
-              elem.hide();
+              elem.remove();
             }
           });
         });
@@ -450,9 +450,12 @@ function StravaEnhancementSuite($, options) {
       // Remove any days that are now empty
       $('div.feed>.time-header').each(function() {
         var elem = $(this);
+        var next = elem.nextUntil('.time-header');
 
-        if (elem.nextUntil('.row.header').not('script').length === 0) {
-          elem.hide();
+        // Should be a single <script> element
+        if (next.length === 1) {
+          elem.remove();
+          next.remove();
         }
       });
 
