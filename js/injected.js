@@ -605,7 +605,7 @@ function StravaEnhancementSuite($, options) {
     var w = $(window);
     var container = $('.feed-container');
 
-    w.scroll(function() {
+    var callback = function() {
       var elem = container
         .find('a.load-feed')
         ;
@@ -626,7 +626,12 @@ function StravaEnhancementSuite($, options) {
           .click()
           ;
       }
-    });
+    };
+
+    w.scroll(callback);
+
+    // Check on pageload too - we might have removed enough feed entries.
+    callback();
   });
 
   // Upload activity
