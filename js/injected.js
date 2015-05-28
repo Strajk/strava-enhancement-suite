@@ -615,7 +615,7 @@ function StravaEnhancementSuite($, options) {
         return;
       }
 
-      var offset = 100;
+      var offset = 300;
       var elem_top = elem.offset().top;
       var window_top = w.scrollTop();
       var window_bottom = w.height() + window_top;
