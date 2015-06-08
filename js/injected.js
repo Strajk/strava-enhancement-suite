@@ -367,14 +367,14 @@ function StravaEnhancementSuite($, options) {
 
     if (m !== null) {
       $(
-        '<div class="module">' +
+        '<div class="section">' +
           '<h3 class="marginless">External links</h3>' +
           '<ul style="list-style-type: disc; margin: 10px 0 0 25px;">' +
             '<li><a href="http://veloviewer.com/segment/' + m[1] + '">Veloviewer</a></li>' +
             '<li><a href="http://raceshape.com/strava-segments/' + m[1] + '">Race Shape</a></li>' +
           '</ul>' +
         '</div>'
-      ).prependTo('.pageContent .sidebar');
+      ).prependTo('.page .sidebar');
     }
 
     // Link to KOM Club
