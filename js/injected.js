@@ -372,6 +372,7 @@ function StravaEnhancementSuite($, options) {
           '<ul style="list-style-type: disc; margin: 10px 0 0 25px;">' +
             '<li><a href="http://veloviewer.com/segment/' + m[1] + '">Veloviewer</a></li>' +
             '<li><a href="http://raceshape.com/strava-segments/' + m[1] + '">Race Shape</a></li>' +
+            '<li><a href="http://everesting.io/?id=' + m[1] + '">Everesting.io</a></li>' +
           '</ul>' +
         '</div>'
       ).prependTo('.page .sidebar');
