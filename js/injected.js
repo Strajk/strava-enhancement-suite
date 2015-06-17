@@ -1069,6 +1069,14 @@ function StravaEnhancementSuite($, options) {
     onHover('.feed-entry .photostream li', {
         'width': 300
       , 'height': 300
+    }, function() {
+      $(this)
+        // Use a higher-resolution bigger image (if we aren't using the FB CDN)
+        .find('img')
+          .attr('src', function (i, val) {
+            return val.replace('?size=t', '?size=l');
+          })
+        ;
     });
 
     // Mouseover on condensed athlete list in feed makes them bigger
