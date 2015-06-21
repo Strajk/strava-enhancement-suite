@@ -453,8 +453,8 @@ function StravaEnhancementSuite($, options) {
         var elem = $(this);
         var next = elem.nextUntil('.time-header');
 
-        // Should be a single <script> element
-        if (next.length === 1) {
+        // Should be at least a single <script> element
+        if (next.length < 2) {
           elem.remove();
           next.remove();
         }
