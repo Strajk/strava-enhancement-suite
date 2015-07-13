@@ -796,7 +796,7 @@ function StravaEnhancementSuite($, options) {
 
   // Repated segments
   $.option('repeated_segments', function() {
-    if (!$.defined('pageView')) {
+    if (!$.defined('pageView.segmentEfforts')) {
       return;
     }
 
