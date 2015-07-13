@@ -56,6 +56,10 @@ function StravaEnhancementSuite($, options) {
         return false;
       }
     },
+    endsWith: function (haystack, needle) {
+      return haystack.length >= needle.length &&
+        haystack.substr(haystack.length - needle.length) == needle;
+    },
     convert: function(val, unit) {
       var d = parseFloat(val.replace(/,/g, ''));
 
@@ -640,6 +644,27 @@ function StravaEnhancementSuite($, options) {
     if (window.location.pathname !== '/upload/select') {
       return;
     }
+
+    // Replace "--" with Unicode equivalents
+    $('body').on('keyup', '.uploads input[type=text]', function (e) {
+      var elem = $(this);
+      var s = elem.val();
+
+      $.each({
+          " - ": " — "
+        , " -- ": " — "
+        , " -> ": " → "
+        , " > ": " → "
+        , " < ": " ← "
+        , " <- ": " ← "
+        , " <-> ": " ↔ "
+        , "(L)": "❤"
+      }, function(x, y) {
+        if ($.endsWith(s, x)) {
+          elem.val(s.substr(0, s.length - x.length) + y);
+        }
+      });
+    });
 
     $('body').on('keydown', '.uploads input[type=text]', function (e) {
       if (e.keyCode === 13) {
