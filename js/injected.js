@@ -689,6 +689,7 @@ function StravaEnhancementSuite($, options) {
       var elem = $(this);
       var s = elem
         .val()
+        .replace(/\u00A0/g,' ') // for some <textarea> elements
         ;
 
       $.each({
