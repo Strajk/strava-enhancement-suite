@@ -685,7 +685,7 @@ function StravaEnhancementSuite($, options) {
 
   // Replace "--" with Unicode equivalents
   $.always(function() {
-    $('body').on('keyup', '.uploads input[type=text], .lightbox.edit_activity input[type=text], .activities .training-activity-row .edit-col input[type=text]', function (e) {
+    $('body').on('keyup', '.uploads input[type=text], .lightbox.edit_activity input[type=text], .activities .training-activity-row .edit-col input[type=text], .manual-entry input#activity_name', function (e) {
       var elem = $(this);
       var s = elem
         .val()
