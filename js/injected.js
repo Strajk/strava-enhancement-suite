@@ -687,7 +687,9 @@ function StravaEnhancementSuite($, options) {
   $.always(function() {
     $('body').on('keyup', '.uploads input[type=text], .lightbox.edit_activity input[type=text]', function (e) {
       var elem = $(this);
-      var s = elem.val();
+      var s = elem
+        .val()
+        ;
 
       $.each({
           " - ": " — "
