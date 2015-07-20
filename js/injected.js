@@ -645,27 +645,6 @@ function StravaEnhancementSuite($, options) {
       return;
     }
 
-    // Replace "--" with Unicode equivalents
-    $('body').on('keyup', '.uploads input[type=text]', function (e) {
-      var elem = $(this);
-      var s = elem.val();
-
-      $.each({
-          " - ": " — "
-        , " -- ": " — "
-        , " -> ": " → "
-        , " > ": " → "
-        , " < ": " ← "
-        , " <- ": " ← "
-        , " <-> ": " ↔ "
-        , "(L)": "❤"
-      }, function(x, y) {
-        if ($.endsWith(s, x)) {
-          elem.val(s.substr(0, s.length - x.length) + y);
-        }
-      });
-    });
-
     $('body').on('keydown', '.uploads input[type=text]', function (e) {
       if (e.keyCode === 13) {
         $('footer .save-and-view').click();
@@ -702,6 +681,29 @@ function StravaEnhancementSuite($, options) {
         .attr('autocomplete', 'off')
         ;
     }, 1000);
+  });
+
+  // Replace "--" with Unicode equivalents
+  $.always(function() {
+    $('body').on('keyup', '.uploads input[type=text]', function (e) {
+      var elem = $(this);
+      var s = elem.val();
+
+      $.each({
+          " - ": " — "
+        , " -- ": " — "
+        , " -> ": " → "
+        , " > ": " → "
+        , " < ": " ← "
+        , " <- ": " ← "
+        , " <-> ": " ↔ "
+        , "(L)": "❤"
+      }, function(x, y) {
+        if ($.endsWith(s, x)) {
+          elem.val(s.substr(0, s.length - x.length) + y);
+        }
+      });
+    });
   });
 
   // Athlete profile
