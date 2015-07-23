@@ -255,6 +255,20 @@ function StravaEnhancementSuite($, options) {
     }, 1000);
   });
 
+  // Manual upload
+  $.always(function() {
+    // Ctrl+enter whilst editing the name saves the dialog
+    $('body').on('keydown', '.manual-entry input#activity_name, .manual-entry textarea', function (e) {
+      if (e.keyCode === 13) {
+        $(this)
+          .parents('form')
+          .find('input[type=submit]')
+          .click()
+          ;
+      }
+    });
+  });
+
   // Convert units on hover, etc.
   $.option('convert_units', function() {
     $.setInterval(function() {
