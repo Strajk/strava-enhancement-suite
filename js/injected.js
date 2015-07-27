@@ -443,6 +443,7 @@ function StravaEnhancementSuite($, options) {
 
         $.each([
             ['hide_route_feed_entries', '> created the route, <']
+          , ['hide_route_feed_entries', '> starred the route, <']
           , ['hide_club_feed_entries', '> joined <']
           , ['hide_club_feed_entries', '> created <']
           , ['hide_training_plan_feed_entries', ' started a training plan: ']
