@@ -60,6 +60,14 @@ function StravaEnhancementSuite($, options) {
       return haystack.length >= needle.length &&
         haystack.substr(haystack.length - needle.length) == needle;
     },
+    urlParam: function (name) {
+      var m = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+
+      if (!m) {
+          return undefined;
+      }
+      return m[1] || undefined;
+    },
     convert: function(val, unit) {
       var d = parseFloat(val.replace(/,/g, ''));
 
@@ -1129,6 +1137,30 @@ function StravaEnhancementSuite($, options) {
         'width': 60
       , 'height': 60
       , 'position': 'absolute'
+    });
+  });
+
+  // Fix athlete search forgetting values
+  $.always(function() {
+    if (window.location.pathname.indexOf('/activities/search') !== 0) {
+      return;
+    }
+
+    if ($.urlParam('location') === undefined) {
+      return;
+    }
+
+    $.each([
+        'elev_gain'
+      , 'distance'
+      , 'time'
+    ], function() {
+      var name = this;
+
+      $('.slider#' + name).slider('values', [
+          parseInt($.urlParam(name + '_start'), 10)
+        , parseInt($.urlParam(name + '_end'), 10)
+      ]);
     });
   });
 }
