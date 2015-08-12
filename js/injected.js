@@ -488,13 +488,16 @@ function StravaEnhancementSuite($, options) {
       });
 
       $.option('hide_invite_friends', function() {
+        // Remove social buttons
         $('div.feed>.feed-entry')
-          // Remove social buttons
           .find('.share')
             .hide()
           .end()
+      });
 
-          // Remove "Premium" buttons
+      $.option('hide_premium_badges', function() {
+        // Remove "Premium" buttons
+        $('div.feed>.feed-entry')
           .find('.badge.premium')
             .hide()
           .end()

@@ -40,6 +40,13 @@ var StravaEnhancementSuiteOptions = [
     , "default": false
   }
   , {
+      "name": "hide_premium_badges"
+    , "title": "Hide Premium badges"
+    , "description": "Hide 'Premium' badges."
+    , "image": false
+    , "default": false
+  }
+  , {
       "name": "comment_post_on_enter"
     , "title": "\"Enter\" posts comment"
     , "description": "Immediately posts comment when pressing the \"enter\" / \"return\" key in the edit box rather than adding a new line."
