@@ -66,7 +66,7 @@ function StravaEnhancementSuite($, options) {
       if (!m) {
           return undefined;
       }
-      return m[1] || undefined;
+      return decodeURIComponent(m[1]) || undefined;
     },
     convert: function(val, unit) {
       var d = parseFloat(val.replace(/,/g, ''));
