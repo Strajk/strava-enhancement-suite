@@ -263,7 +263,7 @@ function StravaEnhancementSuite($, options) {
     }, 1000);
   });
 
-  // Manual upload
+  // Manual file upload
   $.always(function() {
     // Ctrl+enter whilst editing the name saves the dialog
     $('body').on('keydown', '.manual-entry input#activity_name, .manual-entry textarea', function (e) {
