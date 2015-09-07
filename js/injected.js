@@ -277,6 +277,39 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
+  // Manual activity input
+  $.always(function() {
+    if (window.location.pathname !== '/upload/manual') {
+      return;
+    }
+
+    var type = $.urlParam('type');
+
+    if (type !== undefined) {
+      $('.upload-type li[data-value="' + type + '"] a').click().click();
+    }
+
+    $.each([
+        'name'
+      , 'description'
+      , 'elapsed_time_hours'
+      , 'elapsed_time_minutes'
+      , 'elapsed_time_seconds'
+      , 'description'
+    ], function() {
+      var name = this;
+      var val = $.urlParam(name);
+
+      if (val === undefined) {
+        return;
+      }
+
+      jQuery('form#new_activity input, textarea, select').filter(function () {
+        return $(this).attr('name') === 'activity[' + name + ']';
+      }).val(val);
+    });
+  });
+
   // Convert units on hover, etc.
   $.option('convert_units', function() {
     $.setInterval(function() {
