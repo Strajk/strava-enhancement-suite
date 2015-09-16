@@ -304,9 +304,11 @@ function StravaEnhancementSuite($, options) {
         return;
       }
 
-      jQuery('form#new_activity input, textarea, select').filter(function () {
+      var elem = jQuery('form#new_activity input, textarea, select').filter(function () {
         return $(this).attr('name') === 'activity[' + name + ']';
-      }).val(val);
+      });
+
+      elem.val(val);
     });
   });
 
