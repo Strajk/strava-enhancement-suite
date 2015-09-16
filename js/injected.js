@@ -309,6 +309,11 @@ function StravaEnhancementSuite($, options) {
       });
 
       elem.val(val);
+
+      // Sending a .change() signal ensures that the UI doesn't reset the
+      // activity name to (eg.) "Morning Activity" if you adjust the time
+      // considerably.
+      elem.change();
     });
   });
 
