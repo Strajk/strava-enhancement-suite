@@ -899,8 +899,14 @@ function StravaEnhancementSuite($, options) {
     var data = {};
     var elevation_unit = null;
 
+    // Calculate for both regular and hidden efforts
+    var efforts = $.merge(
+        pageView.segmentEfforts().models
+      , pageView.segmentEfforts().hiddenSegmentEfforts
+    );
+
     // Find total raw times by segment ID
-    $.each(pageView.segmentEfforts().models, function() {
+    $.each(efforts, function() {
       var segment_id = this.attributes.segment_id;
 
       var m_distance = this.attributes.distance.match(/^([\d\.]+)(.*)/);
