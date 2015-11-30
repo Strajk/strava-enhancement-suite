@@ -22,7 +22,7 @@ test:
 
 icons: icons/icon16.png icons/icon48.png icons/icon128.png
 
-strava-enhancement-suite.zip: clean $(ICONS)
+$(DIST): clean $(ICONS)
 	zip -r $@ $(SRC)
 
 icons/icon%.png: icons/original.png
