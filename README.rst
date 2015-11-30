@@ -3,8 +3,8 @@ Strava Enhancement Suite
 
 A Chrome extension to enhance using Strava.com.
 
-Installation
-============
+Installation from Git
+=====================
 
 * Clone (or otherwise download) the contents of this repository.
 
