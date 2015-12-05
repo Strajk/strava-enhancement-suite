@@ -15,7 +15,7 @@ all: test $(DIST)
 	@echo `pwd`
 
 clean:
-	rm -f $(DIST) $(ICONS)
+	rm -f $(DIST)
 
 test:
 	! find js pages -type f -name '*.js' -print0 | xargs -0r grep console.log
