@@ -513,6 +513,11 @@ function StravaEnhancementSuite($, options) {
           .not(':has(.activity-map)')
           .hide()
           ;
+
+        $('div.feed>.feed-entry')
+          .has('.type[title="Virtual Ride"]')
+          .hide()
+          ;
       });
 
       // Remove any days that are now empty

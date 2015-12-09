@@ -97,8 +97,8 @@ var StravaEnhancementSuiteOptions = [
   }
   , {
       "name": "hide_turbo_trainer_rides"
-    , "title": "Hide turbo trainer rides"
-    , "description": "Hide rides in the feed that do not contain a map."
+    , "title": "Hide turbo trainer / virtual rides"
+    , "description": "Hide Zwift activities or rides in the feed that do not contain a map."
     , "image": true
     , "default": false
   }
