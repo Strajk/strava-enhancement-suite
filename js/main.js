@@ -556,6 +556,10 @@ function StravaEnhancementSuite($, options) {
             .hide()
           .end()
           ;
+
+        $('#premium-views div.premium.badge')
+          .hide()
+          ;
       });
 
       $.always(function() {
