@@ -648,6 +648,13 @@ function StravaEnhancementSuite($, options) {
   });
 
   $.option('hide_upcoming', function() {
+    // Hide "Yearly Goals"
+    $('.sidebar .section#yearly-progress-goals')
+      .hide()
+      ;
+  });
+
+  $.option('hide_upcoming', function() {
     // Upcoming races, events, goals
     $('.sidebar .section#upcoming-events')
       .not(':has(li)') // Show if we have upcoming events

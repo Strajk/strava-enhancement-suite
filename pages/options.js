@@ -180,6 +180,13 @@ var StravaEnhancementSuiteOptions = [
     , "default": false
   }
   , {
+      "name": "hide_yearly_goals"
+    , "title": "Hide \"Yearly Goals\""
+    , "description": "Hide the \"Yearly Goals\" module on the dashboard."
+    , "image": false
+    , "default": false
+  }
+  , {
       "name": "hide_upcoming"
     , "title": "Hide \"upcoming\""
     , "description": "Hide \"Upcoming\" module on the dashboard if you have no upcoming races, events or goals coming soon. Also hides the \"Discover More\" sub-module."
