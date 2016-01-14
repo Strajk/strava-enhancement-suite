@@ -261,6 +261,15 @@ function StravaEnhancementSuite($, options) {
         .css('height', 130)
         ;
     }, 1000);
+
+    $.option('show_hidden_efforts', function() {
+      $.setInterval(function() {
+        $('button#show-hidden-efforts')
+          .onceOnly()
+          .click()
+          ;
+      });
+    });
   });
 
   // Manual file upload

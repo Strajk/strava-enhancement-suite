@@ -221,4 +221,11 @@ var StravaEnhancementSuiteOptions = [
     , "image": false
     , "default": true
   }
+  , {
+      "name": "show_hidden_efforts"
+    , "title": "Show hidden efforts"
+    , "description": "When there are too many segments/efforts on a particular ride, Strava hides them behind a \"Show X hidden efforts\" button. Enabling this option shows these efforts by default."
+    , "image": false
+    , "default": true
+  }
 ]
