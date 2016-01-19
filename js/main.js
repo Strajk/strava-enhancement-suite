@@ -204,7 +204,7 @@ function StravaEnhancementSuite($, options) {
 
   // Methods //////////////////////////////////////////////////////////////////
 
-  // Activity pages
+  // Own activity pages
   $.always(function() {
     // Detect whether we are viewing our own activity and to activate the dialog
     var edit_activity = $('.sidenav .edit-activity');
