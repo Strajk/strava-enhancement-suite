@@ -13,6 +13,9 @@ function StravaEnhancementSuite($, options) {
         .addClass('once-only')
         ;
     },
+    reverse: function () {
+      return this.pushStack(this.get().reverse(), arguments);
+    },
     setInterval: function (fn, interval) {
       var that = $(this);
       var prev = undefined;
@@ -359,6 +362,20 @@ function StravaEnhancementSuite($, options) {
         })
         ;
     }, 1000);
+  });
+
+  $.option('sort_starred_segments_first', function() {
+    $('table.segments tr')
+      .has('.starred.active')
+      .reverse()
+      .each(function () {
+        var elem = $(this);
+        elem
+          .parents('tbody')
+          .prepend(elem)
+          ;
+      })
+      ;
   });
 
   // Hide calories on your own pages

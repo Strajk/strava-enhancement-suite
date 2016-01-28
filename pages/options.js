@@ -228,4 +228,11 @@ var StravaEnhancementSuiteOptions = [
     , "image": false
     , "default": true
   }
+  , {
+      "name": "sort_starred_segments_first"
+    , "title": "Sort starred segments first"
+    , "description": "Show 'starred' segments at the top of lists instead of in their geographical order."
+    , "image": false
+    , "default": false
+  }
 ]
