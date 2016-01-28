@@ -562,6 +562,21 @@ function StravaEnhancementSuite($, options) {
         $('#premium-views div.premium.badge')
           .hide()
           ;
+
+        // Top of activity page
+        $('header h1 div.badge')
+          .hide()
+          ;
+
+        // Sidebar of profile
+        $('div.section.profile .athlete-title .badge')
+          .hide()
+          ;
+
+        // Tabs on profile
+        $('.challenges-completed .badge')
+          .hide()
+          ;
       });
 
       $.always(function() {
