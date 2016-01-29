@@ -551,12 +551,15 @@ function StravaEnhancementSuite($, options) {
       // Remove any days that are now empty
       $('div.feed>.time-header').each(function() {
         var elem = $(this);
-        var next = elem.nextUntil('.time-header');
 
-        // Should be at least a single <script> element
-        if (next.length < 2) {
+        // If it's a <div> it's probably visible
+        var entries = elem
+          .nextUntil('.time-header')
+          .filter('div')
+          ;
+
+        if (entries.length === 0) {
           elem.remove();
-          next.remove();
         }
       });
 
