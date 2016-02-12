@@ -572,14 +572,8 @@ function StravaEnhancementSuite($, options) {
       });
 
       $.option('hide_premium_badges', function() {
-        // Remove "Premium" buttons
-        $('div.feed>.feed-entry')
-          .find('.badge.premium')
-            .hide()
-          .end()
-          ;
-
-        $('#premium-views div.premium.badge')
+        // Remove "Premium" badges
+        $('.badge.premium')
           .hide()
           ;
 
