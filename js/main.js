@@ -632,7 +632,7 @@ function StravaEnhancementSuite($, options) {
 
   // Hide shop in top-level navigation
   $.option('hide_shop', function() {
-    $('header nav ul.global-nav li a[href^="/shop"]')
+    $('header nav ul.global-nav li a[href*="/store"]')
       .remove()
       ;
 
