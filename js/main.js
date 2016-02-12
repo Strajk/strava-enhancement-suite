@@ -577,6 +577,11 @@ function StravaEnhancementSuite($, options) {
           .hide()
           ;
 
+        // Navigation
+        $('header nav ul li.premium div.icon-strava')
+          .hide()
+          ;
+
         // Top of activity page
         $('header h1 div.badge')
           .hide()
