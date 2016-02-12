@@ -649,7 +649,7 @@ function StravaEnhancementSuite($, options) {
 
     // Shop module in footer
     $('footer .footer-promos .promo')
-      .has('a[href*=shop\\.strava\\.com]')
+      .has('a[href*="/store"]')
       .children()
       .hide()
       ;
