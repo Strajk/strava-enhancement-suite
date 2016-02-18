@@ -350,7 +350,8 @@ function StravaEnhancementSuite($, options) {
 
           var val = container
             .clone()
-            .children()
+            // Don't remove all children; the value might be wrapped in <strong>
+            .children('.unit')
               .remove()
             .end()
             .text()
