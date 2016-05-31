@@ -637,6 +637,11 @@ function StravaEnhancementSuite($, options) {
       .remove()
       ;
 
+    // "Free Strava Mobile app"
+    $('#appUpsell')
+      .hide()
+      ;
+
     $('.sidebar .section')
       .has('.upsell-copy')
       .hide()
