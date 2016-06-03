@@ -1283,6 +1283,20 @@ function StravaEnhancementSuite($, options) {
       ]);
     });
   });
+
+  // Show same-activity Flybys only (runs or rides) in the Flyby viewer.
+  $.option('show_same_activity_flybys', function() {
+    if (window.location.pathname.indexOf('/flyby/viewer') !== 0) {
+      return;
+    }
+    $(document).ready(function() {
+      // Check the "Runs only" / "Rides only" checkbox
+      var elem = $('input#hide_different_activity_type');
+      if (elem.checked !== 'on') {
+        elem.click();
+      }
+    });
+  });
 }
 
 StravaEnhancementSuite.prototype.switch_units = function() {

@@ -235,4 +235,11 @@ var StravaEnhancementSuiteOptions = [
     , "image": false
     , "default": true
   }
+  , {
+      "name": "show_same_activity_flybys"
+    , "title": "Show same-activity Flybys only"
+    , "description": "Show same-activity Flybys only (runs or rides) in the Flyby viewer."
+    , "image": false
+    , "default": false
+  }
 ]
