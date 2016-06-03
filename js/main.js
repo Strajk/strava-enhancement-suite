@@ -844,7 +844,7 @@ function StravaEnhancementSuite($, options) {
 
   // Athlete profile
   $.always(function() {
-    profile_link = $('header .user-menu a');
+    var profile_link = $('header .user-menu a');
     if (
          (profile_link.length === 0)
       || (profile_link.attr('href').indexOf(window.location.pathname) !== 0)
@@ -1292,7 +1292,7 @@ function StravaEnhancementSuite($, options) {
     $(document).ready(function() {
       // Check the "Runs only" / "Rides only" checkbox
       var elem = $('input#hide_different_activity_type');
-      if (elem.checked !== 'on') {
+      if (!elem.prop('checked')) {
         elem.click();
       }
     });
