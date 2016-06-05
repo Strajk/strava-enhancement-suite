@@ -23,6 +23,7 @@ function StravaEnhancementSuite($, options) {
       $.setInterval(function() {
         var current = $(that.selector).length;
 
+        // Only call our method if we think the items have changed.
         if (current !== prev) {
           fn();
         }
