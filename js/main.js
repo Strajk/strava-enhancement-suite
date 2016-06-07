@@ -1289,13 +1289,19 @@ function StravaEnhancementSuite($, options) {
     if (window.location.pathname.indexOf('/flyby/viewer') !== 0) {
       return;
     }
-    $(document).ready(function() {
-      // Check the "Runs only" / "Rides only" checkbox
-      var elem = $('input#hide_different_activity_type');
-      if (!elem.prop('checked')) {
-        elem.click();
+
+    $.setInterval(function() {
+      // Wait until the activities table is loaded before clicking the button.
+      // Strava JS hides a #table_loading div when ready.
+      var activities_loaded = ($('#table_loading').css("display") === 'none');
+      if (activities_loaded) {
+        // Click the "Runs only" / "Rides only" checkbox.
+        $('input#hide_different_activity_type')
+          .onceOnly()
+          .click()
+          ;
       }
-    });
+    }, 1000);
   });
 }
 
