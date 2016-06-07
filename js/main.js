@@ -845,7 +845,11 @@ function StravaEnhancementSuite($, options) {
 
   // Athlete profile
   $.always(function() {
-    if ($('header .user-menu a').attr('href').indexOf(window.location.pathname) !== 0) {
+    var profile_link = $('header .user-menu a');
+    if (
+         (profile_link.length === 0)
+      || (profile_link.attr('href').indexOf(window.location.pathname) !== 0)
+    ) {
       return;
     }
 
@@ -1279,6 +1283,26 @@ function StravaEnhancementSuite($, options) {
         , parseInt($.urlParam(name + '_end'), 10)
       ]);
     });
+  });
+
+  // Show same-activity Flybys only (runs or rides) in the Flyby viewer.
+  $.option('show_same_activity_flybys', function() {
+    if (window.location.pathname.indexOf('/flyby/viewer') !== 0) {
+      return;
+    }
+
+    $.setInterval(function() {
+      // Wait until the activities table is loaded before clicking the button.
+      // Strava JS hides a #table_loading div when ready.
+      var activities_loaded = ($('#table_loading').css("display") === 'none');
+      if (activities_loaded) {
+        // Click the "Runs only" / "Rides only" checkbox.
+        $('input#hide_different_activity_type')
+          .onceOnly()
+          .click()
+          ;
+      }
+    }, 1000);
   });
 }
 
