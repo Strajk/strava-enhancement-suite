@@ -1294,14 +1294,15 @@ function StravaEnhancementSuite($, options) {
     $.setInterval(function() {
       // Wait until the activities table is loaded before clicking the button.
       // Strava JS hides a #table_loading div when ready.
-      var activities_loaded = ($('#table_loading').css('display') === 'none');
-      if (activities_loaded) {
-        // Click the "Runs only" / "Rides only" checkbox.
-        $('input#hide_different_activity_type')
-          .onceOnly()
-          .click()
-          ;
+      if ($('#table_loading').css('display') !== 'none') {
+        return;
       }
+
+      // Click the "Runs only" / "Rides only" checkbox.
+      $('input#hide_different_activity_type')
+        .onceOnly()
+        .click()
+        ;
     }, 1000);
   });
 }
