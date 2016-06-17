@@ -16,8 +16,10 @@ $(function() {
       $.setOption(option.name, elem.prop('checked'));
     });
 
-    chrome.storage.sync.get(option.name, function(x) {
-      elem.prop('checked', x[option.name]);
+    chrome.storage.sync.get(option.name, function(items) {
+      var val = items[option.name];
+
+      elem.prop('checked', (typeof val === 'undefined') ? option.default : val);
     });
 
     if (option.choices) {
@@ -35,8 +37,10 @@ $(function() {
         $.setOption(option.name, elem.val());
       });
 
-      chrome.storage.sync.get(option.name, function(x) {
-        elem.val(x[option.name]);
+      chrome.storage.sync.get(option.name, function(items) {
+        var val = items[option.name];
+
+        elem.val((typeof val === 'undefined') ? option.default : val);
       });
     }
 
