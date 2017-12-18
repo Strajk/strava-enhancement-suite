@@ -548,7 +548,7 @@ function StravaEnhancementSuite($, options) {
           .has('.type[title="Virtual Ride"]')
           .hide()
           ;
-          
+
         $('div.feed>.feed-entry')
           .has('.entry-body a:contains("Zwift")')
           .hide()
