@@ -549,13 +549,13 @@ function StravaEnhancementSuite($, options) {
           .hide()
           ;
 
-        $('div.feed>.feed-entry')
-          .has('.entry-body a:contains("Zwift")')
+        $('.feed-entry')
+          .has('.entry-header a:contains("Zwift")')
           .hide()
           ;
 
-        $('div.feed>.feed-entry')
-          .has('.media-body a:contains("Zwift")')
+        $('.feed-entry')
+          .has('a:contains("Zwift")')
           .hide()
           ;
       });
