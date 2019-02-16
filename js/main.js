@@ -431,28 +431,22 @@ function StravaEnhancementSuite($, options) {
     }
 
     // Need a little more room to include our links
-    $('section#heading h1')
-      .css({'width': '40%'})
-      ;
+    $('section#heading h2')
+      .css({'width': '40%'});
 
     $.each([
         ["Veloviewer", 'http://veloviewer.com/activities/']
       , ["Raceshape", 'http://raceshape.com/url.redirect.php?url=http%3A%2F%2Fapp.strava.com%2Factivities%2F']
-    ].reverse(), function() {
+    ].reverse(), function(i, details) {
       $(
-        '<div class="button-group">' +
-          '<a href="#" class="button title"></a>' +
-        '</div>'
+        '<a href="' + details[1] + pageView.activity().id + '" class="button title">' + details[0] + '</a>'
       )
         .prependTo('section#heading .social')
         .find('a')
-        .text(this[0])
         .css({
             'font-size': '12px'
           , 'line-height': '20px'
-        })
-        .attr('href', this[1] + pageView.activity().id)
-        ;
+        });
     });
   });
 
