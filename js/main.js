@@ -476,13 +476,10 @@ function StravaEnhancementSuite($, options) {
 
     // Link to KOM Club
     $(
-      '<li>' +
-        '<button>KOM Club</button>' +
-      '</li>'
+      '<button data-type="komclub" id="komclub">KOM Club</button>'
     )
       .appendTo('#challenge-filters')
-      .find('button')
-      .css('margin-left', '18px')
+      .find('button#komclub')
       .on('click', function (e) {
         e.preventDefault();
         window.location.href = 'http://www.kom.club/';
