@@ -1206,9 +1206,9 @@ function StravaEnhancementSuite($, options) {
     });
 
     // Mouseover on map makes them bigger
-    var width = 250;
-    var height = 135;
-    onHover('.feed-entry .activity-map', {
+    var width = $('.feed-entry .entry-images').width();
+    var height = 360;
+    onHover('.feed-entry .activity-map .entry-image-wrapper', {
         'width': width
       , 'height': height
       , 'margin-left': 0
