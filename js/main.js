@@ -471,7 +471,7 @@ function StravaEnhancementSuite($, options) {
             '<li><a href="http://everesting.io/?id=' + m[1] + '">Everesting.io</a></li>' +
           '</ul>' +
         '</div>'
-      ).prependTo('.page .sidebar');
+      ).prependTo('.container .sidebar');
     }
 
     // Link to KOM Club
