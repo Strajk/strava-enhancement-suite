@@ -470,12 +470,11 @@ function StravaEnhancementSuite($, options) {
     $(
       '<button data-type="komclub" id="komclub">KOM Club</button>'
     )
-      .appendTo('#challenge-filters')
-      .find('button#komclub')
       .on('click', function (e) {
         e.preventDefault();
         window.location.href = 'http://www.kom.club/';
       })
+      .appendTo('#challenge-filters')
       ;
   });
 
