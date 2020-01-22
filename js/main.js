@@ -436,7 +436,6 @@ function StravaEnhancementSuite($, options) {
 
     $.each([
         ["Veloviewer", 'http://veloviewer.com/activities/']
-      , ["Relive.cc", 'https://www.relive.cc/view/']
     ].reverse(), function(i, details) {
       $(
         '<a href="' + details[1] + pageView.activity().id + '" class="button title">' + details[0] + '</a>'
