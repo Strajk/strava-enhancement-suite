@@ -728,49 +728,6 @@ function StravaEnhancementSuite($, options) {
       ;
   });
 
-  // Infinite scroll
-  $.option('infinite_scroll', function() {
-    var url = window.location.pathname;
-
-    if (!(
-         (url.indexOf('/dashboard') === 0)
-      || (url.indexOf('/clubs/') === 0 && url.indexOf('/recent_activity') > 0)
-    )) {
-      return;
-    }
-
-    var w = $(window);
-    var container = $('.feed-container');
-
-    var callback = function() {
-      var elem = container
-        .find('a.load-feed')
-        ;
-
-      if (elem.length === 0) {
-        // Can't unbind as we may be waiting for another page to load
-        return;
-      }
-
-      var offset = 300;
-      var elem_top = elem.offset().top;
-      var window_top = w.scrollTop();
-      var window_bottom = w.height() + window_top;
-
-      if ((elem_top >= window_top + offset) && (elem_top < window_bottom)) {
-        elem
-          .onceOnly()
-          .click()
-          ;
-      }
-    };
-
-    w.scroll(callback);
-
-    // Check on pageload too - we might have removed enough feed entries.
-    callback();
-  });
-
   // Upload activity
   $.option('improve_upload_activity', function() {
     if (window.location.pathname !== '/upload/select') {

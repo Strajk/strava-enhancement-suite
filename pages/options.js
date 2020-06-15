@@ -19,13 +19,6 @@ var StravaEnhancementSuiteOptions = [
     ]
   }
   , {
-      "name": "infinite_scroll"
-    , "title": "Infinite scroll"
-    , "description": "Automatically load more dashboard entries when reaching the bottom."
-    , "image": true
-    , "default": true
-  }
-  , {
       "name": "external_links"
     , "title": "External links"
     , "description": "Show links to Veloviewer, Race Shape, KOM Club etc. on activity, segment detail and Challenge pages."
