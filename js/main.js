@@ -572,30 +572,15 @@ function StravaEnhancementSuite($, options) {
       });
 
       $.option('hide_premium_badges', function() {
-        // Remove "Premium" badges
-        $('.badge.premium')
-          .hide()
-          ;
+        // Only keep "Subscriber" line right under the name on athlete's page
+        $([
+          '.avatar-badge', // badge over the top-right corner of avatar profiles
+          '.badge.premium', // activity page: prefixed to activity name
+          '.icon-badge-premium' // suffixed to athlete name
+        ].join(', ')).hide()
 
-        // Navigation
-        $('header nav ul li.premium div.icon-strava')
-          .hide()
-          ;
-
-        // Top of activity page
-        $('header h1 div.badge')
-          .hide()
-          ;
-
-        // Sidebar of profile
-        $('div.section.profile .athlete-title .badge')
-          .hide()
-          ;
-
-        // Tabs on profile
-        $('.challenges-completed .badge')
-          .hide()
-          ;
+        // Implementation note: Would be better to do with CSS
+        // to avoid badges flashing for a brief moment until hidden by JS
       });
 
       $.always(function() {
