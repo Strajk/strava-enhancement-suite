@@ -917,7 +917,7 @@ function StravaEnhancementSuite($, options) {
     };
   });
 
-  // Repated segments
+  // Repeated segments
   $.option('repeated_segments', function() {
     if (!$.defined('pageView.segmentEfforts')) {
       return;
@@ -927,10 +927,10 @@ function StravaEnhancementSuite($, options) {
     var elevation_unit = null;
 
     // Calculate for both regular and hidden efforts
-    var efforts = $.merge(
-        pageView.segmentEfforts().models
-      , pageView.segmentEfforts().hiddenSegmentEfforts
-    );
+    var efforts = [
+      ...pageView.segmentEfforts().models,
+      ...pageView.segmentEfforts().hiddenSegmentEfforts
+    ]
 
     // Find total raw times by segment ID
     $.each(efforts, function() {
