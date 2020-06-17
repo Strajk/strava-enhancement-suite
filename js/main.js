@@ -430,22 +430,33 @@ function StravaEnhancementSuite($, options) {
 
       // Need a little more room to include our links
       $('section#heading h2').css({'width': '40%'});
-      [
-        [ 'VeloViewer', 'http://veloviewer.com/activities/' ]
-      ].forEach(function([title, href]) {
-        $(`<a href="${href}${pageView.activity().id}" class="button title" target="_blank">${title}</a>`)
-          .prependTo('section#heading .social')
-      });
+      $(`
+        <div class="drop-down-menu">
+          <a class="selection" style="padding-right: 30px;">External links</a>
+          <ul class="options" style="right: 0px;">
+              ${
+                ([
+                  [ 'VeloViewer', 'http://veloviewer.com/activities/$ID' ],
+                  [ 'myWindsock', 'https://mywindsock.com/activity/$ID/' ],
+                  [ 'Power-Meter.cc', 'https://power-meter.cc/activities/$ID/power-analysis' ],
+                ].map(function([title, href]) {
+                  return `<li><a href="${href.replace('$ID', window.pageView.activity().id)}" target="_blank">${title}</a></li>`
+                }).join(''))
+              }
+          </ul>
+        </div>
+      `).prependTo('section#heading .social')
 
     } else if ($.defined('segmentId')) { // Segment page
 
       $(
         '<ul style="list-style-type: disc; margin: 10px 0 0 25px;">' +
           ([
-            [ 'VeloViewer', 'http://veloviewer.com/segments/' ],
-            [ 'Everesting', 'https://everesting.cc/app/lap-calculator/?id='],
+            [ 'VeloViewer', 'https://veloviewer.com/segments/$ID' ],
+            [ 'myWindsock', 'https://mywindsock.com/segments/$ID/' ],
+            [ 'Everesting', 'https://everesting.cc/app/lap-calculator/?id=$ID'],
           ].map(function([title, href]) {
-            return `<li><a href="${href}${window.segmentId}" target="_blank">${title}</a></li>`
+            return `<li><a href="${href.replace('$ID', window.segmentId)}" target="_blank">${title}</a></li>`
           }).join('')) +
         '</ul>'
       ).appendTo('.container .sidebar .section:last');
