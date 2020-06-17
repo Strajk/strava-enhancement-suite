@@ -208,64 +208,46 @@ function StravaEnhancementSuite($, options) {
 
   // Methods //////////////////////////////////////////////////////////////////
 
-  // Own activity pages
+  // Own activity page
   $.always(function() {
     // Detect whether we are viewing our own activity and to activate the dialog
-    var edit_activity = $('.sidenav .edit-activity');
-
-    // Seems to be truncated in size
-    $('#heading span.title')
-      .css('display', 'inline')
-      ;
+    var edit_activity = $('a[title="Edit this activity"]');
 
     if (edit_activity.length === 0) {
       return;
     }
 
-    // Clicking the activity name launches the dialog
-    $('#heading h2.activity-name')
+    // Edit activity by clicking on it's name
+    $('.activity-name')
       .css('cursor', 'pointer')
       .on('click', function() {
-        edit_activity.click();
+        location.pathname = edit_activity.attr('href')
       })
-      ;
 
-    // Enter whilst editing the name saves the dialog
-    $('body').on('keydown', '.lightbox.edit_activity input[type=text]', function (e) {
-      if (e.keyCode === 13) {
-        $(this)
-          .parents('.lightbox')
-          .find('input[type=submit]')
-          .click()
-          ;
-      }
-    });
-
-    // CTRL+Enter whilst editing the name or description saves the dialog
-    $('body').on('keydown', '.lightbox.edit_activity input[type=text], .lightbox.edit_activity textarea', function (e) {
-      if (e.ctrlKey && e.keyCode === 13) {
-        $(this)
-          .parents('.lightbox')
-          .find('input[type=submit]')
-          .click()
-          ;
-      }
-    });
-
-    $.setInterval(function() {
-      // Disable autocomplete on the "Name" dialog
-      $('.lightbox.edit_activity input[type=text]')
-        .onceOnly()
-        .attr('autocomplete', 'off')
-        ;
-
-      // Make description boxes bigger by default
-      $('.lightbox.edit_activity textarea[name=description]')
-        .onceOnly()
-        .css('height', 130)
-        ;
-    }, 1000);
+    // Edit activity by pressing "e"
+    $('body').on('keydown', function () {
+      location.pathname = edit_activity.attr('href')
+    })
   });
+
+  // Own activity page: editing
+  $.always(function() {
+    if (location.pathname.startsWith('/activities') && location.pathname.endsWith('/edit')) {
+
+      $('#edit-activity #activity_name').onceOnly()
+        .attr('autocomplete', 'off')
+        .focus()
+
+      // Submit with keyboard
+      // Note: Submitting by Enter while editing activity name is already done directly on Strava
+      $('body').on('keydown', '#edit-activity #activity_name, #edit-activity #activity_description', function (e) {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+          $('#edit-activity').submit()
+        }
+      });
+
+    }
+  })
 
   $.option('show_hidden_efforts', function() {
     $.setInterval(function() {
