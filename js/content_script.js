@@ -17,11 +17,13 @@ function inject(content, callback) {
 
 chrome.storage.sync.get(null, function(items) {
   inject('/pages/options.js', function() {
-    inject('/js/main.js', function() {
-      inject(
-          'var strava_enhancement_suite = '
-        + 'new StravaEnhancementSuite(jQuery, ' + JSON.stringify(items) + ');'
-      );
+    inject('/js/libs/arrive.js', function() {
+      inject('/js/main.js', function() {
+        inject(
+            'var strava_enhancement_suite = '
+          + 'new StravaEnhancementSuite(jQuery, ' + JSON.stringify(items) + ');'
+        );
+      });
     });
   });
 });
