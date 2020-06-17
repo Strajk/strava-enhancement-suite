@@ -1,0 +1,15 @@
+{
+  "name": "strava-enhancement-suite",
+  "description": "Strava Enhancement Suite",
+  "scripts": {
+    "lint": "eslint **/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lamby/strava-enhancement-suite.git"
+  },
+  "homepage": "https://github.com/lamby/strava-enhancement-suite#readme",
+  "devDependencies": {
+    "eslint": "^7.2.0"
+  }
+}

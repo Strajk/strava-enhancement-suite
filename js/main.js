@@ -424,58 +424,38 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Add external links 1/2
+  // External links
   $.option('external_links', function() {
-    if (!$.defined('pageView')) {
-      return;
-    }
+    if ($.defined('pageView')) { // Activity page
 
-    // Need a little more room to include our links
-    $('section#heading h2')
-      .css({'width': '40%'});
+      // Need a little more room to include our links
+      $('section#heading h2').css({'width': '40%'});
+      [
+        [ 'VeloViewer', 'http://veloviewer.com/activities/' ]
+      ].forEach(function([title, href]) {
+        $(`<a href="${href}${pageView.activity().id}" class="button title" target="_blank">${title}</a>`)
+          .prependTo('section#heading .social')
+      });
 
-    $.each([
-        ["Veloviewer", 'http://veloviewer.com/activities/']
-    ].reverse(), function(i, details) {
+    } else if ($.defined('segmentId')) { // Segment page
+
       $(
-        '<a href="' + details[1] + pageView.activity().id + '" class="button title">' + details[0] + '</a>'
-      )
-        .prependTo('section#heading .social')
-        .find('a')
-        .css({
-            'font-size': '12px'
-          , 'line-height': '20px'
-        });
-    });
-  });
+        '<ul style="list-style-type: disc; margin: 10px 0 0 25px;">' +
+          ([
+            [ 'VeloViewer', 'http://veloviewer.com/segments/' ],
+            [ 'Everesting', 'https://everesting.cc/app/lap-calculator/?id='],
+          ].map(function([title, href]) {
+            return `<li><a href="${href}${window.segmentId}" target="_blank">${title}</a></li>`
+          }).join('')) +
+        '</ul>'
+      ).appendTo('.container .sidebar .section:last');
 
-  // Add external links 2/2
-  $.option('external_links', function() {
-    // Segment external links
-    var m = window.location.pathname.match(/^\/segments\/(\d+)$/);
+    } else if (location.pathname === '/challenges') { // Challenges page
 
-    if (m !== null) {
-      $(
-        '<div class="section">' +
-          '<h3 class="marginless">External links</h3>' +
-          '<ul style="list-style-type: disc; margin: 10px 0 0 25px;">' +
-            '<li><a href="http://veloviewer.com/segment/' + m[1] + '">Veloviewer</a></li>' +
-            '<li><a href="http://everesting.io/?id=' + m[1] + '">Everesting.io</a></li>' +
-          '</ul>' +
-        '</div>'
-      ).prependTo('.container .sidebar');
+      $('<a class="text-caption1" href="https://www.kom.club" target="_blank">KOM Club</a>')
+        .appendTo('[class^="ChallengesRow--section-title-container"]:first') // "Recommended For You" heading – not perfect place, but there's no better one
+
     }
-
-    // Link to KOM Club
-    $(
-      '<button data-type="komclub" id="komclub">KOM Club</button>'
-    )
-      .on('click', function (e) {
-        e.preventDefault();
-        window.location.href = 'http://www.kom.club/';
-      })
-      .appendTo('#challenge-filters')
-      ;
   });
 
   // Estimated FTP
