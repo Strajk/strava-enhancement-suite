@@ -367,17 +367,13 @@ function StravaEnhancementSuite($, options) {
   });
 
   $.option('sort_starred_segments_first', function() {
-    $('table.segments tr')
-      .has('.starred.active')
-      .reverse()
-      .each(function () {
-        var elem = $(this);
-        elem
-          .parents('tbody')
-          .prepend(elem)
-          ;
-      })
-      ;
+    document.arrive('table.segments', { existing: true }, function() {
+      $(this)
+        .find('tr')
+        .has('.starred.active')
+        .reverse()
+        .each((i, el) => $(el).parents('tbody').prepend(el))
+    });
   });
 
   // Hide calories on your own pages

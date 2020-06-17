@@ -36,6 +36,7 @@
     "tabs"
   ],
   "web_accessible_resources": [
+    "js/libs/arrive.js",
     "js/main.js",
     "pages/options.js"
   ]
