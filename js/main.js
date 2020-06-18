@@ -556,7 +556,9 @@ function StravaEnhancementSuite($, options) {
         $([
           '.avatar-badge', // badge over the top-right corner of avatar profiles
           '.badge.premium', // activity page: prefixed to activity name
-          '.icon-badge-premium' // suffixed to athlete name
+          '.icon-badge-premium', // suffixed to athlete name
+          '.icon-badge-premium', // Club leaderboard
+          '.icon-premium' // Card title prefixes (e.g. Relative effort card on dashboard)
         ].join(', ')).hide()
 
         // Implementation note: Would be better to do with CSS
