@@ -225,9 +225,11 @@ function StravaEnhancementSuite($, options) {
       })
 
     // Edit activity by pressing "e"
-    $('body').on('keydown', function () {
-      location.pathname = edit_activity.attr('href')
-    })
+    $('body').on('keydown', function (e) {
+      if (e.key === 'e') {
+        location.pathname = edit_activity.attr('href');
+      }
+    });
   });
 
   // Own activity page: editing
