@@ -1218,6 +1218,34 @@ function StravaEnhancementSuite($, options) {
         ;
     }, 1000);
   });
+  
+  // Show button for giving a kudo to all open activities.
+  $.option('show_kudo_all_button', function () {
+    console.log(!window.location.pathname.startsWith('/dashboard'));
+    if (!window.location.pathname.startsWith('/dashboard')) {
+      return;
+    }
+
+    $.setInterval(function () {
+      var toKudoCount = $('button.js-add-kudo').length; //count the Kudo-able buttons
+
+      if (!$.defined('likeAllButton')) {
+        //button does not exist, create
+        var liItem =
+          $('<li class="nav-item" id="likeAllContainer"><button id="likeAllButton" type="button" class="btn btn-icon btn-kudo"><span>Kudo All (<span id="toKudoCount">'+
+          toKudoCount +
+          '</span>)</span><span class="app-icon icon-color icon-kudo icon-md"></button></li>')
+          .css('margin-left', '8px');
+        $('#notifications').before(liItem); //add to page before the notification bell
+
+        $('#likeAllButton').on('click', function () {//attach handler
+          $('button.js-add-kudo').click(); //click all kudo buttons
+        });
+      }
+      
+      $('#toKudoCount').text(toKudoCount); //update counter
+    }, 1000);
+  });
 }
 
 StravaEnhancementSuite.prototype.switch_units = function() {
