@@ -234,5 +234,11 @@ var StravaEnhancementSuiteOptions = [
     , "description": "Show same-activity Flybys only (runs or rides) in the Flyby viewer."
     , "image": false
     , "default": false
+  }, {
+      "name": "show_kudo_all_button"
+    , "title": "Show button to give Kudos to all"
+    , "description": "Show button in the header bar to give Kudos to all displayed activities that need some love"
+    , "image": false
+    , "default": false
   }
 ]
