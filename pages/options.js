@@ -237,7 +237,7 @@ var StravaEnhancementSuiteOptions = [
   }, {
       "name": "show_kudo_all_button"
     , "title": "Show button to give Kudos to all"
-    , "description": "Show button in the header bar to give Kudos to all displayed activities that need some love"
+    , "description": "Show button in the header bar to give Kudos to all displayed activities"
     , "image": false
     , "default": false
   }
