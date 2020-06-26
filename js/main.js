@@ -544,16 +544,17 @@ function StravaEnhancementSuite($, options) {
 
       $.option('hide_premium_badges', function() {
         // Only keep "Subscriber" line right under the name on athlete's page
-        $([
+        var selectors = [
           '.avatar-badge', // badge over the top-right corner of avatar profiles
           '.badge.premium', // activity page: prefixed to activity name
           '.icon-badge-premium', // suffixed to athlete name
           '.icon-badge-premium', // Club leaderboard
           '.icon-premium' // Card title prefixes (e.g. Relative effort card on dashboard)
-        ].join(', ')).hide()
-
-        // Implementation note: Would be better to do with CSS
-        // to avoid badges flashing for a brief moment until hidden by JS
+        ];
+        $.each(selectors, function(){
+          var newCss = this + '{display:none;}';
+          $('body').append('<style>' + newCss + '</style>');
+        })
       });
 
       $.always(function() {
