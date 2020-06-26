@@ -1106,16 +1106,18 @@ function StravaEnhancementSuite($, options) {
     onHover('.feed-entry .avatar-md', {
         'width': 80
       , 'height': 80
-      // Use absolute positioning so we don't move stuff out of the way
-      , 'position': 'absolute'
     }, function() {
       $(this)
         // Use a higher-resolution bigger image
         .find('img')
-          .attr('src', function (i, val) {
-            return val.replace('/medium.jpg', '/large.jpg');
-          })
-        ;
+        .attr('src', function (i, val) {
+          return val.replace('/medium.jpg', '/large.jpg');
+        })
+        .css({'width':80,'height':80});
+    }, function(){
+      $(this)
+        .find('img')
+        .css({'width':'','height':''});
     });
 
     // Mouseover on map makes them bigger
