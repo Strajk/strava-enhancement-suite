@@ -497,26 +497,38 @@ function StravaEnhancementSuite($, options) {
       });
 
       $.option('hide_turbo_trainer_rides', function() {
-        $('div.feed>.feed-entry')
-          .has('.type[title=Ride]')
-          .not(':has(.activity-map)')
-          .hide()
-          ;
+        $.setInterval(function() {
+          $('div.feed>.feed-entry')
+            .has('.type[title=Ride]')
+            .not(':has(.activity-map)')
+            .hide()
+            ;
 
-        $('div.feed>.feed-entry')
-          .has('.type[title="Virtual Ride"]')
-          .hide()
-          ;
+          $('div.feed>.feed-entry')
+            .has('.type[title="Virtual Ride"]')
+            .hide()
+            ;
 
-        $('.feed-entry')
-          .has('.entry-header a:contains("Zwift")')
-          .hide()
-          ;
+          $('.feed-entry')
+            .has('.entry-header a:contains("Zwift")')
+            .hide()
+            ;
 
-        $('.feed-entry')
-          .has('a:contains("Zwift")')
-          .hide()
-          ;
+          $('.feed-entry')
+            .has('a:contains("Zwift")')
+            .hide()
+            ;
+
+          $('.feed-entry')
+            .has('div.enhanced-tag')
+            .hide()
+            ;
+
+          $('.feed-entry')
+            .has('span.icon-virtualride')
+            .hide()
+            ;            
+        }, 1000);
       });
 
       // Remove any days that are now empty
