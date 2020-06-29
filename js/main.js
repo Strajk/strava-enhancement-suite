@@ -251,6 +251,101 @@ function StravaEnhancementSuite($, options) {
     }
   })
 
+  $.option('keyboard_controls', function () {
+    /*
+    * Up (previous)  – J
+    * Down (next)    – K
+    * Kudos (like)   – L
+    * Comment        – C
+    * Go to activity – Enter (hold shift to open in new tab/window)
+    * Edit activity  – E (hold shift to open in new tab/window)
+    * Go to athlete  – U (hold shift to open in new tab/window)
+    */
+    if (!location.pathname.startsWith('/dashboard')) return;
+
+    let activeEntry;
+
+    // .activity without id would match also group activity, just [id^="Activity-"] would match comment threads
+    // :visible will omit activities hidden by other features on this extensions (eg. virtual rides)
+    const selector = '.activity[id^="Activity-"]:visible';
+    const setActiveEntry = (el) => {
+      if (activeEntry) activeEntry.style.outline = '0';
+      activeEntry = el;
+      activeEntry.style.outline = '1px solid #F9531E'; // Strava brand orange
+      // native `scrollIntoView` not possible due to header with fixed position
+      const absoluteOffset = $(activeEntry).offset().top; // Cannot use .offsetTop as that is relative to it's positioned parent, not whole window
+      window.scroll(0, absoluteOffset - (55 + 10)); // 55 ~ header height, 10 - padding
+    };
+
+    $(document).on('keydown', function (ev) {
+      if (
+        document.activeElement && (
+          document.activeElement.tagName === 'INPUT' ||
+          document.activeElement.tagName === 'TEXTAREA' ||
+          document.activeElement.isContentEditable // not needed atm, but future proof
+        )
+      ) return true; // Do not handle
+
+      if (['j', 'k'].includes(ev.key)) {
+        if (!activeEntry) {
+          setActiveEntry(
+            $(selector).toArray().find(x => {
+              return $(x).offset().top > window.scrollY; // First entry that is whole in viewport
+            })
+          );
+        } else {
+          const all = $(selector).toArray();
+          const currentIndex = all.indexOf(activeEntry);
+          if (
+            (ev.key === 'k' && currentIndex === 0) || // first, cannot go up
+            (ev.key === 'j' && currentIndex === (all.length - 1)) // last, cannot go down
+          ) return false;
+          const target = all[currentIndex + (ev.key === 'j' ? 1 : -1)];
+          if (!target) return console.error('Next active element not found (this should not happen)', { all, currentIndex });
+          setActiveEntry(target);
+        }
+      }
+
+      if (activeEntry && ev.key === 'l') {
+        $(activeEntry).find('.btn-kudo').click();
+      }
+
+      if (activeEntry && ev.key === 'c') {
+        $(activeEntry).find('.btn-comment').click();
+        return false; // Prevent "c" in the textarea
+      }
+
+      if (activeEntry && ev.key === 'Enter') {
+        const href = $(activeEntry).find('.title-text a').attr('href');
+        if (ev.shiftKey) {
+          window.open(href, '_blank');
+        } else {
+          window.location.href = href;
+        }
+      }
+
+      if (activeEntry && ev.key === 'e') {
+        const href = $(activeEntry).find('.title-text a').attr('href') + '/edit';
+        if (ev.shiftKey) {
+          window.open(href, '_blank');
+        } else {
+          window.location.href = href;
+        }
+      }
+
+      if (activeEntry && ev.key === 'u') {
+        const href = $(activeEntry).find('a.entry-owner').attr('href');
+        if (ev.shiftKey) {
+          window.open(href, '_blank');
+        } else {
+          window.location.href = href;
+        }
+      }
+    });
+
+  });
+
+
   $.option('show_hidden_efforts', function() {
     $.setInterval(function() {
       $('div.show-hide-segments')

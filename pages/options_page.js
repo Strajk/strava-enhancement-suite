@@ -52,7 +52,7 @@ $(function() {
 
     // Description
     $('<li class="text"/>')
-      .text(option.description)
+      .html(option.description) // Allow HTML in description
       .appendTo(ul)
       ;
 

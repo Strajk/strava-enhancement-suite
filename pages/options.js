@@ -234,7 +234,15 @@ var StravaEnhancementSuiteOptions = [
     , "description": "Show same-activity Flybys only (runs or rides) in the Flyby viewer."
     , "image": false
     , "default": false
-  }, {
+  }
+  , {
+    "name": "keyboard_controls"
+    , "title": 'Keyboard controls'
+    , "description": 'Enable keyboard controls on the dashboard:\n<br> <kbd>J</kbd> - Up (previous) \n<br> <kbd>K</kbd> - Down (next) \n<br> <kbd>L</kbd> - Kudos (like) \n<br> <kbd>C</kbd> - Comment \n<br> <kbd>Enter</kbd> - Go to activity  (hold shift to open in a new tab/window)\n<br> <kbd>E</kbd> - Edit activity  (hold shift to open in a new tab/window)\n<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window) '
+    , "image": false
+    , "default": true
+  }
+  , {
       "name": "show_kudo_all_button"
     , "title": "Show button to give Kudos to all"
     , "description": "Show button in the header bar to give Kudos to all displayed activities"
