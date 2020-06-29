@@ -1044,12 +1044,16 @@ function StravaEnhancementSuite($, options) {
 
   // Show "running" tab by default
   $.option('side_by_side_running', function() {
-    $.setInterval(function() {
-      $('.section.comparison .running-tab')
+    if (!location.pathname.startsWith('/athletes/')) return;
+
+    const selector = '.section.comparison';
+    $(selector).leave('.spinner', function() {
+      $(selector)
+        .find('.running-tab :visible') // :visible will cause not selecting anything when running comparison is already selected
+        .first() // As switcher is duplicated on each tab, and just hidden, it's important to select just the first one to avoid clicking multiple times
         .onceOnly()
-        .click()
-        ;
-    }, 1000);
+        .click();
+    });
   });
 
   // Show the standard Google map, not the terrain one
