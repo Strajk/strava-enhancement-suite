@@ -527,7 +527,7 @@ function StravaEnhancementSuite($, options) {
           $('.feed-entry')
             .has('span.icon-virtualride')
             .hide()
-            ;            
+            ;
         }, 1000);
       });
 
@@ -1215,25 +1215,20 @@ function StravaEnhancementSuite($, options) {
 
   // Show same-activity Flybys only (runs or rides) in the Flyby viewer.
   $.option('show_same_activity_flybys', function() {
-    if (window.location.pathname.indexOf('/flyby/viewer') !== 0) {
+    if (!window.location.pathname.startsWith('/flyby/viewer')) {
       return;
     }
 
-    $.setInterval(function() {
+    document.arrive('#table_loading', { existing: true, fireOnAttributesModification: true }, function() {
       // Wait until the activities table is loaded before clicking the button.
       // Strava JS hides a #table_loading div when ready.
-      if ($('#table_loading').css('display') !== 'none') {
-        return;
+      if (this.style.display === 'none') {
+        // Click the "Runs only" / "Rides only" checkbox.
+        $('input#hide_different_activity_type').onceOnly().click();
       }
-
-      // Click the "Runs only" / "Rides only" checkbox.
-      $('input#hide_different_activity_type')
-        .onceOnly()
-        .click()
-        ;
-    }, 1000);
+    });
   });
-  
+
   // Show button for giving a kudo to all open activities.
   $.option('show_kudo_all_button', function () {
     console.log(!window.location.pathname.startsWith('/dashboard'));
@@ -1257,7 +1252,7 @@ function StravaEnhancementSuite($, options) {
           $('button.js-add-kudo').click(); //click all kudo buttons
         });
       }
-      
+
       $('#toKudoCount').text(toKudoCount); //update counter
     }, 1000);
   });
