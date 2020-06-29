@@ -1231,7 +1231,6 @@ function StravaEnhancementSuite($, options) {
 
   // Show button for giving a kudo to all open activities.
   $.option('show_kudo_all_button', function () {
-    console.log(!window.location.pathname.startsWith('/dashboard'));
     if (!window.location.pathname.startsWith('/dashboard')) {
       return;
     }
