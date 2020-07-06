@@ -1330,29 +1330,35 @@ function StravaEnhancementSuite($, options) {
 
   // Show button for giving a kudo to all open activities.
   $.option('show_kudo_all_button', function () {
-    if (!window.location.pathname.startsWith('/dashboard')) {
-      return;
-    }
+    if (!location.pathname.startsWith('/dashboard')) return;
 
-    $.setInterval(function () {
-      var toKudoCount = $('button.js-add-kudo').length; //count the Kudo-able buttons
+    const selector = 'button.js-add-kudo';
+    document.arrive(selector, { existing: true }, (newEl) => {
 
-      if (!$.defined('likeAllButton')) {
-        //button does not exist, create
-        var liItem =
-          $('<li class="nav-item" id="likeAllContainer"><button id="likeAllButton" type="button" class="btn btn-icon btn-kudo"><span>Kudo All (<span id="toKudoCount">'+
-          toKudoCount +
-          '</span>)</span><span class="app-icon icon-color icon-kudo icon-md"></button></li>')
-          .css('margin-left', '8px');
-        $('#notifications').before(liItem); //add to page before the notification bell
+      // Only run the following code once for every bulk update
+      // TODO: Consider creating an issue or asking for a best practice https://github.com/uzairfarooq/arrive/issues
+      const all = Array.from(document.querySelectorAll(selector));
+      const allCount = all.length;
+      if (all.indexOf(newEl) !== allCount - 1) return;
 
-        $('#likeAllButton').on('click', function () {//attach handler
-          $('button.js-add-kudo').click(); //click all kudo buttons
-        });
+      if (!$.defined('kudosAllCount')) { // This relies on browser exposing all elements with ID to window
+        $('<button/>', {
+          'class': 'btn',
+          style: 'margin-left: 8px;',
+          html: 'Give Kudos to all (<span id="kudosAllCount">${count}</span>)',
+          on: {
+            click: () => {
+              $(selector).click();
+              $('#kudosAllCount').text(0);
+            }
+          }
+        }).wrap('<li class="nav-item"></li>')
+          .parent() // reference <li> instead of the <button>
+          .insertBefore('#notifications');
       }
 
-      $('#toKudoCount').text(toKudoCount); //update counter
-    }, 1000);
+      $('#kudosAllCount').text(allCount);
+    });
   });
 }
 
