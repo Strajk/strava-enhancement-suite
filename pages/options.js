@@ -236,6 +236,13 @@ var StravaEnhancementSuiteOptions = [
     , "default": false
   }
   , {
+      "name": "separate_notifications"
+    , "title": "Separate notifications"
+    , "description": "Separate notification types for kudos, comments, uploads, challenges, follows, and others"
+    , "image": true
+    , "default": false // TODO: Consider enabling after getting some feedback
+  },
+  , {
     "name": "keyboard_controls"
     , "title": 'Keyboard controls'
     , "description": 'Enable keyboard controls on the dashboard:\n<br> <kbd>J</kbd> - Up (previous) \n<br> <kbd>K</kbd> - Down (next) \n<br> <kbd>L</kbd> - Kudos (like) \n<br> <kbd>C</kbd> - Comment \n<br> <kbd>Enter</kbd> - Go to activity  (hold shift to open in a new tab/window)\n<br> <kbd>E</kbd> - Edit activity  (hold shift to open in a new tab/window)\n<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window) '
