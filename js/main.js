@@ -1227,6 +1227,23 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
+  $.option('chart_controls_colors', function () {
+    const COLORS = {
+      pace: '#34ACE4',
+      cadence: '#f0f',
+      heartrate: '#DD0447',
+      grade_adjusted_pace: '#6633cc',
+      temp: '#00f'
+    };
+
+    document.arrive('#chart-controls', { existing: true }, function () {
+      $(this).find('td[data-type]').each((i, el) => {
+        const type = el.getAttribute('data-type');
+        $(el).find('> .label').css('color', COLORS[type]);
+      });
+    });
+  });
+
   // Show button for giving a kudo to all open activities.
   $.option('show_kudo_all_button', function () {
     if (!location.pathname.startsWith('/dashboard')) return;

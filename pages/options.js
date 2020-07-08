@@ -1,3 +1,6 @@
+/* eslint quotes: ["error", "double"], indent: "off", comma-style: ["error", "first"] */
+// TODO: Eventually remove specific ESLint rules
+
 var StravaEnhancementSuiteOptions = [
     {
       "name": "repeated_segments"
@@ -248,5 +251,11 @@ var StravaEnhancementSuiteOptions = [
     , "description": "Show button in the header bar to give Kudos to all displayed activities"
     , "image": false
     , "default": false
+  }, {
+      "name": "chart_controls_colors"
+    , "title": "Chart controls colors"
+    , "description": "Add colors to chart legend"
+    , "image": true
+    , "default": true
   }
-]
+];
