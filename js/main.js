@@ -412,36 +412,28 @@ function StravaEnhancementSuite($, options) {
 
   // Convert units on hover, etc.
   $.option('convert_units', function() {
-    $.setInterval(function() {
-      $('abbr.unit, span.unit')
+    document.arrive('abbr.unit, span.unit', { existing: true }, function() {
+      $(this)
         .onceOnly()
-        .filter(function() {
+        .filter((i, el) => {
           // Don't convert multi-"1h 30m" units. In this case we think "m"
           // means meters but we just don't support any of these.
-          return $(this).siblings('.unit').length === 0;
+          return $(el).siblings('.unit').length === 0;
         })
-        .each(function() {
-          var elem = $(this)
-            .removeAttr('title')
-            ;
-
-          var container = elem.parent();
-
+        .each((i, el) => {
+          $(el).removeAttr('title');
+          var container = $(el).parent();
+          var unit = $(el).text().trim(); // " km" -> "km"
           var val = container
             .clone()
-            // Don't remove all children; the value might be wrapped in <strong>
-            .children('.unit')
-              .remove()
+            .children('.unit') // Don't remove all children; the value might be wrapped in <strong>
+            .remove()
             .end()
-            .text()
-            ;
+            .text();
 
-          container
-            .attr('title', $.convert(val, elem.text()))
-            ;
-        })
-        ;
-    }, 1000);
+          container.attr('title', $.convert(val, unit));
+        });
+    });
   });
 
   $.option('sort_starred_segments_first', function() {
