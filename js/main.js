@@ -347,14 +347,13 @@ function StravaEnhancementSuite($, options) {
 
 
   $.option('show_hidden_efforts', function() {
-    $.setInterval(function() {
-      $('div.show-hide-segments')
-        .onceOnly()
-        .find('button')
-          .click()
-        .end()
-        ;
-    }, 1000);
+    // Beware: Do not watch directly for #show-hidden-efforts, as Strava website uses
+    // .html() to update page after showing hidden efforts,
+    // which causes observer to fire again, and again, and again
+    // `#segments` will fire correctly just once
+    document.arrive('#segments', { existing: true }, function() {
+      $('#show-hidden-efforts').onceOnly().click();
+    });
   });
 
   // Manual file upload
