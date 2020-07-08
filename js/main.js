@@ -551,149 +551,57 @@ function StravaEnhancementSuite($, options) {
 
   // Hide feed entries
   $.always(function() {
-    $('div.feed>.feed-entry').setInterval(function() {
-      // Match by CSS class
-      $.each([
-          ['hide_challenge_feed_entries', '.challenge']
-        , ['hide_goal_feed_entries', '.performance-goal-created']
-        , ['hide_promotion_feed_entries', '.promo, .membership']
-      ], function() {
-        var filter = this[1];
-
-        $.option(this[0], function() {
-          $('div.feed>.feed-entry')
-            .filter(filter)
-            .remove()
-            ;
-        });
+    let filters = [];
+    [
+      ['hide_challenge_feed_entries', ['.challenge']],
+      ['hide_promotion_feed_entries', ['.promo, .membership']],
+      ['hide_club_feed_entries', ['.club']],
+      ['hide_goal_feed_entries', ['.performance-goal-created']], // Seems deprecated, adjusting perf goals are no longer broadcasted to others
+      ['hide_turbo_trainer_rides', ['.activity', ':has(.icon-ride)', ':not(:has(.activity-map))']],
+      ['hide_turbo_trainer_rides', ['.activity', ':has(.icon-virtualride)']],
+      ['hide_turbo_trainer_rides', ['.activity', ':has(.enhanced-tag)']] // TODO: Explain selector
+    ].forEach(([option, optionFilters]) => {
+      $.option(option, () => {
+        filters.push(optionFilters);
       });
+    });
 
-      // Match by text
-      $('div.feed>.min-view').each(function() {
-        var elem = $(this);
-        var haystack = elem.find('.entry-title').html();
-
-        $.each([
-            ['hide_route_feed_entries', '> created the route, <']
-          , ['hide_route_feed_entries', '> starred the route, <']
-          , ['hide_club_feed_entries', '> joined <']
-          , ['hide_club_feed_entries', '> created <']
-          , ['hide_training_plan_feed_entries', ' started a training plan: ']
-        ], function() {
-          var option = this[0];
-          var needle = this[1];
-
-          $.option(option, function() {
-            if (haystack.indexOf(needle) !== -1) {
-              elem.remove();
-            }
-          });
-        });
-      });
-
-      $.option('hide_turbo_trainer_rides', function() {
-        $.setInterval(function() {
-          $('div.feed>.feed-entry')
-            .has('.type[title=Ride]')
-            .not(':has(.activity-map)')
-            .hide()
-            ;
-
-          $('div.feed>.feed-entry')
-            .has('.type[title="Virtual Ride"]')
-            .hide()
-            ;
-
-          $('.feed-entry')
-            .has('.entry-header a:contains("Zwift")')
-            .hide()
-            ;
-
-          $('.feed-entry')
-            .has('a:contains("Zwift")')
-            .hide()
-            ;
-
-          $('.feed-entry')
-            .has('div.enhanced-tag')
-            .hide()
-            ;
-
-          $('.feed-entry')
-            .has('span.icon-virtualride')
-            .hide()
-            ;
-        }, 1000);
-      });
-
-      // Remove any days that are now empty
-      $('div.feed>.time-header').each(function() {
-        var elem = $(this);
-
-        // If it's a <div> it's probably visible
-        var entries = elem
-          .nextUntil('.time-header')
-          .filter('div')
-          ;
-
-        if (entries.length === 0) {
-          elem.remove();
+    document.arrive('#dashboard-feed .feed-entry', { existing: true }, function() {
+      // Whole feed entry filtering
+      // ---
+      for (let optionFilters of filters) {
+        if (
+          optionFilters.every(filter => $(this).is(filter))
+        ) {
+          $(this).hide();
+          return; // entry was matched and hidden, so exit for-loop and whole callback
         }
-      });
+      }
 
-      $.option('hide_invite_friends', function() {
-        // Remove social buttons
-        $('div.feed>.feed-entry')
-          .find('.share')
-            .hide()
-          .end()
-      });
-
-      $.option('hide_premium_badges', function() {
-        // Only keep "Subscriber" line right under the name on athlete's page
-        var selectors = [
-          '.avatar-badge', // badge over the top-right corner of avatar profiles
-          '.badge.premium', // activity page: prefixed to activity name
-          '.icon-badge-premium', // suffixed to athlete name
-          '.icon-badge-premium', // Club leaderboard
-          '.icon-premium' // Card title prefixes (e.g. Relative effort card on dashboard)
-        ];
-        $.each(selectors, function(){
-          var newCss = this + '{display:none;}';
-          $('body').append('<style>' + newCss + '</style>');
-        })
-      });
-
-      $.always(function() {
-        var elems = $('div.feed>.feed-entry .featured-achievements li')
-          .filter(function() {
-            var txt = $(this)
-              .find('strong')
-              .text()
-              ;
-
-            return /^\d+ (KOM|QOM|PR)$/.test(txt);
-          })
-          ;
-
-        switch (options.annual_achievements) {
+      // Achievements
+      // ---
+      const achiementElems = $(this)
+        .find('.featured-achievements li')
+        .filter(function() {
+          var txt = $(this).find('strong').text();
+          return /^\d+ (KOM|QOM|PR)$/.test(txt);
+        });
+      switch (options.annual_achievements) {
         case 'show':
           break;
         case 'unhighlight':
-          elems
+          achiementElems
             .find('strong')
             .css('font-weight', 'normal')
             .text(function(idx, txt) {
               return '(' + txt + ')';
-            })
-            ;
+            });
           break;
         case 'hide':
-          elems.hide();
+          achiementElems.hide();
           break;
-        }
-      });
-    }, 1000);
+      }
+    });
   });
 
   // Hide shop in top-level navigation
