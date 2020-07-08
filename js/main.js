@@ -990,13 +990,12 @@ function StravaEnhancementSuite($, options) {
     }
 
     var data = {};
-    var elevation_unit = null;
 
     // Calculate for both regular and hidden efforts
     var efforts = [
-      ...pageView.segmentEfforts().models,
-      ...pageView.segmentEfforts().hiddenSegmentEfforts
-    ]
+      ...window.pageView.segmentEfforts().models,
+      ...window.pageView.segmentEfforts().hiddenSegmentEfforts
+    ];
 
     // Find total raw times by segment ID
     $.each(efforts, function() {
@@ -1049,70 +1048,64 @@ function StravaEnhancementSuite($, options) {
       });
     });
 
-    // Flatten and sort
-    data = $.map(data, function(elem) { return elem; });
-    data.sort(keySort('-starred', '-count', 'title'));
+    if (!Object.values(data).some(x => x.count > 1)) return; // No repeated segment effort, do not continue
 
-    $.setInterval(function() {
-      var section = $('section.segments-list')
+    // Flatten and sort
+    var dataFlatAndSorted = Object.values(data).sort(keySort('-starred', '-count', 'title'));
+
+    document.arrive('.segments-list', { existing: true }, function() {
+      var section = $(this)
         .not('.collapsed')
-        .onceOnly()
-        ;
+        .onceOnly();
 
       if (section.length === 0) {
         return;
       }
 
-      var table = $(
-        '<table class="striped">' +
-          '<thead>' +
-            '<tr>' +
-              '<th>&nbsp;</th>' +
-              '<th>Name</th>' +
-              '<th>Count</th>' +
-              '<th>Fastest</th>' +
-              '<th>Slowest</th>' +
-              '<th>Average</th>' +
-              '<th>Total</th>' +
-              '<th>Distance</th>' +
-              '<th>Elevation</th>' +
-            '</tr>' +
-          '</thead>' +
-          '<tbody></tbody>' +
-        '</table>'
-      ).appendTo(section);
+      var table = $(`
+        <table class="striped">
+          <thead>
+            <tr>
+              <th>&nbsp;</th>
+              <th>Name</th>
+              <th>Count</th>
+              <th>Fastest</th>
+              <th>Slowest</th>
+              <th>Average</th>
+              <th>Total</th>
+              <th>Distance</th>
+              <th>Elevation</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      `).appendTo(section);
 
-      $.each(data, function() {
-        var row = this;
-
+      dataFlatAndSorted.forEach((row) => {
         // Only add repeated rows
-        if (this.count < 2) {
+        if (row.count < 2) {
           return;
         }
 
-        var tr = $(
-          '<tr>' +
-            '<td><div class="starred" style="cursor: default;">★</div></td>' +
-            '<td><a class="title" href="#"</a></td>' +
-            '<td>' + row.count.toLocaleString() + '</td>' +
-            '<td><a href="#" class="min">' + $.toSeconds(row.min.seconds) + '</a></td>' +
-            '<td><a href="#" class="max">' + $.toSeconds(row.max.seconds) + '</a></td>' +
-            '<td>' + $.toSeconds(row.average) + '</td>' +
-            '<td>' + $.toSeconds(row.sum) + '</td>' +
-            '<td>' + (row.count * row.distance).toLocaleString() + row.distance_unit + '</td>' +
-            '<td>' + (row.count * row.elev_difference).toLocaleString() + row.elev_difference_unit + '</td>' +
-          '</tr>'
-        ).appendTo(table.find('tbody'));
+        var tr = $(`
+          <tr>
+            <td><div class="starred" style="cursor: default;">★</div></td>
+            <td><a class="title" href="#"</a></td>
+            <td>${row.count.toLocaleString()}</td>
+            <td><a href="#" class="min">${$.toSeconds(row.min.seconds)}</a></td>
+            <td><a href="#" class="max">${$.toSeconds(row.max.seconds)}</a></td>
+            <td>${$.toSeconds(row.average)}</td>
+            <td>${$.toSeconds(row.sum)}</td>
+            <td>${(row.count * row.distance).toLocaleString()}${row.distance_unit}</td>
+            <td>${(row.count * row.elev_difference).toLocaleString()}${row.elev_difference_unit}</td>
+          </tr>
+        `).appendTo(table.find('tbody'));
 
         tr.find('a.title')
           .attr('href', '/segments/' + row.segment_id)
-          .text(row.title)
-          ;
-
+          .text(row.title);
         tr.find('.starred')
-          .toggleClass('active', row.starred)
-          ;
-
+          .toggleClass('active', row.starred);
         $.each(['min', 'max'], function() {
           var min_max = this;
 
@@ -1123,9 +1116,7 @@ function StravaEnhancementSuite($, options) {
 
             // Scroll into view. Doesn't work perfectly at the moment if a
             // segment is already open.
-            $('html, body')
-              .scrollTop(elem.offset().top)
-              ;
+            $('html, body').scrollTop(elem.offset().top);
 
             // Passthrough click
             elem.trigger(e);
@@ -1133,8 +1124,8 @@ function StravaEnhancementSuite($, options) {
             return false;
           });
         });
-      })
-    }, 1000);
+      });
+    });
   });
 
   // Show "running" tab by default
