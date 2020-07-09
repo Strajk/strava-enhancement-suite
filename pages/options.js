@@ -244,7 +244,7 @@ var StravaEnhancementSuiteOptions = [
     , "description": "Separate notification types for kudos, comments, uploads, challenges, follows, and others"
     , "image": true
     , "default": false // TODO: Consider enabling after getting some feedback
-  },
+  }
   , {
       "name": "keyboard_controls"
     , "title": "Keyboard controls"
