@@ -38,6 +38,16 @@ footer {
   background-color: #fff;
 }
 
+/*
+Clearfix: https://www.w3schools.com/howto/howto_css_clearfix.asp*
+Important when last option contains image
+*/
+.content::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
 h2 {
   color: #777777;
   font-size: 24px;
