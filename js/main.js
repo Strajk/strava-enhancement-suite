@@ -59,10 +59,6 @@ function StravaEnhancementSuite($, options) {
         return false;
       }
     },
-    endsWith: function (haystack, needle) {
-      return haystack.length >= needle.length &&
-        haystack.substr(haystack.length - needle.length) == needle;
-    },
     urlParam: function (name) {
       var m = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
 
@@ -712,29 +708,37 @@ function StravaEnhancementSuite($, options) {
     }, 1000);
   });
 
-  // Replace "--" with Unicode equivalents
+  // Enhance typography
   $.always(function() {
-    $('body').on('keyup', '.uploads input[type=text], .lightbox.edit_activity input[type=text], .activities .training-activity-row .edit-col input[type=text], .manual-entry input#activity_name', function (e) {
-      var elem = $(this);
-      var s = elem
-        .val()
-        .replace(/\u00A0/g,' '); // for some <textarea> elements
+    const selectors = [
+      '.uploads', // https://www.strava.com/upload/select
+      '.manual-entry', // https://www.strava.com/upload/manual
+      '#edit-activity', // https://www.strava.com/activities/ID/edit
+      '.table-activity-edit', // https://www.strava.com/athlete/training
+    ].map(x => `${x} input[type=text], ${x} textarea`).join(', ');
 
-      $.each({
-        ' - ': ' — ',
-        ' -- ': ' — ',
-        ' -> ': ' → ',
-        ' > ': ' → ',
-        ' < ': ' ← ',
-        ' <- ': ' ← ',
-        ' <-> ': ' ↔ ',
-        '(L)': '❤',
-      }, function(x, y) {
-        if ($.endsWith(s, x)) {
-          elem.val(s.substr(0, s.length - x.length) + y);
-        }
+    $('body').on(
+      'keyup',
+      selectors,
+      function(ev) {
+        const el = $(this);
+        const text = el.val().replace(/\u00A0/g, ' '); // for some <textarea> elements, NO-BREAK-SPACE
+        $.each({
+          ' - ': ' — ',
+          ' -- ': ' — ',
+          ' -> ': ' → ',
+          ' > ': ' → ',
+          ' < ': ' ← ',
+          ' <- ': ' ← ',
+          ' <-> ': ' ↔ ',
+          '(L)': '❤',
+        }, (x, y) => {
+          if (text.endsWith(x)) {
+            let value = text.substr(0, text.length - x.length) + y;
+            el.val(value);
+          }
+        });
       });
-    });
   });
 
   // Athlete profile
