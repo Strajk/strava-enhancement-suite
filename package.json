@@ -10,6 +10,6 @@
   },
   "homepage": "https://github.com/lamby/strava-enhancement-suite#readme",
   "devDependencies": {
-    "eslint": "^7.2.0"
+    "eslint": "~7.4.0"
   }
 }

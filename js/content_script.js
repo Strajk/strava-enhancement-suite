@@ -1,29 +1,25 @@
-function inject(content, callback) {
-  var elem = document.createElement('script');
+/* global chrome */
 
-  if (content.indexOf('/') === 0) {
-    elem.src = chrome.extension.getURL(content);
-  } else {
-    elem.textContent = content;
-  }
+function inject(what) {
+  return new Promise((resolve, reject) => {
+    const el = document.createElement('script');
 
-  elem.onload = function () {
-    this.parentNode.removeChild(this);
-    typeof callback === 'function' && callback.apply(this);
-  };
+    if (what.startsWith('/')) {
+      el.src = chrome.extension.getURL(what);
+    } else {
+      el.textContent = what;
+    }
 
-  (document.head || document.documentElement).appendChild(elem);
-};
+    el.onerror = reject;
+    el.onload = resolve;
 
-chrome.storage.sync.get(null, function(items) {
-  inject('/pages/options.js', function() {
-    inject('/js/libs/arrive.js', function() {
-      inject('/js/main.js', function() {
-        inject(
-            'var strava_enhancement_suite = '
-          + 'new StravaEnhancementSuite(jQuery, ' + JSON.stringify(items) + ');'
-        );
-      });
-    });
+    document.head.appendChild(el);
   });
+}
+
+chrome.storage.sync.get(null, async (items) => {
+  await inject('/pages/options.js');
+  await inject('/js/libs/arrive.js');
+  await inject('/js/main.js');
+  await inject(`window.strava_enhancement_suite = new StravaEnhancementSuite(jQuery, ${JSON.stringify(items)});`);
 });
