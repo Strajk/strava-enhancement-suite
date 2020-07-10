@@ -1,14 +1,16 @@
+/* global chrome */
+
 $(function() {
   $.extend({
     setOption: function(key, value) {
-      var items = {}
+      var items = {};
       items[key] = value;
       chrome.storage.sync.set(items);
-    }
+    },
   });
 
   $.each(StravaEnhancementSuiteOptions, function(idx, option) {
-    var ul = $('<ul/>')
+    var ul = $('<ul/>');
 
     var elem = $('<input type="checkbox">');
 
@@ -29,8 +31,7 @@ $(function() {
         $('<option>')
           .attr('value', this[0])
           .text(this[1])
-          .appendTo(elem)
-          ;
+          .appendTo(elem);
       });
 
       elem.on('change', function() {
@@ -47,31 +48,27 @@ $(function() {
     // Add control element
     $('<li/>')
       .append(elem)
-      .appendTo(ul)
-      ;
+      .appendTo(ul);
 
     // Description
     $('<li class="text"/>')
       .html(option.description) // Allow HTML in description
-      .appendTo(ul)
-      ;
+      .appendTo(ul);
 
     // Image
     if (option.image === true) {
       $('<li><img></li>')
         .find('img')
-          .attr('src', 'img/' + option.name + '.png')
+        .attr('src', 'img/' + option.name + '.png')
         .end()
-        .appendTo(ul)
-        ;
+        .appendTo(ul);
     }
 
     $('<section><h3/></section>')
       .find('h3')
-        .text(option.title)
+      .text(option.title)
       .end()
       .append(ul)
-      .appendTo('.content')
-      ;
+      .appendTo('.content');
   });
 });

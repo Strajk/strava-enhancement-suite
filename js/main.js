@@ -10,8 +10,7 @@ function StravaEnhancementSuite($, options) {
     onceOnly: function () {
       return this
         .not('.once-only')
-        .addClass('once-only')
-        ;
+        .addClass('once-only');
     },
     reverse: function () {
       return this.pushStack(this.get().reverse(), arguments);
@@ -30,7 +29,7 @@ function StravaEnhancementSuite($, options) {
 
         prev = current;
       }, interval);
-    }
+    },
   });
 
   $.extend({
@@ -42,7 +41,7 @@ function StravaEnhancementSuite($, options) {
     },
     keys: function (obj) {
       var a = [];
-      $.each(obj, function(k) { a.push(k) });
+      $.each(obj, function(k) { a.push(k); });
       return a;
     },
     always: function (handler) {
@@ -68,7 +67,7 @@ function StravaEnhancementSuite($, options) {
       var m = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
 
       if (!m) {
-          return undefined;
+        return undefined;
       }
       return decodeURIComponent(m[1]) || undefined;
     },
@@ -86,13 +85,11 @@ function StravaEnhancementSuite($, options) {
             Math.floor((secs * conv) / 60).toFixed(0)
           + ':'
           + (((secs * conv) % 60 < 10) ? '0' : '')
-          + ((secs * conv) % 60).toFixed(0)
-          ;
-
+          + ((secs * conv) % 60).toFixed(0);
         return [
-            pace + u1
-          , (60 * 60 / secs).toFixed(1) + u2
-          , (60 * 60 / secs / conv).toFixed(1) + u3
+          pace + u1,
+          (60 * 60 / secs).toFixed(1) + u2,
+          (60 * 60 / secs / conv).toFixed(1) + u3,
         ].join(' — ');
       };
 
@@ -103,37 +100,36 @@ function StravaEnhancementSuite($, options) {
           + ':'
           + (((secs * conv) % 60 < 10) ? '0' : '')
           + ((secs * conv) % 60).toFixed(0)
-          + suffix
-          ;
+          + suffix;
       };
 
       switch (unit) {
-      case 'km':
-        return toNumber(d * 0.621371, 'mi', 1);
-      case 'mi':
-        return toNumber(d * 1.609344, 'km', 1);
-      case 'km/h':
-        return toNumber(d * 0.621371, 'mi/h', 1);
-      case 'mi/h':
-        return toNumber(d * 1.609344, 'km/h', 1);
-      case 'm':
-        return toNumber(d * 3.2808, 'ft', 0);
-      case 'ft':
-        return toNumber(d * 0.3048, 'm', 0);
-      case '℃':
-        return toNumber((d * 1.8) + 32, '℉', 0);
-      case '℉':
-        return toNumber((d - 32) / 1.8, '℃', 0);
-      case '/km':
-        return toPace(val, 1.60934, '/mi', 'km/h', 'mi/h');
-      case '/mi':
-        return toPace(val, 0.621371, '/km', 'mi/h', 'km/h');
-      case '/100m':
-        return swimPace(val, 0.9144, '/100yds');
-      case '/100yds':
-        return swimPace(val, 1.0936, '/100m');
-      default:
-        return '';
+        case 'km':
+          return toNumber(d * 0.621371, 'mi', 1);
+        case 'mi':
+          return toNumber(d * 1.609344, 'km', 1);
+        case 'km/h':
+          return toNumber(d * 0.621371, 'mi/h', 1);
+        case 'mi/h':
+          return toNumber(d * 1.609344, 'km/h', 1);
+        case 'm':
+          return toNumber(d * 3.2808, 'ft', 0);
+        case 'ft':
+          return toNumber(d * 0.3048, 'm', 0);
+        case '℃':
+          return toNumber((d * 1.8) + 32, '℉', 0);
+        case '℉':
+          return toNumber((d - 32) / 1.8, '℃', 0);
+        case '/km':
+          return toPace(val, 1.60934, '/mi', 'km/h', 'mi/h');
+        case '/mi':
+          return toPace(val, 0.621371, '/km', 'mi/h', 'km/h');
+        case '/100m':
+          return swimPace(val, 0.9144, '/100yds');
+        case '/100yds':
+          return swimPace(val, 1.0936, '/100m');
+        default:
+          return '';
       }
     },
     parseSeconds: function(x) {
@@ -144,7 +140,7 @@ function StravaEnhancementSuite($, options) {
       var hours = Math.floor(s / 3600.0);
 
       if (hours < 10) {
-        r += '0' + hours
+        r += '0' + hours;
       } else {
         r += hours;
       }
@@ -171,7 +167,7 @@ function StravaEnhancementSuite($, options) {
       }
 
       return r;
-    }
+    },
   });
 
   function keySort() {
@@ -204,7 +200,7 @@ function StravaEnhancementSuite($, options) {
 
       return 0;
     };
-  };
+  }
 
   // Methods //////////////////////////////////////////////////////////////////
 
@@ -221,8 +217,8 @@ function StravaEnhancementSuite($, options) {
     $('.activity-name')
       .css('cursor', 'pointer')
       .on('click', function() {
-        location.pathname = edit_activity.attr('href')
-      })
+        location.pathname = edit_activity.attr('href');
+      });
 
     // Edit activity by pressing "e"
     $('body').on('keydown', function (e) {
@@ -238,18 +234,18 @@ function StravaEnhancementSuite($, options) {
 
       $('#edit-activity #activity_name').onceOnly()
         .attr('autocomplete', 'off')
-        .focus()
+        .focus();
 
       // Submit with keyboard
       // Note: Submitting by Enter while editing activity name is already done directly on Strava
       $('body').on('keydown', '#edit-activity #activity_name, #edit-activity #activity_description', function (e) {
         if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-          $('#edit-activity').submit()
+          $('#edit-activity').submit();
         }
       });
 
     }
-  })
+  });
 
   $.option('keyboard_controls', function () {
     /*
@@ -288,11 +284,8 @@ function StravaEnhancementSuite($, options) {
 
       if (['j', 'k'].includes(ev.key)) {
         if (!activeEntry) {
-          setActiveEntry(
-            $(selector).toArray().find(x => {
-              return $(x).offset().top > window.scrollY; // First entry that is whole in viewport
-            })
-          );
+          const firstVisible = $(selector).toArray().find(x => $(x).offset().top > window.scrollY);
+          setActiveEntry(firstVisible);
         } else {
           const all = $(selector).toArray();
           const currentIndex = all.indexOf(activeEntry);
@@ -364,8 +357,7 @@ function StravaEnhancementSuite($, options) {
         $(this)
           .parents('form')
           .find('input[type=submit]')
-          .click()
-          ;
+          .click();
       }
     });
   });
@@ -383,12 +375,12 @@ function StravaEnhancementSuite($, options) {
     }
 
     $.each([
-        'name'
-      , 'description'
-      , 'elapsed_time_hours'
-      , 'elapsed_time_minutes'
-      , 'elapsed_time_seconds'
-      , 'description'
+      'name',
+      'description',
+      'elapsed_time_hours',
+      'elapsed_time_minutes',
+      'elapsed_time_seconds',
+      'description',
     ], function() {
       var name = this;
       var val = $.urlParam(name);
@@ -397,7 +389,7 @@ function StravaEnhancementSuite($, options) {
         return;
       }
 
-      var elem = jQuery('form#new_activity input, textarea, select').filter(function () {
+      var elem = $('form#new_activity input, textarea, select').filter(function () {
         return $(this).attr('name') === 'activity[' + name + ']';
       });
 
@@ -442,7 +434,7 @@ function StravaEnhancementSuite($, options) {
         .find('tr')
         .has('.starred.active')
         .reverse()
-        .each((i, el) => $(el).parents('tbody').prepend(el))
+        .each((i, el) => $(el).parents('tbody').prepend(el));
     });
   });
 
@@ -455,23 +447,21 @@ function StravaEnhancementSuite($, options) {
     // Premium
     $('.section.more-stats table tr')
       .filter(function () {
-          return $(this).find('th').text() === 'Calories';
+        return $(this).find('th').text() === 'Calories';
       })
-      .hide()
-      ;
+      .hide();
 
     // Non-premium
     $('.section.more-stats div')
       // Label
       .filter(function () {
-          return $(this).text() === 'Calories';
+        return $(this).text() === 'Calories';
       })
       .hide()
 
       // Value
       .next()
-      .hide()
-      ;
+      .hide();
   });
 
   // Post comments on 'enter'
@@ -483,9 +473,7 @@ function StravaEnhancementSuite($, options) {
 
       $(this)
         .parents('form')
-        .submit()
-        ;
-
+        .submit();
       return false;
     });
   });
@@ -494,43 +482,45 @@ function StravaEnhancementSuite($, options) {
   $.option('external_links', function() {
     if ($.defined('pageView')) { // Activity page
 
+      const items = [
+        [ 'VeloViewer', 'http://veloviewer.com/activities/$ID' ],
+        [ 'myWindsock', 'https://mywindsock.com/activity/$ID/' ],
+        [ 'Power-Meter.cc', 'https://power-meter.cc/activities/$ID/power-analysis' ],
+      ].map(function([title, href]) {
+        return `<li><a href="${href.replace('$ID', window.pageView.activity().id)}" target="_blank">${title}</a></li>`;
+      }).join('');
+
       // Need a little more room to include our links
-      $('section#heading h2').css({'width': '40%'});
+      $('section#heading h2').css({ 'width': '40%' });
       $(`
         <div class="drop-down-menu">
           <a class="selection" style="padding-right: 30px;">External links</a>
           <ul class="options" style="right: 0px;">
-              ${
-                ([
-                  [ 'VeloViewer', 'http://veloviewer.com/activities/$ID' ],
-                  [ 'myWindsock', 'https://mywindsock.com/activity/$ID/' ],
-                  [ 'Power-Meter.cc', 'https://power-meter.cc/activities/$ID/power-analysis' ],
-                ].map(function([title, href]) {
-                  return `<li><a href="${href.replace('$ID', window.pageView.activity().id)}" target="_blank">${title}</a></li>`
-                }).join(''))
-              }
+            ${items}
           </ul>
         </div>
-      `).prependTo('section#heading .social')
+      `).prependTo('section#heading .social');
 
     } else if ($.defined('segmentId')) { // Segment page
 
-      $(
-        '<ul style="list-style-type: disc; margin: 10px 0 0 25px;">' +
-          ([
-            [ 'VeloViewer', 'https://veloviewer.com/segments/$ID' ],
-            [ 'myWindsock', 'https://mywindsock.com/segments/$ID/' ],
-            [ 'Everesting', 'https://everesting.cc/app/lap-calculator/?id=$ID'],
-          ].map(function([title, href]) {
-            return `<li><a href="${href.replace('$ID', window.segmentId)}" target="_blank">${title}</a></li>`
-          }).join('')) +
-        '</ul>'
-      ).appendTo('.container .sidebar .section:last');
+      const items = [
+        ['VeloViewer', 'https://veloviewer.com/segments/$ID'],
+        ['myWindsock', 'https://mywindsock.com/segments/$ID/'],
+        ['Everesting', 'https://everesting.cc/app/lap-calculator/?id=$ID'],
+      ].map(function ([title, href]) {
+        return `<li><a href="${href.replace('$ID', window.segmentId)}" target="_blank">${title}</a></li>`;
+      }).join('');
+
+      $(`
+        <ul style="list-style-type: disc; margin: 10px 0 0 25px;">
+          ${items}
+        </ul>
+      `).appendTo('.container .sidebar .section:last');
 
     } else if (location.pathname === '/challenges') { // Challenges page
 
       $('<a class="text-caption1" href="https://www.kom.club" target="_blank">KOM Club</a>')
-        .appendTo('[class^="ChallengesRow--section-title-container"]:first') // "Recommended For You" heading – not perfect place, but there's no better one
+        .appendTo('[class^="ChallengesRow--section-title-container"]:first'); // "Recommended For You" heading – not perfect place, but there's no better one
 
     }
   });
@@ -550,7 +540,7 @@ function StravaEnhancementSuite($, options) {
       ['hide_goal_feed_entries', ['.performance-goal-created']], // Seems deprecated, adjusting perf goals are no longer broadcasted to others
       ['hide_turbo_trainer_rides', ['.activity', ':has(.icon-ride)', ':not(:has(.activity-map))']],
       ['hide_turbo_trainer_rides', ['.activity', ':has(.icon-virtualride)']],
-      ['hide_turbo_trainer_rides', ['.activity', ':has(.enhanced-tag)']] // TODO: Explain selector
+      ['hide_turbo_trainer_rides', ['.activity', ':has(.enhanced-tag)']], // TODO: Explain selector
     ].forEach(([option, optionFilters]) => {
       $.option(option, () => {
         filters.push(optionFilters);
@@ -598,31 +588,25 @@ function StravaEnhancementSuite($, options) {
   // Hide shop in top-level navigation
   $.option('hide_shop', function() {
     $('header nav ul.global-nav li a[href*="/store"]')
-      .remove()
-      ;
+      .remove();
 
     // "Free Strava Mobile app"
     $('#appUpsell')
-      .hide()
-      ;
-
+      .hide();
     $('.sidebar .section')
       .has('.upsell-copy')
-      .hide()
-      ;
+      .hide();
 
     // Don't link device name on activity pages to shop
     $('#heading .activity-stats .device a')
       .contents()
-      .unwrap()
-      ;
+      .unwrap();
 
     // Shop module in footer
     $('footer .footer-promos .promo')
       .has('a[href*="/store"]')
       .children()
-      .hide()
-      ;
+      .hide();
   });
 
   // Hide invite friends & social buttons
@@ -630,14 +614,12 @@ function StravaEnhancementSuite($, options) {
     // "Invite friends" in navbar
     $('header nav a.find-and-invite')
       .parent('li')
-      .hide()
-      ;
+      .hide();
 
     // "Share your rides" on profile
     $('.sidebar .section')
       .has('#embed-athlete-widget')
-      .hide()
-      ;
+      .hide();
 
     // Facebook, Twitter and share logos on activity page
     $('section#heading .social .sharing').hide();
@@ -654,43 +636,38 @@ function StravaEnhancementSuite($, options) {
   // Hide blog links
   $.option('hide_blog', function() {
     $.each([
-        ['blog.strava.com']
-      , ['2014story.strava.com']
-      , ['www.strava.com/videos']
+      ['blog.strava.com'],
+      ['2014story.strava.com'],
+      ['www.strava.com/videos'],
     ], function() {
       $('.sidebar .section')
-        .has("a[href*='" + this + "']")
-        .hide()
-        ;
-      ;
+        .has('a[href*=\'' + this + '\']')
+        .hide();
+
     });
   });
 
   $.option('hide_upcoming', function() {
     // Hide "Yearly Goals"
     $('.sidebar .section#yearly-progress-goals')
-      .hide()
-      ;
+      .hide();
   });
 
   $.option('hide_upcoming', function() {
     // Upcoming races, events, goals
     $('.sidebar .section#upcoming-events')
       .not(':has(li)') // Show if we have upcoming events
-      .hide()
-      ;
+      .hide();
 
     // Discover more races, etc.
     $('.sidebar .section#discover-more')
-      .hide()
-      ;
+      .hide();
   });
 
   // Swap club and challenges
   $.option('swap_clubs_and_challenge_module', function() {
     $('.sidebar #club-module')
-      .after($('.sidebar #challenge-module'))
-      ;
+      .after($('.sidebar #challenge-module'));
   });
 
   // Upload activity
@@ -711,7 +688,7 @@ function StravaEnhancementSuite($, options) {
 
         var poll = function() {
           if (btn.hasClass('disabled')) {
-            btn.text("Please wait...");
+            btn.text('Please wait...');
             setTimeout(poll, 1000);
             return;
           }
@@ -726,14 +703,12 @@ function StravaEnhancementSuite($, options) {
       // Make description boxes bigger by default
       $('textarea[name=description]')
         .onceOnly()
-        .css('height', 160)
-        ;
+        .css('height', 160);
 
       // Disable autocomplete on the "Name" dialog
       $('input[type=text]')
         .onceOnly()
-        .attr('autocomplete', 'off')
-        ;
+        .attr('autocomplete', 'off');
     }, 1000);
   });
 
@@ -743,18 +718,17 @@ function StravaEnhancementSuite($, options) {
       var elem = $(this);
       var s = elem
         .val()
-        .replace(/\u00A0/g,' ') // for some <textarea> elements
-        ;
+        .replace(/\u00A0/g,' '); // for some <textarea> elements
 
       $.each({
-          " - ": " — "
-        , " -- ": " — "
-        , " -> ": " → "
-        , " > ": " → "
-        , " < ": " ← "
-        , " <- ": " ← "
-        , " <-> ": " ↔ "
-        , "(L)": "❤"
+        ' - ': ' — ',
+        ' -- ': ' — ',
+        ' -> ': ' → ',
+        ' > ': ' → ',
+        ' < ': ' ← ',
+        ' <- ': ' ← ',
+        ' <-> ': ' ↔ ',
+        '(L)': '❤',
       }, function(x, y) {
         if ($.endsWith(s, x)) {
           elem.val(s.substr(0, s.length - x.length) + y);
@@ -767,7 +741,7 @@ function StravaEnhancementSuite($, options) {
   $.always(function() {
     var profile_link = $('header .user-menu a');
     if (
-         (profile_link.length === 0)
+      (profile_link.length === 0)
       || (profile_link.attr('href').indexOf(window.location.pathname) !== 0)
     ) {
       return;
@@ -778,12 +752,9 @@ function StravaEnhancementSuite($, options) {
       .css('margin-left', '8px')
       .attr('href', '/settings/profile')
       .text('(edit)')
-      .appendTo('.page .main h1:first')
-      ;
-
+      .appendTo('.page .main h1:first');
     $('.avatar.avatar-athlete img')
-      .wrap('<a href="/settings/profile"></a>')
-      ;
+      .wrap('<a href="/settings/profile"></a>');
   });
 
   // Improved pagination
@@ -792,7 +763,7 @@ function StravaEnhancementSuite($, options) {
       return;
     }
 
-    var c = pagingController;
+    var c = window.pagingController;
 
     $.setInterval(function() {
       $('.simple.pagination ul.switches')
@@ -801,23 +772,22 @@ function StravaEnhancementSuite($, options) {
         // First
         .prepend('<li><span class="button first_page">First</span></li>')
         .find('.first_page')
-          .on('click', function() {
-            c.page = 1;
-            c.paging_adapter.fetch(c.buildOptions());
-          })
-          .toggleClass('disabled', c.page == 1)
+        .on('click', function() {
+          c.page = 1;
+          c.paging_adapter.fetch(c.buildOptions());
+        })
+        .toggleClass('disabled', c.page == 1)
         .end()
 
         // Last
         .append('<li><span class="button last_page">Last</span></li>')
         .find('.last_page')
-          .on('click', function() {
-            c.page = c.pageInfo().pages;
-            c.paging_adapter.fetch(c.buildOptions());
-          })
-          .toggleClass('disabled', c.page == c.pageInfo().pages)
-        .end()
-        ;
+        .on('click', function() {
+          c.page = c.pageInfo().pages;
+          c.paging_adapter.fetch(c.buildOptions());
+        })
+        .toggleClass('disabled', c.page == c.pageInfo().pages)
+        .end();
     }, 1000);
   });
 
@@ -826,8 +796,7 @@ function StravaEnhancementSuite($, options) {
     $.setInterval(function() {
       $('#elevation-profile td[data-type=cadence] .toggle-button')
         .onceOnly()
-        .click()
-        ;
+        .click();
     }, 1000);
   });
 
@@ -836,8 +805,7 @@ function StravaEnhancementSuite($, options) {
     $.setInterval(function() {
       $('#elevation-profile td[data-type=heartrate] .toggle-button')
         .onceOnly()
-        .click()
-        ;
+        .click();
     }, 1000);
   });
 
@@ -848,15 +816,15 @@ function StravaEnhancementSuite($, options) {
     }
 
     var TSS_PER_HOUR = {
-        'Z1':  55
-      , 'Z2':  75
-      , 'Z3':  90
-      , 'Z4': 100
-      , 'Z5': 120
-      , 'Z6': 145
+      'Z1':  55,
+      'Z2':  75,
+      'Z3':  90,
+      'Z4': 100,
+      'Z5': 120,
+      'Z6': 145,
     };
 
-    var view = Strava.Labs.Activities.PaceZones;
+    var view = window.Strava.Labs.Activities.PaceZones;
     var fn = view.prototype.getPaceZones;
 
     view.prototype.getPaceZones = function () {
@@ -867,7 +835,7 @@ function StravaEnhancementSuite($, options) {
         // Re-parse the time (eg. "23s" / "32:21")
         var parts = item.time.replace('s', '').split(':').reverse();
         var seconds = parts.reduce(function (prev, cur, idx) {
-            return prev + (cur * Math.pow(60, idx));
+          return prev + (cur * Math.pow(60, idx));
         }, 0);
 
         // Calculate the contribution to TSS
@@ -875,7 +843,7 @@ function StravaEnhancementSuite($, options) {
       });
 
       $('#view .inline-stats').append(
-        '<li><strong>' + Math.round(tss) + '</strong><div class="label">TSS (estimated)</div></li>'
+        '<li><strong>' + Math.round(tss) + '</strong><div class="label">TSS (estimated)</div></li>',
       );
 
       return result;
@@ -893,14 +861,14 @@ function StravaEnhancementSuite($, options) {
     // Calculate for both regular and hidden efforts
     var efforts = [
       ...window.pageView.segmentEfforts().models,
-      ...window.pageView.segmentEfforts().hiddenSegmentEfforts
+      ...window.pageView.segmentEfforts().hiddenSegmentEfforts,
     ];
 
     // Find total raw times by segment ID
     $.each(efforts, function() {
       var segment_id = this.attributes.segment_id;
 
-      var m_distance = this.attributes.distance.match(/^([\d\.]+)(.*)/);
+      var m_distance = this.attributes.distance.match(/^([\d.]+)(.*)/);
       var m_elev_difference = this.attributes.elev_difference.match(/^(\d+)(.*)/);
 
       data[segment_id] = data[segment_id] || {
@@ -911,12 +879,12 @@ function StravaEnhancementSuite($, options) {
         'distance': parseFloat(m_distance[1]),
         'distance_unit': m_distance[2],
         'elev_difference': parseInt(m_elev_difference[1], 10),
-        'elev_difference_unit': m_elev_difference[2]
+        'elev_difference_unit': m_elev_difference[2],
       };
 
       data[segment_id].times.push({
         'seconds': this.attributes.elapsed_time_raw,
-        'segment_effort_id': this.id
+        'segment_effort_id': this.id,
       });
     });
 
@@ -925,11 +893,11 @@ function StravaEnhancementSuite($, options) {
       var sum = 0;
       var max = {
         'seconds': 0,
-        'segment_effort_id': null
+        'segment_effort_id': null,
       };
       var min = {
         'seconds': 99999999,
-        'segment_effort_id': null
+        'segment_effort_id': null,
       };
 
       $.each(this.times, function() {
@@ -943,7 +911,7 @@ function StravaEnhancementSuite($, options) {
         'min': min,
         'sum': sum,
         'count': this.times.length,
-        'average': Math.floor(sum / this.times.length)
+        'average': Math.floor(sum / this.times.length),
       });
     });
 
@@ -1010,7 +978,7 @@ function StravaEnhancementSuite($, options) {
 
           tr.find('a.' + min_max).click(function(e) {
             var elem = $(
-              'tr[data-segment-effort-id=' + row[min_max].segment_effort_id + ']'
+              'tr[data-segment-effort-id=' + row[min_max].segment_effort_id + ']',
             );
 
             // Scroll into view. Doesn't work perfectly at the moment if a
@@ -1048,8 +1016,7 @@ function StravaEnhancementSuite($, options) {
         .onceOnly()
         .click()
         .parents('.drop-down-menu') // Close menu
-        .click()
-        ;
+        .click();
     }, 1000);
   });
 
@@ -1063,19 +1030,18 @@ function StravaEnhancementSuite($, options) {
       .parents('li');
 
     var np = parseInt(elem.find('strong').text(), 10);
-    var ap = pageView.activity().get('avgWatts');
+    var ap = window.pageView.activity().get('avgWatts');
 
     $('<li><strong>X</strong><div class="label">Variability Index</div></li>')
       .insertAfter(elem)
       .find('strong')
-      .text((np / ap).toFixed(2))
-      ;
+      .text((np / ap).toFixed(2));
   });
 
   $.option('enlarge_on_hover', function() {
     function onHover(src, css, handlerIn, handlerOut) {
       css = $.extend({
-          'z-index': 99999
+        'z-index': 99999,
       }, css);
 
       $('body')
@@ -1089,8 +1055,7 @@ function StravaEnhancementSuite($, options) {
             .data('original-css', elem.css($.keys(css)))
 
             // Apply target CSS
-            .css(css)
-            ;
+            .css(css);
         })
         .on('mouseout', src, function() {
           var elem = $(this);
@@ -1099,14 +1064,13 @@ function StravaEnhancementSuite($, options) {
 
           // Restore original CSS
           elem.css(elem.data('original-css') || {});
-        })
-        ;
-    };
+        });
+    }
 
     // Mouseover on feed avatars makes them bigger
     onHover('.feed-entry .avatar-md', {
-        'width': 80
-      , 'height': 80
+      'width': 80,
+      'height': 80,
     }, function() {
       $(this)
         // Use a higher-resolution bigger image
@@ -1114,67 +1078,64 @@ function StravaEnhancementSuite($, options) {
         .attr('src', function (i, val) {
           return val.replace('/medium.jpg', '/large.jpg');
         })
-        .css({'width':80,'height':80});
+        .css({ 'width':80,'height':80 });
     }, function(){
       $(this)
         .find('img')
-        .css({'width':'','height':''});
+        .css({ 'width':'','height':'' });
     });
 
     // Mouseover on map makes them bigger
     var width = $('.feed-entry .entry-images').width();
     var height = 360;
     onHover('.feed-entry .activity-map .entry-image-wrapper', {
-        'width': width
-      , 'height': height
-      , 'margin-left': 0
+      'width': width,
+      'height': height,
+      'margin-left': 0,
     }, function() {
       var elem = $(this);
 
       elem
         .find('.leaflet-container')
-          .css('z-index', 99999)
+        .css('z-index', 99999)
         .end()
         .find('.leaflet-map-pane')
-          .css({
-              'margin-top': (height - elem.height()) / 2
-            , 'margin-left': (width - elem.width()) / 2
-          })
-        .end()
-        ;
+        .css({
+          'margin-top': (height - elem.height()) / 2,
+          'margin-left': (width - elem.width()) / 2,
+        })
+        .end();
     }, function() {
       $(this)
         .find('.leaflet-container')
-          .css('z-index', 'inherit')
+        .css('z-index', 'inherit')
         .end()
         .find('.leaflet-map-pane')
-          .css({
-              'margin-top': 0
-            , 'margin-left': 0
-          })
-        .end()
-        ;
+        .css({
+          'margin-top': 0,
+          'margin-left': 0,
+        })
+        .end();
     });
 
     // Mouseover on Instagram images makes them bigger
     onHover('.feed-entry .photostream li', {
-        'width': 300
-      , 'height': 300
+      'width': 300,
+      'height': 300,
     }, function() {
       $(this)
         // Use a higher-resolution bigger image (if we aren't using the FB CDN)
         .find('img')
-          .attr('src', function (i, val) {
-            return val.replace('?size=t', '?size=l');
-          })
-        ;
+        .attr('src', function (i, val) {
+          return val.replace('?size=t', '?size=l');
+        });
     });
 
     // Mouseover on condensed athlete list in feed makes them bigger
     onHover('.feed-entry.challenge .list-athletes img', {
-        'width': 60
-      , 'height': 60
-      , 'position': 'absolute'
+      'width': 60,
+      'height': 60,
+      'position': 'absolute',
     });
   });
 
@@ -1189,15 +1150,15 @@ function StravaEnhancementSuite($, options) {
     }
 
     $.each([
-        'elev_gain'
-      , 'distance'
-      , 'time'
+      'elev_gain',
+      'distance',
+      'time',
     ], function() {
       var name = this;
 
       $('.slider#' + name).slider('values', [
-          parseInt($.urlParam(name + '_start'), 10)
-        , parseInt($.urlParam(name + '_end'), 10)
+        parseInt($.urlParam(name + '_start'), 10),
+        parseInt($.urlParam(name + '_end'), 10),
       ]);
     });
   });
@@ -1224,7 +1185,7 @@ function StravaEnhancementSuite($, options) {
       cadence: '#f0f',
       heartrate: '#DD0447',
       grade_adjusted_pace: '#6633cc',
-      temp: '#00f'
+      temp: '#00f',
     };
 
     document.arrive('#chart-controls', { existing: true }, function () {
@@ -1257,8 +1218,8 @@ function StravaEnhancementSuite($, options) {
             click: () => {
               $(selector).click();
               $('#kudosAllCount').text(0);
-            }
-          }
+            },
+          },
         }).wrap('<li class="nav-item"></li>')
           .parent() // reference <li> instead of the <button>
           .insertBefore('#notifications');
@@ -1347,13 +1308,13 @@ function StravaEnhancementSuite($, options) {
 StravaEnhancementSuite.prototype.switch_units = function() {
   var $ = jQuery;
 
-  var url = $("a:contains(My Profile)[href^='/athletes/']").attr('href');
+  var url = $('a:contains(My Profile)[href^=\'/athletes/\']').attr('href');
   var target = window._measurement_preference == 'meters' ? 'feet' : 'meters';
   var athlete_id = parseInt(url.split('/')[2], 10);
 
-  (new Strava.Athletes.Athlete(url, athlete_id)).save(
+  (new window.Strava.Athletes.Athlete(url, athlete_id)).save(
     'measurement_preference',
     target,
-    {'success': function(x) { window.location.reload(); } }
+    { 'success': function(x) { window.location.reload(); } },
   );
 };
