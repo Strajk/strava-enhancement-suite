@@ -668,44 +668,43 @@ function StravaEnhancementSuite($, options) {
 
   // Upload activity
   $.option('improve_upload_activity', function() {
-    if (window.location.pathname !== '/upload/select') {
-      return;
+    if (window.location.pathname !== '/upload/select') return;
+
+    const titleSelector = '.uploads input[type=text]';
+    const descriptionSelector = '.uploads textarea';
+
+    function submit() {
+      const btn = $('footer .save-and-view');
+      function poll() {
+        if (btn.hasClass('disabled')) {
+          btn.text('Please wait...');
+          setTimeout(poll, 1000);
+        }
+        btn.click();
+      }
+      poll();
     }
 
-    $('body').on('keydown', '.uploads input[type=text]', function (e) {
-      if (e.keyCode === 13) {
-        $('footer .save-and-view').click();
+    $('body').on('keydown', titleSelector, function(ev) {
+      const el = $(this);
+      if (
+        ev.key === 'Enter' && (
+          el.is(titleSelector) ||
+          el.is(descriptionSelector) && (ev.metaKey || ev.ctrlKey)
+        )
+      ) {
+        submit();
       }
     });
 
-    $('body').on('keydown', '.uploads input[type=text], .uploads textarea', function (e) {
-      if (e.ctrlKey && e.keyCode === 13) {
-        var btn = $('footer .save-and-view');
-
-        var poll = function() {
-          if (btn.hasClass('disabled')) {
-            btn.text('Please wait...');
-            setTimeout(poll, 1000);
-            return;
-          }
-          btn.click();
-        };
-
-        poll();
-      }
+    document.arrive(titleSelector, { existing: true }, function() {
+      $(this).onceOnly().attr('autocomplete', 'off');
     });
 
-    $.setInterval(function() {
-      // Make description boxes bigger by default
-      $('textarea[name=description]')
-        .onceOnly()
-        .css('height', 160);
+    document.arrive(descriptionSelector, { existing: true }, function() {
+      $(this).onceOnly().css('height', 160);
+    });
 
-      // Disable autocomplete on the "Name" dialog
-      $('input[type=text]')
-        .onceOnly()
-        .attr('autocomplete', 'off');
-    }, 1000);
   });
 
   // Enhance typography
