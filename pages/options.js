@@ -117,6 +117,13 @@ var StravaEnhancementSuiteOptions = [ // eslint-disable-line no-redeclare
     'default': true,
   },
   {
+    'name': 'running_gap',
+    'title': 'Running Grade Adjusted Pace (GAP)',
+    'description': 'Show running Grade Adjusted Pace (GAP) by default in elevation profile.',
+    'image': true,
+    'default': true,
+  },
+  {
     'name': 'variability_index',
     'title': 'Variability Index',
     'description': 'Calculate a Variability Index (VI) from the weighted average power and the average power, an indication of how "smooth" a ride was. A VI of 1.0 would mean perfect pacing. (Requires a power meter.)',
