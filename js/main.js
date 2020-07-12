@@ -797,20 +797,23 @@ function StravaEnhancementSuite($, options) {
 
   // Show running cadence by default
   $.option('running_cadence', function() {
-    $.setInterval(function() {
-      $('#elevation-profile td[data-type=cadence] .toggle-button')
-        .onceOnly()
-        .click();
-    }, 1000);
+    document.arrive('#elevation-profile td[data-type=cadence] .toggle-button:not(.active)', { existing: true }, function() {
+      $(this).click();
+    });
   });
 
   // Show running heart rate by default
   $.option('running_heart_rate', function() {
-    $.setInterval(function() {
-      $('#elevation-profile td[data-type=heartrate] .toggle-button')
-        .onceOnly()
-        .click();
-    }, 1000);
+    document.arrive('#elevation-profile td[data-type=heartrate] .toggle-button:not(.active)', { existing: true }, function() {
+      $(this).click();
+    });
+  });
+
+  // Show running GAP by default
+  $.option('running_gap', function() {
+    document.arrive('#elevation-profile td[data-type=grade_adjusted_pace] .toggle-button:not(.active)', { existing: true }, function() {
+      $(this).click();
+    });
   });
 
   // Caculate running TSS
