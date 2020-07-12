@@ -761,37 +761,35 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Improved pagination
+  // Seems like old pagination is only on this one page: https://www.strava.com/athlete/training
   $.option('improve_pagination', function() {
-    if (!$.defined('pagingController')) {
-      return;
-    }
+    if (!$.defined('pagingController')) return;
 
-    var c = window.pagingController;
+    const ctrl = window.pagingController;
 
-    $.setInterval(function() {
-      $('.simple.pagination ul.switches')
-        .onceOnly()
+    document.arrive('.simple.pagination ul.switches', { existing: true }, function() {
+      $(this)
 
         // First
-        .prepend('<li><span class="button first_page">First</span></li>')
+        .prepend('<li><span class="btn btn-default btn-sm first_page">First</span></li>')
         .find('.first_page')
         .on('click', function() {
-          c.page = 1;
-          c.paging_adapter.fetch(c.buildOptions());
+          ctrl.page = 1;
+          ctrl.paging_adapter.fetch(ctrl.buildOptions());
         })
-        .toggleClass('disabled', c.page == 1)
+        .toggleClass('disabled', ctrl.page === 1)
         .end()
 
         // Last
-        .append('<li><span class="button last_page">Last</span></li>')
+        .append('<li><span class="btn btn-default btn-sm last_page">Last</span></li>')
         .find('.last_page')
         .on('click', function() {
-          c.page = c.pageInfo().pages;
-          c.paging_adapter.fetch(c.buildOptions());
+          ctrl.page = ctrl.pageInfo().pages;
+          ctrl.paging_adapter.fetch(ctrl.buildOptions());
         })
-        .toggleClass('disabled', c.page == c.pageInfo().pages)
+        .toggleClass('disabled', ctrl.page === ctrl.pageInfo().pages)
         .end();
-    }, 1000);
+    });
   });
 
   // Show running cadence by default
