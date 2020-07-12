@@ -145,13 +145,6 @@ var StravaEnhancementSuiteOptions = [ // eslint-disable-line no-redeclare
     'default': true,
   },
   {
-    'name': 'standard_google_map',
-    'title': 'Standard Google Map',
-    'description': 'Prefer the "Standard" Google map over the "Terrain" view.',
-    'image': true,
-    'default': false,
-  },
-  {
     'name': 'hide_shop',
     'title': 'Hide shop links',
     'description': 'Hide links to the Strava store in the header, footer and on activity pages.',
