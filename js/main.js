@@ -1013,17 +1013,6 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Show the standard Google map, not the terrain one
-  $.option('standard_google_map', function() {
-    $.setInterval(function() {
-      $('a.map-type-selector[data-map-type-id=standard]')
-        .onceOnly()
-        .click()
-        .parents('.drop-down-menu') // Close menu
-        .click();
-    }, 1000);
-  });
-
   // Calculate a cycling variability index by default
   $.option('variability_index', function() {
     if (!$.defined('pageView')) {
