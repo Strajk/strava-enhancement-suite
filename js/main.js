@@ -9,8 +9,8 @@ function StravaEnhancementSuite($, options) {
   $.fn.extend({
     onceOnly: function () {
       return this
-        .not('.once-only')
-        .addClass('once-only');
+        .not('.__STRAVA_ENHANCEMENT_SUITE__once-only')
+        .addClass('__STRAVA_ENHANCEMENT_SUITE__once-only');
     },
     reverse: function () {
       return this.pushStack(this.get().reverse(), arguments);
