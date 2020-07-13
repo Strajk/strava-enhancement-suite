@@ -2,7 +2,9 @@
   "name": "strava-enhancement-suite",
   "description": "Strava Enhancement Suite",
   "scripts": {
-    "lint": "eslint **/*.js"
+    "lint": "eslint .",
+    "test": "ava",
+    "test:watch": "ava --watch"
   },
   "repository": {
     "type": "git",
@@ -10,6 +12,8 @@
   },
   "homepage": "https://github.com/lamby/strava-enhancement-suite#readme",
   "devDependencies": {
-    "eslint": "~7.4.0"
+    "ava": "-3.10.1",
+    "eslint": "~7.4.0",
+    "rewire": "-5.0.0"
   }
 }
