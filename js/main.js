@@ -699,7 +699,7 @@ function StravaEnhancementSuite($, options) {
     $('body').on(
       'keyup',
       selectors,
-      function(ev) {
+      function() {
         const el = $(this);
         const text = el.val().replace(/\u00A0/g, ' '); // for some <textarea> elements, NO-BREAK-SPACE
         $.each({
@@ -1269,7 +1269,7 @@ function StravaEnhancementSuite($, options) {
     $('#notifications-button').prepend(counter);
 
     // Un-highlight after "reading"
-    $(document).on('mousedown', '#notifications-button', function(ev) { // TODO: Investigate why 'click' is not working
+    $(document).on('mousedown', '#notifications-button', function() { // TODO: Investigate why 'click' is not working
       setTimeout(() => {
         counter.fadeOut();
       }, 1500);
@@ -1278,16 +1278,16 @@ function StravaEnhancementSuite($, options) {
   });
 }
 
+// noinspection JSUnusedGlobalSymbols
 StravaEnhancementSuite.prototype.switch_units = function() {
-  var $ = jQuery;
 
-  var url = $('a:contains(My Profile)[href^=\'/athletes/\']').attr('href');
-  var target = window._measurement_preference == 'meters' ? 'feet' : 'meters';
+  var url = jQuery('a:contains(My Profile)[href^=\'/athletes/\']').attr('href');
+  var target = window._measurement_preference === 'meters' ? 'feet' : 'meters';
   var athlete_id = parseInt(url.split('/')[2], 10);
 
   (new window.Strava.Athletes.Athlete(url, athlete_id)).save(
     'measurement_preference',
     target,
-    { 'success': function(x) { window.location.reload(); } },
+    { 'success': () => { window.location.reload(); } },
   );
 };
