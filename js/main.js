@@ -220,6 +220,12 @@ function StravaEnhancementSuite($, options) {
         }
       });
 
+    } else if (location.pathname === '/athlete/training') {
+
+      $('table.activities').on('click', '.quick-edit', function(ev) {
+        $(ev.target).parents('tr').find('.edit-col input[name=name]').focus();
+      });
+
     }
   });
 
