@@ -47,6 +47,11 @@ function StravaEnhancementSuite($, options) {
     reverse: function () {
       return this.pushStack(this.get().reverse(), arguments);
     },
+
+    // For debugging
+    clickFake: function () {
+      return this.css('outline', '3px solid red');
+    },
   });
 
   $.extend({
@@ -449,13 +454,17 @@ function StravaEnhancementSuite($, options) {
   // Post comments on 'enter'
   $.option('comment_post_on_enter', function() {
     $(document).on('keydown', '.comments textarea', function(e) {
-      if (e.keyCode !== 13) {
+      if (e.key !== 'Enter') {
         return true;
       }
 
       $(this)
         .parents('form')
-        .submit();
+        // Click of Post button instead of submitting is important,
+        // cause click handler also takes care of textarea clearing and possibly other stuff
+        // Note: Verify both on dashboard and activity page
+        .find('button:first')
+        .click();
       return false;
     });
   });
