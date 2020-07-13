@@ -1,4 +1,36 @@
+const StravaEnhancementSuiteHelpers = {
+  keySort: (...keys) => function (a, b) {
+    for (const key of keys) {
+      let valA, valB;
+      if (key.startsWith('-')) {
+        valA = b[key.slice(1)];
+        valB = a[key.slice(1)];
+      } else {
+        valA = a[key];
+        valB = b[key];
+      }
+
+      // TODO: Verify that it works for localized strings
+      // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/localeCompare
+      if (typeof valA === 'string') {
+        valA = valA.trim().toLowerCase();
+        valB = valB.trim().toLowerCase();
+      }
+
+      if (valA > valB) {
+        return 1;
+      }
+      if (valA < valB) {
+        return -1;
+      }
+    }
+    return 0;
+  },
+};
+
 function StravaEnhancementSuite($, options) {
+  const helpers = StravaEnhancementSuiteHelpers;
+
   var defaults = {};
   $.each(StravaEnhancementSuiteOptions, function() {
     defaults[this.name] = this['default'];
@@ -145,37 +177,6 @@ function StravaEnhancementSuite($, options) {
     },
   });
 
-  function keySort() {
-    var fields = arguments;
-
-    return function(a, b) {
-      for (var i = 0; i < fields.length; ++i) {
-        var key = fields[i];
-
-        if (key.slice(0, 1) === '-') {
-          var val_a = b[key.slice(1)];
-          var val_b = a[key.slice(1)];
-        } else {
-          var val_a = a[key];
-          var val_b = b[key];
-        }
-
-        if (typeof val_a === 'string') {
-          val_a = val_a.trim().toLowerCase();
-          val_b = val_b.trim().toLowerCase();
-        }
-
-        if (val_a > val_b) {
-          return 1;
-        }
-        if (val_a < val_b) {
-          return -1;
-        }
-      }
-
-      return 0;
-    };
-  }
 
   // Methods //////////////////////////////////////////////////////////////////
 
@@ -901,7 +902,7 @@ function StravaEnhancementSuite($, options) {
     if (!Object.values(data).some(x => x.count > 1)) return; // No repeated segment effort, do not continue
 
     // Flatten and sort
-    var dataFlatAndSorted = Object.values(data).sort(keySort('-starred', '-count', 'title'));
+    var dataFlatAndSorted = Object.values(data).sort(helpers.keySort('-starred', '-count', 'title'));
 
     document.arrive('.segments-list', { existing: true }, function() {
       var section = $(this)
