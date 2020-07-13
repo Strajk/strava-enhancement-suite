@@ -15,30 +15,9 @@ function StravaEnhancementSuite($, options) {
     reverse: function () {
       return this.pushStack(this.get().reverse(), arguments);
     },
-    setInterval: function (fn, interval) {
-      var that = $(this);
-      var prev = undefined;
-
-      $.setInterval(function() {
-        var current = $(that.selector).length;
-
-        // Only call our method if we think the items have changed.
-        if (current !== prev) {
-          fn();
-        }
-
-        prev = current;
-      }, interval);
-    },
   });
 
   $.extend({
-    setInterval: function(fn, interval) {
-      // Call immediately, not just after the first interval
-      fn();
-
-      setInterval(fn, interval);
-    },
     keys: function (obj) {
       var a = [];
       $.each(obj, function(k) { a.push(k); });
