@@ -576,30 +576,6 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Hide shop in top-level navigation
-  $.option('hide_shop', function() {
-    $('header nav ul.global-nav li a[href*="/store"]')
-      .remove();
-
-    // "Free Strava Mobile app"
-    $('#appUpsell')
-      .hide();
-    $('.sidebar .section')
-      .has('.upsell-copy')
-      .hide();
-
-    // Don't link device name on activity pages to shop
-    $('#heading .activity-stats .device a')
-      .contents()
-      .unwrap();
-
-    // Shop module in footer
-    $('footer .footer-promos .promo')
-      .has('a[href*="/store"]')
-      .children()
-      .hide();
-  });
-
   // Hide invite friends & social buttons
   $.option('hide_invite_friends', function() {
     // "Invite friends" in navbar
