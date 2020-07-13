@@ -633,8 +633,7 @@ function StravaEnhancementSuite($, options) {
 
   // Swap club and challenges
   $.option('swap_clubs_and_challenge_module', function() {
-    $('.sidebar #club-module')
-      .after($('.sidebar #challenge-module'));
+    $('.sidebar #your-clubs').after($('.sidebar #your-challenges'));
   });
 
   // Upload activity
