@@ -518,7 +518,7 @@ function StravaEnhancementSuite($, options) {
 
   // Estimated FTP
   $.option('estimated_ftp', function() {
-    $('#cpcurve-estimatedCP').click();
+    $('#cpcurve-estimatedCP').click(); // Check checkbox for "Show Estimated FTP" at /athlete/analysis
   });
 
   // Hide feed entries
