@@ -145,13 +145,6 @@ var StravaEnhancementSuiteOptions = [ // eslint-disable-line no-redeclare
     'default': true,
   },
   {
-    'name': 'hide_shop',
-    'title': 'Hide shop links',
-    'description': 'Hide links to the Strava store in the header, footer and on activity pages.',
-    'image': false,
-    'default': false,
-  },
-  {
     'name': 'hide_blog',
     'title': 'Hide blog links',
     'description': 'Hide links to Strava blog on the dashboard.',
