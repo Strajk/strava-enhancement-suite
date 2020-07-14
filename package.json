@@ -2,9 +2,14 @@
   "name": "strava-enhancement-suite",
   "description": "Strava Enhancement Suite",
   "scripts": {
+    "build": "cd extension && zip -r ../build.zip ./ && echo '\n=== build.zip prepared ===\n'",
     "lint": "eslint .",
     "test": "ava",
-    "test:watch": "ava --watch"
+    "test:watch": "ava --watch",
+    "cypress:open": "cypress open",
+    "generate:description": "node ./tools/description.js",
+    "generate:project": "node ./tools/project.js",
+    "generate:icons": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done"
   },
   "repository": {
     "type": "git",
@@ -13,6 +18,10 @@
   "homepage": "https://github.com/lamby/strava-enhancement-suite#readme",
   "devDependencies": {
     "ava": "-3.10.1",
+    "cypress": "~4.10.0",
+    "cypress-browser-extension-plugin": "Strajk/cypress-browser-extension-plugin#15f14eaad4c0602339ddd67aafd9ec9d9145936b",
+    "cypress-skip-and-only-ui": "~1.2.6",
+    "eslint-plugin-cypress": "~2.11.1",
     "eslint": "~7.4.0",
     "rewire": "-5.0.0"
   }
