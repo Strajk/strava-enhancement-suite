@@ -350,39 +350,60 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Manual activity input
-  // TEST https://www.strava.com/upload/manual?type=IceSkate&name=Rolling%20Thunder&description=Rollin%0ARollin%0ARollin&elapsed_time_hours=2&elapsed_time_minutes=12&elapsed_time_seconds=34
-  // TODO: Add all fields
   $.always(function() {
     if (window.location.pathname !== '/upload/manual') return;
 
     const urlParams = new URLSearchParams(window.location.search);
 
-    const type = urlParams.get('type');
-    if (type) {
-      $(`.upload-type li[data-value="${type}"] a`).click().click(); // Double click required
-    }
+    Object.entries({
+      distance: 'input',
+      distance_unit: 'select',
+      elapsed_time_hours: 'input',
+      elapsed_time_minutes: 'input',
+      elapsed_time_seconds: 'input',
+      elev_gain: 'input',
+      elevation_unit: 'select',
+      type: 'select',
+      start_date: 'input',
+      start_time_of_day: 'input',
+      name: 'input',
+      commute: 'toggle',
+      trainer: 'toggle', // Ride: Indoor Cycling, Run: Treadmill, Swim: Pool
+      bike_id: 'TODO',
+      athlete_gear_id: 'TODO',
+      description: 'input',
+      visibility: 'radio',
+      perceived_exertion: 'TODO',
+      // TODO
+      // workout_type:
+      // workout_type_run: 0: Default, 1: Race, 2: Long Run, 3: Workout
+      // workout_type_ride: 10: Default, 11: Race, 12: Workout
+    }).forEach(([key, type]) => {
+      const val = urlParams.get(key);
+      if (val === null) return;
 
-    [
-      'name',
-      'description',
-      'elapsed_time_hours',
-      'elapsed_time_minutes',
-      'elapsed_time_seconds',
-    ].forEach(name => {
-      const val = urlParams.get(name);
-
-      if (val === undefined) return;
-
-      const elem = $('form#new_activity')
-        .find('input, textarea, select')
-        .filter((i, el) => $(el).attr('name') === 'activity[' + name + ']');
-
-      elem.val(val);
-
-      // Sending a .change() signal ensures that the UI doesn't reset the
-      // activity name to (eg.) "Morning Activity" if you adjust the time
-      // considerably.
-      elem.change();
+      const el = $(`#new_activity [name="activity[${key}]"]`);
+      switch (type) {
+        case 'input':
+          el.val(val);
+          el.change(); // send signal to ensure UI consistency, important when adjusting time, to trigger Name update (eg. Morning Run)
+          break;
+        case 'select':
+          el.siblings('.options').find(`li[data-value="${val}"] a`).click().click(); // Double click required
+          break;
+        case 'toggle':
+          el
+            .closest('.input-field')
+            .find('[type=checkbox]')
+            .prop('checked', val === 'true');
+          break;
+        case 'radio':
+          $(`#new_activity [name="activity[${key}]"][value=${val}]`).click();
+          break;
+        case 'TODO':
+          console.log(`Setting "${key}" via URL params is not supported yet`);
+          break;
+      }
     });
   });
 
