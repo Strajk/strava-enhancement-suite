@@ -350,35 +350,32 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Manual activity input
+  // TEST https://www.strava.com/upload/manual?type=IceSkate&name=Rolling%20Thunder&description=Rollin%0ARollin%0ARollin&elapsed_time_hours=2&elapsed_time_minutes=12&elapsed_time_seconds=34
+  // TODO: Add all fields
   $.always(function() {
-    if (window.location.pathname !== '/upload/manual') {
-      return;
+    if (window.location.pathname !== '/upload/manual') return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const type = urlParams.get('type');
+    if (type) {
+      $(`.upload-type li[data-value="${type}"] a`).click().click(); // Double click required
     }
 
-    var type = $.urlParam('type');
-
-    if (type !== undefined) {
-      $('.upload-type li[data-value="' + type + '"] a').click().click();
-    }
-
-    $.each([
+    [
       'name',
       'description',
       'elapsed_time_hours',
       'elapsed_time_minutes',
       'elapsed_time_seconds',
-      'description',
-    ], function() {
-      var name = this;
-      var val = $.urlParam(name);
+    ].forEach(name => {
+      const val = urlParams.get(name);
 
-      if (val === undefined) {
-        return;
-      }
+      if (val === undefined) return;
 
-      var elem = $('form#new_activity input, textarea, select').filter(function () {
-        return $(this).attr('name') === 'activity[' + name + ']';
-      });
+      const elem = $('form#new_activity')
+        .find('input, textarea, select')
+        .filter((i, el) => $(el).attr('name') === 'activity[' + name + ']');
 
       elem.val(val);
 
@@ -578,49 +575,37 @@ function StravaEnhancementSuite($, options) {
 
   // Hide invite friends & social buttons
   $.option('hide_invite_friends', function() {
-    // "Invite friends" in navbar
-    $('header nav a.find-and-invite')
-      .parent('li')
-      .hide();
+    // Navbar: "Find friends"
+    $('.user-nav .options li').has('.find-and-invite').hide(); // @CHECKED 2020-06-19
 
-    // "Share your rides" on profile
-    $('.sidebar .section')
-      .has('#embed-athlete-widget')
-      .hide();
+    // My profile: "Share your Runs/Rides"
+    $('.sidebar .section').has('#embed-athlete-widget').hide(); // @CHECKED 2020-06-19
 
-    // Facebook, Twitter and share logos on activity page
-    $('section#heading .social .sharing').hide();
+    // Activity: Header: Facebook, Twitter and share icons
+    $('#heading .social .sharing').hide(); // @CHECKED 2020-06-19
 
-    //// Dashboard
+    // Dashboard: Suggested Friends
+    // TODO: Consider this as a separate option
+    $('.sidebar #suggested-follows').hide(); // @CHECKED 2020-06-19
 
-    // "You Should Follow"
-    $('.sidebar #suggested-follow-module').hide();
-
-    // "Find Your Friends On Strava"
-    $('.sidebar #invite-your-friend-module').hide();
-  });
-
-  // Hide blog links
-  $.option('hide_blog', function() {
-    $.each([
-      ['blog.strava.com'],
-      ['2014story.strava.com'],
-      ['www.strava.com/videos'],
-    ], function() {
-      $('.sidebar .section')
-        .has('a[href*=\'' + this + '\']')
-        .hide();
-
+    document.arrive([
+      '.feed-entry .share', // Athlete: Feed entry
+      '.media-actions .share', // Dashboard: Feed entry
+      '.training-activity-row .share', // My activities: Activity row
+    ].join(', '), { existing: true }, function () {
+      $(this).hide(); // @CHECKED 2020-06-19
     });
   });
 
   $.option('hide_upcoming', function() {
+    // @DEPRECATED: Seems not needed anymore
     // Hide "Yearly Goals"
     $('.sidebar .section#yearly-progress-goals')
       .hide();
   });
 
   $.option('hide_upcoming', function() {
+    // @DEPRECATED: Seems not needed anymore
     // Upcoming races, events, goals
     $('.sidebar .section#upcoming-events')
       .not(':has(li)') // Show if we have upcoming events
@@ -995,7 +980,7 @@ function StravaEnhancementSuite($, options) {
     var np = parseInt(elem.find('strong').text(), 10);
     var ap = window.pageView.activity().get('avgWatts');
 
-    $('<li><strong>X</strong><div class="label">Variability Index</div></li>')
+    $('<li><strong>X</strong><div class="label"><a href="https://science4performance.com/2017/04/20/strava-ride-statistics/">Variability Index</a></div></li>')
       .insertAfter(elem)
       .find('strong')
       .text((np / ap).toFixed(2));
