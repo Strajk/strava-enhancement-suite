@@ -1,9 +1,6 @@
-var fs = require('fs');
+const fs = require('fs');
+eval(fs.readFileSync('./extension/pages/options.js', 'utf-8'));
 
-eval(fs.readFileSync('pages/options.js') + '');
-
-for (var i = 0; i < StravaEnhancementSuiteOptions.length; ++i) {
-  var option = StravaEnhancementSuiteOptions[i];
-
+StravaEnhancementSuiteOptions.forEach(option => {
   console.log(' - ' + option.title + ': ' + option.description);
-}
+});

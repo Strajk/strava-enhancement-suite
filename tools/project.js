@@ -1,18 +1,11 @@
-var fs = require('fs');
+const fs = require('fs');
+eval(fs.readFileSync('./extension/pages/options.js', 'utf-8'));
 
-function load(filename) {
-  return fs.readFileSync(filename) + '';
-}
+console.log(fs.readFileSync('tools/project_header.rst', 'utf-8'));
 
-eval(load('pages/options.js'));
-
-console.log(load('tools/project_header.rst'));
-
-for (var i = 0; i < StravaEnhancementSuiteOptions.length; ++i) {
-  var option = StravaEnhancementSuiteOptions[i];
-
+StravaEnhancementSuiteOptions.forEach(option => {
   console.log(option.title);
   console.log('    ' + option.description);
-}
+});
 
-console.log(load('tools/project_footer.rst'));
+console.log(fs.readFileSync('tools/project_footer.rst', 'utf-8'));

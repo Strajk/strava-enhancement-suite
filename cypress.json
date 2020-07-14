@@ -1,0 +1,10 @@
+{
+  "chromeWebSecurity": false,
+  "watchForFileChanges": false,
+  "numTestsKeptInMemory": 200,
+  "baseUrl": "https://www.strava.com/",
+  "env": {
+    "username": "strava-enhancement-suite@protonmail.com",
+    "password": ""
+  }
+}
