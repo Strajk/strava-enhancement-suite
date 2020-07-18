@@ -1198,6 +1198,16 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
+  $.option('my_activities_expand_latest_activity', function() {
+    if (window.location.pathname !== '/athlete/training') return;
+
+    // Table rows are loaded asynchronously, we need to wait for a row
+    document.arrive('table.activities .training-activity-row', { existing: true, onceOnly: true }, () => {
+      $('table.activities .quick-edit:first').click();
+    });
+
+  });
+
   $.option('separate_notifications', function() {
     // Sadly, it's not possible to reuse existing icons from the website as they mix and match various styles :(
     const ICONS = {

@@ -255,4 +255,11 @@ var StravaEnhancementSuiteOptions = [ // eslint-disable-line no-redeclare
     'image': true,
     'default': true,
   },
+  {
+    'name': 'my_activities_expand_latest_activity',
+    'title': 'My Activities: Expand latest activity on page load',
+    'description': 'When opening My Activities, expand latest activity for editing automatically.',
+    'image': false, // TODO
+    'default': false,
+  },
 ];
