@@ -26,6 +26,7 @@ module.exports = {
     'comma-dangle': ['error', 'always-multiline'],
     'indent': ['error', 2, { 'SwitchCase': 1 }],
     'object-curly-spacing': ['error', 'always'],
+    'key-spacing': ['error', { 'beforeColon': false, 'afterColon': true }],
 
     'no-redeclare': 'warn',
 
