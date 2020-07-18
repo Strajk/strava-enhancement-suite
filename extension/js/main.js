@@ -796,9 +796,9 @@ function StravaEnhancementSuite($, options) {
     }
 
     var TSS_PER_HOUR = {
-      'Z1':  55,
-      'Z2':  75,
-      'Z3':  90,
+      'Z1': 55,
+      'Z2': 75,
+      'Z3': 90,
       'Z4': 100,
       'Z5': 120,
       'Z6': 145,
@@ -1047,11 +1047,11 @@ function StravaEnhancementSuite($, options) {
         .attr('src', function (i, val) {
           return val.replace('/medium.jpg', '/large.jpg');
         })
-        .css({ 'width':80,'height':80 });
+        .css({ 'width': 80,'height': 80 });
     }, function(){
       $(this)
         .find('img')
-        .css({ 'width':'','height':'' });
+        .css({ 'width': '','height': '' });
     });
 
     // Mouseover on map makes them bigger
