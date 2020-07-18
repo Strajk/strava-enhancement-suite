@@ -19,8 +19,15 @@ function inject(what) {
 
 chrome.storage.sync.get(null, async (items) => {
   await inject('/pages/options.js');
+
   await inject('/js/libs/jquery.js'); // jQuery is not present on new, react-only pages, e.g. Training Log
   await inject('/js/libs/arrive.js');
+
+  await inject('/js/libs/react.development.js');
+  await inject('/js/libs/react-dom.development.js');
+  await inject('/js/libs/react-dom-test-utils.development.js');
+
   await inject('/js/main.js');
+
   await inject(`window.strava_enhancement_suite = new StravaEnhancementSuite(jQuery, ${JSON.stringify(items)});`);
 });
