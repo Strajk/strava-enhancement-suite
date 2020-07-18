@@ -262,4 +262,11 @@ var StravaEnhancementSuiteOptions = [ // eslint-disable-line no-redeclare
     'image': false, // TODO
     'default': false,
   },
+  {
+    name: 'training_log_overview',
+    title: 'Training Log: Enhanced Overview',
+    description: 'Show stats for all sports in the overview section in Training Log',
+    image: true,
+    default: true,
+  },
 ];

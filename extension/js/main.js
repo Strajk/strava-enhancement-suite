@@ -26,6 +26,55 @@ const StravaEnhancementSuiteHelpers = {
     }
     return 0;
   },
+  formatSecondsToHhMm: x => {
+    x = x / 60; // seconds to minutes
+    const h = Math.floor((x / 60));
+    const m = Math.round(((x / 60) - h) * 60);
+    const mm = ('00' + m).substring(String(m).length); // pad
+    return `${h}h${mm}m`;
+  },
+  // TODO: Automate or at least verify
+  activities: {
+    alpine_ski: 'Alpine Ski',
+    backcountry_ski: 'Backcountry Ski',
+    canoeing: 'Canoe',
+    crossfit: 'Crossfit',
+    e_bike_ride: 'E-Bike Ride',
+    elliptical: 'Elliptical',
+    golf: 'Golf',
+    handcycle: 'Handcycle',
+    hike: 'Hike',
+    ice_skate: 'Ice Skate',
+    inline_skate: 'Inline Skate',
+    kayaking: 'Kayaking',
+    kitesurf: 'Kitesurf',
+    nordic_ski: 'Nordic Ski',
+    ride: 'Ride',
+    rock_climbing: 'Rock Climb',
+    roller_ski: 'Roller Ski',
+    rowing: 'Rowing',
+    run: 'Run',
+    sail: 'Sail',
+    skateboard: 'Skateboard',
+    snowboard: 'Snowboard',
+    snowshoe: 'Snowshoe',
+    soccer: 'Soccer',
+    stair_stepper: 'Stair-Stepper',
+    stand_up_paddling: 'Stand Up Paddling',
+    surfing: 'Surfing',
+    swim: 'Swim',
+    velomobile: 'Velomobile',
+    virtual_ride: 'Virtual Ride',
+    virtual_run: 'Virtual Run',
+    walk: 'Walk',
+    water_sport: 'Water Sport',
+    weight_training: 'Weight Training',
+    wheelchair: 'Wheelchair',
+    windsurf: 'Windsurf',
+    winter_sport: 'Winter Sport',
+    workout: 'Workout',
+    yoga: 'Yoga',
+  },
 };
 
 function StravaEnhancementSuite($, options) {
@@ -1207,6 +1256,58 @@ function StravaEnhancementSuite($, options) {
     });
 
   });
+
+  $.option('training_log_overview', function() {
+    function getReactElement(dom) {
+      for (const prop in dom) {
+        // Requires injected ReactDOM, probably even dev version
+        // noinspection JSUnfilteredForInLoop
+        if (prop.startsWith('__reactInternalInstance$')) {
+          const val = dom[prop];
+          return {
+            node: val.stateNode,
+            props: val.return.memoizedProps, // .return is probably not universal, as it's probably caused some wrapper component
+          };
+        }
+      }
+    }
+
+    if (!window.location.pathname.includes('/training/log')) return;
+
+    // https://www.strava.com/athletes/5041066/training/log?v2=true
+    document.arrive('[class^="Calendar--calendar-row-container--"]', { existing: true, fireOnAttributesModification: true }, (el) => {
+      if (el.getAttribute('data-display-type') === 'empty') return;
+
+      const overviewEl = el.querySelector('[class^="WeekOverview--sidebar-container--"]');
+      const { props } = getReactElement(overviewEl);
+      const totals = props.entry.totals_by_sport;
+
+      if (!totals) return; // No activities for specific date range
+
+      const formatDistance = x => x ? `${Math.round(x / 1000)}km`: '';
+      const formatElevation = x => x ? `${x}m` : '';
+      const formatTime = x => x ? helpers.formatSecondsToHhMm(x) : '';
+
+      const sports = Array.from(new Set(['run', 'ride', 'swim'].concat(Object.keys(totals)))); // TODO: Refactor to prioritySort function
+      const items = sports.map(sport => {
+        const total = totals[sport];
+        if (!total) return;
+        return `
+          <div style="margin-bottom: 8px;">
+            <div class="text-caption2" style="color: #6d6d78; margin-bottom: 3px;">${helpers.activities[sport]}</div>
+            <div style="font-size: 12px;" class="text-light">
+              <span style="margin-right: 5px;">${formatTime(total.moving_time)}</span>
+              <span style="margin-right: 5px;">${formatDistance(total.distance)}</span>
+              <span>${formatElevation(total.elev_gain)}</span>
+            </div>
+          </div> 
+        `;
+      });
+
+      $(`<div>${items.join('')}</div> `).appendTo(overviewEl);
+    });
+  });
+
 
   $.option('separate_notifications', function() {
     // Sadly, it's not possible to reuse existing icons from the website as they mix and match various styles :(

@@ -38,6 +38,9 @@
   "web_accessible_resources": [
     "js/libs/jquery.js",
     "js/libs/arrive.js",
+    "js/libs/react.development.js",
+    "js/libs/react-dom.development.js",
+    "js/libs/react-dom-test-utils.development.js",
     "js/main.js",
     "pages/options.js"
   ]
