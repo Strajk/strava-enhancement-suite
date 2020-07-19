@@ -1,0 +1,22 @@
+name: CI
+on: [push]
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2-beta
+        with:
+          node-version: '12'
+      - run: npm install
+      # - run: npm run build
+      - run: npm run lint
+      - run: npm run test
+      - uses: cypress-io/github-action@v2
+        with:
+          install: false # already installed from previous steps
+          browser: chrome
+          record: true
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
