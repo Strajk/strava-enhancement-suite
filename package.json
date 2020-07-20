@@ -12,6 +12,7 @@
     "generate:icons": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done",
     "append-beta-to-name": "dot-json extension/manifest.json name 'Strava Enhancement Suite BETA'",
     "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)",
+    "reset-manifest": "git checkout HEAD -- extension/manifest.json",
     "release:cws": "webstore upload --source=extension --auto-publish"
   },
   "repository": {
