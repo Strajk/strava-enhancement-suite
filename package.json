@@ -20,7 +20,7 @@
     "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)"
   },
   "devDependencies": {
-    "ava": "-3.10.1",
+    "ava": "~3.10.1",
     "chrome-webstore-upload-cli": "~1.2.0",
     "cypress": "~4.10.0",
     "cypress-browser-extension-plugin": "Strajk/cypress-browser-extension-plugin#15f14eaad4c0602339ddd67aafd9ec9d9145936b",
