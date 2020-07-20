@@ -1,0 +1,32 @@
+# <%= pkg.meta.name %>
+
+> <%= pkg.description %>
+
+## Install
+
+* [Chrome extension from Chrome Web Store](https://chrome.google.com/webstore/detail/<%= pkg.meta.chromeWebStoreId %>)
+  * [BETA version](https://chrome.google.com/webstore/detail/<%= pkg.meta.chromeWebStoreIdBeta %>) – automatically published from `develop` branch
+* Firefox add-on – TODO 👷‍
+* Safari extension – probably not gonna happen
+
+#### Install from Git
+
+* Clone (or otherwise download) this repository
+* In Chrome, go to `chrome://extensions`
+* Ensure "Developer mode" is ticked
+* Click "Load unpacked" and select the `extension` directory within this repository
+* Refresh any page on Strava - the extension will now be active
+
+## Features
+<% options.forEach(option => { %>
+* <%- option.title -%>
+<% }) %>
+
+## Contribute
+
+Feel free to! 🙏
+
+## Disclaimer
+
+This software is not endorsed by Strava. Please do not ask them for support.
+The term STRAVA and the Strava logo are the exclusive trademarks of, and are owned by, Strava Inc.
