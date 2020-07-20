@@ -1,25 +1,24 @@
 {
   "name": "strava-enhancement-suite",
-  "description": "Strava Enhancement Suite",
-  "scripts": {
-    "build": "cd extension && zip -r ../build.zip ./ && echo '\n=== build.zip prepared ===\n'",
-    "lint": "eslint .",
-    "test": "ava",
-    "test:watch": "ava --watch",
-    "cypress:open": "cypress open",
-    "generate:description": "node ./tools/description.js",
-    "generate:project": "node ./tools/project.js",
-    "generate:icons": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done",
-    "append-beta-to-name": "dot-json extension/manifest.json name 'Strava Enhancement Suite BETA'",
-    "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)",
-    "reset-manifest": "git checkout HEAD -- extension/manifest.json",
-    "release:cws": "webstore upload --source=extension --auto-publish"
-  },
+  "description": "A browser extension to enhance Strava.com",
+  "homepage": "https://github.com/lamby/strava-enhancement-suite#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lamby/strava-enhancement-suite.git"
   },
-  "homepage": "https://github.com/lamby/strava-enhancement-suite#readme",
+  "scripts": {
+    "append-beta-to-name": "dot-json extension/manifest.json name 'Strava Enhancement Suite BETA'",
+    "build": "cd extension && zip -r ../build.zip ./ && echo '\n=== build.zip prepared ===\n'",
+    "cypress:open": "cypress open",
+    "generate:icons": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done",
+    "generate:docs": "node tools/build-docs.js",
+    "lint": "eslint .",
+    "release:cws": "webstore upload --source=extension --auto-publish",
+    "reset-manifest": "git checkout HEAD -- extension/manifest.json",
+    "test": "ava",
+    "test:watch": "ava --watch",
+    "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)"
+  },
   "devDependencies": {
     "ava": "-3.10.1",
     "chrome-webstore-upload-cli": "~1.2.0",
@@ -27,8 +26,15 @@
     "cypress-browser-extension-plugin": "Strajk/cypress-browser-extension-plugin#15f14eaad4c0602339ddd67aafd9ec9d9145936b",
     "cypress-skip-and-only-ui": "~1.2.6",
     "dot-json": "~1.2.0",
+    "ejs": "~3.1.2",
+    "ejs-cli": "~2.2.0",
     "eslint": "~7.4.0",
     "eslint-plugin-cypress": "~2.11.1",
     "rewire": "-5.0.0"
+  },
+  "meta": {
+    "name": "Strava Enhancement Suite",
+    "chromeWebStoreId": "egelalffpmicecakegglddmhlbdiemlg",
+    "chromeWebStoreIdBeta": "oaioodcklbhlefejbglemgjndhckgklf"
   }
 }
