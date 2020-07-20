@@ -49,7 +49,7 @@ function login () {
     } else {
       cy.log('Logging in');
       const username = Cypress.env('username');
-      const password = Cypress.env('password');
+      const password = Cypress.env('password_test');
       if (!password) throw new Error('Missing password value, set using CYPRESS_password=...');
 
       cy.visit('/login');
