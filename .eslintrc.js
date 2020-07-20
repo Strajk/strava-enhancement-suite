@@ -15,7 +15,7 @@ module.exports = {
     '$': false,
   },
   'ignorePatterns': [
-    'js/libs/*.js',
+    'extension/js/libs/*.js',
   ],
   'rules': {
     // Overwrite few recommended options to avoid too many changes when introducing ESLint to the codebase
