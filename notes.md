@@ -1,0 +1,7 @@
+- <https://github.com/lamby/strava-enhancement-suite>
+- <https://github.com/strajk/strava-enhancement-suite-fork>
+- <https://github.com/Strajk/strava-enhancement-suite-fork/tree/develop>
+- <https://chrome.google.com/webstore/detail/egelalffpmicecakegglddmhlbdiemlg>
+- <https://chrome.google.com/webstore/detail/oaioodcklbhlefejbglemgjndhckgklf> BETA
+- <https://chrome.google.com/webstore/devconsole/>
+- <https://addons.mozilla.org/en-US/developers/>
