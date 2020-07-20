@@ -2,7 +2,7 @@
 const rewire = require('rewire');
 const test = require('ava');
 
-const main = rewire('./js/main.js');
+const main = rewire('./extension/js/main.js');
 const SES = main.__get__('StravaEnhancementSuite');
 const SESHelpers = main.__get__('StravaEnhancementSuiteHelpers');
 
