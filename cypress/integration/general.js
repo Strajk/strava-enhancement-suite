@@ -48,9 +48,9 @@ function login () {
       cy.log('Already logged in, continuing');
     } else {
       cy.log('Logging in');
-      const username = Cypress.env('username');
-      const password = Cypress.env('password_test');
-      if (!password) throw new Error('Missing password value, set using CYPRESS_password=...');
+      const username = Cypress.env('USERNAME');
+      const password = Cypress.env('PASSWORD_TEST');
+      if (!password) throw new Error('Missing password value, set using CYPRESS_PASSWORD_TEST=...');
 
       cy.visit('/login');
       cy.get('#login_form #email').type(username);

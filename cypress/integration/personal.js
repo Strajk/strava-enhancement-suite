@@ -70,8 +70,8 @@ function login () {
     } else {
       cy.log('Logging in');
       const username = 'strajk@me.com';
-      const password = Cypress.env('password_personal');
-      if (!password) throw new Error('Missing password value, set using CYPRESS_password=...');
+      const password = Cypress.env('PASSWORD_PERSONAL');
+      if (!password) throw new Error('Missing password value, set using CYPRESS_PASSWORD_PERSONAL=...');
 
       cy.visit('/login');
       cy.get('#login_form #email').type(username);
