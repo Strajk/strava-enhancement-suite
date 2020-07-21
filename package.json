@@ -9,6 +9,7 @@
   "scripts": {
     "append-beta-to-name": "dot-json extension/manifest.json name 'Strava Enhancement Suite BETA'",
     "build": "cd extension && zip -r ../build.zip ./ && echo '\n=== build.zip prepared ===\n'",
+    "cypress:run": "cypress run --browser chrome",
     "cypress:open": "cypress open",
     "generate:icons": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done",
     "generate:docs": "node tools/build-docs.js",
