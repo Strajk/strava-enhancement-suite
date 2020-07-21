@@ -1,32 +1,33 @@
 /* eslint-env node */
 
 module.exports = {
-  'extends': ['eslint:recommended'],
-  'parserOptions': {
-    'ecmaVersion': 2018,
+  extends: ['eslint:recommended'],
+  parserOptions: {
+    ecmaVersion: 2018,
   },
-  'env': {
-    'browser': true,
-    'es6': true,
+  env: {
+    browser: true,
+    es6: true,
   },
-  'globals': {
-    'StravaEnhancementSuiteOptions': true, // `true` to allow the variable to be overwritten
-    'jQuery': false,
-    '$': false,
+  globals: {
+    StravaEnhancementSuiteOptions: true, // `true` to allow the variable to be overwritten
+    jQuery: false,
+    $: false,
   },
-  'ignorePatterns': [
+  ignorePatterns: [
     'extension/js/libs/*.js',
   ],
-  'rules': {
+  rules: {
     // Overwrite few recommended options to avoid too many changes when introducing ESLint to the codebase
-    'quotes': ['error', 'single'],
-    'semi': ['error', 'always'],
+    quotes: ['error', 'single'],
+    'quote-props': ['error', 'as-needed'],
+    semi: ['error', 'always'],
     'comma-style': ['error', 'last'],
     'semi-style': ['error', 'last'],
     'comma-dangle': ['error', 'always-multiline'],
-    'indent': ['error', 2, { 'SwitchCase': 1 }],
+    indent: ['error', 2, { SwitchCase: 1 }],
     'object-curly-spacing': ['error', 'always'],
-    'key-spacing': ['error', { 'beforeColon': false, 'afterColon': true }],
+    'key-spacing': ['error', { beforeColon: false, afterColon: true }],
 
     'no-redeclare': 'warn',
 
