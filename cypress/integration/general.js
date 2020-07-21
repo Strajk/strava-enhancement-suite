@@ -1,3 +1,5 @@
+const options = require('./../../extension/pages/options');
+
 const sessionCookie = '_strava4_session';
 
 Cypress.Cookies.defaults({
@@ -9,7 +11,7 @@ describe('strava-enhancement-suite', () => {
     login();
   });
 
-  it('Manual activity input', () => {
+  it(options.upload_manual_ux.title, () => {
     cy.visit('/upload/manual?' + Cypress.$.param({
       distance: '7',
       distance_unit: 'mi',

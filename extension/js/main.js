@@ -1392,3 +1392,6 @@ StravaEnhancementSuite.prototype.switch_units = function() {
     { success: () => { window.location.reload(); } },
   );
 };
+
+// eslint-disable-next-line no-undef
+if (typeof require !== 'undefined' && require.main !== module) module.exports = { default: StravaEnhancementSuite, helpers: StravaEnhancementSuiteHelpers };

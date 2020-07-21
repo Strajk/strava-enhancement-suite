@@ -2,9 +2,8 @@
 const rewire = require('rewire');
 const test = require('ava');
 
-const main = rewire('./extension/js/main.js');
-const SES = main.__get__('StravaEnhancementSuite');
-const SESHelpers = main.__get__('StravaEnhancementSuiteHelpers');
+const main = require('./extension/js/main.js').default;
+const helpers = require('./extension/js/main.js').helpers;
 
 test('keySort', t => {
   t.deepEqual(
@@ -17,7 +16,7 @@ test('keySort', t => {
       { starred: false, count: 4, title: 'Echo' },
       { starred: false, count: 2, title: 'Alpha' },
       { starred: true, count: 3, title: 'Hotel' },
-    ].sort(SESHelpers.keySort('-starred', '-count', 'title')),
+    ].sort(helpers.keySort('-starred', '-count', 'title')),
     [
       { starred: true, count: 3, title: 'Foxtrot' },
       { starred: true, count: 3, title: 'Hotel' },
