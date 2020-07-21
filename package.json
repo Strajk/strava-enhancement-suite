@@ -33,8 +33,7 @@
     "ejs": "~3.1.2",
     "ejs-cli": "~2.2.0",
     "eslint": "~7.4.0",
-    "eslint-plugin-cypress": "~2.11.1",
-    "rewire": "~5.0.0"
+    "eslint-plugin-cypress": "~2.11.1"
   },
   "meta": {
     "name": "Strava Enhancement Suite",
