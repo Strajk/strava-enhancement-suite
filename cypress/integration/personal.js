@@ -4,7 +4,7 @@ Cypress.Cookies.defaults({
   whitelist: sessionCookie,
 });
 
-describe('strava-enhancement-suite', () => {
+describe.skip('strava-enhancement-suite', () => {
   before(() => {
     login();
   });
