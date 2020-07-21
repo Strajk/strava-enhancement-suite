@@ -57,6 +57,14 @@
 * Chart controls colors
 * My Activities: Expand latest activity on page load
 * Training Log: Enhanced Overview
+* Activity page: Shortcuts
+* User profile: Shortcuts
+* Activity editing page: UX
+* Upload: File: UX
+* Upload: Manual: UX
+* Dashboard: Filter activities
+* Enhance typography
+* Search: UX enhancements
 
 ## Contribute
 

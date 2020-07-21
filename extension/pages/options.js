@@ -282,3 +282,6 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: true,
   },
 };
+
+// eslint-disable-next-line no-undef
+if (typeof require !== 'undefined' && require.main !== module) module.exports = StravaEnhancementSuiteOptions;
