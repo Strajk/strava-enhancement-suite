@@ -1,4 +1,5 @@
 const task = require('cypress-skip-and-only-ui/task');
+const dotenv = require('cypress-dotenv');
 const extensionLoader = require('cypress-browser-extension-plugin/loader');
 
 /**
@@ -7,4 +8,6 @@ const extensionLoader = require('cypress-browser-extension-plugin/loader');
 module.exports = (on, config) => { // eslint-disable-line no-unused-vars
   on('task', task);
   on('before:browser:launch', extensionLoader.load({ source: './extension', alias: 'strava-enhancement-suite' }));
+  config = dotenv(config);
+  return config;
 };
