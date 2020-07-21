@@ -11,6 +11,11 @@ describe('strava-enhancement-suite', () => {
     login();
   });
 
+  it(options.repeated_segments.title, () => {
+    cy.visit('/activities/3553439073/segments');
+    cy.get('table th:contains("Count")');
+  });
+
   it(options.upload_manual_ux.title, () => {
     cy.visit('/upload/manual?' + Cypress.$.param({
       distance: '7',
