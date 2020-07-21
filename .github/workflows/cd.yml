@@ -3,9 +3,8 @@ on:
   push:
     tags:
       - '**'
-
 jobs:
-  cws:
+  cd:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
