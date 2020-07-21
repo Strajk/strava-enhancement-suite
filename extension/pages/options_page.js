@@ -9,17 +9,17 @@ $(function() {
     },
   });
 
-  $.each(StravaEnhancementSuiteOptions, function(idx, option) {
+  Object.entries(StravaEnhancementSuiteOptions).forEach(([key, option]) => {
     var ul = $('<ul/>');
 
     var elem = $('<input type="checkbox">');
 
     elem.on('change', function() {
-      $.setOption(option.name, elem.prop('checked'));
+      $.setOption(key, elem.prop('checked'));
     });
 
-    chrome.storage.sync.get(option.name, function(items) {
-      var val = items[option.name];
+    chrome.storage.sync.get(key, function(items) {
+      var val = items[key];
 
       elem.prop('checked', (typeof val === 'undefined') ? option.default : val);
     });
@@ -35,11 +35,11 @@ $(function() {
       });
 
       elem.on('change', function() {
-        $.setOption(option.name, elem.val());
+        $.setOption(key, elem.val());
       });
 
-      chrome.storage.sync.get(option.name, function(items) {
-        var val = items[option.name];
+      chrome.storage.sync.get(key, function(items) {
+        var val = items[key];
 
         elem.val((typeof val === 'undefined') ? option.default : val);
       });
@@ -59,7 +59,7 @@ $(function() {
     if (option.image === true) {
       $('<li><img></li>')
         .find('img')
-        .attr('src', 'img/' + option.name + '.png')
+        .attr('src', 'img/' + key + '.png')
         .end()
         .appendTo(ul);
     }
