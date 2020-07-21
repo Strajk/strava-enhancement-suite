@@ -549,7 +549,7 @@ function StravaEnhancementSuite($, options) {
       }).join('');
 
       // Need a little more room to include our links
-      $('section#heading h2').css({ 'width': '40%' });
+      $('section#heading h2').css({ width: '40%' });
       $(`
         <div class="drop-down-menu">
           <a class="selection" style="padding-right: 30px;">External links</a>
@@ -845,12 +845,12 @@ function StravaEnhancementSuite($, options) {
     }
 
     var TSS_PER_HOUR = {
-      'Z1': 55,
-      'Z2': 75,
-      'Z3': 90,
-      'Z4': 100,
-      'Z5': 120,
-      'Z6': 145,
+      Z1: 55,
+      Z2: 75,
+      Z3: 90,
+      Z4: 100,
+      Z5: 120,
+      Z6: 145,
     };
 
     var view = window.Strava.Labs.Activities.PaceZones;
@@ -901,19 +901,19 @@ function StravaEnhancementSuite($, options) {
       var m_elev_difference = this.attributes.elev_difference.match(/^(\d+)(.*)/);
 
       data[segment_id] = data[segment_id] || {
-        'segment_id': segment_id,
-        'times': [],
-        'title': this.attributes.name,
-        'starred': this.attributes.starred_by_current_athlete,
-        'distance': parseFloat(m_distance[1]),
-        'distance_unit': m_distance[2],
-        'elev_difference': parseInt(m_elev_difference[1], 10),
-        'elev_difference_unit': m_elev_difference[2],
+        segment_id: segment_id,
+        times: [],
+        title: this.attributes.name,
+        starred: this.attributes.starred_by_current_athlete,
+        distance: parseFloat(m_distance[1]),
+        distance_unit: m_distance[2],
+        elev_difference: parseInt(m_elev_difference[1], 10),
+        elev_difference_unit: m_elev_difference[2],
       };
 
       data[segment_id].times.push({
-        'seconds': this.attributes.elapsed_time_raw,
-        'segment_effort_id': this.id,
+        seconds: this.attributes.elapsed_time_raw,
+        segment_effort_id: this.id,
       });
     });
 
@@ -921,12 +921,12 @@ function StravaEnhancementSuite($, options) {
     $.each(data, function() {
       var sum = 0;
       var max = {
-        'seconds': 0,
-        'segment_effort_id': null,
+        seconds: 0,
+        segment_effort_id: null,
       };
       var min = {
-        'seconds': 99999999,
-        'segment_effort_id': null,
+        seconds: 99999999,
+        segment_effort_id: null,
       };
 
       $.each(this.times, function() {
@@ -936,11 +936,11 @@ function StravaEnhancementSuite($, options) {
       });
 
       $.extend(this, {
-        'max': max,
-        'min': min,
-        'sum': sum,
-        'count': this.times.length,
-        'average': Math.floor(sum / this.times.length),
+        max: max,
+        min: min,
+        sum: sum,
+        count: this.times.length,
+        average: Math.floor(sum / this.times.length),
       });
     });
 
@@ -1087,8 +1087,8 @@ function StravaEnhancementSuite($, options) {
 
     // Mouseover on feed avatars makes them bigger
     onHover('.feed-entry .avatar-md', {
-      'width': 80,
-      'height': 80,
+      width: 80,
+      height: 80,
     }, function() {
       $(this)
         // Use a higher-resolution bigger image
@@ -1096,19 +1096,19 @@ function StravaEnhancementSuite($, options) {
         .attr('src', function (i, val) {
           return val.replace('/medium.jpg', '/large.jpg');
         })
-        .css({ 'width': 80,'height': 80 });
+        .css({ width: 80,height: 80 });
     }, function(){
       $(this)
         .find('img')
-        .css({ 'width': '','height': '' });
+        .css({ width: '',height: '' });
     });
 
     // Mouseover on map makes them bigger
     var width = $('.feed-entry .entry-images').width();
     var height = 360;
     onHover('.feed-entry .activity-map .entry-image-wrapper', {
-      'width': width,
-      'height': height,
+      width: width,
+      height: height,
       'margin-left': 0,
     }, function() {
       var elem = $(this);
@@ -1138,8 +1138,8 @@ function StravaEnhancementSuite($, options) {
 
     // Mouseover on Instagram images makes them bigger
     onHover('.feed-entry .photostream li', {
-      'width': 300,
-      'height': 300,
+      width: 300,
+      height: 300,
     }, function() {
       $(this)
         // Use a higher-resolution bigger image (if we aren't using the FB CDN)
@@ -1151,9 +1151,9 @@ function StravaEnhancementSuite($, options) {
 
     // Mouseover on condensed athlete list in feed makes them bigger
     onHover('.feed-entry.challenge .list-athletes img', {
-      'width': 60,
-      'height': 60,
-      'position': 'absolute',
+      width: 60,
+      height: 60,
+      position: 'absolute',
     });
   });
 
@@ -1229,7 +1229,7 @@ function StravaEnhancementSuite($, options) {
 
       if (!$.defined('kudosAllCount')) { // This relies on browser exposing all elements with ID to window
         $('<button/>', {
-          'class': 'btn',
+          class: 'btn',
           style: 'margin-left: 8px;',
           html: 'Give Kudos to all (<span id="kudosAllCount">${count}</span>)',
           on: {
@@ -1395,6 +1395,6 @@ StravaEnhancementSuite.prototype.switch_units = function() {
   (new window.Strava.Athletes.Athlete(url, athlete_id)).save(
     'measurement_preference',
     target,
-    { 'success': () => { window.location.reload(); } },
+    { success: () => { window.location.reload(); } },
   );
 };
