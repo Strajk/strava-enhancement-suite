@@ -1,5 +1,4 @@
 /* eslint-env node */
-const rewire = require('rewire');
 const test = require('ava');
 
 const main = require('./extension/js/main.js').default;
