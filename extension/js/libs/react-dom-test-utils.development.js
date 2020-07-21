@@ -10,7 +10,6 @@
 'use strict';
 
 (function (global, factory) {
-  debugger
   typeof exports === 'object' && typeof module !== 'undefined' ? module.exports = factory(require('react'), require('react-dom')) :
   typeof define === 'function' && define.amd ? define(['react', 'react-dom'], factory) :
   (global = global || self, global.ReactTestUtils = factory(global.React, global.ReactDOM));
