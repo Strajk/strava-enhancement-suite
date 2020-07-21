@@ -12,12 +12,28 @@ jobs:
       # - run: npm run build
       - run: npm run lint
       - run: npm run test
-      - uses: cypress-io/github-action@v2.2.2
-        with:
-          install: true
-          browser: chrome
-          record: true
+      # - uses: cypress-io/github-action@v2.2.2
+      #   with:
+      #     install: true
+      #     browser: chrome
+      #     record: true
+      #   env:
+      #     CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      #     CYPRESS_PASSWORD_TEST: ${{ secrets.CYPRESS_PASSWORD_TEST }}
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  deploy-beta:
+    if: github.ref == 'refs/heads/develop'
+    needs: ci
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm install
+      # - run: npm build
+      - run: npm run append-beta-to-name
+      - run: npm run update-version
+      - run: npm run release:cws
         env:
-          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
-          CYPRESS_PASSWORD_TEST: ${{ secrets.CYPRESS_PASSWORD_TEST }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+          CLIENT_ID: ${{ secrets.CLIENT_ID }}
+          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
