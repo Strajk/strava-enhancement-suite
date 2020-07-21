@@ -1,7 +1,7 @@
 name: CI
 on: [push]
 jobs:
-  main:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -12,9 +12,9 @@ jobs:
       # - run: npm run build
       - run: npm run lint
       - run: npm run test
-      - uses: cypress-io/github-action@v2
+      - uses: cypress-io/github-action@v2.2.2
         with:
-          install: false # already installed from previous steps
+          install: true
           browser: chrome
           record: true
         env:
