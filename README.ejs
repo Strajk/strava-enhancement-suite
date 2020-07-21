@@ -18,7 +18,7 @@
 * Refresh any page on Strava - the extension will now be active
 
 ## Features
-<% options.forEach(option => { %>
+<% Object.entries(options).forEach(([key, option]) => { %>
 * <%- option.title -%>
 <% }) %>
 

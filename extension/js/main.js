@@ -80,12 +80,12 @@ const StravaEnhancementSuiteHelpers = {
 function StravaEnhancementSuite($, options) {
   const helpers = StravaEnhancementSuiteHelpers;
 
-  var defaults = {};
-  $.each(StravaEnhancementSuiteOptions, function() {
-    defaults[this.name] = this['default'];
+  // Options
+  const defaults = {};
+  Object.entries(StravaEnhancementSuiteOptions).forEach(([key, val]) => {
+    defaults[key] = val.default;
   });
-
-  options = $.extend({}, defaults, options);
+  options = Object.assign({}, defaults, options);
 
   $.fn.extend({
     onceOnly: function () {
@@ -108,9 +108,6 @@ function StravaEnhancementSuite($, options) {
       var a = [];
       $.each(obj, function(k) { a.push(k); });
       return a;
-    },
-    always: function (handler) {
-      handler();
     },
     option: function (option, handler) {
       if (options[option] !== false) {
@@ -235,7 +232,7 @@ function StravaEnhancementSuite($, options) {
   // Methods //////////////////////////////////////////////////////////////////
 
   // Own activity page
-  $.always(function() {
+  $.option('activity_shortcuts', function() {
     // Detect whether we are viewing our own activity and to activate the dialog
     var edit_activity = $('a[title="Edit this activity"]');
 
@@ -259,7 +256,7 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Own activity page: editing
-  $.always(function() {
+  $.option('activity_edit_ux', function() {
     if (location.pathname.startsWith('/activities') && location.pathname.endsWith('/edit')) {
 
       $('#edit-activity #activity_name').onceOnly()
@@ -385,8 +382,7 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Manual file upload
-  $.always(function() {
+  $.option('upload_file_ux', function() {
     // Ctrl+enter whilst editing the name saves the dialog
     $('body').on('keydown', '.manual-entry input#activity_name, .manual-entry textarea', function (e) {
       if (e.ctrlKey && e.keyCode === 13) {
@@ -398,8 +394,7 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Manual activity input
-  $.always(function() {
+  $.option('upload_manual_ux', function() {
     if (window.location.pathname !== '/upload/manual') return;
 
     const urlParams = new URLSearchParams(window.location.search);
@@ -589,7 +584,7 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Hide feed entries
-  $.always(function() {
+  $.option('dashboard_filter', function() {
     let filters = [];
     [
       ['hide_challenge_feed_entries', ['.challenge']],
@@ -732,8 +727,7 @@ function StravaEnhancementSuite($, options) {
 
   });
 
-  // Enhance typography
-  $.always(function() {
+  $.option('general_typography', function() {
     const selectors = [
       '.uploads', // https://www.strava.com/upload/select
       '.manual-entry', // https://www.strava.com/upload/manual
@@ -766,7 +760,7 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Athlete profile
-  $.always(function() {
+  $.option('user_shortcut', function() {
     var profile_link = $('header .user-menu a');
     if (
       (profile_link.length === 0)
@@ -1158,7 +1152,7 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Fix athlete search forgetting values
-  $.always(function() {
+  $.option('search_ux', function() {
     if (window.location.pathname.indexOf('/activities/search') !== 0) {
       return;
     }
