@@ -4,8 +4,8 @@
 
 ## Install
 
-* [Chrome extension on Chrome Web Store](https://chrome.google.com/webstore/detail/egelalffpmicecakegglddmhlbdiemlg) – published manually after testing from `master` branch
-  * 🚀 [BETA version](https://chrome.google.com/webstore/detail/oaioodcklbhlefejbglemgjndhckgklf) – automatically published from `develop` branch
+* [Chrome extension from Chrome Web Store](https://chrome.google.com/webstore/detail/egelalffpmicecakegglddmhlbdiemlg) ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/egelalffpmicecakegglddmhlbdiemlg?label=)
+  * [BETA version](https://chrome.google.com/webstore/detail/oaioodcklbhlefejbglemgjndhckgklf) ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/oaioodcklbhlefejbglemgjndhckgklf?label=) – automatically published from `develop` branch
 * Firefox add-on – TODO 👷‍
 * Safari extension – probably not gonna happen
 
