@@ -1,20 +1,21 @@
-name: CD
-on:
-  push:
-    tags:
-      - '**'
-jobs:
-  cd:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - run: npm install
-      # - run: npm build
-      - run: npm run append-beta-to-name
-      - run: npm run update-version
-      - run: npm run release:cws
-        env:
-          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
-          REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
+# TODO
+# name: CD
+# on:
+#   push:
+#     tags:
+#       - '**'
+# jobs:
+#   cd:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v2
+#       - run: npm install
+#       # - run: npm build
+#       - run: npm run append-beta-to-name
+#       - run: npm run update-version
+#       - run: npm run release:cws
+#         env:
+#           EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+#           CLIENT_ID: ${{ secrets.CLIENT_ID }}
+#           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+#           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
