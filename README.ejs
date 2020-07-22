@@ -1,11 +1,11 @@
-# <%= pkg.meta.name %>
+# <%= pkg.meta.name %> [![Chrome Web Store][Shield: CWS: Users]][Link: CWS]
 
 > <%= pkg.description %>
 
 ## Install
 
-* [Chrome extension from Chrome Web Store](https://chrome.google.com/webstore/detail/<%= pkg.meta.chromeWebStoreId %>) ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/<%= pkg.meta.chromeWebStoreId %>?label=)
-  * [BETA version](https://chrome.google.com/webstore/detail/<%= pkg.meta.chromeWebStoreIdBeta %>) ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/<%= pkg.meta.chromeWebStoreIdBeta %>?label=) – automatically published from `develop` branch
+* [Chrome extension from Chrome Web Store&nbsp;![Chrome Web Store][Shield: CWS: Version]][Link: CWS]
+  * [BETA version&nbsp;![Chrome Web Store][Shield: CWS: Version: Beta]][Link: CWS: Beta] – automatically published from `develop` branch
 * Firefox add-on – TODO 👷‍
 * Safari extension – probably not gonna happen
 
@@ -30,3 +30,9 @@ Feel free to! 🙏
 
 This software is not endorsed by Strava. Please do not ask them for support.
 The term STRAVA and the Strava logo are the exclusive trademarks of, and are owned by, Strava Inc.
+
+[Shield: CWS: Users]: https://img.shields.io/chrome-web-store/users/<%= pkg.meta.chromeWebStoreId %>?label=Chrome+Extension
+[Shield: CWS: Version]: https://img.shields.io/chrome-web-store/v/<%= pkg.meta.chromeWebStoreId %>?label=
+[Shield: CWS: Version: Beta]: https://img.shields.io/chrome-web-store/v/<%= pkg.meta.chromeWebStoreIdBeta %>?label=
+[Link: CWS]: https://chrome.google.com/webstore/detail/<%= pkg.meta.chromeWebStoreId %>
+[Link: CWS: Beta]: https://chrome.google.com/webstore/detail/<%= pkg.meta.chromeWebStoreIdBeta %>
