@@ -38,6 +38,17 @@
   "meta": {
     "name": "Strava Enhancement Suite",
     "chromeWebStoreId": "egelalffpmicecakegglddmhlbdiemlg",
-    "chromeWebStoreIdBeta": "oaioodcklbhlefejbglemgjndhckgklf"
+    "chromeWebStoreIdBeta": "oaioodcklbhlefejbglemgjndhckgklf",
+    "mainFeatures": [
+      "Repeated segments",
+      "Dashboard filtering (hide virtual rides/commutes/promos/…)",
+      "Keyboard navigation",
+      "Customizable defaults",
+      "Improved pagination",
+      "Improved activity upload",
+      "Separate notifications",
+      "Unit conversion tooltips on hover",
+      "Enhanced Training log"
+    ]
   }
 }

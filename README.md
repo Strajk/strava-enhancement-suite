@@ -2,6 +2,8 @@
 
 > A browser extension to enhance Strava.com
 
+<em>Repeated segments • Dashboard filtering (hide virtual rides/commutes/promos/…) • Keyboard navigation • Customizable defaults • Improved pagination • Improved activity upload • Separate notifications • Unit conversion tooltips on hover • Enhanced Training log [and more & more](#features)</em>
+
 ## Install
 
 * [Chrome extension from Chrome Web Store&nbsp;![Chrome Web Store][Shield: CWS: Version]][Link: CWS]
@@ -9,13 +11,15 @@
 * Firefox add-on – TODO 👷‍
 * Safari extension – probably not gonna happen
 
-#### Install from Git
+<details>
+<summary><strong>Install manually from source</strong></summary>
 
 * Clone (or otherwise download) this repository
 * In Chrome, go to `chrome://extensions`
 * Ensure "Developer mode" is ticked
 * Click "Load unpacked" and select the `extension` directory within this repository
 * Refresh any page on Strava - the extension will now be active
+</details>
 
 ## Features
 
