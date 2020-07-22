@@ -1,11 +1,11 @@
-# Strava Enhancement Suite
+# Strava Enhancement Suite [![Chrome Web Store][Shield: CWS: Users]][Link: CWS]
 
 > A browser extension to enhance Strava.com
 
 ## Install
 
-* [Chrome extension from Chrome Web Store](https://chrome.google.com/webstore/detail/egelalffpmicecakegglddmhlbdiemlg) ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/egelalffpmicecakegglddmhlbdiemlg?label=)
-  * [BETA version](https://chrome.google.com/webstore/detail/oaioodcklbhlefejbglemgjndhckgklf) ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/oaioodcklbhlefejbglemgjndhckgklf?label=) – automatically published from `develop` branch
+* [Chrome extension from Chrome Web Store&nbsp;![Chrome Web Store][Shield: CWS: Version]][Link: CWS]
+  * [BETA version&nbsp;![Chrome Web Store][Shield: CWS: Version: Beta]][Link: CWS: Beta] – automatically published from `develop` branch
 * Firefox add-on – TODO 👷‍
 * Safari extension – probably not gonna happen
 
@@ -74,3 +74,9 @@ Feel free to! 🙏
 
 This software is not endorsed by Strava. Please do not ask them for support.
 The term STRAVA and the Strava logo are the exclusive trademarks of, and are owned by, Strava Inc.
+
+[Shield: CWS: Users]: https://img.shields.io/chrome-web-store/users/egelalffpmicecakegglddmhlbdiemlg?label=Chrome+Extension
+[Shield: CWS: Version]: https://img.shields.io/chrome-web-store/v/egelalffpmicecakegglddmhlbdiemlg?label=
+[Shield: CWS: Version: Beta]: https://img.shields.io/chrome-web-store/v/oaioodcklbhlefejbglemgjndhckgklf?label=
+[Link: CWS]: https://chrome.google.com/webstore/detail/egelalffpmicecakegglddmhlbdiemlg
+[Link: CWS: Beta]: https://chrome.google.com/webstore/detail/oaioodcklbhlefejbglemgjndhckgklf
