@@ -1,74 +1,75 @@
 /* global chrome */
 
-$(function() {
-  $.extend({
-    setOption: function(key, value) {
-      var items = {};
-      items[key] = value;
-      chrome.storage.sync.set(items);
-    },
+// TODO: Nicer
+function enhanceOptionsWithImageInfo(options) {
+  let counter = Object.keys(options).length;
+
+  return new Promise(function (resolve, reject) {
+
+    function cb(key, val) {
+      options[key].image = val;
+      counter--;
+      if (counter === 0) resolve(); // resolve after "receiving" all callbacks
+    }
+
+    chrome.runtime.getPackageDirectoryEntry(storageRootEntry => {
+      Object.entries(options).forEach(([key, option]) => {
+        storageRootEntry.getFile(`pages/img/${key}.png`, { create: false },
+          cb.bind(undefined, key, true),
+          cb.bind(undefined, key, false),
+        );
+      });
+    });
+
   });
+}
 
-  Object.entries(StravaEnhancementSuiteOptions).forEach(([key, option]) => {
-    var ul = $('<ul/>');
+function storageGet(key) {
+  return new Promise((resolve, reject) => {
+    chrome.storage.sync.get(key, items => resolve(items[key]));
+  });
+}
 
-    var elem = $('<input type="checkbox">');
+function storageSet(key, value) {
+  chrome.storage.sync.set({ [key]: value });
+}
 
-    elem.on('change', function() {
-      $.setOption(key, elem.prop('checked'));
-    });
+(async () => {
+  await enhanceOptionsWithImageInfo(StravaEnhancementSuiteOptions);
 
-    chrome.storage.sync.get(key, function(items) {
-      var val = items[key];
+  for (const [key, option] of Object.entries(StravaEnhancementSuiteOptions)) {
+    const val = await storageGet(key);
+    const ul = $('<ul/>');
 
-      elem.prop('checked', (typeof val === 'undefined') ? option.default : val);
-    });
-
+    let control;
     if (option.choices) {
-      elem = $('<select>');
-
+      control = $('<select>');
       $.each(option.choices, function() {
         $('<option>')
           .attr('value', this[0])
           .text(this[1])
-          .appendTo(elem);
+          .appendTo(control);
       });
-
-      elem.on('change', function() {
-        $.setOption(key, elem.val());
-      });
-
-      chrome.storage.sync.get(key, function(items) {
-        var val = items[key];
-
-        elem.val((typeof val === 'undefined') ? option.default : val);
-      });
+      control.on('change', () => storageSet(key, control.val()));
+      control.val((typeof val === 'undefined') ? option.default : val);
+    } else {
+      control = $('<input type="checkbox">');
+      control.on('change', () => storageSet(key, control.prop('checked')));
+      control.prop('checked', (typeof val === 'undefined') ? option.default : val);
     }
 
     // Add control element
-    $('<li/>')
-      .append(elem)
-      .appendTo(ul);
+    $('<li/>').append(control).appendTo(ul);
 
     // Description
-    $('<li class="text"/>')
-      .html(option.description) // Allow HTML in description
-      .appendTo(ul);
+    $('<li class="text" />').html(option.description).appendTo(ul);
 
     // Image
     if (option.image === true) {
-      $('<li><img></li>')
-        .find('img')
-        .attr('src', 'img/' + key + '.png')
-        .end()
-        .appendTo(ul);
+      $(`<li><img src="img/${key}.png"></li>`).appendTo(ul);
     }
 
-    $('<section><h3/></section>')
-      .find('h3')
-      .text(option.title)
-      .end()
-      .append(ul)
+    $(`<section><h3>${option.title}</h3></section>`).append(ul)
       .appendTo('.content');
-  });
-});
+  }
+})();
