@@ -1,3 +1,5 @@
+const notyf = new window.Notyf({ duration: 5000, dismissable: true });
+
 const StravaEnhancementSuiteHelpers = {
   keySort: (...keys) => function (a, b) {
     for (const key of keys) {
@@ -32,6 +34,22 @@ const StravaEnhancementSuiteHelpers = {
     const m = Math.round(((x / 60) - h) * 60);
     const mm = ('00' + m).substring(String(m).length); // pad
     return `${h}h${mm}m`;
+  },
+  notify: (message, type = 'success') => {
+    // TODO: Consider reusing existing notifications from Strava website
+    // BUT: I was not able to make styling work properly
+    // AND: It seems that styles are not loaded on new react-only pages at all
+    /*
+      const alert = new window.Strava.Ui.AlertView({
+        persist: true, // dismissTime
+        messageSubject: 'Subject',
+        messageBody: 'BODY',
+        alertType: 'info',
+        className: 'info',
+      });
+      alert.show();
+    */
+    notyf.open({ message, type });
   },
   // TODO: Automate or at least verify
   activities: {
@@ -445,7 +463,7 @@ function StravaEnhancementSuite($, options) {
           $(`#new_activity [name="activity[${key}]"][value=${val}]`).click();
           break;
         case 'TODO':
-          console.log(`Setting "${key}" via URL params is not supported yet`);
+          helpers.notify(`Setting "${key}" via URL params is not supported yet`, 'error');
           break;
       }
     });
