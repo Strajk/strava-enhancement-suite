@@ -14,7 +14,7 @@
     "generate:icons": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done",
     "generate:docs": "node tools/build-docs.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
+    "lint-fix": "eslint . --fix",
     "release:cws": "webstore upload --source=extension --auto-publish",
     "reset-manifest": "git checkout HEAD -- extension/manifest.json",
     "test": "ava",
@@ -33,7 +33,8 @@
     "ejs": "~3.1.2",
     "ejs-cli": "~2.2.0",
     "eslint": "~7.4.0",
-    "eslint-plugin-cypress": "~2.11.1"
+    "eslint-plugin-cypress": "~2.11.1",
+    "eslint-plugin-unicorn": "~21.0.0"
   },
   "meta": {
     "name": "Strava Enhancement Suite",
