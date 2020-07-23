@@ -2,6 +2,7 @@
 
 module.exports = {
   extends: ['eslint:recommended'],
+  plugins: ['unicorn'],
   parserOptions: {
     ecmaVersion: 2018,
   },
@@ -32,5 +33,12 @@ module.exports = {
     'no-redeclare': 'warn',
 
     'no-unused-vars': 'off',
+
+    // Prefer event key over keyCode
+    'unicorn/prefer-event-key': 'error', // only works on addEventListener, not with jQuery's .on
+    'no-restricted-properties': ['error', { // quick'n'dirty solution for jQuery
+      property: 'keyCode',
+      message: 'Use .key instead of .keyCode',
+    }],
   },
 };

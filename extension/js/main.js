@@ -385,7 +385,7 @@ function StravaEnhancementSuite($, options) {
   $.option('upload_file_ux', function() {
     // Ctrl+enter whilst editing the name saves the dialog
     $('body').on('keydown', '.manual-entry input#activity_name, .manual-entry textarea', function (e) {
-      if (e.ctrlKey && e.keyCode === 13) {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
         $(this)
           .parents('form')
           .find('input[type=submit]')
