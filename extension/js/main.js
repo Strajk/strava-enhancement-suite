@@ -607,6 +607,7 @@ function StravaEnhancementSuite($, options) {
   $.option('dashboard_filter', function() {
     let filters = [];
     [
+      // TODO: hide_route_feed_entries
       ['hide_challenge_feed_entries', ['.challenge']],
       ['hide_promotion_feed_entries', ['.promo, .membership']],
       ['hide_club_feed_entries', ['.club']],
@@ -1314,7 +1315,7 @@ function StravaEnhancementSuite($, options) {
               <span style="margin-right: 5px;">${formatDistance(total.distance)}</span>
               <span>${formatElevation(total.elev_gain)}</span>
             </div>
-          </div> 
+          </div>
         `;
       });
 
@@ -1376,10 +1377,10 @@ function StravaEnhancementSuite($, options) {
       const capitalized = key.charAt(0).toUpperCase() + key.slice(1);
       $(`
         <span style="margin-right: 8px;">
-          <span 
+          <span
             class="app-icon icon-dark icon-sm"
             style="background-image: url(data:image/svg+xml;base64,${btoa(val.icon)}); background-position-y: 0%"
-            title="${capitalized}" 
+            title="${capitalized}"
           />
           <strong style="display: block; margin-top: 2px;">${val.list.length}</strong>
         </span>

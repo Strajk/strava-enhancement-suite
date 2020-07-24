@@ -12,6 +12,7 @@ module.exports = {
   },
   globals: {
     StravaEnhancementSuiteOptions: true, // `true` to allow the variable to be overwritten
+    StravaEnhancementSuiteOptionsContexts: true, // `true` to allow the variable to be overwritten
     jQuery: false,
     $: false,
   },
