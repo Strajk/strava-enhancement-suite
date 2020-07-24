@@ -105,6 +105,8 @@ function StravaEnhancementSuite($, options) {
   });
   options = Object.assign({}, defaults, options);
 
+  this.options = options; // make available for debugging purposes
+
   $.fn.extend({
     onceOnly: function () {
       return this

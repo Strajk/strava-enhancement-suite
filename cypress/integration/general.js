@@ -11,6 +11,20 @@ describe('strava-enhancement-suite', () => {
     login();
   });
 
+  beforeEach(() => {
+    cy.clearExtensionStorage('sync');
+  });
+
+  it('executeInstructionsFromUrl', () => {
+    cy.visit('/dashboard', {
+      qs: {
+        '__SES.opts.repeated_segments': true,
+        '__SES.opts.annual_achievements': 'unhighlight',
+      },
+    });
+    cy.getExtensionStorage('sync').should('deep.eq', { repeated_segments: true, annual_achievements: 'unhighlight' });
+  });
+
   it(options.repeated_segments.title, () => {
     cy.visit('/activities/3553439073/segments');
     cy.get('table th:contains("Count")');

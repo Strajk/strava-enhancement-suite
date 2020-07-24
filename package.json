@@ -25,7 +25,7 @@
     "ava": "~3.10.1",
     "chrome-webstore-upload-cli": "~1.2.0",
     "cypress": "~4.10.0",
-    "cypress-browser-extension-plugin": "Strajk/cypress-browser-extension-plugin#15f14eaad4c0602339ddd67aafd9ec9d9145936b",
+    "cypress-browser-extension-plugin": "Strajk/cypress-browser-extension-plugin#a43dd46de57d0876b2e247fef3d69940a0df52d1",
     "cypress-dotenv": "~1.2.2",
     "cypress-skip-and-only-ui": "~1.2.6",
     "dot-json": "~1.2.0",
