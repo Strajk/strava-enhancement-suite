@@ -25,6 +25,93 @@ describe('strava-enhancement-suite', () => {
     cy.getExtensionStorage('sync').should('deep.eq', { repeated_segments: true, annual_achievements: 'unhighlight' });
   });
 
+  it(options.submit_forms_with_keyboard.title, () => {
+    const metaEnter = ['keydown', { key: 'Enter', metaKey: true }];
+
+    // TODO: Upload: File
+
+    { // Training editing
+      const name = '.table-activity-edit:first #name';
+      const description = '.table-activity-edit:first #description';
+
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: false });
+      cy.visit('/athlete/training');
+      cy.get('.quick-edit').first().click();
+      cy.get(name).clear().type('Test name').trigger(...metaEnter);
+      cy.get('.table-activity-edit:first').should('be.visible');
+      cy.get(description).clear().type('Test description').trigger(...metaEnter);
+      cy.get('.table-activity-edit:first').should('be.visible');
+
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: true });
+      cy.visit('/athlete/training');
+      cy.get('.quick-edit').first().click();
+      cy.get(name).clear().type('Test name').trigger(...metaEnter);
+      cy.get('.table-activity-edit:first').should('not.be.visible');
+      cy.wait(1000); // eslint-disable-line cypress/no-unnecessary-waiting
+      cy.get('.quick-edit').first().click();
+      cy.get(description).clear().type('Test description').trigger(...metaEnter);
+      cy.get('.table-activity-edit:first').should('not.be.visible');
+    }
+
+    { // Activity editing
+      const url = '/activities/3806933378/edit';
+      const name = '[name="activity[name]"]';
+      const description = '[name="activity[description]"]';
+
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: false });
+      cy.visit(url);
+      cy.get(name).clear().type('Test name').trigger(...metaEnter);
+      cy.url().should('include', '/edit');
+      cy.get(description).clear().type('Test description').trigger(...metaEnter);
+      cy.url().should('include', '/edit');
+
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: true });
+      cy.visit(url);
+      cy.get(name).clear().type('Test name').trigger(...metaEnter);
+      cy.url().should('not.include', '/edit');
+      cy.visit(url);
+      cy.get(description).clear().type('Test description').trigger(...metaEnter);
+      cy.url().should('not.include', '/edit');
+    }
+
+    { // Upload: Manual
+      const name = '[name="activity[name]"]';
+      const description = '[name="activity[description]"]';
+
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: false });
+      cy.visit('/upload/manual');
+      cy.get(name).clear().type('Test name').trigger(...metaEnter);
+      cy.url().should('include', '/upload');
+      cy.get(description).clear().type('Test description').trigger(...metaEnter);
+      cy.url().should('include', '/upload');
+
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: true });
+      cy.visit('/upload/manual');
+      cy.get(name).clear().type('Test name').trigger(...metaEnter);
+      cy.url().should('include', '/activities');
+      cy.visit('/upload/manual');
+      cy.get(description).clear().type('Test description').trigger(...metaEnter);
+      cy.url().should('include', '/activities'); // API return conflict, but that doesn't matter for this test
+    }
+
+    { // Comments
+      const url = '/activities/1731836154';
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: false });
+      cy.visit(url);
+      cy.get('.icon-comment').click();
+      cy.get('.comments textarea').type('Wheee').trigger(...metaEnter);
+      cy.get('.comments .media-actions button').should('not.have.attr', 'disabled'); // cause it was not sent
+
+      cy.setExtensionStorage('sync', { submit_forms_with_keyboard: true });
+      cy.visit(url);
+      cy.get('.icon-comment').click();
+      cy.get('.comments textarea').type('Wheee').trigger(...metaEnter);
+      cy.get('.comments .media-actions button').should('have.attr', 'disabled'); // cause it was sent
+    }
+
+
+  });
+
   it(options.repeated_segments.title, () => {
     cy.visit('/activities/3553439073/segments');
     cy.get('table th:contains("Count")');
