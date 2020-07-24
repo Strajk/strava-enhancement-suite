@@ -4,8 +4,9 @@
   "numTestsKeptInMemory": 200,
   "baseUrl": "https://www.strava.com/",
   "env": {
-    "USERNAME": "strava-enhancement-suite@protonmail.com",
+    "USERNAME_TEST": "strava-enhancement-suite@protonmail.com",
     "PASSWORD_TEST": "",
+    "USERNAME_PERSONAL": "strajk@me.com",
     "PASSWORD_PERSONAL": ""
   },
   "projectId": "2pbivf"
