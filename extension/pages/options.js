@@ -44,7 +44,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   hide_premium_badges: {
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Premium badges',
-    description: 'Hide \'Premium\' badges.',
+    description: 'Hide Premium badges on avatars. Subscriber status on an athlete’s page is still shown.',
     default: false,
   },
   comment_post_on_enter: {
