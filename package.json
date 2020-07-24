@@ -8,21 +8,23 @@
   },
   "scripts": {
     "append-beta-to-name": "dot-json extension/manifest.json name 'Strava Enhancement Suite BETA'",
-    "build": "cd extension && zip -r ../build.zip ./ && echo '\n=== build.zip prepared ===\n'",
     "cypress:run": "cypress run --browser chrome",
     "cypress:open": "cypress open",
+    "build:docs": "node tools/build-docs.js",
+    "watch:docs": "chokidar 'README.ejs' -c 'npm run build:docs'",
     "generate:icons": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done",
-    "generate:docs": "node tools/build-docs.js",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
     "release:cws": "webstore upload --source=extension --auto-publish",
     "reset-manifest": "git checkout HEAD -- extension/manifest.json",
     "test": "ava",
     "test:watch": "ava --watch",
-    "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)"
+    "update-version": "dot-json extension/manifest.json version $(date -u +%y.%-m.%-d.%-H%M)",
+    "zip": "cd extension && zip -r ../build.zip ./"
   },
   "devDependencies": {
     "ava": "~3.10.1",
+    "chokidar-cli": "~2.1.0",
     "chrome-webstore-upload-cli": "~1.2.0",
     "cypress": "~4.10.0",
     "cypress-browser-extension-plugin": "Strajk/cypress-browser-extension-plugin#a43dd46de57d0876b2e247fef3d69940a0df52d1",
