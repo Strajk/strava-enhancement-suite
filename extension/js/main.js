@@ -1262,6 +1262,20 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
+  $.option('hide_premium_badges', function() {
+    // Only keep "Subscriber" line right under the name on athlete's page
+    const selectors = [
+      '.avatar-badge', // badge over the top-right corner of avatar profiles
+      '.badge.premium', // activity page: prefixed to activity name
+      '.icon-badge-premium', // suffixed to athlete name
+      '.icon-badge-premium', // Club leaderboard
+      '.icon-premium', // Card title prefixes (e.g. Relative effort card on dashboard)
+    ];
+    const css = `${selectors.join(', ')} { display: none; }`;
+    $(`<style>${css}</style>`).appendTo(document.head);
+  });
+
+
   $.option('my_activities_expand_latest_activity', function() {
     if (window.location.pathname !== '/athlete/training') return;
 
