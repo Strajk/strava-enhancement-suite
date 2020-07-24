@@ -1,4 +1,12 @@
-/* global chrome */
+/* global chrome, browser */
+
+// TODO: Add unit tests
+function convertToBoolOrInput(input) {
+  const lower = input.toLowerCase();
+  if (['true', 'y', '1'].some(x => lower === x)) return true;
+  if (['false', 'n', '0'].some(x => lower === x)) return false;
+  return input;
+}
 
 function injectJs(what) {
   return new Promise((resolve, reject) => {
@@ -31,7 +39,32 @@ function injectCss(what) {
   });
 }
 
-chrome.storage.sync.get(null, async (items) => {
+// TODO: Add unit tests
+async function executeInstructionsFromUrl() {
+  // /path?__SES.opts.general_typography=true&__SES.opts.blabla=false
+  if (window.location.search.includes('__SES')) {
+    const urlParamsOrig = new URLSearchParams(window.location.search);
+    const urlParamsNew = new URLSearchParams(window.location.search);
+    for (const [key, value] of urlParamsOrig) {
+      if (!key.startsWith('__SES.')) continue;
+      const strippedKey = key.substring('__SES.'.length);
+      if (strippedKey.startsWith('opts.')) {
+        const opt = strippedKey.substring('opts.'.length);
+        const parsedValue = convertToBoolOrInput(value);
+        await browser.storage.sync.set({ [opt]: parsedValue });
+      }
+      urlParamsNew.delete(key);
+    }
+    const newSearchParams = urlParamsNew.toString();
+    const newUrl = window.location.pathname + (newSearchParams ? `?${newSearchParams}` : '');
+    history.replaceState(null, null, newUrl);
+  }
+}
+
+(async () => {
+  await executeInstructionsFromUrl();
+  const options = await browser.storage.sync.get();
+
   await injectJs('/pages/options.js');
 
   await injectJs('/js/libs/jquery.js'); // jQuery is not present on new, react-only pages, e.g. Training Log
@@ -46,5 +79,7 @@ chrome.storage.sync.get(null, async (items) => {
 
   await injectJs('/js/main.js');
 
-  await injectJs(`window.strava_enhancement_suite = new StravaEnhancementSuite(jQuery, ${JSON.stringify(items)});`);
-});
+  await injectJs(`window.strava_enhancement_suite = new StravaEnhancementSuite(jQuery, ${JSON.stringify(options)});`);
+})();
+
+
