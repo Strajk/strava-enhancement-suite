@@ -1,5 +1,13 @@
 /* global chrome */
 
+// Only for easier local development when opening options.html directly in the browser
+let onerror;
+if (!chrome.runtime.getPackageDirectoryEntry && !chrome.storage) {
+  chrome.runtime.getPackageDirectoryEntry = (cb) => cb({ getFile: (path, opts, ok) => ok() });
+  chrome.storage = { sync: { get: (key, cb) => cb(''), set: () => '' } };
+  onerror = 'this.style.display="none"';
+}
+
 // TODO: Nicer
 function enhanceOptionsWithImageInfo(options) {
   let counter = Object.keys(options).length;
@@ -39,7 +47,11 @@ function storageSet(key, value) {
 
   for (const [key, option] of Object.entries(StravaEnhancementSuiteOptions)) {
     const val = await storageGet(key);
-    const ul = $('<ul/>');
+    const $section = $('<section />');
+
+    const $header = $('<label />');
+
+    $(`<h3>${option.title}</h3>`).appendTo($header);
 
     let control;
     if (option.choices) {
@@ -59,17 +71,19 @@ function storageSet(key, value) {
     }
 
     // Add control element
-    $('<li/>').append(control).appendTo(ul);
+    $('<div class="control" />').append(control).appendTo($header);
+
+    // Header to section
+    $header.appendTo($section);
 
     // Description
-    $('<li class="text" />').html(option.description).appendTo(ul);
+    $('<div class="description" />').html(option.description).appendTo($section);
 
     // Image
     if (option.image === true) {
-      $(`<li><img src="img/${key}.png"></li>`).appendTo(ul);
+      $(`<img src="img/${key}.png" onerror=${onerror}>`).appendTo($section);
     }
 
-    $(`<section><h3>${option.title}</h3></section>`).append(ul)
-      .appendTo('.content');
+    $section.appendTo('.content');
   }
 })();
