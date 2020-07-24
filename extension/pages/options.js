@@ -18,6 +18,12 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Show aggregate segment data (fastest, slowest, average, total distance, total elevation, etc.) when segments are repeated within an activity.',
     default: true,
   },
+  submit_forms_with_keyboard: {
+    context: StravaEnhancementSuiteOptionsContexts.general,
+    title: 'Submit forms with keyboard',
+    description: 'Allows submitting forms by pressing <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>.<br />Works on comments, editing activities, and uploading new activities.',
+    default: true,
+  },
   annual_achievements: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Annual achievements',
@@ -46,12 +52,6 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     title: 'Hide Premium badges',
     description: 'Hide Premium badges on avatars. Subscriber status on an athlete’s page is still shown.',
     default: false,
-  },
-  comment_post_on_enter: {
-    context: StravaEnhancementSuiteOptionsContexts.general,
-    title: '"Enter" posts comment',
-    description: 'Immediately posts comment when pressing the "enter" / "return" key in the edit box rather than adding a new line.',
-    default: true,
   },
   hide_challenge_feed_entries: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
@@ -170,7 +170,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   improve_upload_activity: {
     context: StravaEnhancementSuiteOptionsContexts.upload,
     title: 'Improve activity upload',
-    description: 'Add the ability to automatically "Save & View", CTRL+Enter support, and increase the size of the description boxes to the manual "Upload and Sync Your Activities" manual upload page,',
+    description: 'Add the ability to automatically "Save & View", and increase the size of the description boxes to the manual "Upload and Sync Your Activities" manual upload page,',
     default: true,
   },
   hide_calories: {
@@ -254,19 +254,13 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   activity_edit_ux: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
     title: 'Activity editing page: UX',
-    description: 'Autofocus title field; disable autocomplete; allow submitting by `enter`',
-    default: true,
-  },
-  upload_file_ux: {
-    context: StravaEnhancementSuiteOptionsContexts.upload,
-    title: 'Upload: File: UX',
-    description: 'Allow submitting by `enter`',
+    description: 'Autofocus title field; disable autocomplete.',
     default: true,
   },
   upload_manual_ux: {
     context: StravaEnhancementSuiteOptionsContexts.upload,
     title: 'Upload: Manual: UX',
-    description: 'Allow submitting by `enter`; allow pre-filling params from URL',
+    description: 'Allow pre-filling params from URL',
     default: true,
   },
   // TODO: Make it more obvious that this is parent option of all hide_* options

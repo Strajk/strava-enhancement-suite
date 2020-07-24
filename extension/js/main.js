@@ -275,6 +275,84 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
+  $.option('submit_forms_with_keyboard', function() {
+    function bind(selectors, cb) {
+      $(document).on('keydown', selectors.join(', '), function(ev) {
+        if ((ev.metaKey || ev.ctrlKey) && ev.key === 'Enter') {
+          cb(this);
+          return false;
+        }
+      });
+    }
+
+    // Comments
+    bind([
+      '.comments textarea',
+    ], el => {
+      // Click of Post button instead of submitting is important,
+      // cause click handler also takes care of textarea clearing and possibly other stuff
+      // Note: Verify both on dashboard and activity page
+      $(el).parents('form').find('button:first').click();
+    });
+
+
+    // Activity editing
+    if (/^\/activities\/\d+\/edit$/.test(window.location.pathname)) {
+      bind([
+        '#edit-activity #activity_name',
+        '#edit-activity #activity_description',
+      ], el => {
+        $('#edit-activity').submit();
+      });
+    }
+
+    // Training editing
+    if (window.location.pathname.startsWith('/athlete/training')) {
+      bind([
+        '.table-activity-edit #name',
+        '.table-activity-edit #description',
+      ], el => {
+        $(el).closest('form').find('button[type=submit]').click();
+      });
+    }
+
+    // Upload: File
+    if (window.location.pathname === '/upload/select') {
+      const submit = () => { // eslint-disable-line no-inner-declarations
+        const btn = $('footer .save-and-view');
+        function poll() {
+          if (btn.hasClass('disabled')) {
+            btn.text('Please wait...');
+            setTimeout(poll, 1000);
+          }
+          btn.click();
+        }
+        poll();
+      };
+      bind([
+        '.uploads input[type=text]',
+        '.uploads textarea',
+      ], el => {
+        submit();
+      });
+    }
+
+    // Upload: Manual
+    if (window.location.pathname === '/upload/manual') {
+      bind([
+        '.manual-entry input#activity_name',
+        '.manual-entry textarea',
+      ], el => {
+        $(el)
+          .closest('form')
+          .find('input[type=submit]')
+          .click();
+      });
+    }
+
+  });
+
+
   // Own activity page: editing
   $.option('activity_edit_ux', function() {
     if (location.pathname.startsWith('/activities') && location.pathname.endsWith('/edit')) {
@@ -282,14 +360,6 @@ function StravaEnhancementSuite($, options) {
       $('#edit-activity #activity_name').onceOnly()
         .attr('autocomplete', 'off')
         .focus();
-
-      // Submit with keyboard
-      // Note: Submitting by Enter while editing activity name is already done directly on Strava
-      $('body').on('keydown', '#edit-activity #activity_name, #edit-activity #activity_description', function (e) {
-        if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-          $('#edit-activity').submit();
-        }
-      });
 
     } else if (location.pathname === '/athlete/training') {
 
@@ -399,18 +469,6 @@ function StravaEnhancementSuite($, options) {
     // `#segments` will fire correctly just once
     document.arrive('#segments', { existing: true }, function() {
       $('#show-hidden-efforts').onceOnly().click();
-    });
-  });
-
-  $.option('upload_file_ux', function() {
-    // Ctrl+enter whilst editing the name saves the dialog
-    $('body').on('keydown', '.manual-entry input#activity_name, .manual-entry textarea', function (e) {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-        $(this)
-          .parents('form')
-          .find('input[type=submit]')
-          .click();
-      }
     });
   });
 
@@ -531,24 +589,6 @@ function StravaEnhancementSuite($, options) {
       // Value
       .next()
       .hide();
-  });
-
-  // Post comments on 'enter'
-  $.option('comment_post_on_enter', function() {
-    $(document).on('keydown', '.comments textarea', function(e) {
-      if (e.key !== 'Enter') {
-        return true;
-      }
-
-      $(this)
-        .parents('form')
-        // Click of Post button instead of submitting is important,
-        // cause click handler also takes care of textarea clearing and possibly other stuff
-        // Note: Verify both on dashboard and activity page
-        .find('button:first')
-        .click();
-      return false;
-    });
   });
 
   // External links
@@ -713,30 +753,6 @@ function StravaEnhancementSuite($, options) {
 
     const titleSelector = '.uploads input[type=text]';
     const descriptionSelector = '.uploads textarea';
-
-    function submit() {
-      const btn = $('footer .save-and-view');
-      function poll() {
-        if (btn.hasClass('disabled')) {
-          btn.text('Please wait...');
-          setTimeout(poll, 1000);
-        }
-        btn.click();
-      }
-      poll();
-    }
-
-    $('body').on('keydown', titleSelector, function(ev) {
-      const el = $(this);
-      if (
-        ev.key === 'Enter' && (
-          el.is(titleSelector) ||
-          el.is(descriptionSelector) && (ev.metaKey || ev.ctrlKey)
-        )
-      ) {
-        submit();
-      }
-    });
 
     document.arrive(titleSelector, { existing: true }, function() {
       $(this).onceOnly().attr('autocomplete', 'off');
