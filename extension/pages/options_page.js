@@ -64,7 +64,7 @@ function storageSet(key, value) {
 
       const $header = $('<label />');
 
-      $(`<h3>${option.title}</h3>`).appendTo($header);
+      $(`<h3 title="${key}">${option.title}</h3>`).appendTo($header);
 
       let control;
       if (option.choices) {
