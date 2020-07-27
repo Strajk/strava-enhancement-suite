@@ -678,7 +678,7 @@ function StravaEnhancementSuite($, options) {
 
   // Hide invite friends & social buttons
   $.option('hide_invite_friends', function() {
-    // Navbar: "Find friends"
+    // Navbar: User menu: "Find friends"
     $('.user-nav .options li').has('.find-and-invite').hide(); // @CHECKED 2020-06-19
 
     // My profile: "Share your Runs/Rides"
@@ -689,7 +689,7 @@ function StravaEnhancementSuite($, options) {
 
     // Dashboard: Suggested Friends
     // TODO: Consider this as a separate option
-    $('.sidebar #suggested-follows').hide(); // @CHECKED 2020-06-19
+    // $('.sidebar #suggested-follows').hide(); // @CHECKED 2020-06-19
 
     document.arrive([
       '.feed-entry .share', // Athlete: Feed entry
