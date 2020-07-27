@@ -245,12 +245,6 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Allow editing own activity by clicking on it\'s title or pressing `e` key',
     default: true,
   },
-  user_shortcut: {
-    context: StravaEnhancementSuiteOptionsContexts.general,
-    title: 'User profile: Shortcuts',
-    description: 'Add shortcut link for editing own profile',
-    default: true,
-  },
   activity_edit_ux: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
     title: 'Activity editing page: UX',
