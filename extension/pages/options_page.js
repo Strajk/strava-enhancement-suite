@@ -59,6 +59,8 @@ function storageSet(key, value) {
     $(`<h2>${ctx.title}</h2>`).appendTo('.content');
 
     for (const [key, option] of Object.entries(options)) {
+      if (option.internal) continue;
+
       const val = await storageGet(key);
       const $section = $('<section />');
 

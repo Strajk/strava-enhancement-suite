@@ -239,8 +239,8 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Allow pre-filling params from URL',
     default: true,
   },
-  // TODO: Make it more obvious that this is parent option of all hide_* options
   dashboard_filter: {
+    internal: true, // TODO: Make it more obvious that this is parent option of all hide_* options
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Dashboard: Filter activities',
     description: 'Allow hiding specific activities (promos, virtual rides, treadmill runs, club events, goal achievements, ...)',
