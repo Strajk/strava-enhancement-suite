@@ -140,7 +140,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   hide_upcoming: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Hide "upcoming"',
+    title: 'Hide "Upcoming"',
     description: 'Hide "Upcoming" module on the dashboard if you have no upcoming races, events or goals coming soon. Also hides the "Discover More" sub-module.',
     default: false,
   },
