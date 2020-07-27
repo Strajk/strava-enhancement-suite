@@ -673,29 +673,6 @@ function StravaEnhancementSuite($, options) {
         }
       }
 
-      // Achievements
-      // ---
-      const achiementElems = $(this)
-        .find('.featured-achievements li')
-        .filter(function() {
-          var txt = $(this).find('strong').text();
-          return /^\d+ (KOM|QOM|PR)$/.test(txt);
-        });
-      switch (options.annual_achievements) {
-        case 'show':
-          break;
-        case 'unhighlight':
-          achiementElems
-            .find('strong')
-            .css('font-weight', 'normal')
-            .text(function(idx, txt) {
-              return '(' + txt + ')';
-            });
-          break;
-        case 'hide':
-          achiementElems.hide();
-          break;
-      }
     });
   });
 

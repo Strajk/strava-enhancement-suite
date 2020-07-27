@@ -24,17 +24,6 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Allows submitting forms by pressing <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>.<br />Works on comments, editing activities, and uploading new activities.',
     default: true,
   },
-  annual_achievements: {
-    context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Annual achievements',
-    description: 'Changes how yearly achievements (eg. "2015 KOM") are shown on the dashboard feed. "Unhighlight" keeps them visible but without making them stand out so much.',
-    default: 'show',
-    choices: [
-      ['show', 'Show'],
-      ['unhighlight', 'Unhighlight'],
-      ['hide', 'Hide'],
-    ],
-  },
   external_links: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
     title: 'External links',
