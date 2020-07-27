@@ -273,7 +273,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   general_typography: {
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Enhance typography',
-    description: 'Replace `--` with `–`, `->` with `→` and so on',
+    description: 'Replace <code>--</code> with <code>&ndash;</code>, <code>-></code> with <code>&rarr;</code>, <code>(L)</code> with <code>&hearts;</code> and so on…',
     default: true,
   },
   search_ux: {
