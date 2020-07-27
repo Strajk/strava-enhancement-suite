@@ -24,11 +24,11 @@
 ## Features
 
 * Repeated segments
+* Submit forms with keyboard
 * Annual achievements
 * External links
 * Hide "find friends"
 * Hide Premium badges
-* "Enter" posts comment
 * Challenge feed entries
 * Club feed entries
 * Goal feed entries
@@ -43,7 +43,6 @@
 * Variability Index
 * Estimated FTP
 * Running TSS
-* Hide blog links
 * Hover actions
 * Swap club & challenges
 * Hide "Yearly Goals"
@@ -62,9 +61,7 @@
 * My Activities: Expand latest activity on page load
 * Training Log: Enhanced Overview
 * Activity page: Shortcuts
-* User profile: Shortcuts
 * Activity editing page: UX
-* Upload: File: UX
 * Upload: Manual: UX
 * Dashboard: Filter activities
 * Enhance typography

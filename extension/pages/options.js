@@ -31,7 +31,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: true,
   },
   hide_invite_friends: {
-    context: StravaEnhancementSuiteOptionsContexts.dashboard,
+    context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Social Sharing',
     description: 'Hide social networking buttons, including invitations to invite/find friends on Strava.',
     default: false,
