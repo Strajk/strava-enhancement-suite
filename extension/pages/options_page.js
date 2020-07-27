@@ -92,6 +92,11 @@ function storageSet(key, value) {
       $header.appendTo($section);
 
       // Description
+      if (option.note) {
+        $(`<div class="note ${option.note.type}" />`).html(option.note.text).appendTo($section);
+      }
+
+      // Description
       if (option.description) {
         $('<div class="description" />').html(option.description).appendTo($section);
       }

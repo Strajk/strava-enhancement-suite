@@ -39,7 +39,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   hide_premium_badges: {
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Premium badges',
-    description: 'Hide Premium badges on avatars. Subscriber status on an athlete’s page is still shown.',
+    description: 'Hide Premium badges on avatars. Subscriber status on an athlete\'s page is still shown.',
     default: false,
   },
   hide_challenge_feed_entries: {
@@ -122,8 +122,9 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   enlarge_on_hover: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Hover actions',
-    description: 'Make various elements (Instagram images, maps, avatars, etc.) larger when you run your mouse over them.',
-    default: true,
+    note: { type: 'bug', text: 'Beware, currently broken. Enable only on your own risk.' },
+    description: 'Make various elements (photos, maps, avatars, etc.) larger when you hover over them.',
+    default: false,
   },
   swap_clubs_and_challenge_module: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
