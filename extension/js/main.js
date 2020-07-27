@@ -796,26 +796,6 @@ function StravaEnhancementSuite($, options) {
       });
   });
 
-  // Athlete profile
-  $.option('user_shortcut', function() {
-    var profile_link = $('header .user-menu a');
-    if (
-      (profile_link.length === 0)
-      || (profile_link.attr('href').indexOf(window.location.pathname) !== 0)
-    ) {
-      return;
-    }
-
-    $('<a>')
-      .css('font-size', '20px')
-      .css('margin-left', '8px')
-      .attr('href', '/settings/profile')
-      .text('(edit)')
-      .appendTo('.page .main h1:first');
-    $('.avatar.avatar-athlete img')
-      .wrap('<a href="/settings/profile"></a>');
-  });
-
   // Improved pagination
   // Seems like old pagination is only on this one page: https://www.strava.com/athlete/training
   $.option('improve_pagination', function() {
