@@ -90,7 +90,9 @@ function storageSet(key, value) {
       $header.appendTo($section);
 
       // Description
-      $('<div class="description" />').html(option.description).appendTo($section);
+      if (option.description) {
+        $('<div class="description" />').html(option.description).appendTo($section);
+      }
 
       // Image
       if (option.image === true) {
