@@ -33,7 +33,8 @@ jobs:
       - run: npm run update-version
       - run: npm run release:cws
         env:
-          EXTENSION_ID: ${{ secrets.EXTENSION_ID }}
+          # TODO: Use .meta.chromeWebStoreIdBeta from package.json
+          EXTENSION_ID: "oaioodcklbhlefejbglemgjndhckgklf"
           CLIENT_ID: ${{ secrets.CLIENT_ID }}
           CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
