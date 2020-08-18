@@ -1,4 +1,4 @@
-const notyf = new window.Notyf({ duration: 5000, dismissable: true });
+let notyf;
 
 const StravaEnhancementSuiteHelpers = {
   keySort: (...keys) => function (a, b) {
@@ -36,6 +36,10 @@ const StravaEnhancementSuiteHelpers = {
     return `${h}h${mm}m`;
   },
   notify: (message, type = 'success') => {
+    if (!notyf) {
+      notyf = new window.Notyf({ duration: 5000, dismissable: true });
+    }
+
     // TODO: Consider reusing existing notifications from Strava website
     // BUT: I was not able to make styling work properly
     // AND: It seems that styles are not loaded on new react-only pages at all
