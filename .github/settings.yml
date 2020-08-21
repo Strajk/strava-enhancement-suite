@@ -14,3 +14,24 @@ repository:
 labels:
   - name: "area: infra"
     color: FDB000
+  - name: "area: product"
+    color: 84DEE9
+  - name: "area: meta"
+    color: C5CBE8
+
+  - name: "type: feature"
+    color: F7BCD0
+  - name: "type: bug"
+    color: FDAB94
+  - name: "type: other"
+    color: E0E0E0
+
+  - name: "state: idea"
+    color: F0F3C5
+  - name: "state: todo"
+    color: D4E061
+  - name: "state: on-hold"
+    color: 9E9E9E
+
+  - name: "good first issue"
+  - color: 6FEFB0
