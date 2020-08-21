@@ -1,4 +1,4 @@
-const StravaEnhancementSuiteOptionsContexts = {
+const StravaEnhancementSuiteOptionsContexts = { // eslint-disable-line no-redeclare
   // Colors taken from Apple Calendar swatches
   // Note: Colors currently not used
   general: { title: 'General', color: 'hsl(48,95%,55%)' },

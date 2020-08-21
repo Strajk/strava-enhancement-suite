@@ -11,10 +11,10 @@ module.exports = {
     es6: true,
   },
   globals: {
-    StravaEnhancementSuiteOptions: true, // `true` to allow the variable to be overwritten
-    StravaEnhancementSuiteOptionsContexts: true, // `true` to allow the variable to be overwritten
-    jQuery: false,
-    $: false,
+    StravaEnhancementSuiteOptions: 'writable',
+    StravaEnhancementSuiteOptionsContexts: 'writable',
+    jQuery: 'readonly',
+    $: 'readonly',
   },
   ignorePatterns: [
     'extension/js/libs/*.js',
