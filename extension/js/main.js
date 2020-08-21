@@ -273,6 +273,14 @@ function StravaEnhancementSuite($, options) {
 
     // Edit activity by pressing "e"
     $('body').on('keydown', function (e) {
+      if (
+        document.activeElement && (
+          document.activeElement.tagName === 'INPUT' ||
+          document.activeElement.tagName === 'TEXTAREA' ||
+          document.activeElement.isContentEditable // not needed atm, but future proof
+        )
+      ) return true; // Do not handle
+
       if (e.key === 'e') {
         location.pathname = edit_activity.attr('href');
       }
