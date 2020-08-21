@@ -25,6 +25,20 @@ describe('strava-enhancement-suite', () => {
     cy.getExtensionStorage('sync').should('deep.eq', { repeated_segments: true, annual_achievements: 'unhighlight' });
   });
 
+  it(options.activity_shortcuts.title, () => {
+    // Open own activity
+    cy.visit('/activities/3929744208');
+
+    // typing "e" (in "teeest") inside textarea should not redirect to edit
+    cy.get('.view-comments.button').click();
+    cy.get('.mentionable-comment-field textarea').type('Teeest', { delay: 250 });
+    cy.get('.lightbox-window .btn-close').click();
+
+    // typing "e" elsewhere should
+    cy.get('body').type('e');
+    cy.url().should('include', '/edit');
+  });
+
   it(options.submit_forms_with_keyboard.title, () => {
     const metaEnter = ['keydown', { key: 'Enter', metaKey: true }];
 
