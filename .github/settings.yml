@@ -10,3 +10,7 @@ repository:
   allow_merge_commit: false
   allow_squash_merge: false
   allow_rebase_merge: true
+
+labels:
+  - name: "area: infra"
+    color: FDB000
