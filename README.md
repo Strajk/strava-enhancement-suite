@@ -21,21 +21,28 @@
 * Refresh any page on Strava - the extension will now be active
 </details>
 
+---
+
+<p align="center">
+  <img src="./assets/screenshot-1.png" />
+</p>
+
+---
+
 ## Features
 
 * Repeated segments
 * Submit forms with keyboard
-* Annual achievements
 * External links
-* Hide "find friends"
+* Hide Social Sharing
 * Hide Premium badges
-* Challenge feed entries
-* Club feed entries
-* Goal feed entries
-* Route feed entries
-* Promotion feed entries
-* Training plan feed entries
-* Hide turbo trainer / virtual rides
+* Hide Challenge feed entries
+* Hide Club feed entries
+* Hide Goal feed entries
+* Hide Route feed entries
+* Hide Promotion feed entries
+* Hide Training plan feed entries
+* Hide turbo-trainer / virtual rides (Zwift)
 * Compare running
 * Running cadence
 * Running heart rate
@@ -46,7 +53,7 @@
 * Hover actions
 * Swap club & challenges
 * Hide "Yearly Goals"
-* Hide "upcoming"
+* Hide "Upcoming"
 * Improve pagination
 * Improve activity upload
 * Hide calories
