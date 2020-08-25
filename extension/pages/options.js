@@ -12,6 +12,12 @@ const StravaEnhancementSuiteOptionsContexts = { // eslint-disable-line no-redecl
 };
 
 const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
+  keyboard_controls: {
+    context: StravaEnhancementSuiteOptionsContexts.dashboard,
+    title: 'Keyboard controls for navigation, giving kudos, and commenting',
+    description: 'Enable keyboard controls on the dashboard:\n<br> <kbd>J</kbd> - Up (previous) \n<br> <kbd>K</kbd> - Down (next) \n<br> <kbd>L</kbd> - Kudos (like) \n<br> <kbd>C</kbd> - Comment \n<br> <kbd>Enter</kbd> - Go to activity  (hold shift to open in a new tab/window)\n<br> <kbd>E</kbd> - Edit activity  (hold shift to open in a new tab/window)\n<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window) ',
+    default: true,
+  },
   repeated_segments: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
     title: 'Repeated segments',
@@ -20,7 +26,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   submit_forms_with_keyboard: {
     context: StravaEnhancementSuiteOptionsContexts.general,
-    title: 'Submit forms with keyboard',
+    title: 'Submit forms with <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>',
     description: 'Allows submitting forms by pressing <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>.<br />Works on comments, editing activities, and uploading new activities.',
     default: true,
   },
@@ -32,8 +38,8 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   hide_invite_friends: {
     context: StravaEnhancementSuiteOptionsContexts.general,
-    title: 'Hide Social Sharing',
-    description: 'Hide social networking buttons, including invitations to invite/find friends on Strava.',
+    title: 'Hide Social Sharing buttons (Facebook, Twitter, email)',
+    description: 'Hide social networking buttons (Facebook, Twitter, email), including invitations to invite/find friends on Strava.',
     default: false,
   },
   hide_premium_badges: {
@@ -74,7 +80,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   hide_turbo_trainer_rides: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Hide turbo-trainer / virtual rides (Zwift)',
+    title: 'Hide turbo-trainer / virtual rides (e.g. Zwift)',
     default: false,
   },
   side_by_side_running: {
@@ -85,43 +91,43 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   running_cadence: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Running cadence',
+    title: 'Show Running cadence by default',
     description: 'Show running cadence by default in elevation profile.',
     default: true,
   },
   running_heart_rate: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Running heart rate',
+    title: 'Show Running heart rate by default',
     description: 'Show running heart rate by default in elevation profile.',
     default: true,
   },
   running_gap: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Running Grade Adjusted Pace (GAP)',
+    title: 'Show Running Grade Adjusted Pace (GAP) by default',
     description: 'Show running Grade Adjusted Pace (GAP) by default in elevation profile.',
     default: true,
   },
   variability_index: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Variability Index',
+    title: 'Show Variability Index by default',
     description: 'Calculate a Variability Index (VI) from the weighted average power and the average power, an indication of how "smooth" a ride was. A VI of 1.0 would mean perfect pacing. (Requires a power meter.)',
     default: true,
   },
   estimated_ftp: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Estimated FTP',
+    title: 'Show Estimated FTP by default',
     description: 'Select "Show Estimated FTP" by default on Power Curve.',
     default: true,
   },
   running_tss: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Running TSS',
+    title: 'Show Running TSS by default',
     description: 'Estimates a run"s Training Stress Score from its Grade Adjusted Pace distribution.',
     default: true,
   },
   enlarge_on_hover: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Hover actions',
+    title: 'Enlarge on hover actions',
     note: { type: 'bug', text: 'Beware, currently broken. Enable only on your own risk.' },
     description: 'Make various elements (photos, maps, avatars, etc.) larger when you hover over them.',
     default: false,
@@ -164,7 +170,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   convert_units: {
     context: StravaEnhancementSuiteOptionsContexts.general,
-    title: 'Convert units on hover',
+    title: 'Units conversion tooltips on hover',
     description: 'Show converted units when you hover your mouse over numbers.',
     default: true,
   },
@@ -188,15 +194,9 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   separate_notifications: {
     context: StravaEnhancementSuiteOptionsContexts.general,
-    title: 'Separate notifications',
+    title: 'Separated notifications by type',
     description: 'Separate notification types for kudos, comments, uploads, challenges, follows, and others',
     default: false, // TODO: Consider enabling after getting some feedback
-  },
-  keyboard_controls: {
-    context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Keyboard controls',
-    description: 'Enable keyboard controls on the dashboard:\n<br> <kbd>J</kbd> - Up (previous) \n<br> <kbd>K</kbd> - Down (next) \n<br> <kbd>L</kbd> - Kudos (like) \n<br> <kbd>C</kbd> - Comment \n<br> <kbd>Enter</kbd> - Go to activity  (hold shift to open in a new tab/window)\n<br> <kbd>E</kbd> - Edit activity  (hold shift to open in a new tab/window)\n<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window) ',
-    default: true,
   },
   show_kudo_all_button: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
@@ -224,19 +224,19 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   activity_shortcuts: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Activity page: Shortcuts',
+    title: 'Shortcuts on Activity page',
     description: 'Allow editing own activity by clicking on it\'s title or pressing `e` key',
     default: true,
   },
   activity_edit_ux: {
     context: StravaEnhancementSuiteOptionsContexts.activity,
-    title: 'Activity editing page: UX',
+    title: 'Improved UX on Activity editing page',
     description: 'Autofocus title field; disable autocomplete.',
     default: true,
   },
   upload_manual_ux: {
     context: StravaEnhancementSuiteOptionsContexts.upload,
-    title: 'Upload: Manual: UX',
+    title: 'Imporve UX on Manual Upload',
     description: 'Allow pre-filling params from URL',
     default: true,
   },
@@ -249,17 +249,20 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   general_typography: {
     context: StravaEnhancementSuiteOptionsContexts.general,
-    title: 'Enhance typography',
+    title: 'Enhance typography while typing (e.g. <code>-></code> with <code>&rarr;</code>)',
     description: 'Replace <code>--</code> with <code>&ndash;</code>, <code>-></code> with <code>&rarr;</code>, <code>(L)</code> with <code>&hearts;</code> and so on…',
     default: true,
   },
   search_ux: {
     context: StravaEnhancementSuiteOptionsContexts.search,
-    title: 'Search: UX enhancements',
+    title: 'Improve UX on Search',
     description: 'Remember search values in URL',
     default: true,
   },
 };
 
 // eslint-disable-next-line no-undef
-if (typeof require !== 'undefined' && require.main !== module) module.exports = StravaEnhancementSuiteOptions;
+if (typeof require !== 'undefined' && require.main !== module) module.exports = {
+  default: StravaEnhancementSuiteOptions,
+  contexts: StravaEnhancementSuiteOptionsContexts,
+};

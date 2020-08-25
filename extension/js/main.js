@@ -1414,4 +1414,7 @@ StravaEnhancementSuite.prototype.switch_units = function() {
 };
 
 // eslint-disable-next-line no-undef
-if (typeof require !== 'undefined' && require.main !== module) module.exports = { default: StravaEnhancementSuite, helpers: StravaEnhancementSuiteHelpers };
+if (typeof require !== 'undefined' && require.main !== module) module.exports = {
+  default: StravaEnhancementSuite,
+  helpers: StravaEnhancementSuiteHelpers,
+};
