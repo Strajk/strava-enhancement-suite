@@ -1,4 +1,4 @@
-const options = require('./../../extension/pages/options');
+const options = require('./../../extension/pages/options').default;
 
 const sessionCookie = '_strava4_session';
 
