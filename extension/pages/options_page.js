@@ -1,7 +1,7 @@
 /* global chrome */
 
 // Only for easier local development when opening options.html directly in the browser
-let onerror;
+let onerror; // eslint-disable-line no-redeclare
 if (!chrome.runtime.getPackageDirectoryEntry && !chrome.storage) {
   chrome.runtime.getPackageDirectoryEntry = (cb) => cb({ getFile: (path, opts, ok) => ok() });
   chrome.storage = { sync: { get: (key, cb) => cb(''), set: () => '' } };
