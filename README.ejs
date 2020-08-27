@@ -46,7 +46,7 @@
 <tr>
   <td><%- option.title -%></td>
   <td><%- option.default ? "✅" : "➖" -%></td>
-  <td><% if (option.image) { %><a target="_blank" href="./extension/pages/img/<%- key %>.png?raw=true">→</a><% } %></td>
+  <td><% if (option.image) { %><a target="_blank" href="./extension/pages/img/<%- key %>.<%- option.image %>?raw=true">→</a><% } %></td>
 </tr>
 <% }) %>
 <% } %>
@@ -83,7 +83,7 @@ The term STRAVA and the Strava logo are the exclusive trademarks of, and are own
   - **Enabled by default:** <%- option.default ? "✅" : "➖" -%>
 
   - **Description:** <%- option.description -%>
-  <% if (option.image) { %><img src="./extension/pages/img/<%- key %>.png" /><% } %>
+  <% if (option.image) { %><img src="./extension/pages/img/<%- key %>.<%- option.image %>" /><% } %>
 <% }) %>
 <% } %>
 

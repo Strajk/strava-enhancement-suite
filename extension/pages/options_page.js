@@ -10,12 +10,12 @@ if (!chrome.runtime.getPackageDirectoryEntry && !chrome.storage) {
 
 // TODO: Nicer
 function enhanceOptionsWithImageInfo(options) {
-  let counter = Object.keys(options).length;
+  let counter = Object.keys(options).length * 2; // 2 checks for each file, once for png, once for gif
 
   return new Promise(function (resolve, reject) {
 
     function cb(key, val) {
-      options[key].image = val;
+      if (val) options[key].image = val;
       counter--;
       if (counter === 0) resolve(); // resolve after "receiving" all callbacks
     }
@@ -23,8 +23,12 @@ function enhanceOptionsWithImageInfo(options) {
     chrome.runtime.getPackageDirectoryEntry(storageRootEntry => {
       Object.entries(options).forEach(([key, option]) => {
         storageRootEntry.getFile(`pages/img/${key}.png`, { create: false },
-          cb.bind(undefined, key, true),
-          cb.bind(undefined, key, false),
+          cb.bind(undefined, key, 'png'),
+          cb.bind(undefined, key, undefined),
+        );
+        storageRootEntry.getFile(`pages/img/${key}.gif`, { create: false },
+          cb.bind(undefined, key, 'gif'),
+          cb.bind(undefined, key, undefined),
         );
       });
     });
@@ -102,8 +106,8 @@ function storageSet(key, value) {
       }
 
       // Image
-      if (option.image === true) {
-        $(`<img src="img/${key}.png" onerror=${onerror}>`).appendTo($section);
+      if (option.image) {
+        $(`<img src="img/${key}.${option.image}" onerror=${onerror}>`).appendTo($section);
       }
 
       $section.appendTo('.content');
