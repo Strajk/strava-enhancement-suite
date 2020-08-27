@@ -22,7 +22,9 @@ fs.writeFileSync('./README.md', rendered);
 function enhanceOptionsWithImageInfo(options) {
   Object.entries(options).forEach(([key, option]) => {
     if (fs.existsSync(`extension/pages/img/${key}.png`)) {
-      options[key].image = true;
+      options[key].image = 'png';
+    } else if (fs.existsSync(`extension/pages/img/${key}.gif`)) {
+      options[key].image = 'gif';
     }
   });
   return options;

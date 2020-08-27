@@ -46,7 +46,7 @@
 <tr>
   <td>Submit forms with <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd></td>
   <td>✅</td>
-  <td></td>
+  <td><a target="_blank" href="./extension/pages/img/submit_forms_with_keyboard.png?raw=true">→</a></td>
 </tr>
 
 
@@ -103,7 +103,7 @@
 <tr>
   <td>Keyboard controls for navigation, giving kudos, and commenting</td>
   <td>✅</td>
-  <td></td>
+  <td><a target="_blank" href="./extension/pages/img/keyboard_controls.gif?raw=true">→</a></td>
 </tr>
 
 
@@ -418,7 +418,7 @@ The term STRAVA and the Strava logo are the exclusive trademarks of, and are own
 - **General: Submit forms with <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>**
 
   - **Enabled by default:** ✅
-  - **Description:** Allows submitting forms by pressing <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>.<br />Works on comments, editing activities, and uploading new activities.  
+  - **Description:** Allows submitting forms by pressing <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>.<br />Works on comments, editing activities, and uploading new activities.  <img src="./extension/pages/img/submit_forms_with_keyboard.png" />
 
 
 
@@ -478,7 +478,7 @@ The term STRAVA and the Strava logo are the exclusive trademarks of, and are own
 <br> <kbd>C</kbd> - Comment 
 <br> <kbd>Enter</kbd> - Go to activity  (hold shift to open in a new tab/window)
 <br> <kbd>E</kbd> - Edit activity  (hold shift to open in a new tab/window)
-<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window)   
+<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window)   <img src="./extension/pages/img/keyboard_controls.gif" />
 
 
 
