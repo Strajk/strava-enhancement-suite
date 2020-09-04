@@ -1,10 +1,11 @@
 const fs = require('fs');
 const ejs = require('ejs');
 
+const helpers = require('./helpers');
 const pkg = require('./../package.json');
 
-const _options = require('./../extension/pages/options.js');
-const options = enhanceOptionsWithImageInfo(_options.default);
+const _options = require('./../extension/pages/options' );
+const options = helpers.enhanceOptionsWithImageInfo(_options.default);
 const contexts = _options.contexts;
 
 
@@ -13,28 +14,7 @@ const rendered = ejs.render(template, {
   pkg,
   options,
   contexts,
-  filteredByKey,
+  filteredByKey: helpers.filteredByKey,
 });
 
 fs.writeFileSync('./README.md', rendered);
-
-// TODO: Nicer
-function enhanceOptionsWithImageInfo(options) {
-  Object.entries(options).forEach(([key, option]) => {
-    if (fs.existsSync(`extension/pages/img/${key}.png`)) {
-      options[key].image = 'png';
-    } else if (fs.existsSync(`extension/pages/img/${key}.gif`)) {
-      options[key].image = 'gif';
-    }
-  });
-  return options;
-}
-
-/* TODO: DRY*/
-function filteredByKey (obj, x) {
-  return Object.fromEntries(
-    Object.entries(obj).filter(([key, val]) => {
-      return val.context === x;
-    }),
-  );
-}

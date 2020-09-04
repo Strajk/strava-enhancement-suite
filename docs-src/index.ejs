@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+
+  <title><%= pkg.meta.name %></title>
+
+  <meta name="description" content="<%= pkg.description %>"/>
+  <meta http-equiv="x-ua-compatible" content="ie=edge"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no, viewport-fit=cover"/>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito:400,700">
+  <link rel="stylesheet" href="styles/style.css"/>
+  <link rel="stylesheet" href="styles/options.css"/> <!-- Copied from extension/pages/options.css -->
+</head>
+
+<body>
+<section id="s-hero">
+  <div class="container">
+    <div class="row">
+      <div class="col-md">
+        <div id="logo" class="mb-5">
+          <%- icons.logo %>
+          <p id="pitch" class="mt-3 px-2"><%= pkg.description %></p>
+        </div>
+        <ul id="assurances" class="features-list">
+          <% pkg.meta.assurances.forEach(item => { %>
+            <li>
+              <span class="icon"><%- icons.tick %></span>
+              <div class="title"><%- item.title %></div>
+              <div class="subtitle"><%- item.description %></div>
+            </li>
+          <% }) %>
+        </ul>
+      </div>
+      <div class="col-md">
+        <ul id="main-features" class="list-unstyled mt-4 mt-md-2">
+          <% pkg.meta.mainFeatures.forEach(item => { %>
+            <li><%- item %></li>
+          <% }) %>
+          <li class="and-more">and <a class="_fade" href="#features">
+              more
+              <span>& more</span>
+              <span>& more</span>
+              <span>& more</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="cta" class="row p-3">
+      <div class="col-md mb-4 mb-md-0">
+        <a
+          href="https://github.com/Strajk/strava-enhancement-suite"
+          class="btn btn-lg btn-block btn-dark"
+          target="_blank"
+        >
+          Source code on GitHub
+        </a>
+        <p class="mb-0 text-center">
+          <small>Feedback, ideas, bug reports welcome</small>
+        </p>
+      </div>
+      <div class="col-md">
+        <a
+          href="https://chrome.google.com/webstore/detail/strava-enhancement-suite/egelalffpmicecakegglddmhlbdiemlg"
+          class="btn btn-lg btn-block btn-featured"
+          target="_blank"
+        >
+          Install from Chrome Web Store
+        </a>
+        <p class="mb-0 text-center">
+          <small>Firefox addon not available at the moment</small>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="ui-border">
+    <%- icons.border %>
+  </div>
+</section>
+
+<section id="s-features">
+  <div class="section-title">
+    <h1 class="mb-0">Features</h1>
+    <p class="text-sm mt-1">All features are customizable in options</p>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-4 order-last">
+        <div id="features-toc"><!-- Injected by Contents.js --></div>
+      </div>
+      <div class="col-md-8">
+        <div id="features">
+          <% for (const [ctxKey, ctx] of Object.entries(contexts)) { %>
+            <% const ctxOptions = filteredByKey(options, ctx); %>
+            <h2><%= ctx.title %></h2>
+            <% Object.entries(ctxOptions).forEach(([key, option]) => { %>
+              <% if (option.internal) return %>
+              <div class="feature">
+                <h3><%- option.title -%></h3>
+                <p class="meta">
+                  <%- option.default
+                      ? "<abbr title='Enabled by default'>✅</abbr>"
+                      : "<abbr title='Disabled by default'>➖</abbr>"
+                  -%>
+                </p>
+                <% if (option.description) { %><p class="description"><%- option.description -%></p><% } %>
+                <% if (option.image) { %><img src="./img/<%- key %>.<%- option.image %>"/><% } %>
+              </div>
+            <% }) %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s-footer">
+  <div class="ui-border">
+    <%- icons.border %>
+  </div>
+  <div class="container">
+    <ul class="footer-list">
+      <li>
+        Maintained by <a href="https://strajk.me/" target="_blank">@strajk</a>
+      </li>
+      <li>
+        Founded by <a href="https://chris-lamb.co.uk/" target="_blank">@lamby</a>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<script src="https://rawcdn.githack.com/Strajk/contents/ec2915b2e6a725540d8be2f9be447fd0fe8f75dd/dist/index.umd.js"></script>
+<script>
+  const contents = Contents({
+    articles: document.querySelectorAll('#features h2, #features h3'),
+    // modified Contents.link from Contents source
+    link: (guide, article) => {
+      const guideLink = window.document.createElement('a');
+      const articleLink = window.document.createElement('span'); // Replaced `a` with `span`
+      article.element.id = article.id;
+      articleLink.href = '#' + article.id;
+      while (article.element.childNodes.length) {
+        articleLink.appendChild(article.element.childNodes[0]);
+      }
+      article.element.appendChild(articleLink);
+      guideLink.appendChild(window.document.createTextNode(article.name));
+      guideLink.href = '#' + article.id;
+      guide.insertBefore(guideLink, guide.firstChild);
+    }
+  })
+  document.querySelector('#features-toc').appendChild(contents.list());
+</script>
+</body>
+</html>
