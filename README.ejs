@@ -2,7 +2,7 @@
 
 > <%= pkg.description %>
 
-<em><%- pkg.meta.mainFeatures.join(" • ") -%> [and more & more](#features-overview)</em>
+<em><%- pkg.meta.mainFeatures.join(" • ") -%> [and more & more](#features)</em>
 
 ## Install
 
@@ -29,9 +29,11 @@
 
 ---
 
-## Features overview
+## Features
 
-**🎛 All features can be disabled/enabled in options**
+*All features are customizable in options*
+
+**Check all features with description & images on [strajk.github.io/strava-enhancement-suite](https://strajk.github.io/strava-enhancement-suite)**
 
 <table>
 <% for (const [ctxKey, ctx] of Object.entries(contexts)) { %>
@@ -39,14 +41,12 @@
 <tr>
   <td><strong><%= ctx.title %></strong></td>
   <td><% if (ctxKey === 'general') { %><strong>Default</strong><% }%></td>
-  <td><% if (ctxKey === 'general') { %>🖼<% }%></td>
 </tr>
 <% Object.entries(ctxOptions).forEach(([key, option]) => { %>
 <% if (option.internal) return %>
 <tr>
   <td><%- option.title -%></td>
   <td><%- option.default ? "✅" : "➖" -%></td>
-  <td><% if (option.image) { %><a target="_blank" href="./extension/pages/img/<%- key %>.<%- option.image %>?raw=true">→</a><% } %></td>
 </tr>
 <% }) %>
 <% } %>
@@ -66,26 +66,6 @@ Feel free to! 🙏
 This software is not endorsed by Strava. Please do not ask them for support.
 The term STRAVA and the Strava logo are the exclusive trademarks of, and are owned by, Strava Inc.
 
----
----
----
-
-## Features in detail
-
-<% for (const [ctxKey, ctx] of Object.entries(contexts)) { %>
-<% const ctxOptions = filteredByKey(options, ctx); %>
-
-<% Object.entries(ctxOptions).forEach(([key, option]) => { %>
-<% if (option.internal) return %>
-
-- **<%= ctx.title %>: <%- option.title -%>**
-
-  - **Enabled by default:** <%- option.default ? "✅" : "➖" -%>
-
-  - **Description:** <%- option.description -%>
-  <% if (option.image) { %><img src="./extension/pages/img/<%- key %>.<%- option.image %>" /><% } %>
-<% }) %>
-<% } %>
 
 [Shield: CWS: Users]: https://img.shields.io/chrome-web-store/users/<%= pkg.meta.chromeWebStoreId %>?label=Chrome+Extension
 [Shield: CWS: Version]: https://img.shields.io/chrome-web-store/v/<%= pkg.meta.chromeWebStoreId %>?label=

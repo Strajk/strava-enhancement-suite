@@ -66,9 +66,9 @@ function storageSet(key, value) {
       if (option.internal) continue;
 
       const val = await storageGet(key);
-      const $section = $('<section />');
+      const $section = $('<section class="feature" />');
 
-      const $header = $('<label />');
+      const $header = $('<label class="header" />');
 
       $(`<h3 title="${key}">${option.title}</h3>`).appendTo($header);
 
@@ -90,7 +90,7 @@ function storageSet(key, value) {
       }
 
       // Add control element
-      $('<div class="control" />').append(control).appendTo($header);
+      $('<div class="meta" />').append(control).appendTo($header);
 
       // Header to section
       $header.appendTo($section);

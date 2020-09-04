@@ -1,4 +1,4 @@
-const options = require('./../extension/pages/options.js').default;
+const options = require('./../extension/pages/options' ).default;
 
 const MAIN = {
   [options.repeated_segments.title]: () => {

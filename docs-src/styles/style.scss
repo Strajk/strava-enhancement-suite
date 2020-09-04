@@ -1,0 +1,310 @@
+// TODO: Find out how to use absolute path
+
+@import "./../../node_modules/bootstrap/scss/functions";
+@import "./../../node_modules/bootstrap/scss/variables";
+@import "./../../node_modules/bootstrap/scss/mixins";
+@import "./../../node_modules/bootstrap/scss/root";
+@import "./../../node_modules/bootstrap/scss/reboot";
+@import "./../../node_modules/bootstrap/scss/type";
+@import "./../../node_modules/bootstrap/scss/images";
+//@import "./../../node_modules/bootstrap/scss/code";
+@import "./../../node_modules/bootstrap/scss/grid";
+//@import "./../../node_modules/bootstrap/scss/tables";
+//@import "./../../node_modules/bootstrap/scss/forms";
+@import "./../../node_modules/bootstrap/scss/buttons";
+@import "./../../node_modules/bootstrap/scss/transitions";
+//@import "./../../node_modules/bootstrap/scss/dropdown";
+//@import "./../../node_modules/bootstrap/scss/button-group";
+//@import "./../../node_modules/bootstrap/scss/input-group";
+//@import "./../../node_modules/bootstrap/scss/custom-forms";
+//@import "./../../node_modules/bootstrap/scss/nav";
+//@import "./../../node_modules/bootstrap/scss/navbar";
+@import "./../../node_modules/bootstrap/scss/card";
+//@import "./../../node_modules/bootstrap/scss/breadcrumb";
+//@import "./../../node_modules/bootstrap/scss/pagination";
+@import "./../../node_modules/bootstrap/scss/badge";
+//@import "./../../node_modules/bootstrap/scss/jumbotron";
+@import "./../../node_modules/bootstrap/scss/alert";
+//@import "./../../node_modules/bootstrap/scss/progress";
+//@import "./../../node_modules/bootstrap/scss/media";
+//@import "./../../node_modules/bootstrap/scss/list-group";
+//@import "./../../node_modules/bootstrap/scss/close";
+//@import "./../../node_modules/bootstrap/scss/toasts";
+//@import "./../../node_modules/bootstrap/scss/modal";
+//@import "./../../node_modules/bootstrap/scss/tooltip";
+//@import "./../../node_modules/bootstrap/scss/popover";
+//@import "./../../node_modules/bootstrap/scss/carousel";
+//@import "./../../node_modules/bootstrap/scss/spinners";
+@import "./../../node_modules/bootstrap/scss/utilities";
+//@import "./../../node_modules/bootstrap/scss/print";
+
+@include media-breakpoint-up(sm) {
+  .some-class {
+    display: block;
+  }
+}
+
+body {
+  font-family: Nunito, sans-serif;
+}
+
+.btn {
+  transition: color .2s, background .2s;
+}
+
+.btn-lg {
+  @include button-size(
+      1.25rem,
+      $btn-padding-x-lg,
+      1rem,
+      1rem,
+      0
+  );
+}
+
+.btn-featured {
+  color: hsl(13, 100%, 98%);
+  background-color: hsl(13, 100%, 58%);
+  //border: 1px solid #ff5627;
+
+  &:active, &:focus, &:hover {
+    background-color: hsl(14, 91%, 50%);
+    color: hsl(0, 0%, 100%);
+  }
+}
+
+
+abbr {
+  border-bottom: none !important;
+  cursor: help !important;
+  text-decoration: none !important;
+}
+
+section {
+  padding: 50px 0;
+}
+
+.section-title {
+  text-align: center;
+  padding: 30px;
+
+  h1 {
+    text-transform: uppercase;
+    font-weight: 700;
+    opacity: .8;
+  }
+}
+
+#s-hero {
+  background-size: cover;
+  background: radial-gradient(
+      circle farthest-corner at 10% 20%,
+      hsl(20, 95%, 58%) 0%,
+      hsl(12, 95%, 48%) 100%
+  ) no-repeat center;
+
+  color: white;
+
+  position: relative;
+  padding-bottom: 0px;
+  margin-bottom: 40px;
+
+  .ui-border { // Inspired by https://sizzy.co/
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    min-width: 800px;
+  }
+
+  #logo {
+    text-align: center;
+    max-width: 420px;
+    margin: 0 auto;
+
+    @include media-breakpoint-up(md) {
+      & {
+        margin: 0; // align to left
+      }
+    }
+
+    svg {
+      margin-left: -5%;
+      width: 100%;
+    }
+
+    #pitch {
+      text-align: center;
+      font-weight: 700;
+    }
+  }
+
+
+  #assurances {
+    padding-left: 0;
+
+    $icon-size: 30px;
+
+    li {
+      margin-bottom: 10px;
+      list-style: none;
+      padding-left: $icon-size + 5;
+      position: relative;
+
+      .icon {
+        position: absolute;
+        left: -5px;
+        top: 0px;
+
+        svg {
+          width: $icon-size;
+          height: $icon-size;
+          color: hsla(0, 0%, 100%, 75%);
+        }
+      }
+
+      .title {
+        font-size: 18px;
+        font-weight: 700;
+        line-height: $icon-size;
+      }
+
+      .subtitle {
+        //font-size: .8rem;
+      }
+    }
+  }
+
+  #main-features {
+    @include media-breakpoint-only(sm) {
+      margin-left: 35px;
+    }
+
+    li {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: hsl(18, 20%, 95%);
+      margin-bottom: 10px;
+    }
+
+    li.and-more {
+      font-size: 1.2rem;
+
+      a {
+        color: white;
+      }
+    }
+
+    ._fade span + span {
+      opacity: .8
+    }
+
+    ._fade span + span + span {
+      opacity: .6
+    }
+
+    ._fade span + span + span + span {
+      opacity: .4
+    }
+  }
+
+  #cta {
+    position: relative;
+    top: 40px;
+    background: white;
+    color: #5a6268;
+    box-shadow: 0 10px 40px -6px rgba(0, 0, 0, .2);
+    z-index: 9;
+  }
+}
+
+#s-features {
+
+  #features {
+    @include media-breakpoint-up(sm) {
+      & {
+        border: 1px solid #cacaca;
+        padding: 0 20px;
+        box-shadow: 0px 1px 0px #fff;
+      }
+    }
+
+    h2 {
+      font-weight: 700;
+    }
+
+    h3 {
+      padding-right: 20px; // space for icon
+    }
+
+    img {
+      max-width: 100%;
+    }
+  }
+
+}
+
+#features-toc {
+  font-size: 12px;
+
+  ol {
+    list-style: none;
+    padding-left: 0px;
+  }
+
+  ol, li {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  ol li {
+    line-height: 30px;
+  }
+
+  ol ol li {
+    padding-left: 10px;
+    line-height: 20px;
+  }
+
+  a {
+    color: initial !important;
+  }
+}
+
+#s-footer {
+  background: #222222;
+  position: relative;
+
+  color: whitesmoke;
+
+  text-align: center;
+
+  padding-top: 80px;
+
+  .ui-border {
+    position: absolute;
+    top: -1px; // fix weird glitch of fine line of background showing above
+    left: 0;
+    width: 100vw;
+    min-width: 800px;
+    z-index: 9999;
+    transform: scale(1, -1); // vertically flip
+  }
+
+  .footer-list {
+    font-size: 14px;
+    list-style: none;
+    padding: 0;
+
+    & li {
+      display: inline-block;
+      margin-right: 25px;
+      margin-top: 10px;
+    }
+
+    a {
+      color: #F7632E;
+      font-weight: 700;
+    }
+  }
+}
