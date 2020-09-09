@@ -689,9 +689,9 @@ function StravaEnhancementSuite($, options) {
   });
 
   // Hide invite friends & social buttons
-  $.option('hide_invite_friends', function() {
+  $.option('hide_social_sharing', function() {
     // Navbar: User menu: "Find friends"
-    $('.user-nav .options li').has('.find-and-invite').hide(); // @CHECKED 2020-06-19
+    // $('.user-nav .options li').has('.find-and-invite').hide(); // @CHECKED 2020-06-19
 
     // My profile: "Share your Runs/Rides"
     $('.sidebar .section').has('#embed-athlete-widget').hide(); // @CHECKED 2020-06-19

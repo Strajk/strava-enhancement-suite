@@ -27,7 +27,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   submit_forms_with_keyboard: {
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Submit forms with <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>',
-    description: 'Allows submitting forms by pressing <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>.<br />Works on comments, editing activities, and uploading new activities.',
+    description: 'Works on comments, editing activities, and uploading new activities.',
     default: true,
   },
   external_links: {
@@ -36,16 +36,16 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Show links to Veloviewer, Race Shape, KOM Club etc. on activity, segment detail and Challenge pages.',
     default: true,
   },
-  hide_invite_friends: {
+  hide_social_sharing: {
     context: StravaEnhancementSuiteOptionsContexts.general,
-    title: 'Hide Social Sharing buttons (Facebook, Twitter, email)',
-    description: 'Hide social networking buttons (Facebook, Twitter, email), including invitations to invite/find friends on Strava.',
+    title: 'Hide Social Sharing',
+    description: 'Hide social sharing buttons (Facebook, Twitter, email) from the Activity header<br />Hide "Share Your Runs" widget from the Dashboard.',
     default: false,
   },
   hide_premium_badges: {
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Premium badges',
-    description: 'Hide Premium badges on avatars. Subscriber status on an athlete\'s page is still shown.',
+    description: 'Hide Premium badges on user pictures. Subscriber status on an athlete\'s page is still shown.',
     default: false,
   },
   hide_challenge_feed_entries: {
