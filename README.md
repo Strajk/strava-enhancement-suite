@@ -51,7 +51,7 @@
 
 
 <tr>
-  <td>Hide Social Sharing buttons (Facebook, Twitter, email)</td>
+  <td>Hide Social Sharing</td>
   <td>➖</td>
 </tr>
 
