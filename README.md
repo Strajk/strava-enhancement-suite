@@ -322,7 +322,7 @@
 
 
 <tr>
-  <td>Imporve UX on Manual Upload</td>
+  <td>Improve UX on Manual Upload</td>
   <td>✅</td>
 </tr>
 

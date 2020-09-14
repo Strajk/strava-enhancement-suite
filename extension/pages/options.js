@@ -236,7 +236,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   upload_manual_ux: {
     context: StravaEnhancementSuiteOptionsContexts.upload,
-    title: 'Imporve UX on Manual Upload',
+    title: 'Improve UX on Manual Upload',
     description: 'Allow pre-filling params from URL',
     default: true,
   },
