@@ -15,7 +15,7 @@
     "docs:build": "npm run docs:html & npm run docs:styles",
     "docs:watch": "npm run docs:html -- --serve & npm run docs:styles -- --watch",
     "readme:build": "node tools/build-docs.js",
-    "readme:watch": "chokidar 'README.ejs' -c 'npm run build:docs'",
+    "readme:watch": "chokidar 'README.ejs' -c 'npm run readme:build'",
     "icons:generate": "for x in 16 48 128; do convert extension/icons/original.png -resize ${x}x${x} extension/icons/icon${x}.png ; done",
     "lint": "eslint .",
     "lint-fix": "eslint . --fix",
