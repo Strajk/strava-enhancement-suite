@@ -1,7 +1,7 @@
 repository:
   name: strava-enhancement-suite
   description: Handy tools and improvements to Strava.com
-  # homepage: https://example.github.io/
+  homepage: https://strajk.github.io/strava-enhancement-suite/
 
   has_wiki: false
 
