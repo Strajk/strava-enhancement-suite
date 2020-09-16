@@ -392,7 +392,12 @@ function StravaEnhancementSuite($, options) {
     * Edit activity  – E (hold shift to open in new tab/window)
     * Go to athlete  – U (hold shift to open in new tab/window)
     */
-    if (!location.pathname.startsWith('/dashboard')) return;
+
+    // TODO: Make these conditions nicer, more readable, more semantic
+    if (
+      !location.pathname.startsWith('/dashboard') &&
+      !(location.pathname.startsWith('/clubs/') && location.pathname.endsWith('/recent_activity'))
+    ) return;
 
     let activeEntry;
 
@@ -439,12 +444,14 @@ function StravaEnhancementSuite($, options) {
       }
 
       if (activeEntry && ev.key === 'c') {
-        $(activeEntry).find('.btn-comment').click();
+        // .btn-comment on dashboard
+        // .add-comment on club's recent activity
+        $(activeEntry).find('.btn-comment, .add-comment').first().click();
         return false; // Prevent "c" in the textarea
       }
 
       if (activeEntry && ev.key === 'Enter') {
-        const href = $(activeEntry).find('.title-text a').attr('href');
+        const href = $(activeEntry).find('a[href^="/activities/"]').first().attr('href');
         if (ev.shiftKey) {
           window.open(href, '_blank');
         } else {
@@ -453,7 +460,7 @@ function StravaEnhancementSuite($, options) {
       }
 
       if (activeEntry && ev.key === 'e') {
-        const href = $(activeEntry).find('.title-text a').attr('href') + '/edit';
+        const href = $(activeEntry).find('a[href^="/activities/"]').first().attr('href') + '/edit';
         if (ev.shiftKey) {
           window.open(href, '_blank');
         } else {
@@ -462,7 +469,7 @@ function StravaEnhancementSuite($, options) {
       }
 
       if (activeEntry && ev.key === 'u') {
-        const href = $(activeEntry).find('a.entry-owner').attr('href');
+        const href = $(activeEntry).find('a[href^="/athletes/"]').first().attr('href');
         if (ev.shiftKey) {
           window.open(href, '_blank');
         } else {
