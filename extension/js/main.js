@@ -1225,14 +1225,20 @@ function StravaEnhancementSuite($, options) {
   $.option('show_kudo_all_button', function () {
     if (!location.pathname.startsWith('/dashboard')) return;
 
-    const selector = 'button.js-add-kudo';
+    const selector = 'button svg[data-testid=unfilled_kudos]';
     document.arrive(selector, { existing: true }, (newEl) => {
 
       // Only run the following code once for every bulk update
       // TODO: Consider creating an issue or asking for a best practice https://github.com/uzairfarooq/arrive/issues
       const all = Array.from(document.querySelectorAll(selector));
-      const allCount = all.length;
-      if (all.indexOf(newEl) !== allCount - 1) return;
+      const allKudoable = [];
+      all.forEach((svg) => {
+        if(checkCanKudo(svg)){
+          allKudoable.push(svg)
+        }
+      });
+      const allCountKudoable = allKudoable.length;
+      if (allKudoable.indexOf(newEl) == -1 || allKudoable.indexOf(newEl) !== allCountKudoable - 1) return;
 
       if (!$.defined('kudosAllCount')) { // This relies on browser exposing all elements with ID to window
         $('<button/>', {
@@ -1241,7 +1247,11 @@ function StravaEnhancementSuite($, options) {
           html: 'Give Kudos to all (<span id="kudosAllCount">${count}</span>)',
           on: {
             click: () => {
-              $(selector).click();
+              $(selector).each(function(i, svg){
+                if(checkCanKudo(svg)){
+                  $(svg).parent().click();
+                }
+              })
               $('#kudosAllCount').text(0);
             },
           },
@@ -1250,8 +1260,14 @@ function StravaEnhancementSuite($, options) {
           .insertBefore('#notifications');
       }
 
-      $('#kudosAllCount').text(allCount);
+      $('#kudosAllCount').text(allCountKudoable);
     });
+
+    function checkCanKudo(svg){
+      var content = $(svg).closest(".content");
+      var activityData = JSON.parse(content.attr("data-react-props"));
+      return activityData.activity.kudosAndComments.canKudo;
+    }
   });
 
   $.option('hide_premium_badges', function() {
