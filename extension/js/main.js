@@ -1225,20 +1225,14 @@ function StravaEnhancementSuite($, options) {
   $.option('show_kudo_all_button', function () {
     if (!location.pathname.startsWith('/dashboard')) return;
 
-    const selector = 'button svg[data-testid=unfilled_kudos]';
-    document.arrive(selector, { existing: true }, (newEl) => {
+    const kudoSelector = 'button[data-testid=kudos_button]';
+    document.arrive(kudoSelector, { existing: true }, (newEl) => {
 
       // Only run the following code once for every bulk update
       // TODO: Consider creating an issue or asking for a best practice https://github.com/uzairfarooq/arrive/issues
-      const all = Array.from(document.querySelectorAll(selector));
-      const allKudoable = [];
-      all.forEach((svg) => {
-        if(checkCanKudo(svg)){
-          allKudoable.push(svg)
-        }
-      });
-      const allCountKudoable = allKudoable.length;
-      if (allKudoable.indexOf(newEl) == -1 || allKudoable.indexOf(newEl) !== allCountKudoable - 1) return;
+      const all = Array.from(document.querySelectorAll(kudoSelector));
+      const allCount = all.length;
+      if (all.indexOf(newEl) !== allCount - 1) return;
 
       if (!$.defined('kudosAllCount')) { // This relies on browser exposing all elements with ID to window
         $('<button/>', {
@@ -1247,9 +1241,9 @@ function StravaEnhancementSuite($, options) {
           html: 'Give Kudos to all (<span id="kudosAllCount">${count}</span>)',
           on: {
             click: () => {
-              $(selector).each(function(i, svg){
-                if(checkCanKudo(svg)){
-                  $(svg).parent().click();
+              $(kudoSelector).each(function (i, btn) {
+                if (checkCanKudo(btn)) {
+                  $(btn).click();
                 }
               })
               $('#kudosAllCount').text(0);
@@ -1260,14 +1254,32 @@ function StravaEnhancementSuite($, options) {
           .insertBefore('#notifications');
       }
 
-      $('#kudosAllCount').text(allCountKudoable);
-    });
+      var allKudoableCount = 0;
+      all.forEach((btn) => {
+        if (checkCanKudo(btn)) {
+          allKudoableCount++;
+        }
+      });
+      $('#kudosAllCount').text(allKudoableCount);
 
-    function checkCanKudo(svg){
-      var content = $(svg).closest(".content");
-      var activityData = JSON.parse(content.attr("data-react-props"));
-      return activityData.activity.kudosAndComments.canKudo;
-    }
+      function checkCanKudo(btn) {
+        var $btn = $(btn);
+        var content = $btn.closest(".content");
+        var activityData = JSON.parse(content.attr("data-react-props"));
+        if (activityData.activity) {
+          return activityData.activity.kudosAndComments.canKudo;
+        }
+        else if (activityData.rowData) { //groupActivities
+          // have to find link between btn and the data-react-props data in the content card
+          var athleteName = $btn.closest('li').find('a[data-testid=owners-name]').first().text();
+          var foundActivity = activityData.rowData.activities.find(act => act.athlete_name === athleteName);
+          if (foundActivity) {
+            return foundActivity.can_kudo;
+          }
+        }
+        return false;
+      }
+    });
   });
 
   $.option('hide_premium_badges', function() {
