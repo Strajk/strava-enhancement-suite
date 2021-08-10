@@ -1225,12 +1225,12 @@ function StravaEnhancementSuite($, options) {
   $.option('show_kudo_all_button', function () {
     if (!location.pathname.startsWith('/dashboard')) return;
 
-    const selector = 'button.js-add-kudo';
-    document.arrive(selector, { existing: true }, (newEl) => {
+    const kudoSelector = 'button[data-testid=kudos_button]';
+    document.arrive(kudoSelector, { existing: true }, (newEl) => {
 
       // Only run the following code once for every bulk update
       // TODO: Consider creating an issue or asking for a best practice https://github.com/uzairfarooq/arrive/issues
-      const all = Array.from(document.querySelectorAll(selector));
+      const all = Array.from(document.querySelectorAll(kudoSelector));
       const allCount = all.length;
       if (all.indexOf(newEl) !== allCount - 1) return;
 
@@ -1241,7 +1241,11 @@ function StravaEnhancementSuite($, options) {
           html: 'Give Kudos to all (<span id="kudosAllCount">${count}</span>)',
           on: {
             click: () => {
-              $(selector).click();
+              $(kudoSelector).each(function (i, btn) {
+                if (checkCanKudo(btn)) {
+                  $(btn).click();
+                }
+              })
               $('#kudosAllCount').text(0);
             },
           },
@@ -1250,7 +1254,32 @@ function StravaEnhancementSuite($, options) {
           .insertBefore('#notifications');
       }
 
-      $('#kudosAllCount').text(allCount);
+      var allKudoableCount = 0;
+      all.forEach((btn) => {
+        if (checkCanKudo(btn)) {
+          allKudoableCount++;
+        }
+      });
+      $('#kudosAllCount').text(allKudoableCount);
+
+      function checkCanKudo(btn) {
+        var $btn = $(btn);
+        if($btn.children("svg").first().attr("data-testid") === "filled_kudos") return false; //no need to check anything further
+        var content = $btn.closest(".content");
+        var activityData = JSON.parse(content.attr("data-react-props"));
+        if (activityData.activity) {
+          return activityData.activity.kudosAndComments.canKudo;
+        }
+        else if (activityData.rowData) { //groupActivities
+          // have to find link between btn and the data-react-props data in the content card
+          var athleteName = $btn.closest('li').find('a[data-testid=owners-name]').first().text();
+          var foundActivity = activityData.rowData.activities.find(act => act.athlete_name === athleteName);
+          if (foundActivity) {
+            return foundActivity.can_kudo;
+          }
+        }
+        return false;
+      }
     });
   });
 
