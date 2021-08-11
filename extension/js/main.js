@@ -1245,7 +1245,7 @@ function StravaEnhancementSuite($, options) {
                 if (checkCanKudo(btn)) {
                   $(btn).click();
                 }
-              })
+              });
               $('#kudosAllCount').text(0);
             },
           },
@@ -1264,9 +1264,9 @@ function StravaEnhancementSuite($, options) {
 
       function checkCanKudo(btn) {
         var $btn = $(btn);
-        if($btn.children("svg").first().attr("data-testid") === "filled_kudos") return false; //no need to check anything further
-        var content = $btn.closest(".content");
-        var activityData = JSON.parse(content.attr("data-react-props"));
+        if($btn.children('svg').first().attr('data-testid') === 'filled_kudos') return false; //no need to check anything further
+        var content = $btn.closest('.content');
+        var activityData = JSON.parse(content.attr('data-react-props'));
         if (activityData.activity) {
           return activityData.activity.kudosAndComments.canKudo;
         }
