@@ -403,7 +403,7 @@ function StravaEnhancementSuite($, options) {
 
     // .activity without id would match also group activity, just [id^="Activity-"] would match comment threads
     // :visible will omit activities hidden by other features on this extensions (eg. virtual rides)
-    const selector = '.activity[id^="Activity-"]:visible';
+    const selector = 'div[data-react-class="Activity"]:visible';
     const setActiveEntry = (el) => {
       if (activeEntry) activeEntry.style.outline = '0';
       activeEntry = el;
@@ -422,7 +422,7 @@ function StravaEnhancementSuite($, options) {
         )
       ) return true; // Do not handle
 
-      if (['j', 'k'].includes(ev.key)) {
+      if (['j', 'k'].includes(ev.key.toLowerCase())) {
         if (!activeEntry) {
           const firstVisible = $(selector).toArray().find(x => $(x).offset().top > window.scrollY);
           setActiveEntry(firstVisible);
@@ -430,8 +430,8 @@ function StravaEnhancementSuite($, options) {
           const all = $(selector).toArray();
           const currentIndex = all.indexOf(activeEntry);
           if (
-            (ev.key === 'k' && currentIndex === 0) || // first, cannot go up
-            (ev.key === 'j' && currentIndex === (all.length - 1)) // last, cannot go down
+            (ev.key.toLowerCase() === 'k' && currentIndex === 0) || // first, cannot go up
+            (ev.key.toLowerCase() === 'j' && currentIndex === (all.length - 1)) // last, cannot go down
           ) return false;
           const target = all[currentIndex + (ev.key === 'j' ? 1 : -1)];
           if (!target) return console.error('Next active element not found (this should not happen)', { all, currentIndex });
@@ -439,14 +439,14 @@ function StravaEnhancementSuite($, options) {
         }
       }
 
-      if (activeEntry && ev.key === 'l') {
-        $(activeEntry).find('.btn-kudo').click();
+      if (activeEntry && ev.key.toLowerCase() === 'l') {
+        $(activeEntry).find('button[data-testid="kudos_button"]').click();
       }
 
-      if (activeEntry && ev.key === 'c') {
+      if (activeEntry && ev.key.toLowerCase() === 'c') {
         // .btn-comment on dashboard
         // .add-comment on club's recent activity
-        $(activeEntry).find('.btn-comment, .add-comment').first().click();
+        $(activeEntry).find('button[data-testid="comment_button"]').first().click();
         return false; // Prevent "c" in the textarea
       }
 
@@ -459,7 +459,7 @@ function StravaEnhancementSuite($, options) {
         }
       }
 
-      if (activeEntry && ev.key === 'e') {
+      if (activeEntry && ev.key.toLowerCase() === 'e') {
         const href = $(activeEntry).find('a[href^="/activities/"]').first().attr('href') + '/edit';
         if (ev.shiftKey) {
           window.open(href, '_blank');
@@ -468,7 +468,7 @@ function StravaEnhancementSuite($, options) {
         }
       }
 
-      if (activeEntry && ev.key === 'u') {
+      if (activeEntry && ev.key.toLowerCase() === 'u') {
         const href = $(activeEntry).find('a[href^="/athletes/"]').first().attr('href');
         if (ev.shiftKey) {
           window.open(href, '_blank');
