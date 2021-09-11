@@ -1325,10 +1325,8 @@ function StravaEnhancementSuite($, options) {
     if (!window.location.pathname.includes('/training/log')) return;
 
     // https://www.strava.com/athletes/5041066/training/log?v2=true
-    document.arrive('[class^="Calendar--calendar-row-container--"]', { existing: true, fireOnAttributesModification: true }, (el) => {
-      if (el.getAttribute('data-display-type') === 'empty') return;
-
-      const overviewEl = el.querySelector('[class^="WeekOverview--sidebar-container--"]');
+    document.arrive('[data-display-type^="multisport_goal"]', { existing: true, fireOnAttributesModification: true }, (el) => {
+      const overviewEl = el.firstChild.firstChild
       const { props } = getReactElement(overviewEl);
       const totals = props.entry.totals_by_sport;
 
