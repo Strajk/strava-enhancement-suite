@@ -1,5 +1,17 @@
 let notyf;
 
+/*
+#dashboard-feed
+  .feed
+    > .react-card-container
+      > .react-feed-component - this el has data-react-props
+        > .react-feed-entry
+*/
+const SELECTORS = {
+  feed: '#dashboard-feed',
+  feedItem: '.react-feed-component',
+};
+
 const StravaEnhancementSuiteHelpers = {
   keySort: (...keys) => function (a, b) {
     for (const key of keys) {
@@ -664,34 +676,45 @@ function StravaEnhancementSuite($, options) {
 
   // Hide feed entries
   $.option('dashboard_filter', function() {
-    let filters = [];
-    [
-      // TODO: hide_route_feed_entries
-      ['hide_challenge_feed_entries', ['.challenge']],
-      ['hide_promotion_feed_entries', ['.promo, .membership']],
-      ['hide_club_feed_entries', ['.club']],
-      ['hide_goal_feed_entries', ['.performance-goal-created']], // Seems deprecated, adjusting perf goals are no longer broadcasted to others
-      ['hide_turbo_trainer_rides', ['.activity', ':has(.icon-ride)', ':not(:has(.activity-map))']],
-      ['hide_turbo_trainer_rides', ['.activity', ':has(.icon-virtualride)']],
-      ['hide_turbo_trainer_rides', ['.activity', ':has(.enhanced-tag)']], // TODO: Explain selector
-    ].forEach(([option, optionFilters]) => {
-      $.option(option, () => {
-        filters.push(optionFilters);
-      });
-    });
 
-    document.arrive('#dashboard-feed .feed-entry', { existing: true }, function() {
-      // Whole feed entry filtering
-      // ---
-      for (let optionFilters of filters) {
+    const allFilters = {
+      hide_challenge_feed_entries: (props) => {
+        // TODO
+      },
+      hide_club_feed_entries: (props) => {
+        // TODO
+      },
+      hide_goal_feed_entries: (props) => {
+        // TODO
+      },
+      hide_promotion_feed_entries: (props) => {
         if (
-          optionFilters.every(filter => $(this).is(filter))
-        ) {
-          $(this).hide();
-          return; // entry was matched and hidden, so exit for-loop and whole callback
+          props.entity === 'FancyPromo' // e.g. "See All Your 2021 Stats"
+          || (props.entity === 'Post' && props.post.originator_name === 'The Strava Club')
+        ) return true;
+      },
+      hide_turbo_trainer_rides: (props) => {
+        if (
+          props.entity === 'Activity'
+          && props.activity.type === 'VirtualRide'
+        ) return true;
+      },
+    };
+
+    const activeFilters = Object.fromEntries(
+      Object.entries(allFilters).filter(([key, fn]) => options[key]),
+    );
+
+    document.arrive(`${SELECTORS.feed} ${SELECTORS.feedItem}`, { existing: true }, function() {
+      const props = JSON.parse(this.dataset.reactProps); // Hopefully Strava will keep this in DOM for some time
+
+      for (const [key, fn] of Object.entries(activeFilters)) {
+        if (fn(props)) {
+          console.info(`Hiding feed entry, because of ${key}`);
+          $(this).closest('.react-card-container').hide(); // See SELECTORS const at the top of this file to see the reason behind 'closest'
+          return; // entry was matched and hidden -> exit for-loop and whole callback
         }
       }
-
     });
   });
 

@@ -70,7 +70,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   hide_promotion_feed_entries: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Hide Promotion feed entries',
+    title: 'Hide Promotion feed entries <code><small>Fixed 2022-01-02</small></code>',
     default: false,
   },
   hide_training_plan_feed_entries: {
@@ -80,7 +80,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   hide_turbo_trainer_rides: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Hide turbo-trainer / virtual rides (e.g. Zwift)',
+    title: 'Hide turbo-trainer / virtual rides (e.g. Zwift) <code><small>Fixed 2022-01-02</small></code>',
     default: false,
   },
   side_by_side_running: {
