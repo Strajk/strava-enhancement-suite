@@ -413,9 +413,12 @@ function StravaEnhancementSuite($, options) {
 
     let activeEntry;
 
-    // .activity without id would match also group activity, just [id^="Activity-"] would match comment threads
     // :visible will omit activities hidden by other features on this extensions (eg. virtual rides)
-    const selector = 'div[data-react-class="Activity"]:visible';
+    const selector = [
+      '[data-testid="web-feed-entry"] ul[class^=GroupActivity] > li:visible', // either group activity
+      '[data-testid="web-feed-entry"]:not(:has([class^=GroupActivity])):visible', // or single activity (= not having a group list)
+    ].join(', ');
+
     const setActiveEntry = (el) => {
       if (activeEntry) activeEntry.style.outline = '0';
       activeEntry = el;

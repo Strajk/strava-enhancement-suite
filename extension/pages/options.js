@@ -13,6 +13,7 @@ const StravaEnhancementSuiteOptionsContexts = { // eslint-disable-line no-redecl
 
 const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   keyboard_controls: {
+    _tested: '2022-08-20 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Keyboard controls for navigation, giving kudos, and commenting',
     description: 'Enable keyboard controls on the dashboard:\n<br> <kbd>J</kbd> - Up (previous) \n<br> <kbd>K</kbd> - Down (next) \n<br> <kbd>L</kbd> - Kudos (like) \n<br> <kbd>C</kbd> - Comment \n<br> <kbd>Enter</kbd> - Go to activity  (hold shift to open in a new tab/window)\n<br> <kbd>E</kbd> - Edit activity  (hold shift to open in a new tab/window)\n<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window) ',
