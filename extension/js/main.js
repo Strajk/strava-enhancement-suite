@@ -311,12 +311,10 @@ function StravaEnhancementSuite($, options) {
 
     // Comments
     bind([
-      '.comments textarea',
+      '[data-testid="comments-form"] textarea',
     ], el => {
-      // Click of Post button instead of submitting is important,
-      // cause click handler also takes care of textarea clearing and possibly other stuff
       // Note: Verify both on dashboard and activity page
-      $(el).parents('form').find('button:first').click();
+      $(el).parents('[data-testid="comments-form"]').find('button[data-testid="post-comment-btn"]').click();
     });
 
 

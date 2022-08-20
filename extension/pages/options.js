@@ -26,6 +26,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: true,
   },
   submit_forms_with_keyboard: {
+    _tested: '2022-08-20 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Submit forms with <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>',
     description: 'Works on comments, editing activities, and uploading new activities.',
