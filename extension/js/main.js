@@ -1310,7 +1310,8 @@ function StravaEnhancementSuite($, options) {
   $.option('hide_premium_badges', function() {
     // Only keep "Subscriber" line right under the name on athlete's page
     const selectors = [
-      '.avatar-badge', // badge over the top-right corner of avatar profiles
+      '.avatar-badge', // 2020-2021 badge over the top-right corner of avatar profiles
+      '[class^=Avatar--badge--]', // 2022+
       '.badge.premium', // activity page: prefixed to activity name
       '.icon-badge-premium', // suffixed to athlete name
       '.icon-badge-premium', // Club leaderboard
