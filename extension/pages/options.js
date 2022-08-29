@@ -33,29 +33,34 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: true,
   },
   external_links: {
+    _tested: '2022-08-29 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.activity,
     title: 'External links',
     description: 'Show links to Veloviewer, Race Shape, KOM Club etc. on activity, segment detail and Challenge pages.',
     default: true,
   },
   hide_social_sharing: {
+    _tested: '2022-08-29 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Social Sharing',
     description: 'Hide social sharing buttons (Facebook, Twitter, email) from the Activity header<br />Hide "Share Your Runs" widget from the Dashboard.',
     default: false,
   },
   hide_premium_badges: {
+    _tested: '2022-08-29 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Premium badges',
     description: 'Hide Premium badges on user pictures. Subscriber status on an athlete\'s page is still shown.',
     default: false,
   },
   hide_challenge_feed_entries: {
+    _tested: '2022-08-29 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Hide Challenge feed entries',
     default: false,
   },
   hide_club_feed_entries: {
+    _tested: '2022-08-29 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Hide Club feed entries',
     default: false,
@@ -81,8 +86,9 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: false,
   },
   hide_turbo_trainer_rides: {
+    _tested: '2022-08-29 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Hide turbo-trainer / virtual rides (e.g. Zwift) <code><small>Fixed 2022-01-02</small></code>',
+    title: 'Hide turbo-trainer / virtual rides (e.g. Zwift) <code><small>Fixed 2022-08-29</small></code>',
     default: false,
   },
   side_by_side_running: {

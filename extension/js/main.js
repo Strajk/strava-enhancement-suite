@@ -1,15 +1,8 @@
 let notyf;
 
-/*
-#dashboard-feed
-  .feed
-    > .react-card-container
-      > .react-feed-component - this el has data-react-props
-        > .react-feed-entry
-*/
 const SELECTORS = {
   feed: '#dashboard-feed',
-  feedItem: '.react-feed-component',
+  feedItem: '[class^=Feed--entry-container--]', // e.g. Feed--entry-container--ntrEd
 };
 
 const StravaEnhancementSuiteHelpers = {
@@ -679,26 +672,23 @@ function StravaEnhancementSuite($, options) {
   $.option('dashboard_filter', function() {
 
     const allFilters = {
-      hide_challenge_feed_entries: (props) => {
+      hide_challenge_feed_entries: (containerEl) => {
+        let needle = $(containerEl).find('[class^="AthleteJoinEntry--"]');
+        return !!needle.length;
+      },
+      hide_club_feed_entries: (containerEl) => {
+        let needle = $(containerEl).find('[data-testid="owners-name"][href^="/clubs/"]');
+        return !!needle.length;
+      },
+      hide_goal_feed_entries: (containerEl) => {
         // TODO
       },
-      hide_club_feed_entries: (props) => {
+      hide_promotion_feed_entries: (containerEl) => {
         // TODO
       },
-      hide_goal_feed_entries: (props) => {
-        // TODO
-      },
-      hide_promotion_feed_entries: (props) => {
-        if (
-          props.entity === 'FancyPromo' // e.g. "See All Your 2021 Stats"
-          || (props.entity === 'Post' && props.post.originator_name === 'The Strava Club')
-        ) return true;
-      },
-      hide_turbo_trainer_rides: (props) => {
-        if (
-          props.entity === 'Activity'
-          && props.activity.type === 'VirtualRide'
-        ) return true;
+      hide_turbo_trainer_rides: (containerEl) => {
+        let needle = $(containerEl).find('[data-testid="tag"]:contains("Virtual")');
+        return !!needle.length;
       },
     };
 
@@ -707,12 +697,12 @@ function StravaEnhancementSuite($, options) {
     );
 
     document.arrive(`${SELECTORS.feed} ${SELECTORS.feedItem}`, { existing: true }, function() {
-      const props = JSON.parse(this.dataset.reactProps); // Hopefully Strava will keep this in DOM for some time
-
       for (const [key, fn] of Object.entries(activeFilters)) {
-        if (fn(props)) {
-          console.info(`Hiding feed entry, because of ${key}`);
-          $(this).closest('.react-card-container').hide(); // See SELECTORS const at the top of this file to see the reason behind 'closest'
+        if (fn(this)) {
+          console.info(`Hiding feed entry, because of ${key}`, this);
+          // Tip: for easier debugging, comment out hiding and uncomment outline instead
+          $(this).hide();
+          // this.style = 'outline: 3px solid red;';
           return; // entry was matched and hidden -> exit for-loop and whole callback
         }
       }
