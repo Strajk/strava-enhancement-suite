@@ -1,16 +1,20 @@
 {
   "manifest_version": 2,
-
   "name": "Strava Enhancement Suite",
   "description": "Handy tools and improvements to Strava.com",
-  "version": "2.20.2",
-
+  "version": "23.1.6.1332",
   "background": {
-    "scripts": ["js/libs/browser-polyfill.js", "js/background.js"]
+    "scripts": [
+      "js/libs/browser-polyfill.js",
+      "js/background.js"
+    ]
   },
   "content_scripts": [
     {
-      "js": ["js/libs/browser-polyfill.js", "js/content_script.js"],
+      "js": [
+        "js/libs/browser-polyfill.js",
+        "js/content_script.js"
+      ],
       "run_at": "document_end",
       "matches": [
         "http://*.strava.com/*",
