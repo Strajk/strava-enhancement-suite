@@ -91,6 +91,13 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     title: 'Hide turbo-trainer / virtual rides (e.g. Zwift) <code><small>Fixed 2022-08-29</small></code>',
     default: false,
   },
+  hide_short_activities: {
+    _tested: '2023-01-06',
+    context: StravaEnhancementSuiteOptionsContexts.dashboard,
+    title: 'Hide short activities',
+    description: 'Hide activities shorter than 20 minutes.',
+    default: false,
+  },
   side_by_side_running: {
     context: StravaEnhancementSuiteOptionsContexts.athlete,
     title: 'Compare running',

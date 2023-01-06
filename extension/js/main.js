@@ -40,6 +40,20 @@ const StravaEnhancementSuiteHelpers = {
     const mm = ('00' + m).substring(String(m).length); // pad
     return `${h}h${mm}m`;
   },
+  parseDurationToSecs: x => { // 58m 16s -> 3496
+    const parts = x.split(' ');
+    let secs = 0;
+    for (const part of parts) {
+      if (part.endsWith('s')) {
+        secs += parseInt(part.slice(0, -1), 10);
+      } else if (part.endsWith('m')) {
+        secs += parseInt(part.slice(0, -1), 10) * 60;
+      } else if (part.endsWith('h')) {
+        secs += parseInt(part.slice(0, -1), 10) * 60 * 60;
+      }
+    }
+    return secs;
+  },
   notify: (message, type = 'success') => {
     if (!notyf) {
       notyf = new window.Notyf({ duration: 5000, dismissable: true });
@@ -689,6 +703,15 @@ function StravaEnhancementSuite($, options) {
       hide_turbo_trainer_rides: (containerEl) => {
         let needle = $(containerEl).find('[data-testid="tag"]:contains("Virtual")');
         return !!needle.length;
+      },
+      hide_short_activities: (containerEl) => {
+        let statsEls = [...containerEl.querySelectorAll('[class^=Stat--stat--]')]; // TODO: Unify using/not-using jQuery
+        let timeEl = statsEls.find(el => el.textContent.includes('Time')); // TODO: Make it work with other langs
+        let time = timeEl.querySelector('[class^=Stat--stat-value--]')?.textContent; // '10m 35s'
+        if (!time) return false; // failed parsing, so not hiding just to be sure
+        let timeInSecs = StravaEnhancementSuiteHelpers.parseDurationToSecs(time);
+        let thresholdInSecs = 20 * 60; // 20 minutes
+        return timeInSecs < thresholdInSecs;
       },
     };
 
