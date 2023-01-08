@@ -268,12 +268,12 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Replace <code>--</code> with <code>&ndash;</code>, <code>-></code> with <code>&rarr;</code>, <code>(L)</code> with <code>&hearts;</code> and so on…',
     default: true,
   },
-  search_ux: {
-    context: StravaEnhancementSuiteOptionsContexts.search,
-    title: 'Improve UX on Search',
-    description: 'Remember search values in URL',
-    default: true,
-  },
+  // search_ux: { // see note in main.js
+  //   context: StravaEnhancementSuiteOptionsContexts.search,
+  //   title: 'Improve UX on Search',
+  //   description: 'Remember search values in URL',
+  //   default: true,
+  // },
 };
 
 // eslint-disable-next-line no-undef

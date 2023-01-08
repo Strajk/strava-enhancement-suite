@@ -1201,29 +1201,27 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Fix athlete search forgetting values
-  $.option('search_ux', function() {
-    if (window.location.pathname.indexOf('/activities/search') !== 0) {
-      return;
-    }
-
-    if ($.urlParam('location') === undefined) {
-      return;
-    }
-
-    $.each([
-      'elev_gain',
-      'distance',
-      'time',
-    ], function() {
-      var name = this;
-
-      $('.slider#' + name).slider('values', [
-        parseInt($.urlParam(name + '_start'), 10),
-        parseInt($.urlParam(name + '_end'), 10),
-      ]);
-    });
-  });
+  /*
+  * DISABLED NOTICE
+  * The url /activities/search no longer exists, it contained a search form for activities with configurable filters.
+  * It was removed around 2018 and now it exists only in native apps.
+  * It should be possible to reverse engineer the native app and re-implement the feature on the web, see https://www.strava.com/clubs/231407/posts/14507542
+  * */
+  // $.option('search_ux', function() {
+  //   if (!window.location.pathname.startsWith('/activities/search')) return;
+  //   let urlParam = $.urlParam('location');
+  //   if (urlParam === undefined) return;
+  //   [
+  //     'elev_gain',
+  //     'distance',
+  //     'time',
+  //   ].forEach(name => {
+  //     $('.slider#' + name).slider('values', [
+  //       parseInt($.urlParam(name + '_start'), 10),
+  //       parseInt($.urlParam(name + '_end'), 10),
+  //     ]);
+  //   });
+  // });
 
   // Show same-activity Flybys only (runs or rides) in the Flyby viewer.
   $.option('show_same_activity_flybys', function() {
