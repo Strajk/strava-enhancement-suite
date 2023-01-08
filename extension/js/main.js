@@ -797,38 +797,6 @@ function StravaEnhancementSuite($, options) {
 
   });
 
-  $.option('general_typography', function() {
-    const selectors = [
-      '.uploads', // https://www.strava.com/upload/select
-      '.manual-entry', // https://www.strava.com/upload/manual
-      '#edit-activity', // https://www.strava.com/activities/ID/edit
-      '.table-activity-edit', // https://www.strava.com/athlete/training
-    ].map(x => `${x} input[type=text], ${x} textarea`).join(', ');
-
-    $('body').on(
-      'keyup',
-      selectors,
-      function() {
-        const el = $(this);
-        const text = el.val().replace(/\u00A0/g, ' '); // for some <textarea> elements, NO-BREAK-SPACE
-        $.each({
-          ' - ': ' — ',
-          ' -- ': ' — ',
-          ' -> ': ' → ',
-          ' > ': ' → ',
-          ' < ': ' ← ',
-          ' <- ': ' ← ',
-          ' <-> ': ' ↔ ',
-          '(L)': '❤',
-        }, (x, y) => {
-          if (text.endsWith(x)) {
-            let value = text.substr(0, text.length - x.length) + y;
-            el.val(value);
-          }
-        });
-      });
-  });
-
   // Improved pagination
   // Seems like old pagination is only on this one page: https://www.strava.com/athlete/training
   $.option('improve_pagination', function() {
