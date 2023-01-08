@@ -262,6 +262,13 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Allow hiding specific activities (promos, virtual rides, treadmill runs, club events, goal achievements, ...)',
     default: true,
   },
+  general_typography: {
+    removed: '2023/01: Removed, it was buggy and it\'s better to be done at OS level',
+    context: StravaEnhancementSuiteOptionsContexts.general,
+    title: 'Enhance typography while typing (e.g. <code>-></code> with <code>&rarr;</code>)',
+    description: 'Replace <code>--</code> with <code>&ndash;</code>, <code>-></code> with <code>&rarr;</code>, <code>(L)</code> with <code>&hearts;</code> and so on…',
+    default: true,
+  },
   // search_ux: { // see note in main.js
   //   context: StravaEnhancementSuiteOptionsContexts.search,
   //   title: 'Improve UX on Search',

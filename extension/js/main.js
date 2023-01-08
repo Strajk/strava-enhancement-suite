@@ -797,6 +797,48 @@ function StravaEnhancementSuite($, options) {
 
   });
 
+  $.option('[REMOVED]--general_typography', function() {
+    // Previously, the selectors were more specific, but they become outdated quite often
+    // const selectors = [
+    //   '.uploads', // https://www.strava.com/upload/select
+    //   '.manual-entry', // https://www.strava.com/upload/manual
+    //   '#edit-activity', // https://www.strava.com/activities/ID/edit
+    //   '.table-activity-edit', // https://www.strava.com/athlete/training
+    // ].map(x => `${x} input[type=text], ${x} textarea`).join(', ');
+
+    // Now, let's be more generic and hope it does not cause issues elsewhere :)
+    const selectors = [
+      'input[type=text]',
+      'textarea',
+    ].join(', ');
+
+    $('body').on(
+      'keyup',
+      selectors,
+      function(ev) {
+        const el = ev.target;
+        const value = el.value
+          .replace(/\u00A0/g, ' '); // for some <textarea> elements, replace NO-BREAK-SPACE with regular space
+        $.each({
+          ' - ': ' — ',
+          ' -- ': ' — ',
+          ' -> ': ' → ',
+          ' > ': ' → ',
+          ' < ': ' ← ',
+          ' <- ': ' ← ',
+          ' <-> ': ' ↔ ',
+          '(L)': '❤',
+        }, (from, to) => {
+          if (value.endsWith(from)) {
+            let newValue = value.slice(0, -from.length) + to;
+            el.value = newValue;
+            $(el).trigger('input');
+            debugger
+          }
+        });
+      });
+  });
+
   // Improved pagination
   // Seems like old pagination is only on this one page: https://www.strava.com/athlete/training
   $.option('improve_pagination', function() {

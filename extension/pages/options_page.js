@@ -73,7 +73,9 @@ function storageSet(key, value) {
       $(`<h3 title="${key}">${option.title}</h3>`).appendTo($header);
 
       let control;
-      if (option.choices) {
+      if (option.removed) {
+        // Don't show controls for removed options
+      } else if (option.choices) {
         control = $('<select>');
         $.each(option.choices, function() {
           $('<option>')
@@ -94,6 +96,11 @@ function storageSet(key, value) {
 
       // Header to section
       $header.appendTo($section);
+
+      // Removed
+      if (option.removed) {
+        $('<div class="note bug" />').html(option.removed).appendTo($section);
+      }
 
       // Description
       if (option.note) {
