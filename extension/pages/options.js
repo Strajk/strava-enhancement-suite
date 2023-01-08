@@ -216,7 +216,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   show_kudo_all_button: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Show button to give Kudos to all',
-    description: 'Show button in the header bar to give Kudos to all displayed activities',
+    description: 'Show button in the header bar to give Kudos to all displayed activities. Beware that some people may consider it spam-ish.',
     default: false,
   },
   chart_controls_colors: {
