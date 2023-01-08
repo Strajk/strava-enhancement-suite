@@ -250,9 +250,36 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: true,
   },
   upload_manual_ux: {
+    _tested: '2023-01-08',
     context: StravaEnhancementSuiteOptionsContexts.upload,
     title: 'Improve UX on Manual Upload',
-    description: 'Allow pre-filling params from URL',
+    description: [
+      'Allow pre-filling params from URL, e.g. https://www.strava.com/upload/manual?distance=10&name=Testing',
+      '',
+      'Supported params:',
+      [
+        'distance',
+        'distance_unit',
+        'elapsed_time_hours',
+        'elapsed_time_minutes',
+        'elapsed_time_seconds',
+        'elev_gain',
+        'elevation_unit',
+        'type',
+        'start_date',
+        'start_time_of_day',
+        'name',
+        'commute',
+        'trainer',
+        'bike_id',
+        'athlete_gear_id',
+        'description',
+        'visibility',
+        'perceived_exertion',
+      ]
+        .map((param) => `<kbd>${param}</kbd>`)
+        .join(', '),
+    ].join('\n'),
     default: true,
   },
   dashboard_filter: {
