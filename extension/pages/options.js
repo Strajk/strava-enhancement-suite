@@ -13,20 +13,21 @@ const StravaEnhancementSuiteOptionsContexts = { // eslint-disable-line no-redecl
 
 const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   keyboard_controls: {
-    _tested: '2022-08-20 @strajk',
+    _tested: '2023-01-09',
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Keyboard controls for navigation, giving kudos, and commenting',
     description: 'Enable keyboard controls on the dashboard:\n<br> <kbd>J</kbd> - Up (previous) \n<br> <kbd>K</kbd> - Down (next) \n<br> <kbd>L</kbd> - Kudos (like) \n<br> <kbd>C</kbd> - Comment \n<br> <kbd>Enter</kbd> - Go to activity  (hold shift to open in a new tab/window)\n<br> <kbd>E</kbd> - Edit activity  (hold shift to open in a new tab/window)\n<br> <kbd>U</kbd> - Go to athlete  (hold shift to open in a new tab/window) ',
     default: true,
   },
   repeated_segments: {
+    _tested: '2023-01-09 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.activity,
     title: 'Repeated segments',
     description: 'Show aggregate segment data (fastest, slowest, average, total distance, total elevation, etc.) when segments are repeated within an activity.',
     default: true,
   },
   submit_forms_with_keyboard: {
-    _tested: '2022-08-20 @strajk',
+    _tested: '2023-01-09 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Submit forms with <kbd>cmd/ctrl</kbd> + <kbd>Enter</kbd>',
     description: 'Works on comments, editing activities, and uploading new activities.',
@@ -40,14 +41,14 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: true,
   },
   hide_social_sharing: {
-    _tested: '2022-08-29 @strajk',
+    _tested: '2023-01-09 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Social Sharing',
     description: 'Hide social sharing buttons (Facebook, Twitter, email) from the Activity header<br />Hide "Share Your Runs" widget from the Dashboard.',
     default: false,
   },
   hide_premium_badges: {
-    _tested: '2022-08-29 @strajk',
+    _tested: '2023-01-09 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.general,
     title: 'Hide Premium badges',
     description: 'Hide Premium badges on user pictures. Subscriber status on an athlete\'s page is still shown.',
@@ -99,6 +100,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     default: false,
   },
   side_by_side_running: {
+    _tested: '2023-01-09 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.athlete,
     title: 'Compare running',
     description: 'Changes the default sport for the "Side by Side comparison" module to running.',

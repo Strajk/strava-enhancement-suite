@@ -8,4 +8,5 @@
 - auto-reloading somehow works in Chrome, but honestly, I don't know how :D
   - maybe it only works when `chrome://extensions/` is opened? 
 
-
+My activities for testing 
+- https://www.strava.com/activities/3553439073/segments - repeated segments

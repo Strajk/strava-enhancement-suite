@@ -1085,7 +1085,7 @@ function StravaEnhancementSuite($, options) {
     const selector = '.section.comparison';
     $(selector).leave('.spinner', function() {
       $(selector)
-        .find('.running-tab :visible') // :visible will cause not selecting anything when running comparison is already selected
+        .find('button[title="Run"]') // :visible will cause not selecting anything when running comparison is already selected
         .first() // As switcher is duplicated on each tab, and just hidden, it's important to select just the first one to avoid clicking multiple times
         .onceOnly()
         .click();
