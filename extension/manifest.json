@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "Strava Enhancement Suite",
   "description": "Handy tools and improvements to Strava.com",
-  "version": "23.1.6.1332",
+  "version": "23.6.6.1856",
   "background": {
     "scripts": [
       "js/libs/browser-polyfill.js",
