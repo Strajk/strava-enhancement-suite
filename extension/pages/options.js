@@ -40,6 +40,12 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
     description: 'Show links to Veloviewer, Race Shape, KOM Club etc. on activity, segment detail and Challenge pages.',
     default: true,
   },
+  hide_premium_upsell: {
+    context: StravaEnhancementSuiteOptionsContexts.general,
+    title: 'Hide Premium upsell',
+    description: 'Hide Strava nudges to upgrade to Premium.',
+    default: true,
+  },
   hide_social_sharing: {
     _tested: '2023-01-09 @strajk',
     context: StravaEnhancementSuiteOptionsContexts.general,
@@ -74,11 +80,6 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   hide_route_feed_entries: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
     title: 'Hide Route feed entries',
-    default: false,
-  },
-  hide_promotion_feed_entries: {
-    context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Hide Promotion feed entries <code><small>Fixed 2022-01-02</small></code>',
     default: false,
   },
   hide_training_plan_feed_entries: {
@@ -217,7 +218,7 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   },
   show_kudo_all_button: {
     context: StravaEnhancementSuiteOptionsContexts.dashboard,
-    title: 'Show button to give Kudos to all',
+    title: 'Show button to give Kudos to all <code><small>Fixed 2023-06-06</small></code>',
     description: 'Show button in the header bar to give Kudos to all displayed activities. Beware that some people may consider it spam-ish.',
     default: false,
   },

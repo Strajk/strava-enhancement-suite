@@ -684,7 +684,6 @@ function StravaEnhancementSuite($, options) {
 
   // Hide feed entries
   $.option('dashboard_filter', function() {
-
     const allFilters = {
       hide_challenge_feed_entries: (containerEl) => {
         let needle = $(containerEl).find('[class^="AthleteJoinEntry--"]');
@@ -695,9 +694,6 @@ function StravaEnhancementSuite($, options) {
         return !!needle.length;
       },
       hide_goal_feed_entries: (containerEl) => {
-        // TODO
-      },
-      hide_promotion_feed_entries: (containerEl) => {
         // TODO
       },
       hide_turbo_trainer_rides: (containerEl) => {
@@ -713,13 +709,18 @@ function StravaEnhancementSuite($, options) {
         let thresholdInSecs = 20 * 60; // 20 minutes
         return timeInSecs < thresholdInSecs;
       },
+      hide_premium_upsell: (containerEl) => {
+        let needle = $(containerEl).find('[data-testid="promo-img"]');
+        return !!needle.length;
+      }
     };
 
     const activeFilters = Object.fromEntries(
       Object.entries(allFilters).filter(([key, fn]) => options[key]),
     );
 
-    document.arrive(`${SELECTORS.feed} ${SELECTORS.feedItem}`, { existing: true }, function() {
+    // Cannot use `.feed-ui > div` selectors, as it's present on page load, but totally empty and hidden, and hydrates later
+    document.arrive(`[data-testid="web-feed-entry"]`, { existing: true }, function() {
       for (const [key, fn] of Object.entries(activeFilters)) {
         if (fn(this)) {
           console.info(`Hiding feed entry, because of ${key}`, this);
@@ -892,7 +893,7 @@ function StravaEnhancementSuite($, options) {
     });
   });
 
-  // Caculate running TSS
+  // Calculate running TSS
   $.option('running_tss', function() {
     if (!$.defined('Strava.Labs.Activities.PaceZones.prototype.getPaceZones')) {
       return;
@@ -1301,29 +1302,20 @@ function StravaEnhancementSuite($, options) {
 
       var allKudoableCount = 0;
       all.forEach((btn) => {
-        if (checkCanKudo(btn)) {
-          allKudoableCount++;
-        }
+        let canKudo = checkCanKudo(btn);
+        if (canKudo) allKudoableCount++;
       });
       $('#kudosAllCount').text(allKudoableCount);
 
       function checkCanKudo(btn) {
-        var $btn = $(btn);
-        if($btn.children('svg').first().attr('data-testid') === 'filled_kudos') return false; //no need to check anything further
-        var content = $btn.closest('.content');
-        var activityData = JSON.parse(content.attr('data-react-props'));
-        if (activityData.activity) {
-          return activityData.activity.kudosAndComments.canKudo;
-        }
-        else if (activityData.rowData) { //groupActivities
-          // have to find link between btn and the data-react-props data in the content card
-          var athleteName = $btn.closest('li').find('a[data-testid=owners-name]').first().text();
-          var foundActivity = activityData.rowData.activities.find(act => act.athlete_name === athleteName);
-          if (foundActivity) {
-            return foundActivity.can_kudo;
-          }
-        }
-        return false;
+        let $btn = $(btn)
+        if ($btn.find('svg[data-testid=filled_kudos]').length) return false; // already kudoed
+        if ($btn.attr('title') === 'View all kudos') return false; // own activity
+
+        if ($btn.attr('title') === 'Be the first to give kudos!') return true; // own activity
+        if ($btn.attr('title') === 'Give kudos') return true; // own activity
+
+        return true; // true by default
       }
     });
   });
@@ -1402,6 +1394,12 @@ function StravaEnhancementSuite($, options) {
 
       $(`<div>${items.join('')}</div> `).appendTo(overviewEl);
     });
+  });
+
+  $.option('hide_premium_upsell', function() {
+    // "Subscribe to stay motivated with custom progress" in sidebar
+    let css = ` .card-body .upsell { display: none !important; } `;
+    $(`<style>${css}</style>`).appendTo(document.head);
   });
 
 
