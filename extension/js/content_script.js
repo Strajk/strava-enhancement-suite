@@ -39,6 +39,21 @@ function injectCss(what) {
   });
 }
 
+function StravaEnhancementSuiteInit() {
+  const originalAddEventListener = document.addEventListener;
+  document.addEventListener = function (type, listener, options) {
+    if (type === 'wheel') {
+      console.log('[StravaEnhancementSuiteInit]: Preventing wheel event listener to avoid scroll blocking');
+      return;
+    }
+    return originalAddEventListener.call(document, type, listener, options);
+  };
+}
+
+
+injectJs(StravaEnhancementSuiteInit.toString() + ';StravaEnhancementSuiteInit();');
+
+
 // TODO: Add unit tests
 async function executeInstructionsFromUrl() {
   // /path?__SES.opts.general_typography=true&__SES.opts.blabla=false

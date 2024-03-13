@@ -1,5 +1,29 @@
 let notyf;
 
+/** @typedef {object} ReactPropsFeed
+ * @property {object[]} stats
+ * @property {string} stats.key
+ * @property {string} stats.value
+ * @property {null} description
+ * @property {null} flagged
+ * @property {string} activityName
+ * @property {string} activityId
+ * @property {boolean} ownedByCurrentAthlete
+ * @property {number} segAndBestEffortAchievements.id
+ * @property {string} segAndBestEffortAchievements.id_string
+ * @property {string} segAndBestEffortAchievements.name
+ * @property {string} segAndBestEffortAchievements.elapsed_time
+ * @property {string} segAndBestEffortAchievements.description
+ * @property {object} activityMap
+ * @property {string} activityMap.url
+ * @property {string} entryType
+ * @property {boolean} isVirtual
+ * @property {boolean} isCommute
+ * @property {null} workoutType
+ * @property {null} privacyTagKey
+ * @property {boolean} disableNavigation
+ */
+
 const SELECTORS = {
   feed: '#dashboard-feed',
   feedItem: '[class^=Feed--entry-container--]', // e.g. Feed--entry-container--ntrEd
@@ -115,6 +139,46 @@ const StravaEnhancementSuiteHelpers = {
     winter_sport: 'Winter Sport',
     workout: 'Workout',
     yoga: 'Yoga',
+  },
+  /** @returns {ReactPropsFeed} */
+  getReactProps: function (dom) {
+    function _getProps(node) {
+      const key = Object.keys(node).find(key => key.startsWith('__reactInternalInstance$') || key.startsWith('__reactFiber$'));
+      return node[key].return.memoizedProps;
+    }
+
+    const props = _getProps(dom);
+    [
+      '[data-testid="activity_entry_container"]', // contains .activityName, .stats: [], .segAndBestEffortAchievements: []
+      '[data-testid="entry-images"]', // isVirtual, isCommute, workoutType, photoList[0].enhanced_photo.name === `Zwift`
+    ].forEach(selector => {
+      const el = dom.querySelector(selector);
+      if (el) {
+        const val = _getProps(el);
+        if (val) Object.assign(props, val);
+      }
+    });
+    return props;
+  },
+  getStat: (stats, key) => {
+    // {
+    //   "key": "stat_three_subtitle",
+    //   "value": "Time",
+    // }, {
+    //   "key": "stat_three",
+    //   "value": "1<abbr class='unit' title='hour'>h</abbr> 30<abbr class='unit' title='minute'>m</abbr>",
+    // getStats(above, 'Time') -> "1<abbr class...
+    const statWithTitle = stats.find(x => x.value === key);
+    if (!statWithTitle) return;
+    const targetStatKey = statWithTitle
+      ?.key // e.g. "stat_three_subtitle"
+      .replace('_subtitle', ''); // e.g. "stat_three"
+    const statObj = stats.find(x => x.key === targetStatKey);
+    return statObj?.value; // e.g. "1<abbr class='unit' title='hour'>h</abbr> 30<abbr class='unit' title='minute'>m</abbr>"
+  },
+  htmlToText: (html) => {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || '';
   },
 };
 
@@ -701,18 +765,19 @@ function StravaEnhancementSuite($, options) {
         return !!needle.length;
       },
       hide_short_activities: (containerEl) => {
-        let statsEls = [...containerEl.querySelectorAll('[class^=Stat--stat--]')]; // TODO: Unify using/not-using jQuery
-        let timeEl = statsEls.find(el => el.textContent.includes('Time')); // TODO: Make it work with other langs
-        let time = timeEl.querySelector('[class^=Stat--stat-value--]')?.textContent; // '10m 35s'
-        if (!time) return false; // failed parsing, so not hiding just to be sure
-        let timeInSecs = StravaEnhancementSuiteHelpers.parseDurationToSecs(time);
+        const props = helpers.getReactProps(containerEl);
+        if (!props.stats) return false; // failed parsing, so not hiding just to be sure
+        const timeHtml = helpers.getStat(props.stats, 'Time');
+        if (!timeHtml) return false; // failed parsing, so not hiding just to be sure
+        const timeText = helpers.htmlToText(timeHtml);
+        let timeInSecs = helpers.parseDurationToSecs(timeText);
         let thresholdInSecs = 20 * 60; // 20 minutes
         return timeInSecs < thresholdInSecs;
       },
       hide_premium_upsell: (containerEl) => {
         let needle = $(containerEl).find('[data-testid="promo-img"]');
         return !!needle.length;
-      }
+      },
     };
 
     const activeFilters = Object.fromEntries(
@@ -720,7 +785,7 @@ function StravaEnhancementSuite($, options) {
     );
 
     // Cannot use `.feed-ui > div` selectors, as it's present on page load, but totally empty and hidden, and hydrates later
-    document.arrive(`[data-testid="web-feed-entry"]`, { existing: true }, function() {
+    document.arrive('[data-testid="web-feed-entry"]', { existing: true }, function() {
       for (const [key, fn] of Object.entries(activeFilters)) {
         if (fn(this)) {
           console.info(`Hiding feed entry, because of ${key}`, this);
@@ -834,7 +899,6 @@ function StravaEnhancementSuite($, options) {
             let newValue = value.slice(0, -from.length) + to;
             el.value = newValue;
             $(el).trigger('input');
-            debugger
           }
         });
       });
@@ -1308,7 +1372,7 @@ function StravaEnhancementSuite($, options) {
       $('#kudosAllCount').text(allKudoableCount);
 
       function checkCanKudo(btn) {
-        let $btn = $(btn)
+        let $btn = $(btn);
         if ($btn.find('svg[data-testid=filled_kudos]').length) return false; // already kudoed
         if ($btn.attr('title') === 'View all kudos') return false; // own activity
 
@@ -1346,31 +1410,53 @@ function StravaEnhancementSuite($, options) {
   });
 
   $.option('training_log_overview', function() {
-    function getReactElement(dom) {
-      for (const prop in dom) {
-        // Requires injected ReactDOM, probably even dev version
-        // noinspection JSUnfilteredForInLoop
-        if (prop.startsWith('__reactInternalInstance$')) {
-          const val = dom[prop];
-          return {
-            node: val.stateNode,
-            props: val.return.memoizedProps, // .return is probably not universal, as it's probably caused some wrapper component
-          };
-        }
-      }
-    }
-
     if (!window.location.pathname.includes('/training/log')) return;
 
+    const exampleEntry = {
+      id: '2024y11w',
+      sport: 'all',
+      display_type: 'multisport_goal',
+      goals_by_sport: {},
+      totals_by_sport: {
+        ride: {
+          moving_time: 27186,
+          elapsed_time: 35844,
+          distance: 172806.5,
+          elev_gain: 1981,
+        },
+      },
+    };
+    const entries = window.__NEXT_DATA__?.props?.pageProps?.entriesResponse?.entries;
+    if (!entries) return; // No activities for specific date range
+
+    function getWeek (date) {
+      var onejan = new Date(date.getFullYear(), 0, 1);
+      var millisecsInDay = 86400000;
+      let week = Math.ceil((((date - onejan) / millisecsInDay) + onejan.getDay() + 1) / 7);
+      return week.toString().padStart(2, '0');
+    }
+
+    // 1710417600 -> "2024y11w"
+    function tsToId (ts) {
+      const date = new Date(parseInt(ts, 10));
+      const paddedWeek = getWeek(date);
+      return date.getFullYear() + 'y' + paddedWeek + 'w';
+    }
+
     // https://www.strava.com/athletes/5041066/training/log?v2=true
-    document.arrive('[class^="Calendar--calendar-row-container--"]', { existing: true, fireOnAttributesModification: true }, (el) => {
-      if (el.getAttribute('data-display-type') === 'empty') return;
+    document.arrive(`
+      [class^="Calendar--calendar-row-container--"],
+      [class*="_calendarRowContainer_"]
+    `, { existing: true, fireOnAttributesModification: true }, (el) => {
 
-      const overviewEl = el.querySelector('[class^="WeekOverview--sidebar-container--"]');
-      const { props } = getReactElement(overviewEl);
-      const totals = props.entry.totals_by_sport;
-
-      if (!totals) return; // No activities for specific date range
+      const domTimestamp = el.getAttribute('data-timestamp');
+      const entryId = tsToId(domTimestamp);
+      const entry = entries.find(x => x.id === entryId);
+      if (!entry) {
+        console.log(`[StravaEnhancementSuite] No entry found for ${entryId}`);
+        return;
+      }
+      const totals = entry.totals_by_sport;
 
       const formatDistance = x => x ? `${Math.round(x / 1000)}km`: '';
       const formatElevation = x => x ? `${x}m` : '';
@@ -1392,14 +1478,20 @@ function StravaEnhancementSuite($, options) {
         `;
       });
 
+      const overviewEl = el.querySelector('[class*="_sidebarContainer_"]');
       $(`<div>${items.join('')}</div> `).appendTo(overviewEl);
     });
   });
 
   $.option('hide_premium_upsell', function() {
     // "Subscribe to stay motivated with custom progress" in sidebar
-    let css = ` .card-body .upsell { display: none !important; } `;
+    let css = ' .card-body .upsell { display: none !important; } ';
     $(`<style>${css}</style>`).appendTo(document.head);
+
+    document.arrive('[data-cy=paywall-modal]', { existing: true }, function(el) {
+      el.remove();
+      window.document.body.style.setProperty('overflow', 'auto', 'important');
+    });
   });
 
 
