@@ -6636,6 +6636,37 @@ section {
   color: initial !important;
 }
 
+#s-privacy {
+  background: #f8f9fa;
+}
+#s-privacy .privacy-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #333;
+}
+#s-privacy .privacy-content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+#s-privacy .privacy-content p.lead {
+  font-size: 1.25rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+  color: #555;
+}
+#s-privacy .privacy-content ul {
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+#s-privacy .privacy-content a {
+  color: #F7632E;
+  font-weight: 600;
+}
+#s-privacy .privacy-content a:hover {
+  color: #e94409;
+}
+
 #s-footer {
   background: #222222;
   position: relative;

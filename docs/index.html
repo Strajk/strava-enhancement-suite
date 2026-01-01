@@ -154,6 +154,15 @@
             
               
               <div class="feature">
+                <h3>Hide Premium upsell</h3>
+                <p class="meta">
+                  <abbr title='Enabled by default'>✅</abbr>                </p>
+                <p class="description">Hide Strava nudges to upgrade to Premium.</p>
+                
+              </div>
+            
+              
+              <div class="feature">
                 <h3>Hide Social Sharing</h3>
                 <p class="meta">
                   <abbr title='Disabled by default'>➖</abbr>                </p>
@@ -264,15 +273,6 @@
             
               
               <div class="feature">
-                <h3>Hide Promotion feed entries <code><small>Fixed 2022-01-02</small></code></h3>
-                <p class="meta">
-                  <abbr title='Disabled by default'>➖</abbr>                </p>
-                
-                
-              </div>
-            
-              
-              <div class="feature">
                 <h3>Hide Training plan feed entries</h3>
                 <p class="meta">
                   <abbr title='Disabled by default'>➖</abbr>                </p>
@@ -336,10 +336,10 @@
             
               
               <div class="feature">
-                <h3>Show button to give Kudos to all</h3>
+                <h3>Show button to give Kudos to all <code><small>Fixed 2023-06-06</small></code></h3>
                 <p class="meta">
                   <abbr title='Disabled by default'>➖</abbr>                </p>
-                <p class="description">Show button in the header bar to give Kudos to all displayed activities</p>
+                <p class="description">Show button in the header bar to give Kudos to all displayed activities. Beware that some people may consider it spam-ish.</p>
                 
               </div>
             
@@ -500,15 +500,6 @@
             
             <h2>Search</h2>
             
-              
-              <div class="feature">
-                <h3>Improve UX on Search</h3>
-                <p class="meta">
-                  <abbr title='Enabled by default'>✅</abbr>                </p>
-                <p class="description">Remember search values in URL</p>
-                
-              </div>
-            
           
             
             <h2>Athlete</h2>
@@ -540,7 +531,10 @@
                 <h3>Improve UX on Manual Upload</h3>
                 <p class="meta">
                   <abbr title='Enabled by default'>✅</abbr>                </p>
-                <p class="description">Allow pre-filling params from URL</p>
+                <p class="description">Allow pre-filling params from URL, e.g. https://www.strava.com/upload/manual?distance=10&name=Testing
+
+Supported params:
+<kbd>distance</kbd>, <kbd>distance_unit</kbd>, <kbd>elapsed_time_hours</kbd>, <kbd>elapsed_time_minutes</kbd>, <kbd>elapsed_time_seconds</kbd>, <kbd>elev_gain</kbd>, <kbd>elevation_unit</kbd>, <kbd>type</kbd>, <kbd>start_date</kbd>, <kbd>start_time_of_day</kbd>, <kbd>name</kbd>, <kbd>commute</kbd>, <kbd>trainer</kbd>, <kbd>bike_id</kbd>, <kbd>athlete_gear_id</kbd>, <kbd>description</kbd>, <kbd>visibility</kbd>, <kbd>perceived_exertion</kbd></p>
                 
               </div>
             
@@ -558,6 +552,101 @@
               </div>
             
           
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="s-privacy">
+  <div class="section-title">
+    <h1 class="mb-0">Privacy Policy</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10 offset-md-1">
+        <div class="privacy-content">
+          <p class="lead">
+            Strava Enhancement Suite is committed to protecting your privacy. This extension does not collect, store, or transmit any personal data.
+          </p>
+
+          <h3>Data Collection</h3>
+          <p>
+            <strong>We do not collect any data.</strong> The extension operates entirely locally in your browser and does not send any information to external servers. All features and functionality work by modifying the Strava.com website in your browser only.
+          </p>
+
+          <h3>Data Storage</h3>
+          <p>
+            The extension stores your feature preferences locally using Chrome's sync storage API. This data includes:
+          </p>
+          <ul>
+            <li>Your selected options for which features are enabled or disabled</li>
+            <li>Your customization choices (e.g., unit preferences)</li>
+          </ul>
+          <p>
+            This data is stored locally in your browser and may be synced across your devices via your browser's built-in sync functionality (if you have browser sync enabled). We do not have access to this data.
+          </p>
+
+          <h3>Third-Party Services</h3>
+          <p>
+            The extension operates on Strava.com and enhances its functionality. When you use Strava.com, you are subject to Strava's own privacy policy. We recommend reviewing <a href="https://www.strava.com/legal/privacy" target="_blank">Strava's Privacy Policy</a>.
+          </p>
+          <p>
+            The extension may add links to external services (e.g., Veloviewer, Race Shape) when enabled, but does not share any data with these services automatically. You control whether to visit these links.
+          </p>
+
+          <h3>Permissions</h3>
+          <p>
+            The extension requires certain permissions to function. Below are one-sentence justifications for each permission:
+          </p>
+          
+          <h4>Storage</h4>
+          <p>
+            <strong>Justification:</strong> We use storage permission to save your feature preferences and settings locally in your browser so they persist across sessions and sync across your devices.
+          </p>
+          
+          <h4>Scripting</h4>
+          <p>
+            <strong>Justification:</strong> We use scripting permission to inject enhancement features into the Strava.com pages you visit, enabling functionality like keyboard controls, unit conversion tooltips, and activity analytics.
+          </p>
+          
+          <h4>ActiveTab</h4>
+          <p>
+            <strong>Justification:</strong> We use activeTab permission to interact with the currently active Strava.com tab when you click the extension icon, allowing the popup to display relevant information about your current page.
+          </p>
+          
+          <h4>Host Permission (strava.com)</h4>
+          <p>
+            <strong>Justification:</strong> We request host permission for strava.com domains only, as this is the sole website the extension is designed to enhance, and we need access to modify its pages and add features.
+          </p>
+          
+          <h4>Remote Code</h4>
+          <p>
+            <strong>Are you using remote code?</strong> No, we do not use any remotely hosted code - all code is packaged within the extension and runs locally in your browser.
+          </p>
+          
+          <p class="mt-3">
+            <em>These permissions are used solely for providing the extension's functionality and not for data collection, tracking, or any other purpose.</em>
+          </p>
+
+          <h3>Open Source</h3>
+          <p>
+            Strava Enhancement Suite is open source software. You can review the complete source code at <a href="https://github.com/Strajk/strava-enhancement-suite" target="_blank">GitHub</a> to verify our privacy claims.
+          </p>
+
+          <h3>Changes to This Policy</h3>
+          <p>
+            If we make changes to this privacy policy, we will update this page. The extension's core principle of not collecting user data will not change.
+          </p>
+
+          <h3>Contact</h3>
+          <p>
+            If you have questions about this privacy policy, please open an issue on our <a href="https://github.com/Strajk/strava-enhancement-suite/issues" target="_blank">GitHub repository</a>.
+          </p>
+
+          <p class="text-muted mt-4">
+            <small>Last updated: January 1, 2026</small>
+          </p>
         </div>
       </div>
     </div>
