@@ -1,18 +1,14 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
   "name": "Strava Enhancement Suite",
   "description": "Handy tools and improvements to Strava.com",
   "version": "24.3.13.945",
   "background": {
-    "scripts": [
-      "js/libs/browser-polyfill.js",
-      "js/background.js"
-    ]
+    "service_worker": "js/background.js"
   },
   "content_scripts": [
     {
       "js": [
-        "js/libs/browser-polyfill.js",
         "js/content_script.js"
       ],
       "run_at": "document_end",
@@ -28,21 +24,33 @@
     "128": "icons/icon128.png"
   },
   "options_page": "pages/options.html",
-  "page_action": {
+  "action": {
     "default_icon": "icons/icon48.png",
     "default_title": "Strava Enhancement Suite",
     "default_popup": "pages/popup.html"
   },
   "permissions": [
-    "http://*.strava.com/*",
-    "https://*.strava.com/*",
     "storage",
-    "tabs"
+    "scripting",
+    "activeTab"
+  ],
+  "host_permissions": [
+    "http://*.strava.com/*",
+    "https://*.strava.com/*"
   ],
   "web_accessible_resources": [
-    "js/libs/*.js",
-    "js/libs/*.css",
-    "js/main.js",
-    "pages/options.js"
+    {
+      "resources": [
+        "js/libs/*.js",
+        "js/libs/*.css",
+        "js/main.js",
+        "js/inject_bootstrap.js",
+        "pages/options.js"
+      ],
+      "matches": [
+        "http://*.strava.com/*",
+        "https://*.strava.com/*"
+      ]
+    }
   ]
 }

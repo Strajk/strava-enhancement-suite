@@ -20,6 +20,8 @@ module.exports = {
     'extension/js/libs/*.js',
   ],
   rules: {
+    'no-inner-declarations': 'off', // Move function declaration to program root
+
     // Overwrite few recommended options to avoid too many changes when introducing ESLint to the codebase
     quotes: ['error', 'single'],
     'quote-props': ['error', 'as-needed'],

@@ -1,6 +1,3 @@
-var s = document.createElement('script');
-s.textContent = 'strava_enhancement_suite.switch_units();';
-s.onload = function() {
-  this.parentNode.removeChild(this);
-};
-(document.head || document.documentElement).appendChild(s);
+// Dispatch a custom event that the injected main.js can listen for
+// This avoids CSP violations from inline script execution
+window.dispatchEvent(new CustomEvent('SES_SWITCH_UNITS'));

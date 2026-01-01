@@ -1,3 +1,6 @@
+// Guard against multiple executions
+if (typeof window.StravaEnhancementSuiteOptions === 'undefined') {
+
 const StravaEnhancementSuiteOptionsContexts = { // eslint-disable-line no-redeclare
   // Colors taken from Apple Calendar swatches
   // Note: Colors currently not used
@@ -307,8 +310,14 @@ const StravaEnhancementSuiteOptions = { // eslint-disable-line no-redeclare
   // },
 };
 
+// Expose to global scope
+window.StravaEnhancementSuiteOptionsContexts = StravaEnhancementSuiteOptionsContexts;
+window.StravaEnhancementSuiteOptions = StravaEnhancementSuiteOptions;
+
 // eslint-disable-next-line no-undef
 if (typeof require !== 'undefined' && require.main !== module) module.exports = {
   default: StravaEnhancementSuiteOptions,
   contexts: StravaEnhancementSuiteOptionsContexts,
 };
+
+} // End of guard against multiple executions

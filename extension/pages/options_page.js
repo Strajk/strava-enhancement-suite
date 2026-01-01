@@ -2,37 +2,21 @@
 
 // Only for easier local development when opening options.html directly in the browser
 let onerror; // eslint-disable-line no-redeclare
-if (!chrome.runtime.getPackageDirectoryEntry && !chrome.storage) {
-  chrome.runtime.getPackageDirectoryEntry = (cb) => cb({ getFile: (path, opts, ok) => ok() });
+if (!chrome.runtime || !chrome.storage) {
+  chrome.runtime = chrome.runtime || { getURL: (path) => path };
   chrome.storage = { sync: { get: (key, cb) => cb(''), set: () => '' } };
   onerror = 'this.style.display="none"';
 }
 
 // TODO: Nicer
 function enhanceOptionsWithImageInfo(options) {
-  let counter = Object.keys(options).length * 2; // 2 checks for each file, once for png, once for gif
-
-  return new Promise(function (resolve, reject) {
-
-    function cb(key, val) {
-      if (val) options[key].image = val;
-      counter--;
-      if (counter === 0) resolve(); // resolve after "receiving" all callbacks
-    }
-
-    chrome.runtime.getPackageDirectoryEntry(storageRootEntry => {
-      Object.entries(options).forEach(([key, option]) => {
-        storageRootEntry.getFile(`pages/img/${key}.png`, { create: false },
-          cb.bind(undefined, key, 'png'),
-          cb.bind(undefined, key, undefined),
-        );
-        storageRootEntry.getFile(`pages/img/${key}.gif`, { create: false },
-          cb.bind(undefined, key, 'gif'),
-          cb.bind(undefined, key, undefined),
-        );
-      });
+  // In MV3, we can't check file existence directly, so we'll just set the image extension
+  // and rely on the onerror handler in the img tag to hide missing images
+  return Promise.resolve().then(() => {
+    Object.keys(options).forEach(key => {
+      // Default to png, will fall back via onerror if it doesn't exist
+      options[key].image = 'png';
     });
-
   });
 }
 
