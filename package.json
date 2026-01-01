@@ -43,7 +43,8 @@
     "eslint": "~7.4.0",
     "eslint-plugin-cypress": "~2.11.1",
     "eslint-plugin-unicorn": "~21.0.0",
-    "sass": "~1.26.10"
+    "sass": "~1.26.10",
+    "webextension-polyfill": "~0.12.0"
   },
   "meta": {
     "name": "Strava Enhancement Suite",

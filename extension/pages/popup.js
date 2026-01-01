@@ -1,4 +1,4 @@
-/* global chrome */
+/* global chrome, browser */
 
 document.getElementById('options').setAttribute(
   'href',

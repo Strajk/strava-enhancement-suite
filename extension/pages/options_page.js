@@ -1,4 +1,4 @@
-/* global chrome */
+/* global chrome, browser */
 
 // Only for easier local development when opening options.html directly in the browser
 let onerror; // eslint-disable-line no-redeclare

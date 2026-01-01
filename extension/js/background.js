@@ -1,5 +1,8 @@
-/* global chrome */
+/* global chrome, browser */
 /* eslint-env serviceworker */
+
+// Import the browser polyfill for cross-browser compatibility
+importScripts('libs/browser-polyfill.js');
 
 // In Manifest V3, action (formerly pageAction) is always shown by default
 // If we want to show/hide it, we can use chrome.action.enable/disable
